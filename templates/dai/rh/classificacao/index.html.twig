@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+{% block content %}
+    <div class="fundo-topo">
+        Listagem de Classificações
+    </div>
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1 col-xs-12">
+                <h4>Ações</h4>
+                <a href="{{ path('dai_rh_classificacao_novo') }}">Novo</a>
+            </div>
+            <div class="col-md-10 col-xs-12">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Descrição</th>
+                        <th>#</th>
+                        <th>#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in class %}
+                        <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.nome }}</td>
+                            <td><a href="{{ path('dai_rh_classificacao_editar', {'id':i.id}) }}">Editar</a></td>
+                            <td><a href="{{ path('dai_rh_classificacao_deletar', {'id':i.id}) }}">Deletar</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot><tr><td colspan="4"></td></tr></tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

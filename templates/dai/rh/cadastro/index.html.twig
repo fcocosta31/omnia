@@ -1,0 +1,64 @@
+{% extends "base.html.twig" %}
+{% block content %}
+    <div class="fundo-topo">
+        Listagem de Pessoal
+    </div>
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1 col-xs-12">
+                <h4>Ações</h4>
+                <a href="{{ path('dai_rh_cadastro_novo') }}">Novo</a>
+            </div>
+            <div class="col-md-10 col-xs-12 table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Classificação</th>
+                        <th>Lotação</th>
+                        <th>Cedido?</th>
+                        <th>Órgão de Origem</th>
+                        <th>Fone</th>
+                        <th>E-mail</th>
+                        <th>CPF nº</th>
+                        <th>#</th>
+                        <th>#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in empls %}
+                        <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.nome }}</td>
+                            <td>{{ i.classificacao.nome }}</td>
+                            <td>{{ i.departamento.nome }}</td>
+                            <td>
+                                {% if i.cedido == 0 %}
+                                   SIM
+                                {% else %}
+                                   NÃO
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if i.orgao == null %}
+                                    NENHUM
+                                {% else %}
+                                    {{ i.orgao.descricao }}
+                                {% endif %}
+                            </td>
+                            <td>{{ i.fone }}</td>
+                            <td>{{ i.email }}</td>
+                            <td>{{ i.cpf }}</td>
+                            <td><a href="{{ path('dai_rh_cadastro_editar', {'id':i.id}) }}">Editar</a></td>
+                            <td><a href="{{ path('dai_rh_cadastro_deletar', {'id':i.id}) }}">Deletar</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot><tr><td colspan="11"></td></tr></tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

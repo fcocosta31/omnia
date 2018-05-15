@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+{% block content %}
+    <div class="fundo-topo">
+        Cadastro de Férias, Licenças, Atestados...
+    </div>
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container">
+            <div class="col-md-11 col-xs-12">
+                {{ form_start(form) }}
+                <div class="col-md-6 col-xs-12">
+                    {{ form_row(form.employee, {'label':'Servidor'}) }}
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    {{ form_row(form.tipoausencia, {'label':'Tipo'}) }}
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    {{ form_row(form.dataini, {'label':'Data de início'}) }}
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    {{ form_row(form.datafim, {'label':'Data do término'}) }}
+                </div>
+                <div class="col-md-12 col-xs-12">
+                    {{ form_row(form.descricao, {'label':'Descrição'}) }}
+                </div>
+                <div class="col-md-12 col-xs-12">
+                    <input type="submit" value="Enviar" />
+                </div>
+                {{ form_end(form) }}
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

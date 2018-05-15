@@ -1,0 +1,207 @@
+{% extends "base.html.twig" %}
+{% block content %}
+<div class="fundo-topo">
+    Editar Cadastro de Pessoal
+</div>
+<br>
+<div class="container">
+     <div class="row">
+         {{ form_start(form) }}
+         <div class="col-md-12 col-xs-12">
+             <div class="row">
+                 <div class="container-topo">
+                     <div class="col-md-2 col-xs-12">
+                         {{ form_row(form.classificacao, {'label':'Tipo de Servidor'}) }}
+                     </div>
+                     <div class="col-md-4 col-xs-12">
+                         {{ form_row(form.departamento, {'label':'Lotação'}) }}
+                     </div>
+                     <div class="col-md-2 col-xs-12">
+                         {{ form_row(form.cedido, {'label':'Cedido?'}) }}
+                     </div>
+                     <div class="col-md-4 col-xs-12">
+                         {{ form_row(form.orgao, {'label':'Órgão de Origem'}) }}
+                     </div>
+                 </div>
+             </div>
+                 <div class="tabs-container row">
+
+                     <input type="radio" name="tabs" class="tabs" id="tab1" checked>
+                     <label for="tab1">Dados Pessoais</label>
+                     <div class="row">
+                         <div class="col-md-5 col-xs-12">
+                         {{ form_row(form.nome, {'label':'Nome'}) }}
+                         </div>
+                         <div class="col-md-5 col-xs-12">
+                         {{ form_row(form.endereco, {'label':'Endereço'}) }}
+                         </div>
+                         <div class="col-md-2 col-xs-12">
+                         {{ form_row(form.numero, {'label':'Número'}) }}
+                         </div>
+                         <div class="col-md-4 col-xs-12">
+                         {{ form_row(form.bairro, {'label':'Bairro'}) }}
+                         </div>
+                         <div class="col-md-2 col-xs-12">
+                         {{ form_row(form.uf, {'label':'UF'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                         {{ form_row(form.cidade, {'label':'Cidade'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                         {{ form_row(form.cep, {'label':'Cep'}) }}
+                         </div>
+                         <div class="col-md-6 col-xs-12">
+                         {{ form_row(form.fone, {'label':'Telefone'}) }}
+                         </div>
+                         <div class="col-md-6 col-xs-12">
+                         {{ form_row(form.email, {'label':'E-mail'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                         {{ form_row(form.estadocivil, {'label':'Estado Civil'}) }}
+                         </div>
+                         <div class="col-md-2 col-xs-12">
+                         {{ form_row(form.datanascimento, {'label':'Data de Nascimento'}) }}
+                         </div>
+                         <div class="col-md-2 col-xs-12">
+                         {{ form_row(form.ufnatu, {'label':'UF'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.naturalidade, {'label':'Naturalidade'}) }}
+                         </div>
+                         <div class="col-md-2 col-xs-12">
+                         {{ form_row(form.sexo, {'label':'Sexo'}) }}
+                         </div>
+                         <div class="col-md-6 col-xs-12">
+                         {{ form_row(form.mae, {'label':'Mãe'}) }}
+                         </div>
+                         <div class="col-md-6 col-xs-12">
+                         {{ form_row(form.pai, {'label':'Pai'}) }}
+                         </div>
+                     </div>
+                     <input type="radio" name="tabs" class="tabs" id="tab2">
+                     <label for="tab2">Documentos Pessoais</label>
+                     <div>
+                         <div class="col-md-2 col-xs-12">
+                             {{ form_row(form.cpf, {'label':'CPF nº'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.rg, {'label':'RG nº'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.orgaoemissor, {'label':'Órgão emissor'}) }}
+                         </div>
+                         <div class="col-md-2 col-xs-12">
+                             {{ form_row(form.ufrg, {'label':'UF'}) }}
+                         </div>
+                         <div class="col-md-2 col-xs-12">
+                             {{ form_row(form.dataemissao, {'label':'Data emissão'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.cnh, {'label':'CNH nº'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.categoria, {'label':'Categoria'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.pispasep, {'label':'PIS/Pasep nº'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.oab, {'label':'OAB nº'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.ctps, {'label':'CTPS nº'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.seriectps, {'label':'Série'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.certmil, {'label':'Certificado Militar'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.seriecertmil, {'label':'Série'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.titulo, {'label':'Título de Eleitor'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.secao, {'label':'Seção'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.zona, {'label':'Zona'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.ufeleitor, {'label':'UF'}) }}
+                         </div>
+
+                     </div>
+                     <input type="radio" name="tabs" class="tabs" id="tab3">
+                     <label for="tab3">Dados Complementares</label>
+                     <div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.grauinstrucao, {'label':'Grau de Instrução'}) }}
+                         </div>
+                         <div class="col-md-7 col-xs-12">
+                             {{ form_row(form.especializacoes, {'label':'Especializações'}) }}
+                         </div>
+                         <div class="col-md-2 col-xs-12">
+                             {{ form_row(form.dataposse, {'label':'Data da Posse'}) }}
+                         </div>
+                         <div class="col-md-12 col-xs-12">
+                             <h4>Dados Bancários</h4>
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.banco, {'label':'Banco'}) }}
+                         </div>
+                         <div class="col-md-3 col-xs-12">
+                             {{ form_row(form.agencia, {'label':'Agência'}) }}
+                         </div>
+                         <div class="col-md-4 col-xs-12">
+                             {{ form_row(form.conta, {'label':'Conta'}) }}
+                         </div>
+                     </div>
+                     <input type="radio" name="tabs" class="tabs" id="tab4">
+                     <label for="tab4">Arquivos</label>
+                     <div>
+                         <div class="col-md-12 col-xs-12">
+                             <h4>Enviar Arquivos</h4>
+                         </div>
+                         <div class="col-md-12 col-xs-12">
+                             {{ form_row(form.files, {'label':'Arquivos'}) }}
+                         </div>
+                         <div class="col-md-12 col-xs-12">
+                             <h4>Arquivos anexados</h4>
+                         </div>
+                         <div class="col-md-12 col-xs-12">
+                             <table class="table table-striped">
+                                 <thead>
+                                 <tr>
+                                     <th>Arquivo</th>
+                                     <th>#</th>
+                                 </tr>
+                                 </thead>
+                                 <tbody>
+                                 {% for file in form.vars.data.files %}
+                                     <tr>
+                                         <td>
+                                             <a href="{{ path('dai_rh_documento_download', {'filename':file.path}) }}">
+                                                 {{ file.name }}
+                                             </a>
+                                         </td>
+                                         <td>
+                                         <td><a href="{{ path('dai_rh_documento_deletar', {'id':file.id, 'idemp':form.vars.data.id}) }}">Deletar</a></td>
+                                         </td>
+                                     </tr>
+                                 {% endfor %}
+                                 </tbody>
+                             </table>
+                         </div>
+                         <div class="col-md-12 col-xs-12">
+                             <input class="btn btn-lg btn-primary" type="submit" value="Enviar" />
+                         </div>
+                     </div>
+                 </div>
+             {{ form_end(form) }}
+         </div>
+     </div>
+</div>
+{% endblock %}
