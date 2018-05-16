@@ -22,16 +22,18 @@ class Status{
             //Carregando dados das impressoras
             /*************************************************************************/
             $wc = new WebCrawler();
-            $statusbar = "Sem status!";
+
             $rows = $wc->dadosstatus($p->getEndereco(), $uristatus, $urlinfo);
             $p->setOnOff($rows[0]);
             if($p->getOnOff() == 'LIGADA') {
+
                 $statusbar = $wc->getStatusBar($uristatusbar);
+
                 $p->setModelo($rows[1]);
                 $p->setSerial($rows[2]);
                 $p->setStatusToner($rows[3]);
                 $p->setStatusImagem($rows[4]);
-                $p->setMensagem($statusbar);
+                $p->setMensagem($statusbar[1]."[".$statusbar[2]."]");
 
                 if(sizeof($rows) > 5){
                     $troca = $rows[5];
@@ -56,7 +58,7 @@ class Status{
                 $p->setStatusToner('0%');
                 $p->setStatusImagem('0%');
                 $p->setUltimaTroca(null);
-                $p->setMensagem($statusbar);
+                $p->setMensagem("Sem status!");
             }
 
         }

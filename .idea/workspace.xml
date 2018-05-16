@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6e07630d-b700-4837-8dce-d071d506b6d8" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/templates/dai/rh/cadastro/editar.html.twig" afterPath="$PROJECT_DIR$/templates/dai/rh/cadastro/editar.html.twig" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/dti/printers/Status.php" afterPath="$PROJECT_DIR$/src/Entity/dti/printers/Status.php" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/dti/printers/WebCrawler.php" afterPath="$PROJECT_DIR$/src/Entity/dti/printers/WebCrawler.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,7 +31,7 @@
       <file leaf-file-name="Especializada.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/esp/produtividade/Especializada.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="860">
+            <state relative-caret-position="423">
               <caret line="50" column="28" lean-forward="false" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
               <folding>
                 <element signature="e#6#87#0#PHP" expanded="true" />
@@ -40,21 +41,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="novo.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/dai/rh/cadastro/novo.html.twig">
+      <file leaf-file-name="WebCrawler.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Entity/dti/printers/WebCrawler.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="168" column="78" lean-forward="false" selection-start-line="168" selection-start-column="21" selection-end-line="168" selection-end-column="78" />
+            <state relative-caret-position="726">
+              <caret line="154" column="20" lean-forward="false" selection-start-line="154" selection-start-column="20" selection-end-line="154" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editar.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/dai/rh/cadastro/editar.html.twig">
+      <file leaf-file-name="Status.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/dti/printers/Status.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="194" column="46" lean-forward="false" selection-start-line="194" selection-start-column="46" selection-end-line="194" selection-end-column="46" />
+            <state relative-caret-position="209">
+              <caret line="33" column="45" lean-forward="false" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -237,13 +238,13 @@
         <option value="$PROJECT_DIR$/src/Entity/esp/produtividade/Ato.php" />
         <option value="$PROJECT_DIR$/src/Entity/esp/produtividade/Produtividade.php" />
         <option value="$PROJECT_DIR$/src/Entity/dti/printers/Printer.php" />
-        <option value="$PROJECT_DIR$/src/Entity/dti/printers/Status.php" />
-        <option value="$PROJECT_DIR$/src/Entity/dti/printers/WebCrawler.php" />
         <option value="$PROJECT_DIR$/templates/dti/printers/status.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/app.js" />
         <option value="$PROJECT_DIR$/templates/dai/rh/cadastro/novo.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/app.css" />
         <option value="$PROJECT_DIR$/templates/dai/rh/cadastro/editar.html.twig" />
+        <option value="$PROJECT_DIR$/src/Entity/dti/printers/WebCrawler.php" />
+        <option value="$PROJECT_DIR$/src/Entity/dti/printers/Status.php" />
       </list>
     </option>
   </component>
@@ -612,12 +613,12 @@
       <workItem from="1525966540395" duration="1301000" />
       <workItem from="1526303636966" duration="8592000" />
       <workItem from="1526388727322" duration="7116000" />
-      <workItem from="1526474978528" duration="2123000" />
+      <workItem from="1526474978528" duration="4161000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="425956000" />
+    <option name="totallyTimeSpent" value="427994000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1005,20 +1006,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/dti/printers/Status.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="33" column="44" lean-forward="false" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/dti/printers/WebCrawler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="743">
-          <caret line="164" column="30" lean-forward="false" selection-start-line="164" selection-start-column="30" selection-end-line="164" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -1036,21 +1023,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/esp/produtividade/Especializada.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="860">
-          <caret line="50" column="28" lean-forward="false" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
-          <folding>
-            <element signature="e#6#87#0#PHP" expanded="true" />
-            <element signature="e#130#178#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/app.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="43" column="10" lean-forward="false" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/dai/rh/cadastro/editar.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="192" column="44" lean-forward="false" selection-start-line="192" selection-start-column="44" selection-end-line="192" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -1063,10 +1047,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/dai/rh/cadastro/editar.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Entity/esp/produtividade/Especializada.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="194" column="46" lean-forward="false" selection-start-line="194" selection-start-column="46" selection-end-line="194" selection-end-column="46" />
+        <state relative-caret-position="423">
+          <caret line="50" column="28" lean-forward="false" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
+          <folding>
+            <element signature="e#6#87#0#PHP" expanded="true" />
+            <element signature="e#130#178#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/dti/printers/Status.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="33" column="45" lean-forward="false" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/dti/printers/WebCrawler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="154" column="20" lean-forward="false" selection-start-line="154" selection-start-column="20" selection-end-line="154" selection-end-column="20" />
           <folding />
         </state>
       </provider>

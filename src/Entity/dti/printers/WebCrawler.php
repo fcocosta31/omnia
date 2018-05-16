@@ -152,7 +152,7 @@ class WebCrawler{
 
         }
 
-        return $rows[1];
+        return $rows;
     }
     
     function GetServerStatus($site, $port)
