@@ -24,11 +24,18 @@
                      </div>
                  </div>
              </div>
-                 <div class="tabs-container row">
+           <div>
+               <!-- Nav tabs -->
+               <ul class="nav nav-tabs" role="tablist">
+                   <li role="presentation" class="active"><a href="#dadospessoais" class="tabs-color" aria-controls="dadospessoais" role="tab" data-toggle="tab">Dados Pessoais</a></li>
+                   <li role="presentation"><a href="#documentospessoais" class="tabs-color" aria-controls="documentospessoais" role="tab" data-toggle="tab">Documentos Pessoais</a></li>
+                   <li role="presentation"><a href="#dadoscomplemento" class="tabs-color" aria-controls="dadoscomplemento" role="tab" data-toggle="tab">Dados Complementares</a></li>
+                   <li role="presentation"><a href="#arquivos" class="tabs-color" aria-controls="arquivos" role="tab" data-toggle="tab">Arquivos</a></li>
+               </ul>
 
-                     <input type="radio" name="tabs" class="tabs" id="tab1" checked>
-                     <label for="tab1">Dados Pessoais</label>
-                     <div class="row">
+               <div class="tab-content">
+
+                   <div role="tabpanel" class="tab-pane fade in active" id="dadospessoais">
                          <div class="col-md-5 col-xs-12">
                          {{ form_row(form.nome, {'label':'Nome'}) }}
                          </div>
@@ -78,9 +85,7 @@
                          {{ form_row(form.pai, {'label':'Pai'}) }}
                          </div>
                      </div>
-                     <input type="radio" name="tabs" class="tabs" id="tab2">
-                     <label for="tab2">Documentos Pessoais</label>
-                     <div>
+                   <div role="tabpanel" class="tab-pane fade" id="documentospessoais">
                          <div class="col-md-2 col-xs-12">
                              {{ form_row(form.cpf, {'label':'CPF nº'}) }}
                          </div>
@@ -134,9 +139,8 @@
                          </div>
 
                      </div>
-                     <input type="radio" name="tabs" class="tabs" id="tab3">
-                     <label for="tab3">Dados Complementares</label>
-                     <div>
+
+                   <div role="tabpanel" class="tab-pane fade" id="dadoscomplemento">
                          <div class="col-md-3 col-xs-12">
                              {{ form_row(form.grauinstrucao, {'label':'Grau de Instrução'}) }}
                          </div>
@@ -159,9 +163,8 @@
                              {{ form_row(form.conta, {'label':'Conta'}) }}
                          </div>
                      </div>
-                     <input type="radio" name="tabs" class="tabs" id="tab4">
-                     <label for="tab4">Arquivos</label>
-                     <div>
+
+                   <div role="tabpanel" class="tab-pane fade" id="arquivos">
                          <div class="col-md-12 col-xs-12">
                              <h4>Enviar Arquivos</h4>
                          </div>
@@ -200,6 +203,7 @@
                          </div>
                      </div>
                  </div>
+           </div>
              {{ form_end(form) }}
          </div>
      </div>
