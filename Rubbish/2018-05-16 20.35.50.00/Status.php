@@ -33,12 +33,7 @@ class Status{
                 $p->setSerial($rows[2]);
                 $p->setStatusToner($rows[3]);
                 $p->setStatusImagem($rows[4]);
-
-                if(strlen($statusbar[2]) == 13){
-                    $p->setMensagem($statusbar[1]);
-                }else{
-                    $p->setMensagem($statusbar[1]."[".$statusbar[2]."]");
-                }
+                $p->setMensagem($statusbar[1]."[".$statusbar[2]."]");
 
                 if(sizeof($rows) > 5){
                     $troca = $rows[5];
