@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class IndexController
@@ -19,8 +20,13 @@ class IndexController extends Controller
 {
     /**
      * @Route("/")
+     * @param Request $request
+     * @return Response|\Symfony\Component\HttpFoundation\Response
      */
     public function index(){
-
+        $menusys = "Index da aplicação";
+        return $this->render("index.html.twig", array(
+            'menusys' => $menusys
+        ));
     }
 }

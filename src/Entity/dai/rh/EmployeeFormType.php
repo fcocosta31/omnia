@@ -147,8 +147,8 @@ class EmployeeFormType extends AbstractType
             ->add('sexo', ChoiceType::class, array(
                 'placeholder' => 'Selecione...',
                 'choices' => array(
-                    'Masculino' => 1,
-                    'Feminino' => 2,
+                    'MASCULINO' => 1,
+                    'FEMININO' => 2,
                 )
             ))
             ->add('cnh', TextType::class, array(
