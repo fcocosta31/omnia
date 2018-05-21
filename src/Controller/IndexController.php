@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 class IndexController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="index_geral")
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */

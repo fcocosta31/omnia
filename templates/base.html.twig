@@ -26,14 +26,33 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="{{ asset('build/js/app.css') }}">
+            <style>
+                .watermark{
+                    background-image: url({{ asset('uploads/images/water-mark2.jpg') }});
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    position: relative;
+                    width: 100%;
+                    top: 0px;
+                    opacity: 0.04;
+                    color: white;
+                }
+                .watermark-over{
+                    color: #000000;
+                    position: absolute;
+                    top: 70px;
+                    width: 100%;
+                }
+            </style>
         {% endblock %}
     </head>
     <body>
         {% block header %}
         {% endblock %}
-
-        <main id="wrap">
-        {% block content %}{% endblock %}
+        <div id="wrap" class="watermark"></div>
+        <main class="watermark-over">
+        {% block content %}
+        {% endblock %}
         </main>
         <div id="push"></div>
         <footer id="footer">

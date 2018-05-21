@@ -6,7 +6,7 @@
  * Time: 12:25
  */
 
-namespace App\Controller\esp;
+namespace App\Controller\esp\produtividade;
 
 
 class EspecializadaController

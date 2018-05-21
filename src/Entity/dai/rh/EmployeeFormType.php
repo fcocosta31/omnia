@@ -116,7 +116,7 @@ class EmployeeFormType extends AbstractType
                             ->orderBy('u.descricao', 'ASC');
                     },
                     'choice_label' => 'descricao',
-                    'required' => false,
+                    'required' => true,
                     'empty_data' => null
                 )
             )
@@ -132,7 +132,7 @@ class EmployeeFormType extends AbstractType
                             ->orderBy('u.descricao', 'ASC');
                     },
                     'choice_label' => 'descricao',
-                    'required' => false,
+                    'required' => true,
                     'empty_data' => null
                 )
             )

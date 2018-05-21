@@ -100,14 +100,23 @@ html, body {
     background-color: #1b1e21;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-top: 5px;
     margin-bottom: 5px;
-    font-size: 1.7em;
+    font-size: 1.5em;
     font-weight: bold;
     text-align: center;
     color: white;
     text-shadow: 1px 1px 2px rgba(153,153,153, 0.8);
     box-shadow: 0px 3px 4px #888888;
+}
+
+.fundo-topo-menu {
+    background-color: #1b1e21;
+    margin-top: 8px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(153,153,153, 0.8);
 }
 
 .container-topo {
@@ -117,4 +126,9 @@ html, body {
 
 .buttons-topo{
     margin-top: 10px;
+}
+
+.required:after {
+    content:" *";
+    color: red;
 }
