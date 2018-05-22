@@ -37,14 +37,14 @@ class Ato
     protected $peso;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Especializada", inversedBy="atos")
-     * @ORM\JoinColumn(name="especializada_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Lotacao", inversedBy="atos")
+     * @ORM\JoinColumn(name="lotacao_id", referencedColumnName="id")
      */
-    protected $especializada_id;
+    protected $lotacao_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Procurador", inversedBy="atos")
-     * @ORM\JoinColumn(name="procurador_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="atos")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $procurador_id;
 

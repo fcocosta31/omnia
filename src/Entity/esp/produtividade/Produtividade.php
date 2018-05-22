@@ -24,7 +24,7 @@ class Produtividade
     protected $emissao;
 
     /**
-     * @var Especializada
+     * @var Lotacao
      */
     protected $especializada;
 

@@ -6,19 +6,19 @@
  * Time: 07:49
  */
 
-namespace App\Entity\esp\produtividade;
+namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Especializada
- * @package App\Entity\esp\produtividade
+ * Class Lotacao
+ * @package App\Entity
  * @ORM\Entity
- * @ORM\Table(name="especializada")
+ * @ORM\Table(name="lotacao")
  */
-class Especializada
+class Lotacao
 {
     /**
      * @ORM\Id
@@ -34,20 +34,14 @@ class Especializada
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="Processo", mappedBy="especializada_id")
-     */
-    protected $processos;
-
-    /**
-     * @var Collection
-     * @ORM\OneToMany(targetEntity="Ato", mappedBy="especializada_id")
+     * @ORM\OneToMany(targetEntity="Ato", mappedBy="lotacao_id")
      */
     protected $atos;
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="Procurador", mappedBy="especializada_id")
+     * @ORM\OneToMany(targetEntity="User", mappedBy="lotacao_id")
      */
-    protected $procuradores;
+    protected $users;
 
 }

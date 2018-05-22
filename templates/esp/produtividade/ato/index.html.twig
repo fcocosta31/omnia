@@ -1,0 +1,91 @@
+{% extends "base.html.twig" %}
+{% block header %}
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+
+        <div class="container-fluid">
+
+            <a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+
+            <div class="fundo-topo-menu">
+                Atos Praticados
+            </div>
+
+        </div>
+
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container">
+                <div class="col-md-11 col-xs-12">
+                    <div>
+                        <p>Procuradoria Fiscal</p>
+                        <p>Maria Do Carmo Fernandes Frota</p>
+                        <p>Período: 10/01/2018 a 18/01/2018</p>
+                    </div>
+                    <br>
+
+                    <div class="col-md-12 col-xs-12">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Especializada</th>
+                                    <th>Tipo de Ato</th>
+                                    <th>Nº Processo</th>
+                                    <th>Assunto</th>
+                                    <th>Tipo Processo</th>
+                                    <th>#</th>
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>12/01/2018</td>
+                                    <td>Procuradoria Fiscal</td>
+                                    <td>Despacho circunstanciado</td>
+                                    <td>2018015000090923</td>
+                                    <td>Assunto do processo 1</td>
+                                    <td>Tipo do processo 1</td>
+                                    <td><a href="#!" class="btn btn-default btn-sm">Editar</a></td>
+                                    <td><a href="#!" class="btn btn-default btn-sm">Deletar</a></td>
+                                </tr>
+                                <tr>
+                                    <td>14/01/2018</td>
+                                    <td>Procuradoria Fiscal</td>
+                                    <td>Memorando/Ofício</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><a href="#!" class="btn btn-default btn-sm">Editar</a></td>
+                                    <td><a href="#!" class="btn btn-default btn-sm">Deletar</a></td>
+                                </tr>
+                                <tr>
+                                    <td>15/01/2018</td>
+                                    <td>Procuradoria Fiscal</td>
+                                    <td>Participação em reuniões administrativas</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><a href="#!" class="btn btn-default btn-sm">Editar</a></td>
+                                    <td><a href="#!" class="btn btn-default btn-sm">Deletar</a></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="8"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

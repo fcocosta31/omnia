@@ -44,6 +44,12 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Lotacao", inversedBy="users")
+     * @ORM\JoinColumn(name="lotacao_id", referencedColumnName="id")
+     */
+    private $lotacao_id;
+
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;

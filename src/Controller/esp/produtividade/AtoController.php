@@ -19,6 +19,18 @@ use Symfony\Component\HttpFoundation\Request;
 class AtoController extends Controller
 {
     /**
+     * @Route("/esp/produtividade/ato", name="esp_produtividade_ato_index")
+     * @param Request $request
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function index(){
+
+        return $this->render("esp/produtividade/ato/index.html.twig", array(
+            'form' => null,
+        ));
+    }
+
+    /**
      * @Route("/esp/produtividade/ato/novo", name="esp_produtividade_ato_novo")
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
