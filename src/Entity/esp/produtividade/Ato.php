@@ -46,6 +46,12 @@ class Ato
      * @ORM\ManyToOne(targetEntity="User", inversedBy="atos")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $procurador_id;
+    protected $user_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="TipoDeAto", inversedBy="atos")
+     * @ORM\JoinColumn(name="tipodeato_id", referencedColumnName="id")
+     */
+    protected $tipodeato_id;
 
 }

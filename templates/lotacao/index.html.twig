@@ -1,0 +1,69 @@
+{% extends "base.html.twig" %}
+{% block header %}
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+
+        <div class="container-fluid">
+
+            <a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+
+            <div class="fundo-topo-menu">
+                Órgãos Internos
+            </div>
+
+        </div>
+
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container">
+                <div class="col-md-11 col-xs-12">
+
+                    <div class="col-md-12 col-xs-12">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Órgão</th>
+                                <th>#</th>
+                                <th>#</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Procuradoria Administrativa</td>
+                                <td><a href="#!" class="btn btn-default btn-sm">Editar</a></td>
+                                <td><a href="#!" class="btn btn-default btn-sm">Deletar</a></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Procuradoria Fiscal</td>
+                                <td><a href="#!" class="btn btn-default btn-sm">Editar</a></td>
+                                <td><a href="#!" class="btn btn-default btn-sm">Deletar</a></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Procuradoria Patrimonial</td>
+                                <td><a href="#!" class="btn btn-default btn-sm">Editar</a></td>
+                                <td><a href="#!" class="btn btn-default btn-sm">Deletar</a></td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="4"></td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

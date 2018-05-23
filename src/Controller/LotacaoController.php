@@ -2,41 +2,42 @@
 /**
  * Created by PhpStorm.
  * User: fcoco
- * Date: 17/05/2018
- * Time: 12:24
+ * Date: 23/05/2018
+ * Time: 09:40
  */
 
-namespace App\Controller\esp\produtividade;
+namespace App\Controller;
+
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class AtoController
- * @package App\Controller\esp\produtividade
+ * Class LotacaoController
+ * @package App\Controller
  */
-class AtoController extends Controller
+class LotacaoController extends Controller
 {
     /**
-     * @Route("/esp/produtividade/ato", name="esp_produtividade_ato_index")
+     * @Route("/lotacao", name="lotacao_index")
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
     public function index(){
 
-        return $this->render("esp/produtividade/ato/index.html.twig", array(
+        return $this->render("lotacao/index.html.twig", array(
             'form' => null,
         ));
     }
 
     /**
-     * @Route("/esp/produtividade/ato/novo", name="esp_produtividade_ato_novo")
+     * @Route("/lotacao/novo", name="lotacao_novo")
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
     public function novo(Request $request){
 
-        return $this->render("esp/produtividade/ato/novo.html.twig", array(
+        return $this->render("lotacao/novo.html.twig", array(
             'form' => null,
         ));
     }

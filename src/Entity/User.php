@@ -50,6 +50,12 @@ class User implements UserInterface, \Serializable
     private $lotacao_id;
 
     /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Ato", mappedBy="user_id")
+     */
+    protected $atos;
+
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;

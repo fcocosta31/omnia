@@ -8,6 +8,8 @@
 
 namespace App\Entity\esp\produtividade;
 
+use App\Entity\Lotacao;
+use App\Entity\User;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\Date;
 
@@ -21,7 +23,12 @@ class Produtividade
     /**
      * @var Date
      */
-    protected $emissao;
+    protected $dataini;
+
+    /**
+     * @var Date
+     */
+    protected $datafim;
 
     /**
      * @var Lotacao
@@ -29,14 +36,9 @@ class Produtividade
     protected $especializada;
 
     /**
-     * @var Procurador
+     * @var User
      */
     protected $procurador;
-
-    /**
-     * @var Collection
-     */
-    protected $processos;
 
     /**
      * @var Collection

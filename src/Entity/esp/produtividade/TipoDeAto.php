@@ -2,24 +2,25 @@
 /**
  * Created by PhpStorm.
  * User: fcoco
- * Date: 26/04/2018
- * Time: 07:49
+ * Date: 23/05/2018
+ * Time: 10:38
  */
 
-namespace App\Entity;
+namespace App\Entity\esp\produtividade;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Lotacao
+ * Class TipoDeAto
  * @package App\Entity
  * @ORM\Entity
- * @ORM\Table(name="lotacao")
+ * @ORM\Table(name="tipodeato")
  */
-class Lotacao
+class TipoDeAto
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer", nullable=false)
@@ -27,23 +28,16 @@ class Lotacao
      */
     protected $id;
 
-    /**
-     * @ORM\Column(name="descricao", type="string", nullable=false)
-     */
     protected $descricao;
 
+    protected $peso;
+
+    protected $lotacao;
+
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="Ato", mappedBy="lotacao_id")
+     * @ORM\OneToMany(targetEntity="Ato", mappedBy="tipodeato_id")
      */
     protected $atos;
-
-    /**
-     * @var Collection
-     * @ORM\OneToMany(targetEntity="User", mappedBy="lotacao_id")
-     */
-    protected $users;
-
-
 
 }

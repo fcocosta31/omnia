@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+{% block header %}
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+
+        <div class="container-fluid">
+
+            <a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+
+            <div class="fundo-topo-menu">
+                Cadastro de Especializada (protótipo)
+            </div>
+
+        </div>
+
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container">
+                <div class="col-md-11 col-xs-12">
+
+                    <div class="col-md-12 col-xs-12">
+                        <label class="required">Especializada</label>
+                        <input type="text" class="form-control" required="required">
+                    </div>
+                    <div class="row"></div>
+                    <br><br>
+                    <div class="col-md-12 col-xs-12">
+                        <input class="btn btn-primary" type="submit" value="Enviar" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
