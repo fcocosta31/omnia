@@ -47,8 +47,12 @@
         {% endblock %}
     </head>
     <body>
-        {% block header %}
-        {% endblock %}
+        <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+            <div class="container-fluid">
+                {% block header %}
+                {% endblock %}
+            </div>
+        </nav>
         <div id="wrap" class="watermark"></div>
         <main class="watermark-over">
         {% block content %}

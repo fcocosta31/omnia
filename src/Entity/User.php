@@ -149,6 +149,39 @@ class User implements UserInterface, \Serializable
         $this->isActive = $isActive;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLotacaoId()
+    {
+        return $this->lotacao_id;
+    }
+
+    /**
+     * @param mixed $lotacao_id
+     */
+    public function setLotacaoId($lotacao_id)
+    {
+        $this->lotacao_id = $lotacao_id;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAtos(): ArrayCollection
+    {
+        return $this->atos;
+    }
+
+    /**
+     * @param ArrayCollection $atos
+     */
+    public function setAtos(ArrayCollection $atos)
+    {
+        $this->atos = $atos;
+    }
+
+
     public function getRoles()
     {
         return array('ROLE_USER');

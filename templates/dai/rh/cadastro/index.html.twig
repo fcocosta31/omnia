@@ -1,20 +1,14 @@
 {% extends "base.html.twig" %}
 {% block header %}
-    <nav class="navbar navbar-inverse">
 
-        <div class="container-fluid">
+    <a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
+        <i class="glyphicon glyphicon-home"></i>
+    </a>
 
-            <a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
-                <i class="glyphicon glyphicon-home"></i>
-            </a>
+    <div class="fundo-topo-menu">
+        Listagem de Pessoal
+    </div>
 
-            <div class="fundo-topo-menu">
-                Listagem de Pessoal
-            </div>
-
-        </div>
-
-    </nav>
 {% endblock %}
 
 {% block content %}

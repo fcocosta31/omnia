@@ -132,3 +132,7 @@ html, body {
     content:" *";
     color: red;
 }
+
+.fundo-shadow{
+    box-shadow: 0px 3px 4px #888888;
+}

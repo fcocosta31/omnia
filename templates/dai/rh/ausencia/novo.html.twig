@@ -1,8 +1,14 @@
 {% extends "base.html.twig" %}
 {% block header %}
-    <div class="fundo-topo">
+
+    <a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
+        <i class="glyphicon glyphicon-home"></i>
+    </a>
+
+    <div class="fundo-topo-menu">
         Cadastro de Férias, Licenças, Atestados...
     </div>
+
 {% endblock %}
 
 {% block content %}

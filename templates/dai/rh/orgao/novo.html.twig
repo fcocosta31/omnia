@@ -1,9 +1,16 @@
 {% extends "base.html.twig" %}
-{% block content %}
-    <div class="fundo-topo">
+{% block header %}
+
+    <a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
+        <i class="glyphicon glyphicon-home"></i>
+    </a>
+
+    <div class="fundo-topo-menu">
         Cadastro de Órgão
     </div>
-    <br>
+
+{% endblock %}
+{% block content %}
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-xs-12">

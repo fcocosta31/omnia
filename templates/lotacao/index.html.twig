@@ -1,68 +1,49 @@
 {% extends "base.html.twig" %}
 {% block header %}
-    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
 
-        <div class="container-fluid">
+    <a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
+        <i class="glyphicon glyphicon-home"></i>
+    </a>
 
-            <a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
-                <i class="glyphicon glyphicon-home"></i>
-            </a>
+    <div class="fundo-topo-menu">
+        Especializadas / Divisões
+    </div>
 
-            <div class="fundo-topo-menu">
-                Órgãos Internos
-            </div>
-
-        </div>
-
-    </nav>
 {% endblock %}
 
 {% block content %}
     <br>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="container">
-                <div class="col-md-11 col-xs-12">
-
-                    <div class="col-md-12 col-xs-12">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Órgão</th>
-                                <th>#</th>
-                                <th>#</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Procuradoria Administrativa</td>
-                                <td><a href="#!" class="btn btn-default btn-sm">Editar</a></td>
-                                <td><a href="#!" class="btn btn-default btn-sm">Deletar</a></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Procuradoria Fiscal</td>
-                                <td><a href="#!" class="btn btn-default btn-sm">Editar</a></td>
-                                <td><a href="#!" class="btn btn-default btn-sm">Deletar</a></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Procuradoria Patrimonial</td>
-                                <td><a href="#!" class="btn btn-default btn-sm">Editar</a></td>
-                                <td><a href="#!" class="btn btn-default btn-sm">Deletar</a></td>
-                            </tr>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <td colspan="4"></td>
-                            </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-
-                </div>
+            <div class="col-md-1 col-xs-12">
+                <h4>Ações</h4>
+                <a href="{{ path('lotacao_novo') }}"
+                   class="btn btn-default">Novo</a>
+            </div>
+            <div class="col-md-10 col-xs-12">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Descrição</th>
+                        <th>#</th>
+                        <th>#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in lots %}
+                        <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.descricao }}</td>
+                            <td><a href="{{ path('lotacao_editar', {'id':i.id}) }}"
+                                   class="btn btn-default btn-sm">Editar</a></td>
+                            <td><a href="{{ path('lotacao_deletar', {'id':i.id}) }}"
+                                   class="btn btn-default btn-sm">Deletar</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot><tr><td colspan="4"></td></tr></tfoot>
+                </table>
             </div>
         </div>
     </div>
