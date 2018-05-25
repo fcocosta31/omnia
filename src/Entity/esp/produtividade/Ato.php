@@ -66,5 +66,131 @@ class Ato
      */
     protected $user_id;
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmissao()
+    {
+        return $this->emissao;
+    }
+
+    /**
+     * @param mixed $emissao
+     */
+    public function setEmissao($emissao)
+    {
+        $this->emissao = $emissao;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAssunto()
+    {
+        return $this->assunto;
+    }
+
+    /**
+     * @param mixed $assunto
+     */
+    public function setAssunto($assunto)
+    {
+        $this->assunto = $assunto;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTipodeatoId()
+    {
+        return $this->tipodeato_id;
+    }
+
+    /**
+     * @param mixed $tipodeato_id
+     */
+    public function setTipodeatoId($tipodeato_id)
+    {
+        $this->tipodeato_id = $tipodeato_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTipodeprocessoId()
+    {
+        return $this->tipodeprocesso_id;
+    }
+
+    /**
+     * @param mixed $tipodeprocesso_id
+     */
+    public function setTipodeprocessoId($tipodeprocesso_id)
+    {
+        $this->tipodeprocesso_id = $tipodeprocesso_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumerodoprocesso()
+    {
+        return $this->numerodoprocesso;
+    }
+
+    /**
+     * @param mixed $numerodoprocesso
+     */
+    public function setNumerodoprocesso($numerodoprocesso)
+    {
+        $this->numerodoprocesso = $numerodoprocesso;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLotacaoId()
+    {
+        return $this->lotacao_id;
+    }
+
+    /**
+     * @param mixed $lotacao_id
+     */
+    public function setLotacaoId($lotacao_id)
+    {
+        $this->lotacao_id = $lotacao_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param mixed $user_id
+     */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+    }
 }

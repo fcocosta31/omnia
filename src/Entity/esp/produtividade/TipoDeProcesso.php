@@ -47,9 +47,88 @@ class TipoDeProcesso
 
 
     /**
-     * @var Collection
+     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Ato", mappedBy="tipodeprocesso_id")
      */
     protected $atos;
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    /**
+     * @param mixed $descricao
+     */
+    public function setDescricao($descricao)
+    {
+        $this->descricao = $descricao;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPeso()
+    {
+        return $this->peso;
+    }
+
+    /**
+     * @param mixed $peso
+     */
+    public function setPeso($peso)
+    {
+        $this->peso = $peso;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLotacoes(): ArrayCollection
+    {
+        return $this->lotacoes;
+    }
+
+    /**
+     * @param ArrayCollection $lotacoes
+     */
+    public function setLotacoes(ArrayCollection $lotacoes)
+    {
+        $this->lotacoes = $lotacoes;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAtos(): ArrayCollection
+    {
+        return $this->atos;
+    }
+
+    /**
+     * @param ArrayCollection $atos
+     */
+    public function setAtos(ArrayCollection $atos)
+    {
+        $this->atos = $atos;
+    }
 }

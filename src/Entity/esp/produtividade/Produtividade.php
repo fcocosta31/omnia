@@ -10,7 +10,7 @@ namespace App\Entity\esp\produtividade;
 
 use App\Entity\Lotacao;
 use App\Entity\User;
-use Symfony\Component\Validator\Constraints\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\Date;
 
 /**
@@ -41,7 +41,7 @@ class Produtividade
     protected $procurador;
 
     /**
-     * @var Collection
+     * @var ArrayCollection
      */
     protected $atos;
 

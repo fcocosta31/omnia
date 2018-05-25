@@ -58,4 +58,99 @@ class Lotacao
      */
     protected $tiposdeprocesso;
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    /**
+     * @param mixed $descricao
+     */
+    public function setDescricao($descricao)
+    {
+        $this->descricao = $descricao;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAtos(): ArrayCollection
+    {
+        return $this->atos;
+    }
+
+    /**
+     * @param ArrayCollection $atos
+     */
+    public function setAtos(ArrayCollection $atos)
+    {
+        $this->atos = $atos;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getUsers(): ArrayCollection
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param ArrayCollection $users
+     */
+    public function setUsers(ArrayCollection $users)
+    {
+        $this->users = $users;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTiposdeato(): ArrayCollection
+    {
+        return $this->tiposdeato;
+    }
+
+    /**
+     * @param ArrayCollection $tiposdeato
+     */
+    public function setTiposdeato(ArrayCollection $tiposdeato)
+    {
+        $this->tiposdeato = $tiposdeato;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTiposdeprocesso(): ArrayCollection
+    {
+        return $this->tiposdeprocesso;
+    }
+
+    /**
+     * @param ArrayCollection $tiposdeprocesso
+     */
+    public function setTiposdeprocesso(ArrayCollection $tiposdeprocesso)
+    {
+        $this->tiposdeprocesso = $tiposdeprocesso;
+    }
 }
