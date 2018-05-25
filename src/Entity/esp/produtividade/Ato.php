@@ -27,14 +27,32 @@ class Ato
     protected $id;
 
     /**
-     * @ORM\Column(name="descricao", type="string", nullable=false)
+     * @ORM\Column(name="emissao", type="date", nullable=false)
      */
-    protected $descricao;
+    protected $emissao;
 
     /**
-     * @ORM\Column(name="peso", type="float", nullable=false)
+     * @ORM\Column(name="assunto", type="string", nullable=false)
      */
-    protected $peso;
+    protected $assunto;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="TipoDeAto", inversedBy="atos")
+     * @ORM\JoinColumn(name="tipodeato_id", referencedColumnName="id")
+     */
+    protected $tipodeato_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="TipoDeProcesso", inversedBy="atos")
+     * @ORM\JoinColumn(name="tipodeprocesso_id", referencedColumnName="id")
+     */
+    protected $tipodeprocesso_id;
+
+    /**
+     * @ORM\Column(name="numerodoprocesso", type="string", nullable=true)
+     */
+    protected $numerodoprocesso;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="Lotacao", inversedBy="atos")
@@ -48,10 +66,5 @@ class Ato
      */
     protected $user_id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="TipoDeAto", inversedBy="atos")
-     * @ORM\JoinColumn(name="tipodeato_id", referencedColumnName="id")
-     */
-    protected $tipodeato_id;
 
 }
