@@ -55,13 +55,13 @@ class Ato
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Lotacao", inversedBy="atos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lotacao", inversedBy="atos")
      * @ORM\JoinColumn(name="lotacao_id", referencedColumnName="id")
      */
     protected $lotacao_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="atos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="atos")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user_id;

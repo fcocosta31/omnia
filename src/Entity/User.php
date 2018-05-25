@@ -8,6 +8,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -50,8 +51,8 @@ class User implements UserInterface, \Serializable
     private $lotacao_id;
 
     /**
-     * @var Collection
-     * @ORM\OneToMany(targetEntity="Ato", mappedBy="user_id")
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\esp\produtividade\Ato", mappedBy="user_id")
      */
     protected $atos;
 

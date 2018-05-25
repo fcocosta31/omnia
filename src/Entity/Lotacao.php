@@ -34,7 +34,7 @@ class Lotacao
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Ato", mappedBy="lotacao_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\esp\produtividade\Ato", mappedBy="lotacao_id")
      */
     protected $atos;
 
@@ -46,15 +46,15 @@ class Lotacao
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="TipoDeAto", mappedBy="lotacoes")
-     * @JoinTable(name="lotacao_tiposdeato")
+     * @ORM\ManyToMany(targetEntity="App\Entity\esp\produtividade\TipoDeAto", mappedBy="lotacoes")
+     * @ORM\JoinTable(name="lotacao_tiposdeato")
      */
     protected $tiposdeato;
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="TipoDeProcesso", mappedBy="lotacoes")
-     * @JoinTable(name="lotacao_tiposdeprocesso")
+     * @ORM\ManyToMany(targetEntity="App\Entity\esp\produtividade\TipoDeProcesso", mappedBy="lotacoes")
+     * @ORM\JoinTable(name="lotacao_tiposdeprocesso")
      */
     protected $tiposdeprocesso;
 

@@ -8,7 +8,6 @@
 
 namespace App\Entity\esp\produtividade;
 
-use App\Entity\Lotacao;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\Date;

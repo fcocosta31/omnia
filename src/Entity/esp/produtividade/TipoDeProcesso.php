@@ -41,7 +41,7 @@ class TipoDeProcesso
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Lotacao", mappedBy="tiposdeprocesso")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Lotacao", mappedBy="tiposdeprocesso")
      */
     protected $lotacoes;
 

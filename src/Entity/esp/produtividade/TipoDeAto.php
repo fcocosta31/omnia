@@ -37,7 +37,7 @@ class TipoDeAto
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Lotacao", mappedBy="tiposdeato")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Lotacao", mappedBy="tiposdeato")
      */
     protected $lotacoes;
 

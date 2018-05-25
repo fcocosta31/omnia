@@ -3,14 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="6e07630d-b700-4837-8dce-d071d506b6d8" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/assets/js/app.css" afterPath="$PROJECT_DIR$/assets/js/app.css" />
-      <change beforePath="$PROJECT_DIR$/public/build/js/app.css" afterPath="$PROJECT_DIR$/public/build/js/app.css" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Lotacao.php" afterPath="$PROJECT_DIR$/src/Entity/Lotacao.php" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" afterPath="$PROJECT_DIR$/src/Entity/User.php" />
       <change beforePath="$PROJECT_DIR$/src/Entity/esp/produtividade/Ato.php" afterPath="$PROJECT_DIR$/src/Entity/esp/produtividade/Ato.php" />
       <change beforePath="$PROJECT_DIR$/src/Entity/esp/produtividade/Produtividade.php" afterPath="$PROJECT_DIR$/src/Entity/esp/produtividade/Produtividade.php" />
       <change beforePath="$PROJECT_DIR$/src/Entity/esp/produtividade/TipoDeAto.php" afterPath="$PROJECT_DIR$/src/Entity/esp/produtividade/TipoDeAto.php" />
       <change beforePath="$PROJECT_DIR$/src/Entity/esp/produtividade/TipoDeProcesso.php" afterPath="$PROJECT_DIR$/src/Entity/esp/produtividade/TipoDeProcesso.php" />
-      <change beforePath="$PROJECT_DIR$/templates/dti/printers/status.html.twig" afterPath="$PROJECT_DIR$/templates/dti/printers/status.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,8 +37,8 @@
       <file leaf-file-name="Ato.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/esp/produtividade/Ato.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+            <state relative-caret-position="140">
+              <caret line="57" column="47" lean-forward="false" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
               <folding>
                 <element signature="e#130#162#0#PHP" expanded="true" />
               </folding>
@@ -48,12 +46,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="920">
-              <caret line="53" column="30" lean-forward="false" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
-              <folding />
+            <state relative-caret-position="760">
+              <caret line="53" column="27" lean-forward="false" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
+              <folding>
+                <element signature="e#112#160#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -61,8 +61,8 @@
       <file leaf-file-name="Lotacao.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/Lotacao.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="154" column="5" lean-forward="false" selection-start-line="154" selection-start-column="5" selection-end-line="154" selection-end-column="5" />
+            <state relative-caret-position="240">
+              <caret line="29" column="7" lean-forward="false" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
               <folding>
                 <element signature="e#112#160#0#PHP" expanded="true" />
               </folding>
@@ -85,8 +85,8 @@
       <file leaf-file-name="TipoDeAto.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/esp/produtividade/TipoDeAto.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+            <state relative-caret-position="260">
+              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding>
                 <element signature="e#130#178#0#PHP" expanded="true" />
               </folding>
@@ -97,8 +97,8 @@
       <file leaf-file-name="TipoDeProcesso.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/esp/produtividade/TipoDeProcesso.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="14" column="3" lean-forward="true" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+            <state relative-caret-position="160">
+              <caret line="43" column="48" lean-forward="false" selection-start-line="43" selection-start-column="48" selection-end-line="43" selection-end-column="48" />
               <folding>
                 <element signature="e#130#178#0#PHP" expanded="true" />
               </folding>
@@ -106,12 +106,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Produtividade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Produtividade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/esp/produtividade/Produtividade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="100">
+              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding>
+                <element signature="e#130#150#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -238,7 +240,6 @@
         <option value="$PROJECT_DIR$/templates/esp/produtividade/processo/novo.html.twig" />
         <option value="$PROJECT_DIR$/templates/esp/produtividade/ato/index.html.twig" />
         <option value="$PROJECT_DIR$/templates/esp/produtividade/ato/novo.html.twig" />
-        <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/templates/esp/produtividade/especializada/novo.html.twig" />
         <option value="$PROJECT_DIR$/templates/esp/produtividade/especializada/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/esp/produtividade/LotacaoController.php" />
@@ -247,11 +248,12 @@
         <option value="$PROJECT_DIR$/src/Controller/esp/produtividade/AtoController.php" />
         <option value="$PROJECT_DIR$/templates/dti/printers/status.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/app.css" />
+        <option value="$PROJECT_DIR$/src/Entity/esp/produtividade/Produtividade.php" />
         <option value="$PROJECT_DIR$/src/Entity/esp/produtividade/Ato.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Lotacao.php" />
         <option value="$PROJECT_DIR$/src/Entity/esp/produtividade/TipoDeAto.php" />
         <option value="$PROJECT_DIR$/src/Entity/esp/produtividade/TipoDeProcesso.php" />
-        <option value="$PROJECT_DIR$/src/Entity/esp/produtividade/Produtividade.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Lotacao.php" />
+        <option value="$PROJECT_DIR$/src/Entity/User.php" />
       </list>
     </option>
   </component>
@@ -467,36 +469,6 @@
             <path>
               <item name="omnia" type="b2602c69:ProjectViewProjectNode" />
               <item name="omnia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="dai" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="omnia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="omnia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="dai" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="rh" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="omnia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="omnia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="esp" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="omnia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="omnia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="esp" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="produtividade" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="omnia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="omnia" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -671,12 +643,12 @@
       <workItem from="1527173559715" duration="3563000" />
       <workItem from="1527244397590" duration="373000" />
       <workItem from="1527245189287" duration="600000" />
-      <workItem from="1527251255268" duration="742000" />
+      <workItem from="1527251255268" duration="2637000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="487508000" />
+    <option name="totallyTimeSpent" value="489403000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -982,14 +954,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="920">
-          <caret line="53" column="30" lean-forward="false" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/dti/printers/PrinterController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="143">
@@ -1029,32 +993,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/esp/produtividade/Ato.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding>
-            <element signature="e#130#162#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/esp/produtividade/AtoController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="103">
           <caret line="24" column="28" lean-forward="false" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
           <folding>
             <element signature="e#134#181#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Lotacao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="154" column="5" lean-forward="false" selection-start-line="154" selection-start-column="5" selection-end-line="154" selection-end-column="5" />
-          <folding>
-            <element signature="e#112#160#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1069,10 +1013,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/esp/produtividade/Produtividade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#130#150#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/esp/produtividade/Ato.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="57" column="47" lean-forward="false" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
+          <folding>
+            <element signature="e#130#162#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/esp/produtividade/TipoDeAto.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+        <state relative-caret-position="260">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
             <element signature="e#130#178#0#PHP" expanded="true" />
           </folding>
@@ -1081,19 +1045,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/esp/produtividade/TipoDeProcesso.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="14" column="3" lean-forward="true" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+        <state relative-caret-position="160">
+          <caret line="43" column="48" lean-forward="false" selection-start-line="43" selection-start-column="48" selection-end-line="43" selection-end-column="48" />
           <folding>
             <element signature="e#130#178#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/esp/produtividade/Produtividade.php">
+    <entry file="file://$PROJECT_DIR$/src/Entity/Lotacao.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="240">
+          <caret line="29" column="7" lean-forward="false" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
+          <folding>
+            <element signature="e#112#160#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="53" column="27" lean-forward="false" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
+          <folding>
+            <element signature="e#112#160#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
