@@ -41,3 +41,8 @@ services:
         class: App\Entity\dai\rh\Estado
         arguments:
         em: "@doctrine.orm.entity_manager"
+
+    lotacaoformtype_entitymanager.service:
+        class: App\Entity\Lotacao
+        arguments:
+        em: "@doctrine.orm.entity_manager"

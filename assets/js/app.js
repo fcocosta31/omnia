@@ -51,6 +51,7 @@ $("#employee_form_ufnatu").change(function () {
     });
 });
 
+
 /*
 
 var $estado = $('#employee_form_uf');

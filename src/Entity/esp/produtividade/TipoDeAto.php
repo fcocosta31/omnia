@@ -28,6 +28,9 @@ class TipoDeAto
      */
     protected $id;
 
+    /**
+     * @ORM\Column(name="descricao", type="string", nullable=false)
+     */
     protected $descricao;
 
     /**

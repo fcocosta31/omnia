@@ -47,14 +47,20 @@ class Lotacao
     /**
      * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="App\Entity\esp\produtividade\TipoDeAto", mappedBy="lotacoes")
-     * @ORM\JoinTable(name="lotacao_tiposdeato")
+     * @ORM\JoinTable(name="lotacao_tiposdeato",
+     *      joinColumns={@ORM\JoinColumn(name="tipodeato_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="lotacao_id", referencedColumnName="id")}
+     *      )
      */
     protected $tiposdeato;
 
     /**
      * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="App\Entity\esp\produtividade\TipoDeProcesso", mappedBy="lotacoes")
-     * @ORM\JoinTable(name="lotacao_tiposdeprocesso")
+     * @ORM\JoinTable(name="lotacao_tiposdeprocesso",
+     *      joinColumns={@ORM\JoinColumn(name="tipodeprocesso_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="lotacao_id", referencedColumnName="id")}
+     *      )
      */
     protected $tiposdeprocesso;
 

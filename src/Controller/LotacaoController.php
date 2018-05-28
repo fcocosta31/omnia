@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Entity\Lotacao;
+use App\Entity\LotacaoFormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -42,13 +43,11 @@ class LotacaoController extends Controller
      */
     public function novo(Request $request){
 
-        $lotacao = new Lotacao();
-
         $entityManager = $this->getDoctrine()->getManager();
 
-        $form = $this->createFormBuilder($lotacao)
-            ->add('descricao', TextType::class)
-            ->getForm();
+        $lotacao = new Lotacao();
+
+        $form = $this->createForm(LotacaoFormType::class, $lotacao);
 
         $form->handleRequest($request);
 

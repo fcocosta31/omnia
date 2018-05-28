@@ -1,13 +1,13 @@
 {% extends "base.html.twig" %}
 {% block header %}
 
-<a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
-    <i class="glyphicon glyphicon-home"></i>
-</a>
+    <a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
+        <i class="glyphicon glyphicon-home"></i>
+    </a>
 
-<div class="fundo-topo-menu">
-    Cadastro de Especializada / Divisão
-</div>
+    <div class="fundo-topo-menu">
+        Cadastro de Tipo de Processo
+    </div>
 
 {% endblock %}
 
@@ -18,14 +18,11 @@
             <div class="container">
                 <div class="col-md-8 col-xs-12">
                     {{ form_start(form) }}
-                    <div class="col-md-12 col-xs-12">
+                    <div class="col-md-8 col-xs-12">
                         {{ form_row(form.descricao, {'label':'Descrição'}) }}
                     </div>
-                    <div class="col-md-6 col-xs-12">
-                        {{ form_row(form.tiposdeato, {'label':'Tipos de Atos'}) }}
-                    </div>
-                    <div class="col-md-6 col-xs-12">
-                        {{ form_row(form.tiposdeprocesso, {'label':'Tipos de Processos'}) }}
+                    <div class="col-md-4 col-xs-12">
+                        {{ form_row(form.peso, {'label':'Peso'}) }}
                     </div>
                     <div class="col-md-12 col-xs-12">
                         <input type="submit" value="Enviar" class="btn btn-primary"/>
