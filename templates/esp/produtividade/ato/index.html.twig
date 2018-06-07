@@ -18,9 +18,7 @@
             <div class="container">
                 <div class="col-md-11 col-xs-12">
                     <div>
-                        <p>Procuradoria Fiscal</p>
-                        <p>Maria Do Carmo Fernandes Frota</p>
-                        <p>Período: 10/01/2018 a 18/01/2018</p>
+                        <p>Período: 01/06/2018 a 07/06/2018</p>
                     </div>
                     <br>
 
@@ -31,44 +29,30 @@
                                     <th>Data</th>
                                     <th>Especializada</th>
                                     <th>Tipo de Ato</th>
-                                    <th>Nº Processo</th>
                                     <th>Assunto</th>
-                                    <th>Tipo Processo</th>
+                                    <th>Tipo de Processo</th>
+                                    <th>Nº Processo</th>
                                     <th>#</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for i in atos %}
                                 <tr>
-                                    <td>12/01/2018</td>
-                                    <td>Procuradoria Fiscal</td>
-                                    <td>Despacho circunstanciado</td>
-                                    <td>2018015000090923</td>
-                                    <td>Assunto do processo 1</td>
-                                    <td>Tipo do processo 1</td>
+                                    <td>{{ i.emissao|date('d/m/Y') }}</td>
+                                    <td>{{ i.lotacao.descricao }}</td>
+                                    <td>{{ i.tipodeato.descricao }}</td>
+                                    <td>{{ i.assunto }}</td>
+                                    {% set processo = '' %}
+                                    {% if i.tipodeprocesso is not null %}
+                                        {% set processo = i.tipodeprocesso.descricao %}
+                                    {% endif %}
+                                    <td>{{ processo }}</td>
+                                    <td>{{ i.numerodoprocesso }}</td>
                                     <td><a href="#!" class="btn btn-default btn-sm">Editar</a></td>
                                     <td><a href="#!" class="btn btn-default btn-sm">Deletar</a></td>
                                 </tr>
-                                <tr>
-                                    <td>14/01/2018</td>
-                                    <td>Procuradoria Fiscal</td>
-                                    <td>Memorando/Ofício</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href="#!" class="btn btn-default btn-sm">Editar</a></td>
-                                    <td><a href="#!" class="btn btn-default btn-sm">Deletar</a></td>
-                                </tr>
-                                <tr>
-                                    <td>15/01/2018</td>
-                                    <td>Procuradoria Fiscal</td>
-                                    <td>Participação em reuniões administrativas</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href="#!" class="btn btn-default btn-sm">Editar</a></td>
-                                    <td><a href="#!" class="btn btn-default btn-sm">Deletar</a></td>
-                                </tr>
+                                {% endfor %}
                             </tbody>
                             <tfoot>
                                 <tr>

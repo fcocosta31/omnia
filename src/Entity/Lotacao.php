@@ -33,34 +33,28 @@ class Lotacao
     protected $descricao;
 
     /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="App\Entity\esp\produtividade\Ato", mappedBy="lotacao_id")
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Ato", mappedBy="lotacao")
      */
     protected $atos;
 
     /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="User", mappedBy="lotacao_id")
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="User", mappedBy="lotacao")
      */
     protected $users;
 
     /**
-     * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="App\Entity\esp\produtividade\TipoDeAto", mappedBy="lotacoes")
-     * @ORM\JoinTable(name="lotacao_tiposdeato",
-     *      joinColumns={@ORM\JoinColumn(name="tipodeato_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="lotacao_id", referencedColumnName="id")}
-     *      )
+     * @var Collection
+     * @ORM\ManyToMany(targetEntity="TipoDeAto", inversedBy="lotacoes")
+     * @ORM\JoinTable(name="lotacao_tiposdeato")
      */
     protected $tiposdeato;
 
     /**
-     * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="App\Entity\esp\produtividade\TipoDeProcesso", mappedBy="lotacoes")
-     * @ORM\JoinTable(name="lotacao_tiposdeprocesso",
-     *      joinColumns={@ORM\JoinColumn(name="tipodeprocesso_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="lotacao_id", referencedColumnName="id")}
-     *      )
+     * @var Collection
+     * @ORM\ManyToMany(targetEntity="TipoDeProcesso", inversedBy="lotacoes")
+     * @ORM\JoinTable(name="lotacao_tiposdeprocesso")
      */
     protected $tiposdeprocesso;
 
@@ -97,66 +91,67 @@ class Lotacao
     }
 
     /**
-     * @return ArrayCollection
+     * @return mixed
      */
-    public function getAtos(): ArrayCollection
+    public function getAtos()
     {
         return $this->atos;
     }
 
     /**
-     * @param ArrayCollection $atos
+     * @param mixed $atos
      */
-    public function setAtos(ArrayCollection $atos)
+    public function setAtos($atos)
     {
         $this->atos = $atos;
     }
 
     /**
-     * @return ArrayCollection
+     * @return mixed
      */
-    public function getUsers(): ArrayCollection
+    public function getUsers()
     {
         return $this->users;
     }
 
     /**
-     * @param ArrayCollection $users
+     * @param mixed $users
      */
-    public function setUsers(ArrayCollection $users)
+    public function setUsers($users)
     {
         $this->users = $users;
     }
 
     /**
-     * @return ArrayCollection
+     * @return mixed
      */
-    public function getTiposdeato(): ArrayCollection
+    public function getTiposdeato()
     {
         return $this->tiposdeato;
     }
 
     /**
-     * @param ArrayCollection $tiposdeato
+     * @param mixed $tiposdeato
      */
-    public function setTiposdeato(ArrayCollection $tiposdeato)
+    public function setTiposdeato($tiposdeato)
     {
         $this->tiposdeato = $tiposdeato;
     }
 
     /**
-     * @return ArrayCollection
+     * @return mixed
      */
-    public function getTiposdeprocesso(): ArrayCollection
+    public function getTiposdeprocesso()
     {
         return $this->tiposdeprocesso;
     }
 
     /**
-     * @param ArrayCollection $tiposdeprocesso
+     * @param mixed $tiposdeprocesso
      */
-    public function setTiposdeprocesso(ArrayCollection $tiposdeprocesso)
+    public function setTiposdeprocesso($tiposdeprocesso)
     {
         $this->tiposdeprocesso = $tiposdeprocesso;
     }
+
 }

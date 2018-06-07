@@ -17,63 +17,34 @@
         <div class="row">
             <div class="container">
                 <div class="col-md-11 col-xs-12">
-                    <div>
-                        <p>Procuradoria Fiscal</p>
-                        <p>Maria Do Carmo Fernandes Frota</p>
-                    </div>
-                    <br>
-
+                    {{ form_start(form) }}
                     <div class="col-md-4 col-xs-12">
-                        <label class="required">Data</label>
-                        <input type="date" class="form-control" required="required">
+                        {{ form_row(form.emissao, {'label':'Data'}) }}
                     </div>
                     <div class="col-md-8 col-xs-12">
-                        <label class="required">Tipo de Ato</label>
-                        <select class="form-control" required="required">
-                            <option>Selecione...</option>
-                            <option>Pareceres</option>
-                            <option>Despacho de mero expediente</option>
-                            <option>Termo de ratificação</option>
-                            <option>Despacho circunstanciado</option>
-                            <option>Petição judicial</option>
-                            <option>Recursos</option>
-                            <option>Memorando/Ofício</option>
-                            <option>Partipação em audiências</option>
-                            <option>Participação em reuniões administrativas</option>
-                            <option>Sustentação Oral</option>
-                            <option>Outros (Especificar)</option>
-                        </select>
+                        {{ form_row(form.tipodeato, {'label':'Tipo de Ato'}) }}
                     </div>
                     <div class="row"></div>
                     <br>
+                    <div class="col-md-5 col-xs-12">
+                        {{ form_row(form.assunto, {'label':'Assunto'}) }}
+                    </div>
+                    <div class="col-md-5 col-xs-12">
+                        {{ form_row(form.tipodeprocesso, {'label':'Tipo de Processo'}) }}
+                    </div>
                     <div class="col-md-2 col-xs-12">
-                        <label>Nº do Processo</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="col-md-5 col-xs-12">
-                        <label class="required">Assunto</label>
-                        <input type="text" class="form-control" required="required">
-                    </div>
-                    <div class="col-md-5 col-xs-12">
-                        <label>Tipo Processo</label>
-                        <select class="form-control">
-                            <option>Selecione...</option>
-                            <option>Mandados Judiciais Recebidos</option>
-                            <option>Publicações com Prazo</option>
-                            <option>Processos Administrativos</option>
-                        </select>
+                        {{ form_row(form.numerodoprocesso, {'label':'Nº do Processo'}) }}
                     </div>
                     <div class="row"></div>
                     <br>
                     <div class="col-md-12 col-xs-12">
-                        <label>Descrição</label>
-                        <textarea rows="6" cols="50" class="form-control"></textarea>
-                    </div>
+                        {{ form_row(form.descricao, {'label':'Descrição'}) }}                    </div>
                     <div class="row"></div>
                     <br><br>
                     <div class="col-md-12 col-xs-12">
                         <input class="btn btn-primary" type="submit" value="Enviar" />
                     </div>
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>

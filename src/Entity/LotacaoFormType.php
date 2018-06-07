@@ -8,8 +8,8 @@
 
 namespace App\Entity;
 
-use App\Entity\esp\produtividade\TipoDeAto;
-use App\Entity\esp\produtividade\TipoDeProcesso;
+use App\Entity\TipoDeAto;
+use App\Entity\TipoDeProcesso;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\QueryBuilder;
@@ -35,9 +35,10 @@ class LotacaoFormType extends AbstractType
                         return $er->createQueryBuilder('u')
                             ->orderBy('u.descricao', 'ASC');
                     },
-                    'multiple' => true,
                     'choice_label' => 'descricao',
                     'required' => false,
+                    'expanded' => true,
+                    'multiple' => true,
                     'empty_data' => null
                 )
             )
@@ -48,12 +49,14 @@ class LotacaoFormType extends AbstractType
                         return $er->createQueryBuilder('u')
                             ->orderBy('u.descricao', 'ASC');
                     },
-                    'multiple' => true,
                     'choice_label' => 'descricao',
                     'required' => false,
+                    'expanded' => true,
+                    'multiple' => true,
                     'empty_data' => null
                 )
             );
+
     }
 
     public function configureOptions(OptionsResolver $resolver){

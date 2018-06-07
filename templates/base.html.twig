@@ -55,11 +55,18 @@
         </nav>
         <div id="wrap" class="watermark"></div>
         <main class="watermark-over">
+            <div>
+                {% set usuario = app.session.get('usersession') %}
+                {% if usuario is not null %}
+                <p>{{ usuario }}</p>
+                {% endif %}
+            </div>
+            <br>
         {% block content %}
         {% endblock %}
         </main>
         <div id="push"></div>
-        <footer id="footer">
+        <footer>
         {% block footer %}
 
             <div class="container-fluid">

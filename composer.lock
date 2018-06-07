@@ -2871,16 +2871,16 @@
         },
         {
             "name": "symfony/form",
-            "version": "v3.4.8",
+            "version": "v3.4.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/form.git",
-                "reference": "048f802b52bdc1c32b6ee315626df49179135422"
+                "reference": "cc60f7822b48418ea655102be9bf7ef082b863ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/form/zipball/048f802b52bdc1c32b6ee315626df49179135422",
-                "reference": "048f802b52bdc1c32b6ee315626df49179135422",
+                "url": "https://api.github.com/repos/symfony/form/zipball/cc60f7822b48418ea655102be9bf7ef082b863ea",
+                "reference": "cc60f7822b48418ea655102be9bf7ef082b863ea",
                 "shasum": ""
             },
             "require": {
@@ -2888,6 +2888,7 @@
                 "symfony/event-dispatcher": "~2.8|~3.0|~4.0",
                 "symfony/intl": "^2.8.18|^3.2.5|~4.0",
                 "symfony/options-resolver": "~3.4|~4.0",
+                "symfony/polyfill-ctype": "~1.8",
                 "symfony/polyfill-mbstring": "~1.0",
                 "symfony/property-access": "~2.8|~3.0|~4.0"
             },
@@ -2906,7 +2907,7 @@
                 "symfony/dependency-injection": "~3.3|~4.0",
                 "symfony/http-foundation": "~2.8|~3.0|~4.0",
                 "symfony/http-kernel": "^3.3.5|~4.0",
-                "symfony/security-csrf": "~2.8|~3.0|~4.0",
+                "symfony/security-csrf": "^2.8.31|^3.3.13|~4.0",
                 "symfony/translation": "~2.8|~3.0|~4.0",
                 "symfony/validator": "^3.2.5|~4.0",
                 "symfony/var-dumper": "~3.3.11|~3.4|~4.0"
@@ -2947,7 +2948,7 @@
             ],
             "description": "Symfony Form Component",
             "homepage": "https://symfony.com",
-            "time": "2018-04-06T07:35:25+00:00"
+            "time": "2018-05-22T12:52:11+00:00"
         },
         {
             "name": "symfony/framework-bundle",
@@ -3758,6 +3759,61 @@
             "time": "2018-01-30T19:27:44+00:00"
         },
         {
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "7cc359f1b7b80fc25ed7796be7d96adc9b354bae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/7cc359f1b7b80fc25ed7796be7d96adc9b354bae",
+                "reference": "7cc359f1b7b80fc25ed7796be7d96adc9b354bae",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                },
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "time": "2018-04-30T19:57:29+00:00"
+        },
+        {
             "name": "symfony/polyfill-intl-icu",
             "version": "v1.7.0",
             "source": {
@@ -4254,7 +4310,7 @@
         },
         {
             "name": "symfony/security-bundle",
-            "version": "v3.4.8",
+            "version": "v3.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-bundle.git",
@@ -4790,20 +4846,21 @@
         },
         {
             "name": "symfony/validator",
-            "version": "v3.4.8",
+            "version": "v3.4.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "6fa41262dcbd50eedb1e841cfd97f5a1956cf2e7"
+                "reference": "62ccdf62042fbca3be1e7b2dae84965940023362"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/6fa41262dcbd50eedb1e841cfd97f5a1956cf2e7",
-                "reference": "6fa41262dcbd50eedb1e841cfd97f5a1956cf2e7",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/62ccdf62042fbca3be1e7b2dae84965940023362",
+                "reference": "62ccdf62042fbca3be1e7b2dae84965940023362",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.5.9|>=7.0.8",
+                "symfony/polyfill-ctype": "~1.8",
                 "symfony/polyfill-mbstring": "~1.0",
                 "symfony/translation": "~2.8|~3.0|~4.0"
             },
@@ -4870,7 +4927,7 @@
             ],
             "description": "Symfony Validator Component",
             "homepage": "https://symfony.com",
-            "time": "2018-04-06T07:35:25+00:00"
+            "time": "2018-05-18T02:00:55+00:00"
         },
         {
             "name": "symfony/var-dumper",

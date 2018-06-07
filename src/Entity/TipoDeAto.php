@@ -6,19 +6,19 @@
  * Time: 10:38
  */
 
-namespace App\Entity\esp\produtividade;
+namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class TipoDeProcesso
- * @package App\Entity\esp\produtividade
+ * Class TipoDeAto
+ * @package App\Entity
  * @ORM\Entity
- * @ORM\Table(name="tipodeprocesso")
+ * @ORM\Table(name="tipodeato")
  */
-class TipoDeProcesso
+class TipoDeAto
 {
 
     /**
@@ -38,17 +38,15 @@ class TipoDeProcesso
      */
     protected $peso;
 
-
     /**
-     * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="App\Entity\Lotacao", mappedBy="tiposdeprocesso")
+     * @var Collection
+     * @ORM\ManyToMany(targetEntity="Lotacao", mappedBy="tiposdeato")
      */
     protected $lotacoes;
 
-
     /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Ato", mappedBy="tipodeprocesso_id")
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Ato", mappedBy="tipodeato")
      */
     protected $atos;
 
@@ -131,4 +129,5 @@ class TipoDeProcesso
     {
         $this->atos = $atos;
     }
+
 }

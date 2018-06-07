@@ -10,7 +10,12 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
+use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -19,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\Table(name="app_users")
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface, \Serializable, AuthenticationProviderInterface, ListenerInterface
 {
 
     /**
@@ -30,8 +35,10 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @ORM\Column(type="string", length=254, nullable=false)
      */
+    private $nome;
+
     private $username;
 
     /**
@@ -45,14 +52,25 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Lotacao", inversedBy="users")
      * @ORM\JoinColumn(name="lotacao_id", referencedColumnName="id")
      */
-    private $lotacao_id;
+    private $lotacao;
 
     /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="App\Entity\esp\produtividade\Ato", mappedBy="user_id")
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Ato", mappedBy="user_id")
      */
     protected $atos;
 
@@ -60,6 +78,42 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
+
+
+    /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
+     * @var AuthenticationManagerInterface
+     */
+    private $authenticationManager;
+
+    /**
+     * @var string Uniquely identifies the secured area
+     */
+    private $providerKey;
+
+    public function handle(GetResponseEvent $event)
+    {
+        $request = $event->getRequest();
+
+        $username = $request->get('_username');
+        $password = $request->get('_password');;
+
+        $unauthenticatedToken = new UsernamePasswordToken(
+            $username,
+            $password,
+            $this->providerKey
+        );
+
+        $authenticatedToken = $this
+            ->authenticationManager
+            ->authenticate($unauthenticatedToken);
+
+        $this->tokenStorage->setToken($authenticatedToken);
+    }
 
     public function __construct()
     {
@@ -70,7 +124,7 @@ class User implements UserInterface, \Serializable
 
     public function getUsername()
     {
-        return $this->username;
+        return $this->email;
     }
 
     /**
@@ -120,6 +174,23 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * @param mixed $nome
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+    }
+
+
+    /**
+     * @return mixed
+     */
     public function getEmail()
     {
         return $this->email;
@@ -136,7 +207,23 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getisActive()
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsActive()
     {
         return $this->isActive;
     }
@@ -152,31 +239,32 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getLotacaoId()
+    public function getLotacao()
     {
-        return $this->lotacao_id;
+        return $this->lotacao;
     }
 
     /**
-     * @param mixed $lotacao_id
+     * @param mixed $lotacao
      */
-    public function setLotacaoId($lotacao_id)
+    public function setLotacao($lotacao)
     {
-        $this->lotacao_id = $lotacao_id;
+        $this->lotacao = $lotacao;
     }
 
+
     /**
-     * @return ArrayCollection
+     * @return mixed
      */
-    public function getAtos(): ArrayCollection
+    public function getAtos()
     {
         return $this->atos;
     }
 
     /**
-     * @param ArrayCollection $atos
+     * @param mixed $atos
      */
-    public function setAtos(ArrayCollection $atos)
+    public function setAtos($atos)
     {
         $this->atos = $atos;
     }
@@ -184,7 +272,11 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return $this->roles;
+    }
+
+    public function setRoles($roles){
+        $this->roles = $roles;
     }
 
     public function eraseCredentials()
@@ -197,7 +289,10 @@ class User implements UserInterface, \Serializable
         return serialize(array(
             $this->id,
             $this->username,
+            $this->email,
+            $this->nome,
             $this->password,
+            $this->lotacao,
             // see section on salt below
             // $this->salt,
         ));
@@ -209,9 +304,37 @@ class User implements UserInterface, \Serializable
         list (
             $this->id,
             $this->username,
+            $this->email,
+            $this->nome,
             $this->password,
+            $this->lotacao,
             // see section on salt below
             // $this->salt
             ) = unserialize($serialized, ['allowed_classes' => false]);
     }
+
+    /**
+     * Attempts to authenticate a TokenInterface object.
+     *
+     * @param TokenInterface $token The TokenInterface instance to authenticate
+     *
+     * @return TokenInterface An authenticated TokenInterface instance, never null
+     *
+     * @throws AuthenticationException if the authentication fails
+     */
+    public function authenticate(TokenInterface $token)
+    {
+        // TODO: Implement authenticate() method.
+    }
+
+    /**
+     * Checks whether this provider supports the given token.
+     *
+     * @return bool true if the implementation supports the Token, false otherwise
+     */
+    public function supports(TokenInterface $token)
+    {
+        // TODO: Implement supports() method.
+    }
+
 }

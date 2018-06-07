@@ -8,7 +8,7 @@
 
 namespace App\Controller\esp\produtividade;
 
-use App\Entity\esp\produtividade\TipoDeAto;
+use App\Entity\TipoDeAto;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Routing\Annotation\Route;

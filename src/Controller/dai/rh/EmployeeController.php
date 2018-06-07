@@ -154,7 +154,6 @@ class EmployeeController extends Controller
 
         /**
      * @Route("/dai/rh/cadastro/deletar/{id}", name="dai_rh_cadastro_deletar")
-     * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
     public function deletar($id){

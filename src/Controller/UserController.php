@@ -10,8 +10,12 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\UserFormType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,18 +26,39 @@ class UserController extends Controller
     /**
      * @Route("/login", name="login")
      */
-    public function login(Request $request, AuthenticationUtils $authenticationUtils)
+    public function login(Request $request, AuthenticationUtils $authUtils)
     {
+        error_log(".Login.");
+
         // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
+        $error = $authUtils->getLastAuthenticationError();
 
         // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+        $lastUsername = $authUtils->getLastUsername();
 
         return $this->render('registro/login.html.twig', array(
             'last_username' => $lastUsername,
             'error'         => $error,
         ));
+    }
+
+
+    /**
+     * @Route("/login-check", name="logincheck")
+     */
+    public function login_check(Request $request)
+    {
+        $username = $request->get('_username');
+
+        $user = $this->getDoctrine()->getRepository(User::class)
+                ->findBy(array('email' => $username));
+
+        $session = $request->getSession();
+
+        $session->set('usersession', $user[0]->getNome());
+        $session->set('usersessionid', $user[0]->getId());
+
+        return $this->redirectToRoute('index_geral');
     }
 
 

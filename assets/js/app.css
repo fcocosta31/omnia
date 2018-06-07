@@ -1,8 +1,39 @@
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web);
+html, body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
 body{
     font-family: "Trebuchet MS";
     font-size: 10pt;
 }
+
+footer {
+    background-color: #1b1e21;
+    color: white;
+    padding-bottom: 40px;
+    height: 200px;
+}
+
+#footer-container-img{
+    margin-top: 100px;
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 70%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push{
+    height: 200px;
+}
+
 
 table{
     font-stretch: normal;
@@ -46,36 +77,6 @@ p{
     height: auto;
     float: left;
     margin-left: 0;
-}
-
-html, body {
-    height: 100%;
-    /* The html and body elements cannot have any padding or margin. */
-}
-
-/* Wrapper for page content to push down footer */
-#wrap {
-    min-height: 70%;
-    height: auto !important;
-    height: 100%;
-    /* Negative indent footer by it's height */
-    margin: 0 auto -60px;
-}
-
-/* Set the fixed height of the footer here */
-#push{
-    height: 200px;
-}
-
-#footer {
-    background-color: #1b1e21;
-    color: white;
-    padding-bottom: 40px;
-    height: 120px;
-}
-
-#footer-container-img{
-    margin-top: 20px;
 }
 
 .tr-red-color{

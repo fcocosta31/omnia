@@ -71,17 +71,42 @@ class LotacaoController extends Controller
      */
     public function editar(Request $request, $id)
     {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $lotacao = $entityManager->getRepository(Lotacao::class)
+            ->find($id);
+
+        $form = $this->createForm(LotacaoFormType::class, $lotacao);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $lotacao = $form->getData();
+            $entityManager->persist($lotacao);
+            $entityManager->flush();
+            return $this->redirectToRoute('lotacao_index');
+        }
+
+        return $this->render("lotacao/editar.html.twig", array(
+            'form' => $form->createView(),
+        ));
 
     }
 
     /**
      * @Route("/lotacao/deletar/{id}", name="lotacao_deletar")
-     * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
     public function deletar($id)
     {
+        $entityManager = $this->getDoctrine()->getManager();
 
+        $lotacao = $entityManager->getRepository(Lotacao::class)
+            ->find($id);
+        $entityManager->remove($lotacao);
+        $entityManager->flush();
+        return $this->redirectToRoute('lotacao_index');
     }
 
 }

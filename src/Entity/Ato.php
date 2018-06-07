@@ -6,14 +6,14 @@
  * Time: 07:55
  */
 
-namespace App\Entity\esp\produtividade;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Ato
- * @package App\Entity\esp\produtividade
+ * @package App\Entity
  * @ORM\Entity
  * @ORM\Table(name="ato")
  */
@@ -37,16 +37,21 @@ class Ato
     protected $assunto;
 
     /**
+     * @ORM\Column(name="descricao", type="string", nullable=true)
+     */
+    protected $descricao;
+
+    /**
      * @ORM\ManyToOne(targetEntity="TipoDeAto", inversedBy="atos")
      * @ORM\JoinColumn(name="tipodeato_id", referencedColumnName="id")
      */
-    protected $tipodeato_id;
+    protected $tipodeato;
 
     /**
      * @ORM\ManyToOne(targetEntity="TipoDeProcesso", inversedBy="atos")
      * @ORM\JoinColumn(name="tipodeprocesso_id", referencedColumnName="id")
      */
-    protected $tipodeprocesso_id;
+    protected $tipodeprocesso;
 
     /**
      * @ORM\Column(name="numerodoprocesso", type="string", nullable=true)
@@ -55,16 +60,16 @@ class Ato
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Lotacao", inversedBy="atos")
+     * @ORM\ManyToOne(targetEntity="Lotacao", inversedBy="atos")
      * @ORM\JoinColumn(name="lotacao_id", referencedColumnName="id")
      */
-    protected $lotacao_id;
+    protected $lotacao;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="atos")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="atos")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $user_id;
+    protected $user;
 
     /**
      * @return mixed
@@ -117,33 +122,50 @@ class Ato
     /**
      * @return mixed
      */
-    public function getTipodeatoId()
+    public function getDescricao()
     {
-        return $this->tipodeato_id;
+        return $this->descricao;
     }
 
     /**
-     * @param mixed $tipodeato_id
+     * @param mixed $descricao
      */
-    public function setTipodeatoId($tipodeato_id)
+    public function setDescricao($descricao)
     {
-        $this->tipodeato_id = $tipodeato_id;
+        $this->descricao = $descricao;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getTipodeato()
+    {
+        return $this->tipodeato;
+    }
+
+    /**
+     * @param mixed $tipodeato
+     */
+    public function setTipodeato($tipodeato)
+    {
+        $this->tipodeato = $tipodeato;
     }
 
     /**
      * @return mixed
      */
-    public function getTipodeprocessoId()
+    public function getTipodeprocesso()
     {
-        return $this->tipodeprocesso_id;
+        return $this->tipodeprocesso;
     }
 
     /**
-     * @param mixed $tipodeprocesso_id
+     * @param mixed $tipodeprocesso
      */
-    public function setTipodeprocessoId($tipodeprocesso_id)
+    public function setTipodeprocesso($tipodeprocesso)
     {
-        $this->tipodeprocesso_id = $tipodeprocesso_id;
+        $this->tipodeprocesso = $tipodeprocesso;
     }
 
     /**
@@ -165,32 +187,32 @@ class Ato
     /**
      * @return mixed
      */
-    public function getLotacaoId()
+    public function getLotacao()
     {
-        return $this->lotacao_id;
+        return $this->lotacao;
     }
 
     /**
-     * @param mixed $lotacao_id
+     * @param mixed $lotacao
      */
-    public function setLotacaoId($lotacao_id)
+    public function setLotacao($lotacao)
     {
-        $this->lotacao_id = $lotacao_id;
+        $this->lotacao = $lotacao;
     }
 
     /**
      * @return mixed
      */
-    public function getUserId()
+    public function getUser()
     {
-        return $this->user_id;
+        return $this->user;
     }
 
     /**
-     * @param mixed $user_id
+     * @param mixed $user
      */
-    public function setUserId($user_id)
+    public function setUser($user)
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
     }
 }
