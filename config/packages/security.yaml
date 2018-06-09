@@ -1,46 +1,34 @@
 security:
     encoders:
-        App\Entity\User:
-          algorithm: bcrypt
+        FOS\UserBundle\Model\UserInterface: bcrypt
 
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    role_hierarchy:
+        ROLE_ADMIN:       [ROLE_USER, ROLE_DAI, ROLE_DTI, ROLE_ESP]
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
     providers:
-        app_users:
-            entity:
-              class: App\Entity\User
-              property: username
+        fos_userbundle:
+                id: fos_user.user_provider.username
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
         main:
-            anonymous: ~
-
-            # activate different ways to authenticate
-
-            http_basic: false
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
+            pattern: ^/
             form_login:
-              provider: app_users
-              check_path: /login_check
-              login_path: /login
-              post_only: true
-              default_target_path: index_geral
-            # https://symfony.com/doc/current/security/form_login_setup.html
+              provider: fos_userbundle
+              csrf_token_generator: security.csrf.token_manager
 
-            #provider: our_db_provider
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+            logout: true
+            anonymous: true
+
     access_control:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dti/printers/status, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dai, roles: ROLE_DAI }
         - { path: ^/dti, roles: ROLE_DTI }
-        - { path: ^/esp, roles: ROLE_ESP }
+        - { path: ^/esp/produtividade/ato, roles: ROLE_ESP }
         - { path: ^/, roles: ROLE_ADMIN }
-
-        # - { path: ^/editar, roles: ROLE_ADMIN }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }

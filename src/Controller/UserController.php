@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends Controller
 {
     /**
-     * @Route("/login", name="login")
+     * @Route("/login_old", name="login_old")
      */
     public function login(Request $request, AuthenticationUtils $authUtils)
     {
@@ -44,7 +44,7 @@ class UserController extends Controller
 
 
     /**
-     * @Route("/login-check", name="logincheck")
+     * @Route("/login-check_old", name="logincheck_old")
      */
     public function login_check(Request $request)
     {
@@ -63,7 +63,7 @@ class UserController extends Controller
 
 
     /**
-     * @Route("/registro", name="user_registration")
+     * @Route("/registro", name="user_registration_old")
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {

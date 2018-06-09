@@ -4,6 +4,7 @@ parameters:
     locale: 'en'
     documents_directory: '%kernel.project_dir%/public/uploads/documents/'
     images_directory: '%kernel.project_dir%/public/uploads/images/'
+    mailer_user: 'example@email.com'
 
 services:
     # default configuration for services in *this* file
@@ -46,3 +47,16 @@ services:
         class: App\Entity\Lotacao
         arguments:
         em: "@doctrine.orm.entity_manager"
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: App\Entity\User
+    service:                               # this lines
+        mailer: fos_user.mailer.twig_swift # this lines
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+    registration:
+        form:
+            type: App\Entity\UserFormType

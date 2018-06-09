@@ -31,12 +31,12 @@ class AtoController extends Controller
      */
     public function index(){
 
-        $usersessionid = $this->get('session')->get('usersessionid');
+        $user = $this->getUser();
 
         $entityManager = $this->getDoctrine()->getManager();
 
         $atos = $entityManager->getRepository(Ato::class)
-            ->findBy(array('user' => $usersessionid));
+            ->findBy(array('user' => $user->getId()));
 
         return $this->render("esp/produtividade/ato/index.html.twig", array(
             'atos' => $atos,
@@ -52,12 +52,12 @@ class AtoController extends Controller
 
         $ato = new Ato();
 
-        $usersessionid = $this->get('session')->get('usersessionid');
+        $user = $this->getUser();
 
         $entityManager = $this->getDoctrine()->getManager();
 
         $user = $entityManager->getRepository(User::class)
-            ->find($usersessionid);
+            ->find($user->getId());
 
 
         $form = $this->createFormBuilder($ato)

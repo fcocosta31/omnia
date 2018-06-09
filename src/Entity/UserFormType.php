@@ -14,11 +14,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserFormType extends AbstractType
 {
@@ -26,12 +22,6 @@ class UserFormType extends AbstractType
     {
         $builder
             ->add('nome', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Senha'),
-                'second_options' => array('label' => 'Repita a Senha'),
-            ))
             ->add('roles', ChoiceType::class, array(
                 'placeholder' => 'Selecione...',
                 'choices' => array(
@@ -44,7 +34,7 @@ class UserFormType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ))
-            ->add('lotacao_id', EntityType::class, array(
+            ->add('lotacao', EntityType::class, array(
                     'placeholder' => 'Selecione...',
                     'class' => Lotacao::class,
                     'query_builder' => function (EntityRepository $er) {
@@ -61,10 +51,21 @@ class UserFormType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function getParent()
+
     {
-        $resolver->setDefaults(array(
-            'data_class' => User::class,
-        ));
+        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
+    }
+
+    public function getBlockPrefix()
+
+    {
+        return 'app_user_registration';
+    }
+
+    public function getName()
+
+    {
+        return $this->getBlockPrefix();
     }
 }

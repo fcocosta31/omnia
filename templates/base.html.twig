@@ -56,9 +56,9 @@
         <div id="wrap" class="watermark"></div>
         <main class="watermark-over">
             <div>
-                {% set usuario = app.session.get('usersession') %}
+                {% set usuario = app.user.nome %}
                 {% if usuario is not null %}
-                <p>{{ usuario }}</p>
+                <p>{{ usuario }} ({{ app.user.lotacao.descricao }})</p>
                 {% endif %}
             </div>
             <br>
