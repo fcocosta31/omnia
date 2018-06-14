@@ -71,6 +71,12 @@ class Ato
      */
     protected $user;
 
+
+    public function __construct()
+    {
+        $this->emissao = new \DateTime();
+    }
+
     /**
      * @return mixed
      */

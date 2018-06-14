@@ -48,6 +48,10 @@ services:
         arguments:
         em: "@doctrine.orm.entity_manager"
 
+    redirect.after.login:
+        class: App\Redirection\AfterLoginRedirection
+        arguments: ['@router']
+
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
@@ -60,3 +64,8 @@ fos_user:
     registration:
         form:
             type: App\Entity\UserFormType
+
+framework:
+    default_locale: 'pt'
+    translator:
+        fallbacks: ['pt']

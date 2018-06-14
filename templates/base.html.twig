@@ -26,58 +26,91 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="{{ asset('build/js/app.css') }}">
-            <style>
-                .watermark{
-                    background-image: url({{ asset('uploads/images/water-mark2.jpg') }});
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    position: relative;
-                    width: 100%;
-                    top: 0px;
-                    opacity: 0.04;
-                    color: white;
-                }
-                .watermark-over{
-                    color: #000000;
-                    position: absolute;
-                    top: 70px;
-                    width: 100%;
-                }
-            </style>
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <nav class="navbar navbar-custom navbar-static-top" role="navigation">
             <div class="container-fluid">
-                {% block header %}
-                {% endblock %}
-            </div>
-        </nav>
-        <div id="wrap" class="watermark"></div>
-        <main class="watermark-over">
-            <div>
-                {% set usuario = app.user.nome %}
-                {% if usuario is not null %}
-                <p>{{ usuario }} ({{ app.user.lotacao.descricao }})</p>
-                {% endif %}
-            </div>
-            <br>
-        {% block content %}
-        {% endblock %}
-        </main>
-        <div id="push"></div>
-        <footer>
-        {% block footer %}
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
+                        <i class="glyphicon glyphicon-home"></i>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="navbar navbar-nav">
+                        {% if app.user is not null %}
+                            {% if 'ROLE_ADMIN' in app.user.roles %}
+                                <li class="dropdown" role="menuitem">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Menu
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path('dai_rh_cadastro_index') }}">Admnistração Interna</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">One more separated link</a></li>
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        {% endif %}
 
-            <div class="container-fluid">
-                <div class="container-fluid" id="footer-container-img">
-                <img alt="" id="topo-img" src="{{ asset('uploads/images/logopgm.jpg')}}"
-                     class="img-responsive" float="left">
-                    <br/><br/><br/>
-                    Procuradoria Geral do Município
+                        {% block header %}
+                        {% endblock %}
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            {% if app.user is not null %}
+                                <p class="navbar-text" style="color: white">Bem vindo,
+                                    <a href="/omnia/profile" class="navbar-link">
+                                        {{ app.user.nome }}
+                                    </a>
+                                </p>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <a href="{{ path('fos_user_security_logout') }}" class="navbar-brand"
+                                   title="{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}">
+                                    <i class="glyphicon glyphicon-log-out"></i>
+                                </a>
+                            {% else %}
+                                <a href="{{ path('fos_user_security_login') }}"
+                                   class="navbar-brand"  title="{{ 'layout.login'|trans({}, 'FOSUserBundle') }}">
+                                    <i class="glyphicon glyphicon-log-in"></i>
+                                </a>
+                            {% endif %}
+                        </li>
+                    </ul>
                 </div>
             </div>
+        </nav>
+        <main class="container-fluid">
+            <div class="row">
+        {% block content %}
+        {% endblock %}
+            </div>
+        </main>
 
+        <footer>
+        {% block footer %}
+            <div class="container-fluid">
+                <div class="container-fluid" id="footer-container-img" style="color: white">
+                <img alt="" id="topo-img" src="{{ asset('uploads/images/logopgm.jpg')}}"
+                     class="img-responsive" float="left">
+                </div>
+            </div>
         {% endblock %}
         </footer>
 

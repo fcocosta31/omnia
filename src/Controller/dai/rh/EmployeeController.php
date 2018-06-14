@@ -72,7 +72,7 @@ class EmployeeController extends Controller
 
             $entityManager->persist($employee);
             $entityManager->flush();
-            return $this->redirectToRoute('dai_rh_cadastro_listar');
+            return $this->redirectToRoute('dai_rh_cadastro_index');
         }
 
 
@@ -141,7 +141,7 @@ class EmployeeController extends Controller
 
             $entityManager->persist($employee);
             $entityManager->flush();
-            return $this->redirectToRoute('dai_rh_cadastro_listar');
+            return $this->redirectToRoute('dai_rh_cadastro_index');
         }
 
 
@@ -166,7 +166,7 @@ class EmployeeController extends Controller
 
         $entityManager->remove($employee);
         $entityManager->flush();
-        return $this->redirectToRoute('dai_rh_cadastro_listar');
+        return $this->redirectToRoute('dai_rh_cadastro_index');
 
     }
 
@@ -185,7 +185,7 @@ class EmployeeController extends Controller
     }
 
     /**
-     * @Route ("/dai/rh/cadastro", name="dai_rh_cadastro_listar")
+     * @Route ("/dai/rh/cadastro", name="dai_rh_cadastro_index")
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
     public function index(){

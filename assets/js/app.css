@@ -1,32 +1,38 @@
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web);
-html, body {
-    height: 100%;
+html {
+    position: relative;
+    min-height: 100%;
     /* The html and body elements cannot have any padding or margin. */
 }
 
 body{
     font-family: "Trebuchet MS";
     font-size: 10pt;
+    margin-bottom: 60px;
+    height: 100%;
 }
+
 
 footer {
-    background-color: #1b1e21;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
     color: white;
-    padding-bottom: 40px;
-    height: 200px;
+    background-color: #000;
 }
+
 
 #footer-container-img{
-    margin-top: 100px;
+    margin-top: 10px;
+    padding-left: 0;
 }
 
-/* Wrapper for page content to push down footer */
-#wrap {
-    min-height: 70%;
-    height: auto !important;
-    height: 100%;
-    /* Negative indent footer by it's height */
-    margin: 0 auto -60px;
+#topo-img{
+    width: 24px;
+    height: auto;
+    float: left;
+    margin-left: 0;
 }
 
 /* Set the fixed height of the footer here */
@@ -72,13 +78,6 @@ p{
     margin-bottom: 0;
 }
 
-#topo-img{
-    width: 48px;
-    height: auto;
-    float: left;
-    margin-left: 0;
-}
-
 .tr-red-color{
     background-color: #880000;
     color: #dfdfdf;
@@ -111,12 +110,11 @@ p{
 }
 
 .fundo-topo-menu {
-    background-color: #1b1e21;
-    margin-top: 8px;
+    background-color: #ffffff;
     font-size: 1.5em;
     font-weight: bold;
     text-align: center;
-    color: white;
+    color: black;
     text-shadow: 1px 1px 2px rgba(153,153,153, 0.8);
 }
 
@@ -136,4 +134,67 @@ p{
 
 .fundo-shadow{
     box-shadow: 0px 3px 4px #888888;
+}
+
+.red_color_font{
+    color: #880000;
+}
+
+
+/* NAVBAR CUSTOM */
+
+/* --- Style --- */
+.navbar-custom {
+    background-color: #000;
+    border-color: #191919;
+}
+.navbar-custom .navbar-brand{
+    color: #fff;
+}
+.navbar-custom .navbar-brand:hover, .navbar-custom .navbar-brand:focus {
+    color: #a0a0a0;
+}
+.navbar-custom .navbar-nav > li > a {
+    color: #fff;
+}
+.navbar-custom .navbar-nav > li > a:hover, .navbar-custom .navbar-nav > li > a:focus {
+    color: #a0a0a0;
+}
+.navbar-custom .navbar-nav .active > a, .navbar-custom .navbar-nav .active > a:hover, .navbar-custom .navbar-nav .active > a:focus {
+    color: #a0a0a0;
+    background-color: #191919;
+}
+.navbar-custom .navbar-nav .open > a, .navbar-custom .navbar-nav .open > a:hover, .navbar-custom .navbar-nav .open > a:focus {
+    color: #a0a0a0;
+    background-color: #191919;
+}
+.navbar-custom .navbar-nav .open > a .caret, .navbar-custom .navbar-nav .open > a:hover .caret, .navbar-custom .navbar-nav .open > a:focus .caret {
+    border-top-color: #a0a0a0;
+    border-bottom-color: #a0a0a0;
+}
+.navbar-custom .navbar-nav > .dropdown > a .caret {
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+}
+.navbar-custom .navbar-nav > .dropdown > a:hover .caret, .navbar-custom .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #a0a0a0;
+    border-bottom-color: #a0a0a0;
+}
+.navbar-custom .navbar-toggle {
+    border-color: #191919;
+}
+.navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+    background-color: #191919;
+}
+.navbar-custom .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+@media (max-width: 767px) {
+    .navbar-custom .navbar-nav .open .dropdown-menu > li > a {
+        color: #fff;
+    }
+    .navbar-custom .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-custom .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #a0a0a0;
+        background-color: #191919;
+    }
 }

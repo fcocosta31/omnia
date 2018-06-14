@@ -1,29 +1,36 @@
 {% extends "base.html.twig" %}
 {% block header %}
-
-    <a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
-        <i class="glyphicon glyphicon-home"></i>
-    </a>
-
-    <div class="fundo-topo-menu">
-        Atos
-    </div>
-
 {% endblock %}
 
 {% block content %}
-    <br>
+    <div class="fundo-topo-menu">
+        Atos Praticados
+    </div>
+
     <div class="container-fluid">
+       <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <span>Mostrando {{ atos|length }} registros no período abaixo</span><br/><br/>
+                <form action="{{ path('esp_produtividade_ato_index') }}" method="post">
+                    <label>Início: </label>
+                    <input type="date" name="_dateini" value="{{ dateini }}">
+                    <label>Término: </label>
+                    <input type="date" name="_datefim" value="{{ datefim }}">
+                    <input type="submit" value="Enviar">
+                </form>
+            </div>
+       </div>
+        <br>
         <div class="row">
             <div class="container">
+                <div class="col-md-1 col-xs-12">
+                    <h4>Ações</h4>
+                    <a href="{{ path('esp_produtividade_ato_novo') }}"
+                       class="btn btn-default">Novo</a>
+                </div>
                 <div class="col-md-11 col-xs-12">
-                    <div>
-                        <p>Período: 01/06/2018 a 07/06/2018</p>
-                    </div>
-                    <br>
-
-                    <div class="col-md-12 col-xs-12">
-                        <table class="table table-striped">
+                    <div class="col-md-12 col-xs-12 table-responsive">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>Data</th>

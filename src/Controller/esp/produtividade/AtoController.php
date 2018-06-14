@@ -11,6 +11,8 @@ namespace App\Controller\esp\produtividade;
 use App\Entity\Ato;
 use App\Entity\Lotacao;
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -27,19 +29,37 @@ class AtoController extends Controller
 {
     /**
      * @Route("/esp/produtividade/ato", name="esp_produtividade_ato_index")
+     * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function index(){
+    public function index(Request $request){
 
         $user = $this->getUser();
 
-        $entityManager = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $atos = $entityManager->getRepository(Ato::class)
-            ->findBy(array('user' => $user->getId()));
+        $er = $em->getRepository(Ato::class);
+
+        if(!empty($request->get('_dateini'))){
+            $dateini = $request->get('_dateini');
+            $datefim = $request->get('_datefim');
+        }else{
+            $datefim = date("Y-m-d");
+            $dateini = date("Y-m-d", strtotime("-1 months"));
+        }
+
+        $qb = $er->createQueryBuilder('e')
+            ->where('e.user = :userid and e.emissao between :dateini and :datefim')
+            ->setParameter('userid', $user->getId())
+            ->setParameter('dateini', $dateini)
+            ->setParameter('datefim', $datefim);
+
+        $atos = $qb->getQuery()->getResult();
 
         return $this->render("esp/produtividade/ato/index.html.twig", array(
             'atos' => $atos,
+            'dateini' => $dateini,
+            'datefim' => $datefim,
         ));
     }
 
