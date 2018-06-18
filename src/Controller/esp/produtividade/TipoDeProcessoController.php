@@ -19,7 +19,25 @@ class TipoDeProcessoController extends Controller
 {
 
     /**
-     * @Route("/esp/produtividade/tipo-de-processo/novo", name="esp_produtividade_tipodeprocesso_novo")
+     * @Route("/esp/produtividade/tipo-de-processo", name="esp_produtividade_tipo-de-processo_index")
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function index(){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $er = $em->getRepository(TipoDeProcesso::class);
+
+        $tprocs = $er->findBy(array(), array('descricao' => 'ASC'));
+
+        return $this->render("esp/produtividade/tipodeprocesso/index.html.twig", array(
+            'tprocs' => $tprocs,
+        ));
+    }
+
+
+    /**
+     * @Route("/esp/produtividade/tipo-de-processo/novo", name="esp_produtividade_tipo-de-processo_novo")
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
@@ -41,7 +59,7 @@ class TipoDeProcessoController extends Controller
             $tipodeprocesso = $form->getData();
             $entityManager->persist($tipodeprocesso);
             $entityManager->flush();
-            return $this->redirectToRoute('esp_produtividade_tipodeprocesso_novo');
+            return $this->redirectToRoute('esp_produtividade_tipo-de-processo_index');
         }
 
         return $this->render("esp/produtividade/tipodeprocesso/novo.html.twig", array(
@@ -49,5 +67,54 @@ class TipoDeProcessoController extends Controller
         ));
 
     }
+
+
+    /**
+     * @Route("/esp/produtividade/tipo-de-processo/editar/{id}", name="esp_produtividade_tipo-de-processo_editar")
+     * @param Request $request
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editar(Request $request, $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $tipodeprocesso = $entityManager->getRepository(TipoDeProcesso::class)
+            ->find($id);
+
+        $form = $this->createFormBuilder($tipodeprocesso)
+            ->add('descricao', TextType::class)
+            ->add('peso', NumberType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $tipodeprocesso = $form->getData();
+            $entityManager->persist($tipodeprocesso);
+            $entityManager->flush();
+            return $this->redirectToRoute('esp_produtividade_tipo-de-processo_index');
+        }
+
+        return $this->render("esp/produtividade/tipodeprocesso/editar.html.twig", array(
+            'form' => $form->createView(),
+        ));
+
+    }
+
+    /**
+     * @Route("/esp/produtividade/tipo-de-processo/deletar/{id}", name="esp_produtividade_tipo-de-processo_deletar")
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function deletar($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $tipodeprocesso = $entityManager->getRepository(TipoDeProcesso::class)
+            ->find($id);
+        $entityManager->remove($tipodeprocesso);
+        $entityManager->flush();
+        return $this->redirectToRoute('esp_produtividade_tipo-de-processo_index');
+    }    
 
 }

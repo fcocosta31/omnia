@@ -16,23 +16,12 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class UserFormType extends AbstractType
+class ProfileFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('nome', TextType::class)
-            ->add('roles', ChoiceType::class, array(
-                'placeholder' => 'Selecione...',
-                'choices' => array(
-                    'Procurador' => 'ROLE_ESP',
-                    'Usuário' => 'ROLE_ADMIN',
-                    'Adm.Interna' => 'ROLE_DAI',
-                    'Tec.Informação' => 'ROLE_DTI',
-                ),
-                'multiple' => true,
-                'expanded' => false,
-            ))
             ->add('lotacao', EntityType::class, array(
                     'placeholder' => 'Selecione...',
                     'class' => Lotacao::class,
@@ -53,13 +42,13 @@ class UserFormType extends AbstractType
     public function getParent()
 
     {
-        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
+        return 'FOS\UserBundle\Form\Type\ProfileFormType';
     }
 
     public function getBlockPrefix()
 
     {
-        return 'app_user_registration';
+        return 'app_user_profile';
     }
 
     public function getName()

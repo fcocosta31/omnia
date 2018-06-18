@@ -29,7 +29,7 @@ class LotacaoController extends Controller
     public function index(){
         $lotacoes = $this->getDoctrine()
             ->getRepository(Lotacao::class)
-            ->findAll();
+            ->findBy(array(), array('descricao' => 'ASC'));
 
         return $this->render("lotacao/index.html.twig", array(
             'lots' => $lotacoes,

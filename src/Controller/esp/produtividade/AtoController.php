@@ -130,4 +130,82 @@ class AtoController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+
+    /**
+     * @Route("/esp/produtividade/ato/editar/{id}", name="esp_produtividade_ato_editar")
+     * @param Request $request
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editar(Request $request, $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $ato = $entityManager->getRepository(Ato::class)
+            ->find($id);
+
+        $form = $this->createFormBuilder($ato)
+            ->add('emissao', DateType::class, array(
+                'widget' => 'single_text',
+                'html5' => false,
+                'format' => 'dd/MM/yyyy',
+                'attr' => ['class' => 'js-datepicker',
+                    'data-mask' => '00/00/0000',
+                    'placeholder' => '00/00/0000']
+            ))
+            ->add('tipodeato', ChoiceType::class, array(
+                'placeholder' => 'Selecione...',
+                'choices' => $ato->getLotacao()->getTiposdeato(),
+                'choice_label' => 'descricao',
+                'required' => true,
+                'empty_data' => null
+            ))
+            ->add('tipodeprocesso', ChoiceType::class, array(
+                'placeholder' => 'Selecione...',
+                'choices' => $ato->getLotacao()->getTiposdeprocesso(),
+                'choice_label' => 'descricao',
+                'required' => false,
+                'empty_data' => null
+            ))
+            ->add('numerodoprocesso', TextType::class, array(
+                'required' => false
+            ))
+            ->add('assunto', TextType::class, array(
+                'required' => true
+            ))
+            ->add('descricao', TextareaType::class, array(
+                'required' => false,
+            ))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $ato = $form->getData();
+            $entityManager->persist($ato);
+            $entityManager->flush();
+            return $this->redirectToRoute('esp_produtividade_ato_index');
+        }
+
+        return $this->render("esp/produtividade/ato/editar.html.twig", array(
+            'form' => $form->createView(),
+        ));
+
+    }
+
+    /**
+     * @Route("/esp/produtividade/ato/deletar/{id}", name="esp_produtividade_ato_deletar")
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function deletar($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $ato = $entityManager->getRepository(Ato::class)
+            ->find($id);
+        $entityManager->remove($ato);
+        $entityManager->flush();
+        return $this->redirectToRoute('esp_produtividade_ato_index');
+    }
 }

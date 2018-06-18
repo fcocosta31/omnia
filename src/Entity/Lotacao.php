@@ -9,7 +9,9 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Mixed_;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -35,12 +37,14 @@ class Lotacao
     /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="Ato", mappedBy="lotacao")
+     * @ORM\OrderBy({"emissao" = "DESC"})
      */
     protected $atos;
 
     /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="User", mappedBy="lotacao")
+     * @ORM\OrderBy({"nome" = "ASC"})
      */
     protected $users;
 
@@ -48,6 +52,7 @@ class Lotacao
      * @var Collection
      * @ORM\ManyToMany(targetEntity="TipoDeAto", inversedBy="lotacoes")
      * @ORM\JoinTable(name="lotacao_tiposdeato")
+     * @ORM\OrderBy({"descricao" = "ASC"})
      */
     protected $tiposdeato;
 
@@ -55,6 +60,7 @@ class Lotacao
      * @var Collection
      * @ORM\ManyToMany(targetEntity="TipoDeProcesso", inversedBy="lotacoes")
      * @ORM\JoinTable(name="lotacao_tiposdeprocesso")
+     * @ORM\OrderBy({"descricao" = "ASC"})
      */
     protected $tiposdeprocesso;
 

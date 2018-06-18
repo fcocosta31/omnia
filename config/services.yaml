@@ -64,6 +64,9 @@ fos_user:
     registration:
         form:
             type: App\Entity\UserFormType
+    profile:
+        form:
+            type: App\Entity\ProfileFormType
 
 framework:
     default_locale: 'pt'

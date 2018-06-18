@@ -36,12 +36,14 @@ class User extends BaseUser
     /**
      * @ORM\ManyToOne(targetEntity="Lotacao", inversedBy="users")
      * @ORM\JoinColumn(name="lotacao_id", referencedColumnName="id")
+     * @ORM\OrderBy({"descricao" = "ASC"})
      */
     protected $lotacao;
 
     /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="Ato", mappedBy="user_id")
+     * @ORM\OrderBy({"emissao" = "DESC"})
      */
     protected $atos;
 

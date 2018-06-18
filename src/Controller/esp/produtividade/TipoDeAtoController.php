@@ -19,7 +19,24 @@ class TipoDeAtoController extends Controller
 {
 
     /**
-     * @Route("/esp/produtividade/tipo-de-ato/novo", name="esp_produtividade_tipodeato_novo")
+     * @Route("/esp/produtividade/tipo-de-ato", name="esp_produtividade_tipo-de-ato_index")
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function index(){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $er = $em->getRepository(TipoDeAto::class);
+
+        $tpatos = $er->findBy(array(), array('descricao' => 'ASC'));
+
+        return $this->render("esp/produtividade/tipodeato/index.html.twig", array(
+            'tpatos' => $tpatos,
+        ));
+    }
+
+    /**
+     * @Route("/esp/produtividade/tipo-de-ato/novo", name="esp_produtividade_tipo-de-ato_novo")
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
@@ -41,7 +58,7 @@ class TipoDeAtoController extends Controller
             $tipodeato = $form->getData();
             $entityManager->persist($tipodeato);
             $entityManager->flush();
-            return $this->redirectToRoute('esp_produtividade_tipodeato_novo');
+            return $this->redirectToRoute('esp_produtividade_tipo-de-ato_index');
         }
 
         return $this->render("esp/produtividade/tipodeato/novo.html.twig", array(
@@ -49,4 +66,54 @@ class TipoDeAtoController extends Controller
         ));
 
     }
+
+
+    /**
+     * @Route("/esp/produtividade/tipo-de-ato/editar/{id}", name="esp_produtividade_tipo-de-ato_editar")
+     * @param Request $request
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editar(Request $request, $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $tipodeato = $entityManager->getRepository(TipoDeAto::class)
+            ->find($id);
+
+        $form = $this->createFormBuilder($tipodeato)
+            ->add('descricao', TextType::class)
+            ->add('peso', NumberType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $tipodeato = $form->getData();
+            $entityManager->persist($tipodeato);
+            $entityManager->flush();
+            return $this->redirectToRoute('esp_produtividade_tipo-de-ato_index');
+        }
+
+        return $this->render("esp/produtividade/tipodeato/editar.html.twig", array(
+            'form' => $form->createView(),
+        ));
+
+    }
+
+    /**
+     * @Route("/esp/produtividade/tipo-de-ato/deletar/{id}", name="esp_produtividade_tipo-de-ato_deletar")
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function deletar($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $tipodeato = $entityManager->getRepository(TipoDeAto::class)
+            ->find($id);
+        $entityManager->remove($tipodeato);
+        $entityManager->flush();
+        return $this->redirectToRoute('esp_produtividade_tipo-de-ato_index');
+    }
+
 }
