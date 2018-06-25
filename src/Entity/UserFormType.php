@@ -26,9 +26,9 @@ class UserFormType extends AbstractType
                 'placeholder' => 'Selecione...',
                 'choices' => array(
                     'Procurador' => 'ROLE_ESP',
-                    'Usuário' => 'ROLE_ADMIN',
                     'Adm.Interna' => 'ROLE_DAI',
-                    'Tec.Informação' => 'ROLE_DTI',
+                    'Corregedoria' => 'ROLE_CGR',
+                    'Tec.Informação' => 'ROLE_ADMIN',
                 ),
                 'multiple' => true,
                 'expanded' => false,
@@ -41,7 +41,7 @@ class UserFormType extends AbstractType
                             ->orderBy('u.descricao', 'ASC');
                     },
                     'choice_label' => 'descricao',
-                    'required' => true,
+                    'required' => false,
                     'expanded' => false,
                     'multiple' => false,
                     'empty_data' => null

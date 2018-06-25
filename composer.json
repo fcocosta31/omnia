@@ -7,6 +7,7 @@
         "cmen/google-charts-bundle": "^3.0",
         "friendsofsymfony/user-bundle": "~2.0",
         "igorescobar/jquery-mask-plugin": "^1.14",
+        "knplabs/knp-paginator-bundle": "^2.8",
         "scannerjs/scanner.js": "^2.10",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/apache-pack": "^1.0",

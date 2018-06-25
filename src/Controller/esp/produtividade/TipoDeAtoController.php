@@ -22,16 +22,28 @@ class TipoDeAtoController extends Controller
      * @Route("/esp/produtividade/tipo-de-ato", name="esp_produtividade_tipo-de-ato_index")
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function index(){
+    public function index(Request $request){
 
         $em = $this->getDoctrine()->getManager();
 
-        $er = $em->getRepository(TipoDeAto::class);
+        $query = $em->createQueryBuilder()
+            ->from(TipoDeAto::class, 'tpa')
+            ->select("tpa")
+            ->orderBy('tpa.descricao', 'ASC');
 
-        $tpatos = $er->findBy(array(), array('descricao' => 'ASC'));
+        /**
+         * @var $paginator Knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+
+        $result = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 6)
+        );
 
         return $this->render("esp/produtividade/tipodeato/index.html.twig", array(
-            'tpatos' => $tpatos,
+            'tpatos' => $result,
         ));
     }
 

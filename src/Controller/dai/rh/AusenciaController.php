@@ -92,7 +92,7 @@ class AusenciaController extends Controller
             $ausencia = $form->getData();
             $entityManager->persist($ausencia);
             $entityManager->flush();
-            return $this->redirectToRoute('dai_rh_listar_ausencias');
+            return $this->redirectToRoute('dai_rh_ausencia_index');
         }
 
         return $this->render("dai/rh/ausencia/novo.html.twig", array(
@@ -166,7 +166,7 @@ class AusenciaController extends Controller
             $ausencia = $form->getData();
             $entityManager->persist($ausencia);
             $entityManager->flush();
-            return $this->redirectToRoute('dai_rh_listar_ausencias');
+            return $this->redirectToRoute('dai_rh_ausencia_index');
         }
 
         return $this->render("dai/rh/ausencia/editar.html.twig", array(
@@ -190,23 +190,41 @@ class AusenciaController extends Controller
 
         $entityManager->remove($ausencia);
         $entityManager->flush();
-        return $this->redirectToRoute('dai_rh_listar_ausencias');
+        return $this->redirectToRoute('dai_rh_ausencia_index');
 
     }
 
 
     /**
-     * @Route ("/dai/rh/ausencia", name="dai_rh_listar_ausencias")
+     * @Route ("/dai/rh/ausencia", name="dai_rh_ausencia_index")
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function index(){
+    public function index(Request $request){
 
-        $tiposausencia = $this->getDoctrine()
-            ->getRepository(Ausencia::class)
-            ->findAll();
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQueryBuilder()
+            ->select('u')
+            ->from(Ausencia::class, 'u')
+            ->innerJoin('u.tipoausencia', 'b', 'WITH', 'b.id = u.tipoausencia')
+            ->innerJoin('u.employee', 'c', 'WITH', 'c.id = u.employee')
+            ->orderBy('u.dataini', 'DESC')
+            ->orderBy('c.nome', 'ASC');
+
+        /**
+         * @var $paginator Knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+
+        $result = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 6)
+        );
+
 
         return $this->render("dai/rh/ausencia/index.html.twig", array(
-            'tiposausencia' => $tiposausencia
+            'tiposausencia' => $result
         ));
     }
 }

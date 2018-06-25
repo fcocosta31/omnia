@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <form action="{{ path('esp_produtividade_reports_index') }}" method="post">
+                    <label>Início: </label>
+                    <input type="date" class="js-datepicker" name="_dateini" value="{{ dateini }}">
+                    <label>Fim: </label>
+                    <input type="date" class="js-datepicker" name="_datefim" value="{{ datefim }}">
+                    <input type="submit" value="Enviar">
+                </form>
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="container-fluid">
+                <div class="col-md-10 col-xs-12 col-md-offset-2" id="div_tablechart"></div>
+                <div class="col-md-10 col-xs-12 col-md-offset-2" id="div_piechart"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        {{ gc_draw([piechart, tablechart],
+            ['div_piechart', 'div_tablechart']
+        ) }}
+    </script>
+
+{% endblock %}

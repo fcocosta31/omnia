@@ -112,7 +112,7 @@ class ClassificacaoController extends Controller
 
 
     /**
-     * @Route ("/dai/rh/classificacao", name="dai_rh_listar_classificacoes")
+     * @Route ("/dai/rh/classificacao", name="dai_rh_classificacao_index")
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
     public function index(){

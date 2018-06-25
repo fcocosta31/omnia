@@ -3,7 +3,7 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_ADMIN:       [ROLE_USER, ROLE_DAI, ROLE_DTI, ROLE_ESP]
+        ROLE_ADMIN:       [ROLE_ADMIN, ROLE_CGR, ROLE_DAI, ROLE_DTI, ROLE_ESP]
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
@@ -29,13 +29,17 @@ security:
 
             anonymous: true
 
+            access_denied_handler: App\Security\AccessDeniedHandler
+
     access_control:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dti/printers/status, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/home, roles: [ROLE_DAI, ROLE_DTI, ROLE_ESP] }
-        - { path: ^/profile, roles: [ROLE_DAI, ROLE_DTI, ROLE_ESP] }
+        - { path: ^/home, roles: [ROLE_CGR, ROLE_DAI, ROLE_DTI, ROLE_ESP] }
+        - { path: ^/profile, roles: [ROLE_CGR, ROLE_DAI, ROLE_DTI, ROLE_ESP] }
         - { path: ^/dai, roles: ROLE_DAI }
         - { path: ^/dti, roles: ROLE_DTI }
         - { path: ^/esp/produtividade/ato, roles: ROLE_ESP }
+        - { path: ^/lotacao, roles: [ROLE_CGR, ROLE_ADMIN] }
+        - { path: ^/esp, roles: [ROLE_CGR, ROLE_ADMIN] }
         - { path: ^/, roles: ROLE_ADMIN }

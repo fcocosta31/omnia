@@ -253,7 +253,7 @@ class Employee{
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Documento", mappedBy="employee", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Documento", mappedBy="employee", cascade={"persist","remove"})
      *
      */
     protected $files;

@@ -35,28 +35,27 @@ class AfterLoginRedirection implements AuthenticationSuccessHandlerInterface
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
-        // Get list of roles for current user
+        return new RedirectResponse($this->router->generate($this->urlRedirection($token)));
+    }
+
+    /**
+     * @param TokenInterface $token
+     * @return string
+     */
+    public function urlRedirection(TokenInterface $token){
+
+        $redirection = "index_geral";
+
         $roles = $token->getRoles();
-        // Tranform this list in array
+
         $rolesTab = array_map(function($role){
             return $role->getRole();
         }, $roles);
-        // If is a admin or super admin we redirect to the backoffice area
-        if (in_array('ROLE_ADMIN', $rolesTab, true) || in_array('ROLE_SUPER_ADMIN', $rolesTab, true))
-            $redirection = new RedirectResponse($this->router->generate('index_geral'));
-        // otherwise, if is a commercial user we redirect to the crm area
-        elseif (in_array('ROLE_DAI', $rolesTab, true))
-            $redirection = new RedirectResponse($this->router->generate('dai_rh_cadastro_listar'));
-        // otherwise we redirect user to the member area
-        elseif (in_array('ROLE_ESP', $rolesTab, true))
-            $redirection = new RedirectResponse($this->router->generate('esp_produtividade_ato_index'));
-        // otherwise we redirect user to the member area
-        elseif (in_array('ROLE_DTI', $rolesTab, true))
-            $redirection = new RedirectResponse($this->router->generate('dti_printers_status'));
-        // otherwise we redirect user to the member area
-        else
-            $redirection = new RedirectResponse($this->router->generate('index_geral'));
+
+        if (in_array('ROLE_ESP', $rolesTab, true))
+            $redirection = 'esp_produtividade_ato_index';
 
         return $redirection;
     }
+
 }

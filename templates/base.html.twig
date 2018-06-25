@@ -73,11 +73,52 @@
                             {% if 'ROLE_ADMIN' in app.user.roles %}
                                 <li class="dropdown" role="presentation">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        Produtividade
+                                        Relatórios
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Relatórios</a></li>
+                                        <li><a href="{{ path("esp_produtividade_reports_index") }}">Produtividade</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown" role="presentation">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Cadastros
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path('esp_produtividade_tipo-de-ato_index') }}">Tipos de Atos</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{{ path('esp_produtividade_tipo-de-processo_index') }}">Tipos de Processos</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{{ path('lotacao_index') }}">Especializadas (Lotações)</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown" role="presentation">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Pessoal
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path("dai_rh_cadastro_index") }}">Cadastro</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown" role="presentation">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Impressoras
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path('dti_printers_status') }}">Status</a></li>
+                                    </ul>
+                                </li>
+                            {% elseif 'ROLE_CGR' in app.user.roles %}
+                                <li class="dropdown" role="presentation">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Relatórios
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path("esp_produtividade_reports_index") }}">Produtividade</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown" role="presentation">
@@ -93,7 +134,29 @@
                                         <li><a href="{{ path('lotacao_index') }}">Lotações</a></li>
                                     </ul>
                                 </li>
+                            {% elseif 'ROLE_DAI' in app.user.roles %}
+                                <li class="dropdown" role="presentation">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Cadastro
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path('dai_rh_ausencia_index') }}">Ausência</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{{ path("dai_rh_cadastro_index") }}">Pessoal</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown" role="presentation">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Impressoras
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path('dti_printers_status') }}">Status</a></li>
+                                    </ul>
+                                </li>
                             {% endif %}
+
                         {% endif %}
                     </ul>
 

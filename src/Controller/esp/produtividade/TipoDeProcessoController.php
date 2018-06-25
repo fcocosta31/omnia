@@ -22,16 +22,28 @@ class TipoDeProcessoController extends Controller
      * @Route("/esp/produtividade/tipo-de-processo", name="esp_produtividade_tipo-de-processo_index")
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function index(){
+    public function index(Request $request){
 
         $em = $this->getDoctrine()->getManager();
 
-        $er = $em->getRepository(TipoDeProcesso::class);
+        $query = $em->createQueryBuilder()
+            ->from(TipoDeProcesso::class, 'tpc')
+            ->select("tpc")
+            ->orderBy('tpc.descricao', 'ASC');
 
-        $tprocs = $er->findBy(array(), array('descricao' => 'ASC'));
+        /**
+         * @var $paginator Knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+
+        $result = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 6)
+        );
 
         return $this->render("esp/produtividade/tipodeprocesso/index.html.twig", array(
-            'tprocs' => $tprocs,
+            'tprocs' => $result,
         ));
     }
 

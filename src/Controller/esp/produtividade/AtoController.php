@@ -38,8 +38,6 @@ class AtoController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $er = $em->getRepository(Ato::class);
-
         if(!empty($request->get('_dateini'))){
             $dateini = $request->get('_dateini');
             $datefim = $request->get('_datefim');
@@ -48,16 +46,34 @@ class AtoController extends Controller
             $dateini = date("Y-m-d", strtotime("-1 months"));
         }
 
-        $qb = $er->createQueryBuilder('e')
-            ->where('e.user = :userid and e.emissao between :dateini and :datefim')
-            ->setParameter('userid', $user->getId())
-            ->setParameter('dateini', $dateini)
-            ->setParameter('datefim', $datefim);
+        $query = $em->createQueryBuilder()
+            ->select('u')
+            ->from(Ato::class, 'u')
+            ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+            ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+            ->leftJoin('u.tipodeprocesso', 'd', 'WITH', 'd.id = u.tipodeprocesso')
+            ->where('u.user = :userid and u.emissao between :dateini and :datefim')
+            ->setParameters(array(
+                'userid' => $user->getId(),
+                'dateini' => $dateini,
+                'datefim' => $datefim,
+            ))
+            ->orderBy('u.emissao', 'DESC');
 
-        $atos = $qb->getQuery()->getResult();
+
+        /**
+         * @var $paginator Knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+
+        $result = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 5)
+        );
 
         return $this->render("esp/produtividade/ato/index.html.twig", array(
-            'atos' => $atos,
+            'atos' => $result,
             'dateini' => $dateini,
             'datefim' => $datefim,
         ));

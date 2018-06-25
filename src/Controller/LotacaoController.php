@@ -26,13 +26,28 @@ class LotacaoController extends Controller
      * @Route("/lotacao", name="lotacao_index")
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function index(){
-        $lotacoes = $this->getDoctrine()
-            ->getRepository(Lotacao::class)
-            ->findBy(array(), array('descricao' => 'ASC'));
+    public function index(Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQueryBuilder()
+            ->from(Lotacao::class, 'lt')
+            ->select("lt")
+            ->orderBy('lt.descricao', 'ASC');
+
+        /**
+         * @var $paginator Knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+
+        $result = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 6)
+        );
 
         return $this->render("lotacao/index.html.twig", array(
-            'lots' => $lotacoes,
+            'lots' => $result,
         ));
     }
 
