@@ -1,0 +1,12 @@
+<div class="col-md-12 col-xs-12">
+    <h4>Período de {{ dateini|date('d/m/Y') }} a {{ datefim|date('d/m/Y') }} - {{ typefilter }}{{ valuefilter }}</h4>
+</div>
+<div class="col-md-12 col-xs-12" id="div_table"></div>
+<div class="col-md-12 col-xs-12" id="div_chart"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    {{ gc_draw([piechart, tablechart],
+        ['div_chart', 'div_table']
+    ) }}
+</script>

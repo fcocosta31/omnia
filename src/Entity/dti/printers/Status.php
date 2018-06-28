@@ -31,8 +31,9 @@ class Status{
 
                 $p->setModelo($rows[1]);
                 $p->setSerial($rows[2]);
-                $p->setStatusToner($rows[3]);
-                $p->setStatusImagem($rows[4]);
+                $p->setStatusToner($rows[4]);
+                $p->setKitManutencao($rows[5]);
+                $p->setStatusImagem($rows[6]);
 
                 if(strlen($statusbar[2]) == 13){
                     $p->setMensagem($statusbar[1]);
@@ -40,8 +41,8 @@ class Status{
                     $p->setMensagem($statusbar[1]."[".$statusbar[2]."]");
                 }
 
-                if(sizeof($rows) > 5){
-                    $troca = $rows[5];
+                if(sizeof($rows) > 6){
+                    $troca = $rows[3];
                     if(strlen($troca) == 10){
                         $p->setUltimaTroca(date('Y-m-d',strtotime($troca)));
                     }else{
@@ -63,6 +64,7 @@ class Status{
                 $p->setStatusToner('0%');
                 $p->setStatusImagem('0%');
                 $p->setUltimaTroca(null);
+                $p->setKitManutencao('--');
                 $p->setMensagem("Sem status!");
             }
 

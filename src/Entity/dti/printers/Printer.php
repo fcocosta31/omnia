@@ -39,6 +39,7 @@ class Printer{
     protected $on_off;
     protected $ultima_troca;
     protected $mensagem;
+    protected $kit_manutencao;
 
     /**
      * @return mixed
@@ -231,6 +232,23 @@ class Printer{
     {
         $this->mensagem = $mensagem;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getKitManutencao()
+    {
+        return $this->kit_manutencao;
+    }
+
+    /**
+     * @param mixed $kit_manutencao
+     */
+    public function setKitManutencao($kit_manutencao)
+    {
+        $this->kit_manutencao = $kit_manutencao;
+    }
+
 
 
 }

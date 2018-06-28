@@ -22,6 +22,12 @@ footer {
     background-color: #000;
 }
 
+@media print{
+    .noPrint, .noPrint * {
+        display: none !important;
+    }
+}
+
 
 #footer-container-img{
     margin-top: 15px;
@@ -145,6 +151,16 @@ p{
     color: #880000;
 }
 
+.left-panel{
+    border: solid 1px #dfdfdf;
+    padding-left: 5px;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feffff+0,eaeeff+35,b6c4d8+100 */
+    background: #feffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #feffff 0%, #eaeeff 35%, #b6c4d8 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #feffff 0%,#eaeeff 35%,#b6c4d8 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #feffff 0%,#eaeeff 35%,#b6c4d8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#b6c4d8',GradientType=0 ); /* IE6-9 */
+}
 
 /* NAVBAR CUSTOM */
 

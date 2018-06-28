@@ -7,30 +7,41 @@
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-md-12 col-xs-12">
-                <form action="{{ path('esp_produtividade_reports_index') }}" method="post">
+            <div class="col-md-2 col-xs-12 noPrint">
+                <form action="{{ path('esp_produtividade_esp-filter-reports') }}" method="post"
+                    id="esp_form_filter">
+                    <div class="left-panel"><h4>Filtros:</h4></div>
+                    <br>
                     <label>Início: </label>
-                    <input type="date" class="js-datepicker" name="_dateini" value="{{ dateini }}">
+                    <input type="date" class="form-control" name="_dateini" value="{{ dateini }}">
+                    <br>
                     <label>Fim: </label>
-                    <input type="date" class="js-datepicker" name="_datefim" value="{{ datefim }}">
-                    <input type="submit" value="Enviar">
+                    <input type="date" class="form-control" name="_datefim" value="{{ datefim }}">
+                    <br/>
+                    <label>Filtrar por: </label>
+                    <select name="_filterType" id="esp_type_filter"
+                            base-url="{{ path('esp_produtividade_esp-filters') }}"
+                    class="form-control">
+                        <option value="0">Selecione...</option>
+                        <option value="1">Especializada</option>
+                        <option value="2">Procurador</option>
+                        <option value="3">Tipo de Ato</option>
+                    </select>
+                    <br>
+                    <label>Descrição: </label>
+                    <select name="_filterValue" id="esp_value_filter" class="form-control">
+                        <option value="0">Selecione...</option>
+                    </select>
+                    <br/>
+                    <input type="submit" class="btn btn-sm btn-primary" value="Enviar">
                 </form>
             </div>
+            <div class="col-md-10 col-xs-12" id="div_partial">
+                {{ include('esp/produtividade/reports/esp_partial.html.twig') }}
+            </div>
+
         </div>
 
-        <br>
-        <div class="row">
-            <div class="container-fluid">
-                <div class="col-md-10 col-xs-12 col-md-offset-2" id="div_tablechart"></div>
-                <div class="col-md-10 col-xs-12 col-md-offset-2" id="div_piechart"></div>
-            </div>
-        </div>
     </div>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        {{ gc_draw([piechart, tablechart],
-            ['div_piechart', 'div_tablechart']
-        ) }}
-    </script>
 
 {% endblock %}

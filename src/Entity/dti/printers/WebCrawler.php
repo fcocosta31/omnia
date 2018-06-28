@@ -60,12 +60,11 @@ class WebCrawler{
                     $index_troca_toner = $contador - 2;
                 }
             }
-
             $items_rows[] = 'LIGADA';
             $items_rows[] = $rows[$index_modelo];
             $items_rows[] = $rows[$index_num_serie];
-            $items_rows = $this->dadosinfo($items_rows, $uristatus);
             $items_rows[] = trim($rows[$index_troca_toner]);
+            $items_rows = $this->dadosinfo($items_rows, $uristatus);
 
         }else{
             $items_rows[] = 'DESLIGADA';
@@ -113,6 +112,20 @@ class WebCrawler{
                 break;
             }
         }
+
+        $index_kit_manutencao = 0;
+        $contador = 0;
+
+        //Pegando a % do Kit Manutenção
+        foreach($rows as $i => $td_val){
+            $contador++;
+            if($td_val == 'Kit manutenção Vida restante:'){
+                $index_kit_manutencao = $contador;
+                break;
+            }
+        }
+
+        $items[] = $rows[$index_kit_manutencao];
 
         $indice = sizeof($rows);
 

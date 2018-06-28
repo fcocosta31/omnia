@@ -11,6 +11,44 @@ $(document).ready(function () {
 
 });
 
+$("#esp_form_filter").on("submit", function (e) {
+    e.preventDefault();
+
+    $.ajax({
+        type: "POST",
+        url: $(this).attr("action"),
+        dataType: "json",
+        data: $(this).serialize(),
+        success: function (response) {
+            $("#div_partial").html(response);
+        }
+    });
+});
+
+
+$("#esp_type_filter").change(function () {
+    var filtertype = $(this).val();
+    var urlpath = $(this).attr('base-url');
+    if(filtertype != 0){
+        $.ajax({
+            url: urlpath,
+            type: "GET",
+            data: {_filterType:filtertype},
+            success: function (result) {
+                var formValues = $("#esp_value_filter");
+                formValues.empty().html(' ');
+                formValues.append('<option value="0">Selecione...</option>');
+                $.each(result, function (i, item) {
+                    formValues.append('<option value="'+item.id+'">'+item.descricao+'</option>');
+                });
+            }
+        });
+    }else{
+        var formValues = $("#esp_value_filter");
+        formValues.empty().html(' ');
+        formValues.append('<option value="0">Selecione...</option>');
+    }
+});
 
 
 $("#employee_form_uf").change(function () {
