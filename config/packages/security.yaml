@@ -34,6 +34,7 @@ security:
     access_control:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dti/printers/status, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/home, roles: [ROLE_CGR, ROLE_DAI, ROLE_DTI, ROLE_ESP] }
         - { path: ^/profile, roles: [ROLE_CGR, ROLE_DAI, ROLE_DTI, ROLE_ESP] }

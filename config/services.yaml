@@ -1,10 +1,11 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'en'
+    locale: 'pt_BR'
     documents_directory: '%kernel.project_dir%/public/uploads/documents/'
     images_directory: '%kernel.project_dir%/public/uploads/images/'
-    mailer_user: 'example@email.com'
+    mailer_user: 'procuradoriageralmunicipio@gmail.com'
+    mailer_sender: 'Procuradoria Geral do Municipio de Teresina'
 
 services:
     # default configuration for services in *this* file
@@ -60,18 +61,23 @@ fos_user:
         mailer: fos_user.mailer.twig_swift # this lines
     from_email:
         address: "%mailer_user%"
-        sender_name: "%mailer_user%"
+        sender_name: "%mailer_sender%"
     registration:
         form:
             type: App\Entity\UserFormType
+    resetting:
+        email:
+            from_email:
+                address:        "%mailer_user%"
+                sender_name:    "%mailer_sender%"
     profile:
         form:
             type: App\Entity\ProfileFormType
 
 framework:
-    default_locale: 'pt'
+    default_locale: 'pt_BR'
     translator:
-        fallbacks: ['pt']
+        fallbacks: ['%locale%']
 
 cmen_google_charts:
     version: "current"
@@ -90,3 +96,7 @@ knp_paginator:
         pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v3_pagination.html.twig'
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig'
         filtration: '@KnpPaginator/Pagination/filtration.html.twig'
+
+knp_snappy:
+    temporary_folder: "%kernel.cache_dir%/snappy"
+    process_timeout: 20 # In seconds

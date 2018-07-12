@@ -38,12 +38,22 @@ class AtoController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+        $session = $this->get('session');
+
         if(!empty($request->get('_dateini'))){
             $dateini = $request->get('_dateini');
             $datefim = $request->get('_datefim');
+            $session->set('_dateini', $dateini);
+            $session->set('_datefim', $datefim);
         }else{
-            $datefim = date("Y-m-d");
-            $dateini = date("Y-m-d", strtotime("-1 months"));
+
+            if(empty($session->get('_dateini'))){
+                $datefim = date("Y-m-d");
+                $dateini = date("Y-m-d", strtotime("-1 months"));
+            }else{
+                $dateini = $session->get('_dateini');
+                $datefim = $session->get('_datefim');
+            }
         }
 
         $query = $em->createQueryBuilder()

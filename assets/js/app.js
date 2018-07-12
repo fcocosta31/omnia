@@ -11,7 +11,9 @@ $(document).ready(function () {
 
 });
 
+
 $("#esp_form_filter").on("submit", function (e) {
+
     e.preventDefault();
 
     $.ajax({
@@ -23,6 +25,7 @@ $("#esp_form_filter").on("submit", function (e) {
             $("#div_partial").html(response);
         }
     });
+
 });
 
 
@@ -37,7 +40,7 @@ $("#esp_type_filter").change(function () {
             success: function (result) {
                 var formValues = $("#esp_value_filter");
                 formValues.empty().html(' ');
-                formValues.append('<option value="0">Selecione...</option>');
+                formValues.append('<option value="0">Todos</option>');
                 $.each(result, function (i, item) {
                     formValues.append('<option value="'+item.id+'">'+item.descricao+'</option>');
                 });
@@ -46,7 +49,7 @@ $("#esp_type_filter").change(function () {
     }else{
         var formValues = $("#esp_value_filter");
         formValues.empty().html(' ');
-        formValues.append('<option value="0">Selecione...</option>');
+        formValues.append('<option value="0">Todos</option>');
     }
 });
 

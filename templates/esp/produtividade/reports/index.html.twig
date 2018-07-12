@@ -10,7 +10,7 @@
             <div class="col-md-2 col-xs-12 noPrint">
                 <form action="{{ path('esp_produtividade_esp-filter-reports') }}" method="post"
                     id="esp_form_filter">
-                    <div class="left-panel"><h4>Filtros:</h4></div>
+                    <div class="left-panel-title"><h4>Filtros:</h4></div>
                     <br>
                     <label>Início: </label>
                     <input type="date" class="form-control" name="_dateini" value="{{ dateini }}">
@@ -22,7 +22,7 @@
                     <select name="_filterType" id="esp_type_filter"
                             base-url="{{ path('esp_produtividade_esp-filters') }}"
                     class="form-control">
-                        <option value="0">Selecione...</option>
+                        <option value="0">Todos</option>
                         <option value="1">Especializada</option>
                         <option value="2">Procurador</option>
                         <option value="3">Tipo de Ato</option>
@@ -30,12 +30,15 @@
                     <br>
                     <label>Descrição: </label>
                     <select name="_filterValue" id="esp_value_filter" class="form-control">
-                        <option value="0">Selecione...</option>
+                        <option value="0">Todos</option>
                     </select>
                     <br/>
                     <input type="submit" class="btn btn-sm btn-primary" value="Enviar">
+                    <input type="hidden" name="_download-report" value="no" id="_download-report">
                 </form>
+
             </div>
+
             <div class="col-md-10 col-xs-12" id="div_partial">
                 {{ include('esp/produtividade/reports/esp_partial.html.twig') }}
             </div>

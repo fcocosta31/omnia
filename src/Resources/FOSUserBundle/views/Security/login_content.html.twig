@@ -39,22 +39,25 @@
                 <div class="row">
                     <div class="col-xs-12">
 
-                    <input type="submit" class="btn btn-primary" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-
-                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-
-                    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-
-                    <a href="/omnia/register">Cadastre-se</a>
-
+                        <input type="submit" class="btn btn-primary" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                        {% if error %}
+                            <div class="red_color_font" style="font-weight: bold">
+                                {{ error.messageKey|trans(error.messageData, 'security') }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="row"><br><br><br></div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                            <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                        </div>
+                        <div class="form-group">
+                            <a href="{{ path('fos_user_registration_register') }}">Cadastre-se</a><span> | </span>
+                            <a href="{{ path('fos_user_resetting_request') }}">Esqueceu a senha ?</a>
+                        </div>
                     </div>
                 </div>
-                {% if error %}
-                    <br>
-                    <div class="red_color_font" style="font-weight: bold">
-                        {{ error.messageKey|trans(error.messageData, 'security') }}
-                    </div>
-                {% endif %}
             </div>
         </div>
     </div>

@@ -1,12 +1,40 @@
+<div class="container-fluid" id="div_img">
 <div class="col-md-12 col-xs-12">
-    <h4>Período de {{ dateini|date('d/m/Y') }} a {{ datefim|date('d/m/Y') }} - {{ typefilter }}{{ valuefilter }}</h4>
+           <!-- <span><h4>Período de {{ dateini|date('d/m/Y') }} a {{ datefim|date('d/m/Y') }} - {{ typefilter }}{{ valuefilter }}</h4></span> -->
+            <a href="#!" title="Converter em imagem" onclick="exportImageToClipBoard()" class="pull-right">
+                <img src="{{ asset('uploads/images/png-icon.png') }}" width="32" height="auto">
+            </a>
 </div>
-<div class="col-md-12 col-xs-12" id="div_table"></div>
 <div class="col-md-12 col-xs-12" id="div_chart"></div>
+<div class="row"><br><br><p>...</p></div>
+<div class="col-md-12 col-xs-12" id="div_table"></div>
+<div class="row"><br><br><p>...</p></div>
+</div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-    {{ gc_draw([piechart, tablechart],
-        ['div_chart', 'div_table']
-    ) }}
+
+    var imgData;
+
+    {{ gc_start([chart, table], ['div_chart', 'div_table']) }}
+
+    {{ gc_event(chart, 'ready', 'printPngChart') }}
+
+    function printPngChart() {
+        imgData = {{ chart.name }}.getImageURI();
+    };
+
+    {{ gc_end([chart, table]) }}
+
+    function exportImageToClipBoard() {
+        $.ajax({
+           type: "POST",
+           url: "{{ path('esp_produtividade_export-image-chart') }}",
+           data: {imageData:imgData},
+           success: function (content) {
+               $("#div_img").html(content);
+           }
+        });
+    };
+
 </script>

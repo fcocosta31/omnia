@@ -35,4 +35,16 @@ class IndexController extends Controller
         ));
 
     }
+
+    /**
+     * @Route("/", name="index_geral_root")
+     * @param Request $request
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function indexRoot(){
+
+        return $this->redirectToRoute('index_geral');
+
+    }
+
 }

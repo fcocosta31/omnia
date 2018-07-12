@@ -13,9 +13,9 @@
                 <span>Mostrando {{ atos|length }} registro(s).</span><br/><br/>
                 <form action="{{ path('esp_produtividade_ato_index') }}" method="post">
                     <label>Início: </label>
-                    <input type="date" class="js-datepicker" name="_dateini" value="{{ dateini }}">
+                    <input type="date" name="_dateini" value="{{ dateini }}">
                     <label>Fim: </label>
-                    <input type="date" class="js-datepicker" name="_datefim" value="{{ datefim }}">
+                    <input type="date" name="_datefim" value="{{ datefim }}">
                     <input type="submit" value="Enviar">
                 </form>
             </div>
