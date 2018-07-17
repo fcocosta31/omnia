@@ -401,18 +401,19 @@ class ProdutividadeController extends Controller
 
             case '2':
 
-                $repository = $em->getRepository(User::class);
+                $repository = $em->getRepository(Ato::class);
                 $query = $repository->createQueryBuilder('u')
-                    ->select("u.id, u.nome as descricao")
-                    ->where("u.roles like '%ROLE_ESP%'")
-                    ->orderBy('u.nome');
+                    ->select("DISTINCT t.id, t.nome as descricao")
+                    ->innerJoin('u.user', 't', 'WITH', 't.id = u.user')
+                    ->orderBy('t.nome');
                 $result = $query->getQuery()->getResult();
                 break;
 
             default:
                 $repository = $em->getRepository(TipoDeAto::class);
                 $query = $repository->createQueryBuilder('u')
-                    ->select("u.id, u.descricao")
+                    ->select("DISTINCT u.id, u.descricao")
+                    ->innerJoin("u.atos", "t")
                     ->orderBy('u.descricao');
                 $result = $query->getQuery()->getResult();
                 break;

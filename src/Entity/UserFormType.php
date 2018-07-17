@@ -26,12 +26,13 @@ class UserFormType extends AbstractType
                 'placeholder' => 'Selecione...',
                 'choices' => array(
                     'Procurador' => 'ROLE_ESP',
-                    'Adm.Interna' => 'ROLE_DAI',
-                    'Corregedoria' => 'ROLE_CGR',
-                    'Tec.Informação' => 'ROLE_ADMIN',
+                    #'Adm.Interna' => 'ROLE_DAI',
+                    #'Corregedoria' => 'ROLE_CGR',
+                    #'Tec.Informação' => 'ROLE_ADMIN',
                 ),
+                'data' => array('ROLE_ESP'),
                 'multiple' => true,
-                'expanded' => false,
+                'expanded' => true,
             ))
             ->add('lotacao', EntityType::class, array(
                     'placeholder' => 'Selecione...',

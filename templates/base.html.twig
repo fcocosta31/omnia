@@ -86,6 +86,8 @@
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
+                                        <li><a href="{{ path('fos_user_registration_register') }}">Usuários</a></li>
+                                        <li role="separator" class="divider"></li>
                                         <li><a href="{{ path('esp_produtividade_tipo-de-ato_index') }}">Tipos de Atos</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="{{ path('esp_produtividade_tipo-de-processo_index') }}">Tipos de Processos</a></li>
@@ -129,6 +131,8 @@
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
+                                        <li><a href="{{ path('esp_produtividade_ato_index') }}">Atos</a></li>
+                                        <li role="separator" class="divider"></li>
                                         <li><a href="{{ path('esp_produtividade_tipo-de-ato_index') }}">Tipos de Atos</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="{{ path('esp_produtividade_tipo-de-processo_index') }}">Tipos de Processos</a></li>
@@ -232,6 +236,9 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
             <script src="https://github.com/makeusabrew/bootbox/releases/download/v4.4.0/bootbox.min.js"></script>
+            <script type="text/javascript">
+                var routeCidadesPorEstado = "{{ path("dai_rh_get-cidades-por-estado") }}";
+            </script>
             <script src="{{ asset('build/js/app.js') }}"></script>
 
         {% endblock %}

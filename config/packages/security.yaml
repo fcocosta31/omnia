@@ -40,7 +40,7 @@ security:
         - { path: ^/profile, roles: [ROLE_CGR, ROLE_DAI, ROLE_DTI, ROLE_ESP] }
         - { path: ^/dai, roles: ROLE_DAI }
         - { path: ^/dti, roles: ROLE_DTI }
-        - { path: ^/esp/produtividade/ato, roles: ROLE_ESP }
+        - { path: ^/esp/produtividade/ato, roles: [ROLE_CGR, ROLE_ESP] }
         - { path: ^/lotacao, roles: [ROLE_CGR, ROLE_ADMIN] }
         - { path: ^/esp, roles: [ROLE_CGR, ROLE_ADMIN] }
         - { path: ^/, roles: ROLE_ADMIN }

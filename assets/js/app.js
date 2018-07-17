@@ -1,6 +1,7 @@
 require('../js/app.css');
 require('../js/jquery.mask.js');
 
+
 $(document).ready(function () {
 
     $('.js-datepicker').datepicker({
@@ -56,7 +57,7 @@ $("#esp_type_filter").change(function () {
 
 $("#employee_form_uf").change(function () {
     var ufSelector = $(this).val();
-    var urlpath = "/omnia/dai/rh/get-cidades-por-estado";
+    var urlpath = routeCidadesPorEstado;
     $.ajax({
         url: urlpath,
         type: "GET",
@@ -75,7 +76,7 @@ $("#employee_form_uf").change(function () {
 
 $("#employee_form_ufnatu").change(function () {
     var ufSelector = $(this).val();
-    var urlpath = "/omnia/dai/rh/get-cidades-por-estado";
+    var urlpath = routeCidadesPorEstado;
     $.ajax({
         url: urlpath,
         type: "GET",
