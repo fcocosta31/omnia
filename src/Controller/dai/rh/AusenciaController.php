@@ -207,7 +207,7 @@ class AusenciaController extends Controller
             ->select('u')
             ->from(Ausencia::class, 'u')
             ->innerJoin('u.tipoausencia', 'b', 'WITH', 'b.id = u.tipoausencia')
-            ->innerJoin('u.employee', 'c', 'WITH', 'c.id = u.employee')
+            ->innerJoin('u.employee', 'c', 'WITH', 'c.matricula = u.employee')
             ->orderBy('u.dataini', 'DESC')
             ->orderBy('c.nome', 'ASC');
 

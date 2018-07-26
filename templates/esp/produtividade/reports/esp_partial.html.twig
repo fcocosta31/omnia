@@ -1,4 +1,4 @@
-<div class="container-fluid" id="div_img">
+<div class="container-fluid table-responsive" id="div_img">
 <div class="col-md-12 col-xs-12">
            <!-- <span><h4>Período de {{ dateini|date('d/m/Y') }} a {{ datefim|date('d/m/Y') }} - {{ typefilter }}{{ valuefilter }}</h4></span> -->
             <a href="#!" title="Converter em imagem" onclick="exportImageToClipBoard()" class="pull-right">
@@ -23,6 +23,23 @@
     function printPngChart() {
         imgData = {{ chart.name }}.getImageURI();
     };
+
+    {{ gc_event(chart, 'select', 'getSelectionChart') }}
+
+    function getSelectionChart() {
+
+        var selection = {{ chart.name }}.getSelection()[0].row;
+        var valueselection = dataChartDiv_chart.getValue(selection, 0);
+        var typefilter = $("#esp_type_filter").val();
+        var valuefilter = $("#esp_value_filter").val();
+        var dateinifilter = $("#_dateini").val();
+        var datefimfilter = $("#_datefim").val();
+        var url = "{{ path('esp_produtividade_list-acts') }}";
+
+        onChartClickItem(url, typefilter, valuefilter, valueselection, dateinifilter, datefimfilter);
+
+    };
+
 
     {{ gc_end([chart, table]) }}
 

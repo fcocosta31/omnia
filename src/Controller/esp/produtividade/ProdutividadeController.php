@@ -41,12 +41,13 @@ class ProdutividadeController extends Controller
 {
 
     /**
-     * @Route("/esp/produtividade/esp-reports", name="esp_produtividade_esp-reports")
+     * @Route("/esp/produtividade/rels/esp-reports", name="esp_produtividade_esp-reports")
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
     public function espReports(Request $request)
     {
+        $rolesTab = $this->getUser()->getRoles();
 
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository(Ato::class);
@@ -57,23 +58,55 @@ class ProdutividadeController extends Controller
         $datefim = date("Y-m-d");
         $dateini = date("Y-m-d", strtotime("-6 months"));
 
-        $query = $repository->createQueryBuilder('u')
-            ->select('MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
-            ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
-            ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
-            ->where('u.emissao between :dateini and :datefim')
-            ->setParameters(array(
-                'dateini' => $dateini,
-                'datefim' => $datefim,
-            ))
-            ->groupBy('mes, b')
-            ->orderBy('mes, b.descricao');
 
-        $lotacoes = $repository->createQueryBuilder('u')
-            ->select('distinct b.descricao')
-            ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
-            ->orderBy('b.descricao')
-            ->getQuery()->getResult();
+        if (in_array('ROLE_CHESP', $rolesTab, true)){
+
+            $lotacao_id = $this->getUser()->getLotacao()->getId();
+
+            $query = $repository->createQueryBuilder('u')
+                ->select('MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                ->where('b = :idlotacao and u.emissao between :dateini and :datefim')
+                ->setParameters(array(
+                    'idlotacao' => $lotacao_id,
+                    'dateini' => $dateini,
+                    'datefim' => $datefim,
+                ))
+                ->groupBy('mes, b')
+                ->orderBy('mes, b.descricao');
+
+            $lotacoes = $repository->createQueryBuilder('u')
+                ->select('distinct b.descricao')
+                ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                ->where('b = :idlotacao')
+                ->setParameters(array(
+                    'idlotacao' => $lotacao_id,
+                ))
+                ->orderBy('b.descricao')
+                ->getQuery()->getResult();
+
+        }else{
+
+            $query = $repository->createQueryBuilder('u')
+                ->select('MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                ->where('u.emissao between :dateini and :datefim')
+                ->setParameters(array(
+                    'dateini' => $dateini,
+                    'datefim' => $datefim,
+                ))
+                ->groupBy('mes, b')
+                ->orderBy('mes, b.descricao');
+
+            $lotacoes = $repository->createQueryBuilder('u')
+                ->select('distinct b.descricao')
+                ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                ->orderBy('b.descricao')
+                ->getQuery()->getResult();
+
+        }
 
 
         /** GRÁFICO EM FORMA DE LINHAS **/
@@ -97,7 +130,7 @@ class ProdutividadeController extends Controller
     }
 
     /**
-     * @Route("/esp/produtividade/esp-filter-reports", name="esp_produtividade_esp-filter-reports")
+     * @Route("/esp/produtividade/rels/esp-filter-reports", name="esp_produtividade_esp-filter-reports")
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
@@ -107,12 +140,36 @@ class ProdutividadeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository(Ato::class);
 
-        $dateini = $request->get('_dateini');
-        $datefim = $request->get('_datefim');
+        $session = $this->get('session');
 
-        $type = $request->get('_filterType');
-        $value = $request->get('_filterValue');
+        if(!empty($request->get('_filterType'))){
+            $dateini = $request->get('_dateini');
+            $datefim = $request->get('_datefim');
+            $type = $request->get('_filterType');
+            $value = $request->get('_filterValue');
 
+            $session->set('_dateini', $dateini);
+            $session->set('_datefim', $datefim);
+            $session->set('_filterType', $type);
+            $session->set('_filterValue', $value);
+        }else{
+
+            $dateini = $session->get('_dateini');
+            $datefim = $session->get('_datefim');
+            $type = $session->get('_filterType');
+            $value = $session->get('_filterValue');
+        }
+
+
+        $rolesTab = $this->getUser()->getRoles();
+        $ischesp = false;
+        $lotacao_id = 0;
+
+        if (in_array('ROLE_CHESP', $rolesTab, true)) {
+
+            $ischesp = true;
+            $lotacao_id = $this->getUser()->getLotacao()->getId();
+        }
 
         $value_filter = "Todos";
 
@@ -123,17 +180,34 @@ class ProdutividadeController extends Controller
 
             if($value == '0'){
 
-                $query = $repository->createQueryBuilder('u')
-                    ->select('b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
-                    ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
-                    ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
-                    ->where('u.emissao between :dateini and :datefim')
-                    ->setParameters(array(
-                        'dateini' => $dateini,
-                        'datefim' => $datefim,
-                    ))
-                    ->groupBy('b')
-                    ->orderBy('b.descricao');
+                if($ischesp){
+
+                    $query = $repository->createQueryBuilder('u')
+                        ->select('b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->where('b = :lotacaoid and u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'lotacaoid' => $lotacao_id,
+                            'dateini' => $dateini,
+                            'datefim' => $datefim,
+                        ))
+                        ->groupBy('b')
+                        ->orderBy('b.descricao');
+                }else{
+
+                    $query = $repository->createQueryBuilder('u')
+                        ->select('b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->where('u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'dateini' => $dateini,
+                            'datefim' => $datefim,
+                        ))
+                        ->groupBy('b')
+                        ->orderBy('b.descricao');
+                }
 
                 /* GRÁFICO EM FORMA DE PIZZA */
                 $chart = $this->getPierChart($query, $dateini, $datefim, $type_filter, $value_filter, 0);
@@ -185,17 +259,37 @@ class ProdutividadeController extends Controller
 
             if($value == '0'){
 
-                $query = $repository->createQueryBuilder('u')
-                    ->select('b.nome as descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
-                    ->innerJoin('u.user', 'b', 'WITH', 'b.id = u.user')
-                    ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
-                    ->where('u.emissao between :dateini and :datefim')
-                    ->setParameters(array(
-                        'dateini' => $dateini,
-                        'datefim' => $datefim,
-                    ))
-                    ->groupBy('b')
-                    ->orderBy('b.nome');
+                if($ischesp){
+
+                    $query = $repository->createQueryBuilder('u')
+                        ->select('b.nome as descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                        ->innerJoin('u.lotacao', 'a', 'WITH', 'a.id = u.lotacao')
+                        ->innerJoin('u.user', 'b', 'WITH', 'b.id = u.user')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->where('a = :lotacaoid and u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'lotacaoid' => $lotacao_id,
+                            'dateini' => $dateini,
+                            'datefim' => $datefim,
+                        ))
+                        ->groupBy('b')
+                        ->orderBy('b.nome');
+
+                }else{
+
+                    $query = $repository->createQueryBuilder('u')
+                        ->select('b.nome as descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                        ->innerJoin('u.user', 'b', 'WITH', 'b.id = u.user')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->where('u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'dateini' => $dateini,
+                            'datefim' => $datefim,
+                        ))
+                        ->groupBy('b')
+                        ->orderBy('b.nome');
+                }
+
 
                 /* GRÁFICO EM FORMA COMBO CHART BARRAS VERTICAIS */
                 $chart = $this->getComboChart($query, $dateini, $datefim, $type_filter, $value_filter);
@@ -243,17 +337,33 @@ class ProdutividadeController extends Controller
 
             if($value == '0'){
 
-                $query = $repository->createQueryBuilder('u')
-                    ->select('c.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
-                    ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
-                    ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
-                    ->where('u.emissao between :dateini and :datefim')
-                    ->setParameters(array(
-                        'dateini' => $dateini,
-                        'datefim' => $datefim,
-                    ))
-                    ->groupBy('c')
-                    ->orderBy('c.descricao');
+                if($ischesp){
+                    $query = $repository->createQueryBuilder('u')
+                        ->select('c.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->where('b = :lotacaoid and u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'lotacaoid' => $lotacao_id,
+                            'dateini' => $dateini,
+                            'datefim' => $datefim,
+                        ))
+                        ->groupBy('c')
+                        ->orderBy('c.descricao');
+                }else{
+                    $query = $repository->createQueryBuilder('u')
+                        ->select('c.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->where('u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'dateini' => $dateini,
+                            'datefim' => $datefim,
+                        ))
+                        ->groupBy('c')
+                        ->orderBy('c.descricao');
+                }
+
 
                 /* GRÁFICO EM FORMA DE PIZZA */
                 $chart = $this->getPierChart($query, $dateini, $datefim, $type_filter, $value_filter, 0.4);
@@ -275,20 +385,39 @@ class ProdutividadeController extends Controller
                     )->getQuery()->getSingleResult();
 
                 $value_filter = $qb['descricao'];
+                if($ischesp){
 
-                $query = $repository->createQueryBuilder('u')
-                    ->select('c.nome as descricao, SUM(d.peso) as pontos, COUNT(d.peso) as atos')
-                    ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
-                    ->innerJoin('u.user', 'c', 'WITH', 'c.id = u.user')
-                    ->innerJoin('u.tipodeato', 'd', 'WITH', 'd.id = u.tipodeato')
-                    ->where('d.id = :ato and u.emissao between :dateini and :datefim')
-                    ->setParameters(array(
-                        'ato' => $value,
-                        'dateini' => $dateini,
-                        'datefim' => $datefim,
-                    ))
-                    ->groupBy('c')
-                    ->orderBy('c.nome');
+                    $query = $repository->createQueryBuilder('u')
+                        ->select('c.nome as descricao, SUM(d.peso) as pontos, COUNT(d.peso) as atos')
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.user', 'c', 'WITH', 'c.id = u.user')
+                        ->innerJoin('u.tipodeato', 'd', 'WITH', 'd.id = u.tipodeato')
+                        ->where('d.id = :ato and b = :lotacaoid and u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'ato' => $value,
+                            'lotacaoid' => $lotacao_id,
+                            'dateini' => $dateini,
+                            'datefim' => $datefim,
+                        ))
+                        ->groupBy('c')
+                        ->orderBy('c.nome');
+
+                }else{
+
+                    $query = $repository->createQueryBuilder('u')
+                        ->select('c.nome as descricao, SUM(d.peso) as pontos, COUNT(d.peso) as atos')
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.user', 'c', 'WITH', 'c.id = u.user')
+                        ->innerJoin('u.tipodeato', 'd', 'WITH', 'd.id = u.tipodeato')
+                        ->where('d.id = :ato and u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'ato' => $value,
+                            'dateini' => $dateini,
+                            'datefim' => $datefim,
+                        ))
+                        ->groupBy('c')
+                        ->orderBy('c.nome');
+                }
 
                 /* GRÁFICO EM FORMA DE BARRAS */
                 $chart = $this->getBarHorChart($query, $dateini, $datefim, $type_filter, $value_filter);
@@ -350,7 +479,7 @@ class ProdutividadeController extends Controller
 
 
     /**
-     * @Route("/esp/produtividade/export-image-chart", name="esp_produtividade_export-image-chart")
+     * @Route("/esp/produtividade/rels/export-image-chart", name="esp_produtividade_export-image-chart")
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
@@ -367,22 +496,223 @@ class ProdutividadeController extends Controller
 
 
     /**
-     * @Route("/esp/produtividade/tpa-reports", name="esp_produtividade_tpa-reports")
+     * @Route("/esp/produtividade/rels/list-acts", name="esp_produtividade_list-acts")
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function tpareports(Request $request)
+    public function listarAtos(Request $request)
     {
 
+        $session = $this->get('session');
+
+        if(!empty($request->get("_valueselection"))){
+
+            $valueselection = $request->get("_valueselection");
+            $typefilter = $request->get("_typefilter");
+            $valuefilter = $request->get("_valuefilter");
+            $dateinifilter = $request->get("_dateinifilter");
+            $datefimfilter = $request->get("_datefimfilter");
+
+            $session->set('_valueselection', $valueselection);
+            $session->set('_typefilter', $typefilter);
+            $session->set('_valuefilter', $valuefilter);
+            $session->set('_dateinifilter', $dateinifilter);
+            $session->set('_datefimfilter', $datefimfilter);
+
+        }else{
+
+            $valueselection = $session->get("_valueselection");
+            $typefilter = $session->get("_typefilter");
+            $valuefilter = $session->get("_valuefilter");
+            $dateinifilter = $session->get("_dateinifilter");
+            $datefimfilter = $session->get("_datefimfilter");
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        if($valuefilter != '0'){
+
+            switch ($typefilter){
+
+                case '1':
+
+                    $qb = $em->getRepository(User::class)
+
+                        ->createQueryBuilder('u')
+                        ->select('u.id')
+                        ->where('u.nome = :username')
+                        ->setParameters(
+                            array(
+                                'username' => $valueselection
+                            )
+                        )->getQuery()->getSingleResult();
+
+                    $user_id = $qb['id'];
+
+                    $query = $em->createQueryBuilder()
+                        ->select('u')
+                        ->from(Ato::class, 'u')
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->leftJoin('u.tipodeprocesso', 'd', 'WITH', 'd.id = u.tipodeprocesso')
+                        ->where('u.user = :user and u.lotacao = :espec and u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'user' => intval($user_id),
+                            'espec' => intval($valuefilter),
+                            'dateini' => $dateinifilter,
+                            'datefim' => $datefimfilter,
+                        ))
+                        ->orderBy('u.emissao', 'DESC');
+
+                    break;
+
+                case '2':
+
+                    $qb = $em->getRepository(TipoDeAto::class)
+
+                        ->createQueryBuilder('u')
+                        ->select('u.id')
+                        ->where('u.descricao = :descricao')
+                        ->setParameters(
+                            array(
+                                'descricao' => $valueselection
+                            )
+                        )->getQuery()->getSingleResult();
+
+                    $tipodeato_id = $qb['id'];
+
+                    $query = $em->createQueryBuilder()
+                        ->select('u')
+                        ->from(Ato::class, 'u')
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->leftJoin('u.tipodeprocesso', 'd', 'WITH', 'd.id = u.tipodeprocesso')
+                        ->where('c.id = :ato and u.user = :user and u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'ato' => $tipodeato_id,
+                            'user' => intval($valuefilter),
+                            'dateini' => $dateinifilter,
+                            'datefim' => $datefimfilter,
+                        ))
+                        ->orderBy('u.emissao', 'DESC');
+                    break;
+
+                case '3':
+
+                    $qb = $em->getRepository(User::class)
+
+                        ->createQueryBuilder('u')
+                        ->select('u.id')
+                        ->where('u.nome = :username')
+                        ->setParameters(
+                            array(
+                                'username' => $valueselection
+                            )
+                        )->getQuery()->getSingleResult();
+
+                    $user_id = $qb['id'];
+
+                    $query = $em->createQueryBuilder()
+                        ->select('u')
+                        ->from(Ato::class, 'u')
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->leftJoin('u.tipodeprocesso', 'd', 'WITH', 'd.id = u.tipodeprocesso')
+                        ->where('c.id = :ato and u.user = :user and u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'ato' => intval($valuefilter),
+                            'user' => $user_id,
+                            'dateini' => $dateinifilter,
+                            'datefim' => $datefimfilter,
+                        ))
+                        ->orderBy('u.emissao', 'DESC');
+                    break;
+
+            }
+
+        }else{
+
+            if($typefilter == '2'){
+
+                $qb = $em->getRepository(User::class)
+
+                    ->createQueryBuilder('u')
+                    ->select('u.id')
+                    ->where('u.nome = :username')
+                    ->setParameters(
+                        array(
+                            'username' => $valueselection
+                        )
+                    )->getQuery()->getSingleResult();
+
+                $user_id = $qb['id'];
+
+                $query = $em->createQueryBuilder()
+                    ->select('u')
+                    ->from(Ato::class, 'u')
+                    ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                    ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                    ->leftJoin('u.tipodeprocesso', 'd', 'WITH', 'd.id = u.tipodeprocesso')
+                    ->where('u.user = :user and u.emissao between :dateini and :datefim')
+                    ->setParameters(array(
+                        'user' => $user_id,
+                        'dateini' => $dateinifilter,
+                        'datefim' => $datefimfilter,
+                    ))
+                    ->orderBy('u.emissao', 'DESC');
+            }
+        }
+
+        $result = $query->getQuery()->getResult();
+
+        $template = $this->render("esp/produtividade/reports/list-acts.html.twig", array(
+            'acts' => $result,
+            'valueselection' => $valueselection,
+            'dateinifilter' => $dateinifilter,
+            'datefimfilter' => $datefimfilter,
+        ))->getContent();
+
+        return new JsonResponse($template);
     }
 
     /**
-     * @Route("/esp/produtividade/esp-filters", name="esp_produtividade_esp-filters")
+     * @Route("/esp/produtividade/rels/visualizar-ato/{id}", name="esp_produtividade_visualizar-ato")
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function filtervalues(Request $request)
+    public function visualizarAto($id){
+
+        $ato = $this->getDoctrine()
+            ->getRepository(Ato::class)
+            ->findBy(array('id' => $id));
+
+        $template = $this->render("esp/produtividade/ato/view.html.twig", array(
+            'act' => $ato,
+        ))->getContent();
+
+        return new JsonResponse($template);
+
+    }
+
+
+    /**
+     * @Route("/esp/produtividade/rels/esp-filters", name="esp_produtividade_esp-filters")
+     * @param Request $request
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function filterValues(Request $request)
     {
+
+        $rolesTab = $this->getUser()->getRoles();
+        $ischesp = false;
+        $lotacao_id = 0;
+
+        if (in_array('ROLE_CHESP', $rolesTab, true)) {
+
+            $ischesp = true;
+            $lotacao_id = $this->getUser()->getLotacao()->getId();
+        }
+
         $type = $request->get('_filterType');
 
         $em = $this->getDoctrine()->getManager();
@@ -391,31 +721,78 @@ class ProdutividadeController extends Controller
 
             case '1':
 
-                $repository = $em->getRepository(Lotacao::class);
-                $query = $repository->createQueryBuilder('u')
-                    ->select('DISTINCT u.id, u.descricao')
-                    ->innerJoin('u.tiposdeato', 't')
-                    ->orderBy('u.descricao');
-                $result = $query->getQuery()->getResult();
+                if($ischesp){
+                    $repository = $em->getRepository(Lotacao::class);
+                    $query = $repository->createQueryBuilder('u')
+                        ->select('DISTINCT u.id, u.descricao')
+                        ->innerJoin('u.tiposdeato', 't')
+                        ->where('u = :lotacaoid')
+                        ->setParameters(array(
+                            'lotacaoid' => $lotacao_id,
+                        ))
+                        ->orderBy('u.descricao');
+                    $result = $query->getQuery()->getResult();
+                }else{
+                    $repository = $em->getRepository(Lotacao::class);
+                    $query = $repository->createQueryBuilder('u')
+                        ->select('DISTINCT u.id, u.descricao')
+                        ->innerJoin('u.tiposdeato', 't')
+                        ->orderBy('u.descricao');
+                    $result = $query->getQuery()->getResult();
+                }
+
                 break;
 
             case '2':
 
-                $repository = $em->getRepository(Ato::class);
-                $query = $repository->createQueryBuilder('u')
-                    ->select("DISTINCT t.id, t.nome as descricao")
-                    ->innerJoin('u.user', 't', 'WITH', 't.id = u.user')
-                    ->orderBy('t.nome');
-                $result = $query->getQuery()->getResult();
+                if($ischesp){
+                    $repository = $em->getRepository(Ato::class);
+                    $query = $repository->createQueryBuilder('u')
+                        ->select("DISTINCT t.id, t.nome as descricao")
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.user', 't', 'WITH', 't.id = u.user')
+                        ->where('b = :lotacaoid')
+                        ->setParameters(array(
+                            'lotacaoid' => $lotacao_id,
+                        ))
+                        ->orderBy('t.nome');
+                    $result = $query->getQuery()->getResult();
+                }else{
+                    $repository = $em->getRepository(Ato::class);
+                    $query = $repository->createQueryBuilder('u')
+                        ->select("DISTINCT t.id, t.nome as descricao")
+                        ->innerJoin('u.user', 't', 'WITH', 't.id = u.user')
+                        ->orderBy('t.nome');
+                    $result = $query->getQuery()->getResult();
+                }
+
                 break;
 
             default:
-                $repository = $em->getRepository(TipoDeAto::class);
-                $query = $repository->createQueryBuilder('u')
-                    ->select("DISTINCT u.id, u.descricao")
-                    ->innerJoin("u.atos", "t")
-                    ->orderBy('u.descricao');
-                $result = $query->getQuery()->getResult();
+
+                if($ischesp){
+                    $repository = $em->getRepository(Lotacao::class);
+                    $query = $repository->createQueryBuilder('u')
+                        ->select("DISTINCT t.id, t.descricao")
+                        ->innerJoin("u.tiposdeato", "t")
+                        ->innerJoin("u.atos", "s")
+                        ->where('u = :lotacaoid and s.tipodeato = t')
+                        ->setParameters(array(
+                            'lotacaoid' => $lotacao_id,
+                        ))
+                        ->orderBy('u.descricao');
+                    $result = $query->getQuery()->getResult();
+                }else{
+                    $repository = $em->getRepository(Lotacao::class);
+                    $query = $repository->createQueryBuilder('u')
+                        ->select("DISTINCT t.id, t.descricao")
+                        ->innerJoin("u.tiposdeato", "t")
+                        ->innerJoin("u.atos", "s")
+                        ->where('s.tipodeato = t')
+                        ->orderBy('u.descricao');
+                    $result = $query->getQuery()->getResult();
+                }
+
                 break;
         }
         return new JsonResponse($result);

@@ -33,7 +33,11 @@ class Status{
                 $p->setSerial($rows[2]);
                 $p->setStatusToner($rows[4]);
                 $p->setKitManutencao($rows[5]);
-                $p->setStatusImagem($rows[6]);
+                if(sizeof($rows) > 6){
+                    $p->setStatusImagem($rows[6]);
+                }else{
+                    $p->setStatusImagem("erro");
+                }
 
                 if(strlen($statusbar[2]) == 13){
                     $p->setMensagem($statusbar[1]);

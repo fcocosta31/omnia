@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -21,19 +22,8 @@ class UserFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('matricula', NumberType::class)
             ->add('nome', TextType::class)
-            ->add('roles', ChoiceType::class, array(
-                'placeholder' => 'Selecione...',
-                'choices' => array(
-                    'Procurador' => 'ROLE_ESP',
-                    #'Adm.Interna' => 'ROLE_DAI',
-                    #'Corregedoria' => 'ROLE_CGR',
-                    #'Tec.Informação' => 'ROLE_ADMIN',
-                ),
-                'data' => array('ROLE_ESP'),
-                'multiple' => true,
-                'expanded' => true,
-            ))
             ->add('lotacao', EntityType::class, array(
                     'placeholder' => 'Selecione...',
                     'class' => Lotacao::class,

@@ -17,13 +17,16 @@
                      <div class="col-md-2 col-xs-12">
                          {{ form_row(form.classificacao, {'label':'Classificação'}) }}
                      </div>
-                     <div class="col-md-4 col-xs-12">
+                     <div class="col-md-2 col-xs-12">
+                         {{ form_row(form.cargo, {'label':'Cargo'}) }}
+                     </div>
+                     <div class="col-md-3 col-xs-12">
                          {{ form_row(form.departamento, {'label':'Lotação'}) }}
                      </div>
                      <div class="col-md-2 col-xs-12">
                          {{ form_row(form.cedido, {'label':'Cedido?'}) }}
                      </div>
-                     <div class="col-md-4 col-xs-12">
+                     <div class="col-md-3 col-xs-12">
                          {{ form_row(form.orgao, {'label':'Órgão de Origem'}) }}
                      </div>
                  </div>
@@ -40,13 +43,16 @@
                  <div class="tab-content">
 
                      <div role="tabpanel" class="tab-pane fade in active" id="dadospessoais">
-                         <div class="col-md-5 col-xs-12">
+                         <div class="col-md-2 col-xs-12">
+                             {{ form_row(form.matricula, {'label':'Matrícula'}) }}
+                         </div>
+                         <div class="col-md-4 col-xs-12">
                              {{ form_row(form.nome, {'label':'Nome'}) }}
                          </div>
                          <div class="col-md-5 col-xs-12">
                              {{ form_row(form.endereco, {'label':'Endereço'}) }}
                          </div>
-                         <div class="col-md-2 col-xs-12">
+                         <div class="col-md-1 col-xs-12">
                              {{ form_row(form.numero, {'label':'Número'}) }}
                          </div>
                          <div class="col-md-4 col-xs-12">

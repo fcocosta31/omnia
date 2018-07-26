@@ -4,6 +4,9 @@
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
     <div class="row">
         <div class="col-md-6 col-xs-12">
+            {{ form_row(form.matricula, {'label':'Matrícula'}) }}
+        </div>
+        <div class="col-md-6 col-xs-12">
             {{ form_row(form.nome, {'label':'Nome Completo'}) }}
         </div>
         <div class="col-md-6 col-xs-12">
@@ -14,9 +17,6 @@
         </div>
         <div class="col-md-6 col-xs-12">
             {{ form_row(form.lotacao, {'label':'Lotação'}) }}
-        </div>
-        <div class="col-md-6 col-xs-12">
-            {{ form_row(form.roles, {'label':'Perfil'}) }}
         </div>
         <div class="col-md-6 col-xs-12">
             {{ form_row(form.plainPassword, {'label':'Senha'}) }}

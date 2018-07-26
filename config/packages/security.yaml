@@ -36,11 +36,12 @@ security:
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dti/printers/status, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/home, roles: [ROLE_CGR, ROLE_DAI, ROLE_DTI, ROLE_ESP] }
-        - { path: ^/profile, roles: [ROLE_CGR, ROLE_DAI, ROLE_DTI, ROLE_ESP] }
+        - { path: ^/home, roles: [ROLE_CGR, ROLE_DAI, ROLE_DTI, ROLE_ESP, ROLE_CHESP] }
+        - { path: ^/profile, roles: [ROLE_CGR, ROLE_DAI, ROLE_DTI, ROLE_ESP, ROLE_CHESP] }
         - { path: ^/dai, roles: ROLE_DAI }
         - { path: ^/dti, roles: ROLE_DTI }
-        - { path: ^/esp/produtividade/ato, roles: [ROLE_CGR, ROLE_ESP] }
+        - { path: ^/esp/produtividade/ato, roles: [ROLE_CGR, ROLE_ESP, ROLE_CHESP] }
+        - { path: ^/esp/produtividade/rels, roles: [ROLE_CGR, ROLE_ESP, ROLE_CHESP] }
         - { path: ^/lotacao, roles: [ROLE_CGR, ROLE_ADMIN] }
         - { path: ^/esp, roles: [ROLE_CGR, ROLE_ADMIN] }
         - { path: ^/, roles: ROLE_ADMIN }

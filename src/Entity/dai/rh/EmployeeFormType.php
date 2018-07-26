@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
@@ -86,6 +87,7 @@ class EmployeeFormType extends AbstractType
                     'empty_data' => null
                 )
             )
+            ->add('matricula', NumberType::class)
             ->add('nome', TextType::class)
             ->add('endereco', TextType::class, array(
                 'attr' => ['placeholder' => 'Rua/Av/Trav Bloco, Apartamento, Condominio']
@@ -111,6 +113,18 @@ class EmployeeFormType extends AbstractType
             ->add('grauinstrucao', EntityType::class, array(
                     'placeholder' => 'Selecione...',
                     'class' => Escolaridade::class,
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('u')
+                            ->orderBy('u.descricao', 'ASC');
+                    },
+                    'choice_label' => 'descricao',
+                    'required' => true,
+                    'empty_data' => null
+                )
+            )
+            ->add('cargo', EntityType::class, array(
+                    'placeholder' => 'Selecione...',
+                    'class' => Cargo::class,
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('u')
                             ->orderBy('u.descricao', 'ASC');

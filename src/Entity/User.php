@@ -29,6 +29,11 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    protected $matricula;
+
+    /**
      * @ORM\Column(type="string", length=254, nullable=false)
      */
     protected $nome;
@@ -50,7 +55,7 @@ class User extends BaseUser
 
     public function __construct()
     {
-        $this->roles = array('ROLE_USER');
+        $this->roles = array('ROLE_ESP');
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -119,5 +124,21 @@ class User extends BaseUser
     public function setAtos($atos)
     {
         $this->atos = $atos;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMatricula()
+    {
+        return $this->matricula;
+    }
+
+    /**
+     * @param mixed $matricula
+     */
+    public function setMatricula($matricula)
+    {
+        $this->matricula = $matricula;
     }
 }

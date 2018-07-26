@@ -11,3 +11,11 @@ fos_user_change_password:
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
     prefix: /resetting
+
+fos_user_profile_show_id:
+    path: /user-profile/{id}
+    defaults: { _controller: App:UserController:show }
+
+fos_user_profile_edit_id:
+    path: /user-profile/edit/{id}
+    defaults: { _controller: App:UserController:edit }

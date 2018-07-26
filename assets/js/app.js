@@ -54,7 +54,6 @@ $("#esp_type_filter").change(function () {
     }
 });
 
-
 $("#employee_form_uf").change(function () {
     var ufSelector = $(this).val();
     var urlpath = routeCidadesPorEstado;

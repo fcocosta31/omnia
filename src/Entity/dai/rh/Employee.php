@@ -17,18 +17,24 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Employee{
 
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer", nullable=false)
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    protected $matricula;
 
     /**
      * @ORM\ManyToOne(targetEntity="Classificacao", inversedBy="employees")
      * @ORM\JoinColumn(name="classificacao_id", referencedColumnName="id")
      */
     protected $classificacao;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Cargo", inversedBy="employees")
+     * @ORM\JoinColumn(name="cargo_id", referencedColumnName="id")
+     */
+    protected $cargo;
 
     /**
      * @ORM\Column(name="nome", type="string", nullable=true)
@@ -159,6 +165,7 @@ class Employee{
     protected $ufrg;
 
     /**
+     * @ORM\Id
      * @ORM\Column(name="cpf", type="string", nullable=true, length=20)
      */
     protected $cpf;
@@ -263,6 +270,38 @@ class Employee{
      * @ORM\OneToMany(targetEntity="Ausencia", mappedBy="employees")
      */
     protected $ausencias;
+
+    /**
+     * @return mixed
+     */
+    public function getMatricula()
+    {
+        return $this->matricula;
+    }
+
+    /**
+     * @param mixed $matricula
+     */
+    public function setMatricula($matricula)
+    {
+        $this->matricula = $matricula;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCargo()
+    {
+        return $this->cargo;
+    }
+
+    /**
+     * @param mixed $cargo
+     */
+    public function setCargo($cargo)
+    {
+        $this->cargo = $cargo;
+    }
 
     /**
      * @return mixed

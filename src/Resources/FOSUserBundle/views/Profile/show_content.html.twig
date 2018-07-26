@@ -7,6 +7,6 @@
     {% if app.user.lotacao is not null %}
         <p>Lotação: {{ user.lotacao.descricao }}</p>
     {% endif %}
-    <a href="/omnia/profile/change-password" class="btn btn-primary">Alterar Senha</a>
-    <a href="/omnia/profile/edit" class="btn btn-primary">Alterar Dados</a>
+    <a href="{{ path('fos_user_change_password') }}" class="btn btn-primary">Alterar Senha</a>
+    <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary">Alterar Dados</a>
 </div>
