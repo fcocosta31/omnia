@@ -2441,3 +2441,13 @@ c8de96,127.0.0.1,GET,http://localhost/esp/produtividade/rels/esp-filters?_filter
 eb4e3e,127.0.0.1,POST,http://localhost/esp/produtividade/rels/esp-filter-reports,1535369264,,200
 356088,127.0.0.1,POST,http://localhost/esp/produtividade/rels/list-acts,1535369266,,200
 4da783,127.0.0.1,GET,http://localhost/esp/produtividade/rels/visualizar-ato/7,1535369273,,200
+d60639,127.0.0.1,GET,http://localhost/,1535459505,,302
+a42765,127.0.0.1,GET,http://localhost/login,1535459506,,200
+645fd3,127.0.0.1,POST,http://localhost/login_check,1535459518,,302
+93c30c,127.0.0.1,GET,http://localhost/home,1535459518,,200
+75b880,127.0.0.1,GET,http://localhost/esp/produtividade/rels/esp-reports,1535459522,,200
+0222d0,127.0.0.1,GET,http://localhost/esp/produtividade/rels/esp-filters?_filterType=2,1535459530,,200
+f5316c,127.0.0.1,GET,http://localhost/esp/produtividade/rels/esp-filters?_filterType=3,1535459532,,200
+388b67,127.0.0.1,POST,http://localhost/esp/produtividade/rels/esp-filter-reports,1535459535,,200
+e9ebaf,127.0.0.1,POST,http://localhost/esp/produtividade/rels/list-acts,1535459536,,200
+df3e86,127.0.0.1,GET,http://localhost/esp/produtividade/rels/visualizar-ato/15,1535459540,,200
