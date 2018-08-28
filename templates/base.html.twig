@@ -53,7 +53,7 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-custom navbar-static-top" role="navigation">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -78,6 +78,8 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path("esp_produtividade_esp-reports") }}">Gráficos</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{{ path('esp_produtividade_esp-criticas') }}">Críticas</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown" role="presentation">
@@ -123,6 +125,8 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path("esp_produtividade_esp-reports") }}">Gráficos</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{{ path('esp_produtividade_esp-criticas') }}">Críticas</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown" role="presentation">
@@ -150,6 +154,8 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path("esp_produtividade_esp-reports") }}">Gráficos</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{{ path('esp_produtividade_esp-criticas') }}">Críticas</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown" role="presentation">
@@ -195,7 +201,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li role="presentation">
                             {% if app.user is not null %}
-                                <p class="navbar-text" style="color: white">Olá,
+                                <p class="navbar-text" style="color: white">
                                     <a href="{{ path('fos_user_profile_show') }}" class="navbar-link">
                                         {{ app.user.nome }}
                                     </a>
@@ -231,13 +237,13 @@
          </div>
         </main>
 
-        <footer>
+        <footer class="navbar-default">
         {% block footer %}
             <div class="container-fluid">
                 <div class="container-fluid" id="footer-container-img" style="color: white">
                 <img alt="" id="topo-img" src="{{ asset('uploads/images/logopgm.jpg')}}"
                      class="img-responsive" float="left">
-                    <span class="pull-right">
+                    <span class="pull-right footer-text-gray">
                         © 2018 - PGM, Todos os direitos reservados<br>
                         Desenvolvido por Francisco Costa.
                     </span>

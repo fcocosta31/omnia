@@ -12,21 +12,32 @@
             <div class="container">
                 <div class="col-md-11 col-xs-12">
                     {{ form_start(form) }}
-                    <div class="col-md-4 col-xs-12">
+                    <div class="col-md-3 col-xs-12">
                         {{ form_row(form.emissao, {'label':'Data'}) }}
                     </div>
-                    <div class="col-md-8 col-xs-12">
+                    <div class="col-md-4 col-xs-12">
+                        {{ form_row(form.numero, {'label':'Nº do Ato'}) }}
+                    </div>
+                    <div class="col-md-5 col-xs-12">
                         {{ form_row(form.tipodeato, {'label':'Tipo de Ato'}) }}
                     </div>
                     <div class="row"></div>
                     <br>
-                    <div class="col-md-5 col-xs-12">
+                    <div class="col-md-6 col-xs-12">
                         {{ form_row(form.assunto, {'label':'Assunto'}) }}
                     </div>
-                    <div class="col-md-5 col-xs-12">
+                    <div class="col-md-6 col-xs-12">
+                        {{ form_row(form.interessado, {'label':'Interessado/Requerente'}) }}
+                    </div>
+                    <div class="row"></div>
+                    <br>
+                    <div class="col-md-4 col-xs-12">
+                        {{ form_row(form.favoravel, {'label':'Parecer Favorável?'}) }}
+                    </div>
+                    <div class="col-md-4 col-xs-12">
                         {{ form_row(form.tipodeprocesso, {'label':'Tipo de Processo'}) }}
                     </div>
-                    <div class="col-md-2 col-xs-12">
+                    <div class="col-md-4 col-xs-12">
                         {{ form_row(form.numerodoprocesso, {'label':'Nº do Processo'}) }}
                     </div>
                     <div class="row"></div>
@@ -41,7 +52,6 @@
                     </div>
                     {{ form_end(form) }}
                 </div>
-            </div>
         </div>
     </div>
 {% endblock %}

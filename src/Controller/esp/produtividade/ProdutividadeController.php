@@ -433,23 +433,53 @@ class ProdutividadeController extends Controller
 
             $value_filter = "Todos";
 
-            $query = $repository->createQueryBuilder('u')
-                ->select('MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
-                ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
-                ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
-                ->where('u.emissao between :dateini and :datefim')
-                ->setParameters(array(
-                    'dateini' => $dateini,
-                    'datefim' => $datefim,
-                ))
-                ->groupBy('mes, b')
-                ->orderBy('mes, b.descricao');
+            if($ischesp){
 
-            $lotacoes = $repository->createQueryBuilder('u')
-                ->select('distinct b.descricao')
-                ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
-                ->orderBy('b.descricao')
-                ->getQuery()->getResult();
+                $query = $repository->createQueryBuilder('u')
+                    ->select('MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                    ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                    ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                    ->where('b = :lotacaoid and u.emissao between :dateini and :datefim')
+                    ->setParameters(array(
+                        'lotacaoid' => $lotacao_id,
+                        'dateini' => $dateini,
+                        'datefim' => $datefim,
+                    ))
+                    ->groupBy('mes, b')
+                    ->orderBy('mes, b.descricao');
+
+                $lotacoes = $repository->createQueryBuilder('u')
+                    ->select('distinct b.descricao')
+                    ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                    ->where('b = :lotacaoid')
+                    ->setParameters(array(
+                        'lotacaoid' => $lotacao_id,
+                    ))
+                    ->orderBy('b.descricao')
+                    ->getQuery()->getResult();
+
+            }else{
+
+                $query = $repository->createQueryBuilder('u')
+                    ->select('MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                    ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                    ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                    ->where('u.emissao between :dateini and :datefim')
+                    ->setParameters(array(
+                        'dateini' => $dateini,
+                        'datefim' => $datefim,
+                    ))
+                    ->groupBy('mes, b')
+                    ->orderBy('mes, b.descricao');
+
+                $lotacoes = $repository->createQueryBuilder('u')
+                    ->select('distinct b.descricao')
+                    ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                    ->orderBy('b.descricao')
+                    ->getQuery()->getResult();
+
+            }
+
 
 
             /* GRÁFICO EM FORMA DE LINHAS */
@@ -737,6 +767,7 @@ class ProdutividadeController extends Controller
                     $query = $repository->createQueryBuilder('u')
                         ->select('DISTINCT u.id, u.descricao')
                         ->innerJoin('u.tiposdeato', 't')
+                        ->innerJoin('u.atos', 'w')
                         ->orderBy('u.descricao');
                     $result = $query->getQuery()->getResult();
                 }
@@ -771,24 +802,24 @@ class ProdutividadeController extends Controller
             default:
 
                 if($ischesp){
-                    $repository = $em->getRepository(Lotacao::class);
+                    $repository = $em->getRepository(TipoDeAto::class);
                     $query = $repository->createQueryBuilder('u')
-                        ->select("DISTINCT t.id, t.descricao")
-                        ->innerJoin("u.tiposdeato", "t")
-                        ->innerJoin("u.atos", "s")
-                        ->where('u = :lotacaoid and s.tipodeato = t')
+                        ->select("DISTINCT u.id, u.descricao")
+                        ->innerJoin("u.atos", "t")
+                        ->innerJoin("u.lotacoes", "s")
+                        ->where('s = :lotacaoid and t.tipodeato = u')
                         ->setParameters(array(
                             'lotacaoid' => $lotacao_id,
                         ))
                         ->orderBy('u.descricao');
                     $result = $query->getQuery()->getResult();
                 }else{
-                    $repository = $em->getRepository(Lotacao::class);
+                    $repository = $em->getRepository(TipoDeAto::class);
                     $query = $repository->createQueryBuilder('u')
-                        ->select("DISTINCT t.id, t.descricao")
-                        ->innerJoin("u.tiposdeato", "t")
-                        ->innerJoin("u.atos", "s")
-                        ->where('s.tipodeato = t')
+                        ->select("DISTINCT u.id, u.descricao")
+                        ->innerJoin("u.atos", "t")
+                        ->innerJoin("u.lotacoes", "s")
+                        ->where('t.tipodeato = u')
                         ->orderBy('u.descricao');
                     $result = $query->getQuery()->getResult();
                 }
@@ -796,6 +827,124 @@ class ProdutividadeController extends Controller
                 break;
         }
         return new JsonResponse($result);
+    }
+
+
+    /**
+     * @Route("/esp/produtividade/rels/criticas", name="esp_produtividade_esp-criticas")
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    function setRelatorioDeCriticas()
+    {
+        $datefim = date("Y-m-d");
+        $dateini = date("Y-m-d", strtotime("-2 months"));
+
+        return $this->render('esp/produtividade/reports/esp_criticas.html.twig', array(
+            'dateini' => $dateini,
+            'datefim' => $datefim,
+        ));
+    }
+
+    /**
+     * @Route("/esp/produtividade/rels/criticas-detalhe/{dini}/{dfim}/{idesp}/{idproc}/{nproc}", name="esp_produtividade_esp-criticas-detalhe")
+     * @param Request $request
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    function getDetalhesDeCriticas($dini, $dfim, $idesp, $idproc, $nproc)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $repository = $em->getRepository(Ato::class);
+
+        $query = $repository->createQueryBuilder('a')
+            ->select("b.nome, a.emissao, a.assunto, c.descricao as tipodeato, d.descricao as tipodeprocesso, a.numerodoprocesso, a.descricao")
+            ->innerJoin('a.user', 'b', 'WITH', 'b.id = a.user')
+            ->innerJoin('a.tipodeato', 'c', 'WITH', 'c.id = a.tipodeato')
+            ->innerJoin('a.tipodeprocesso', 'd', 'WITH', 'd.id = a.tipodeprocesso')
+            ->innerJoin('a.lotacao', 'e', 'WITH', 'e.id = a.lotacao')
+            ->where('a.emissao between :dateini and :datefim and e = :idesp and d = :idproc and a.numerodoprocesso = :nproc')
+            ->setParameters(array(
+                'dateini' => $dini,
+                'datefim' => $dfim,
+                'idesp' => $idesp,
+                'idproc' => $idproc,
+                'nproc' => $nproc,
+            ))
+            ->orderBy('b.nome');
+
+        $result = $query->getQuery()->getResult();
+
+        return $this->render('esp/produtividade/reports/esp_criticas_detalhe.html.twig', array(
+            'dateini' => $dini,
+            'datefim' => $dfim,
+            'detalhe' => $result,
+        ));
+
+    }
+
+        /**
+     * @Route("/esp/produtividade/rels/criticas-report", name="esp_produtividade_esp-criticas-report")
+     * @param Request $request
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    function getRelatorioDeCriticas(Request $request){
+
+        $rolesTab = $this->getUser()->getRoles();
+        $ischesp = false;
+        $lotacao_id = 0;
+
+        $dateini = $request->get('_dateini');
+        $datefim = $request->get('_datefim');
+
+        $em = $this->getDoctrine()->getManager();
+
+        if (in_array('ROLE_CHESP', $rolesTab, true)) {
+
+            $ischesp = true;
+            $lotacao_id = $this->getUser()->getLotacao()->getId();
+        }
+
+        $repository = $em->getRepository(Ato::class);
+
+        if($ischesp){
+            $query = $repository->createQueryBuilder('u')
+                ->select("a.id, a.descricao as lotacao, b.id as idtipoprocesso, b.descricao as tipoprocesso, u.numerodoprocesso, COUNT(u.numerodoprocesso) as atos")
+                ->innerJoin('u.lotacao', 'a', 'WITH', 'a.id = u.lotacao')
+                ->innerJoin('u.tipodeprocesso', 'b', 'WITH', 'b.id = u.tipodeprocesso')
+                ->where('u.emissao between :dateini and :datefim and a = :lotacaoid')
+                ->setParameters(array(
+                    'dateini' => $dateini,
+                    'datefim' => $datefim,
+                    'lotacaoid' => $lotacao_id,
+                ))
+                ->groupBy('a, b, u.numerodoprocesso')
+                ->orderBy('a.descricao')
+                ->having('COUNT(u.numerodoprocesso) > 1');
+
+            $result = $query->getQuery()->getResult();
+        }else{
+            $query = $repository->createQueryBuilder('u')
+                ->select("a.id, a.descricao as lotacao, b.id as idtipoprocesso, b.descricao as tipoprocesso, u.numerodoprocesso, COUNT(u.numerodoprocesso) as atos")
+                ->innerJoin('u.lotacao', 'a', 'WITH', 'a.id = u.lotacao')
+                ->innerJoin('u.tipodeprocesso', 'b', 'WITH', 'b.id = u.tipodeprocesso')
+                ->where('u.emissao between :dateini and :datefim')
+                ->setParameters(array(
+                    'dateini' => $dateini,
+                    'datefim' => $datefim,
+                ))
+                ->groupBy('a, b, u.numerodoprocesso')
+                ->orderBy('a.descricao')
+                ->having('COUNT(u.numerodoprocesso) > 1');
+
+            $result = $query->getQuery()->getResult();
+        }
+
+        return $this->render('esp/produtividade/reports/esp_criticas_report.html.twig', array(
+            'criticas' => $result,
+            'dateini' => $dateini,
+            'datefim' => $datefim
+        ));
+
     }
 
 
@@ -881,6 +1030,7 @@ class ProdutividadeController extends Controller
             );
             $chart->getOptions()->setTitle($type . ": " . $value . " - período: " . date("d/m/Y", strtotime($dateini)) . " a " . date("d/m/Y", strtotime($datefim)));
             $chart->getOptions()->getHAxis()->setTitle('Produtividade');
+            $chart->getOptions()->getBar()->setGroupWidth('35%');
             $chart->getOptions()->getHAxis()->setMinValue(0);
             $chart->getOptions()->getLegend()->setPosition('none');
             $chart->getOptions()->setFontSize(12)
@@ -911,6 +1061,7 @@ class ProdutividadeController extends Controller
                 ->setHeight(500)
                 ->setWidth(900);
             $chart->getOptions()->getVAxis()->setTitle("Produtividade");
+            $chart->getOptions()->getBar()->setGroupWidth('35%');
             $chart->getOptions()->getLegend()->setPosition('none');
             $chart->getOptions()->setSeriesType('bars');
         }else{

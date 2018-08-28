@@ -115,12 +115,29 @@ class AtoController extends Controller
                         'data-mask' => '00/00/0000',
                         'placeholder' => '00/00/0000']
                 ))
+                ->add('numero', TextType::class, array(
+                    'required' => true
+                ))
                 ->add('tipodeato', ChoiceType::class, array(
                     'placeholder' => 'Selecione...',
                     'choices' => $user->getLotacao()->getTiposdeato(),
                     'choice_label' => 'descricao',
                     'required' => true,
                     'empty_data' => null
+                ))
+            ->add('favoravel', ChoiceType::class, array(
+                'placeholder' => 'Selecione...',
+                'choices' => array(
+                    'Sim' => true,
+                    'Nâo' => false,
+                ),
+                'multiple' => false,
+                'expanded' => false,
+                'required' => false,
+                'empty_data' => null
+            ))
+            ->add('interessado', TextType::class, array(
+                    'required' => false
                 ))
                 ->add('tipodeprocesso', ChoiceType::class, array(
                     'placeholder' => 'Selecione...',
@@ -179,12 +196,29 @@ class AtoController extends Controller
                     'data-mask' => '00/00/0000',
                     'placeholder' => '00/00/0000']
             ))
+            ->add('numero', TextType::class, array(
+                'required' => true
+            ))
             ->add('tipodeato', ChoiceType::class, array(
                 'placeholder' => 'Selecione...',
                 'choices' => $ato->getLotacao()->getTiposdeato(),
                 'choice_label' => 'descricao',
                 'required' => true,
                 'empty_data' => null
+            ))
+            ->add('favoravel', ChoiceType::class, array(
+                'placeholder' => 'Selecione...',
+                'choices' => array(
+                    'Sim' => true,
+                    'Nâo' => false,
+                ),
+                'multiple' => false,
+                'expanded' => false,
+                'required' => false,
+                'empty_data' => null
+            ))
+            ->add('interessado', TextType::class, array(
+                'required' => false
             ))
             ->add('tipodeprocesso', ChoiceType::class, array(
                 'placeholder' => 'Selecione...',

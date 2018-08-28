@@ -54,6 +54,12 @@ class Documento{
     protected $ausencia;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ato", inversedBy="files")
+     * @ORM\JoinColumn(name="ato_id", referencedColumnName="id")
+     */
+    protected $ato;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -148,4 +154,22 @@ class Documento{
     {
         $this->ausencia = $ausencia;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAto()
+    {
+        return $this->ato;
+    }
+
+    /**
+     * @param mixed $ato
+     */
+    public function setAto($ato)
+    {
+        $this->ato = $ato;
+    }
+
+
 }

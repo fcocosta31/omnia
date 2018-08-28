@@ -27,6 +27,21 @@ class Ato
     protected $id;
 
     /**
+     * @ORM\Column(name="numero", type="string", nullable=true)
+     */
+    protected $numero;
+
+    /**
+     * @ORM\Column(name="interessado", type="string", nullable=true)
+     */
+    protected $interessado;
+
+    /**
+     * @ORM\Column(name="favoravel", type="boolean", nullable=true)
+     */
+    protected $favoravel;
+
+    /**
      * @ORM\Column(name="emissao", type="date", nullable=false)
      */
     protected $emissao;
@@ -71,10 +86,21 @@ class Ato
      */
     protected $user;
 
+    /**
+     * @ORM\Column(name="datacadastro", type="date", nullable=true)
+     */
+    protected $datacadastro;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\dai\rh\Documento", mappedBy="ato", cascade={"persist","remove"})
+     */
+    protected $files;
+
 
     public function __construct()
     {
         $this->emissao = new \DateTime();
+        $this->datacadastro = new \DateTime();
     }
 
     /**
@@ -221,4 +247,85 @@ class Ato
     {
         $this->user = $user;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getNumero()
+    {
+        return $this->numero;
+    }
+
+    /**
+     * @param mixed $numero
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInteressado()
+    {
+        return $this->interessado;
+    }
+
+    /**
+     * @param mixed $interessado
+     */
+    public function setInteressado($interessado)
+    {
+        $this->interessado = $interessado;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFavoravel()
+    {
+        return $this->favoravel;
+    }
+
+    /**
+     * @param mixed $favoravel
+     */
+    public function setFavoravel($favoravel)
+    {
+        $this->favoravel = $favoravel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDatacadastro()
+    {
+        return $this->datacadastro;
+    }
+
+    /**
+     * @param mixed $datacadastro
+     */
+    public function setDatacadastro($datacadastro)
+    {
+        $this->datacadastro = $datacadastro;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    /**
+     * @param mixed $files
+     */
+    public function setFiles($files)
+    {
+        $this->files = $files;
+    }
+
 }
