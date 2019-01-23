@@ -167,7 +167,7 @@ class AtoController extends Controller
                 $ato->setLotacao($user->getLotacao());
                 $entityManager->persist($ato);
                 $entityManager->flush();
-                return $this->redirectToRoute('esp_produtividade_ato_index');
+                return $this->redirectToRoute('esp_produtividade_ato_novo');
             }else{
                 return $this->render("error.html.twig", array(
                     'errormessage' => "Data de emissão do Ato não permitida. Prazo de registro encerrado!",

@@ -628,6 +628,11 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'esp_produtividade_visualizar-ato')), array (  '_controller' => 'App\\Controller\\esp\\produtividade\\ProdutividadeController::visualizarAto',));
                 }
 
+                // esp_produtividade_detalhar-ato
+                if (0 === strpos($pathinfo, '/esp/produtividade/rels/detalhar-ato') && preg_match('#^/esp/produtividade/rels/detalhar\\-ato/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'esp_produtividade_detalhar-ato')), array (  '_controller' => 'App\\Controller\\esp\\produtividade\\ProdutividadeController::detalharAto',));
+                }
+
                 if (0 === strpos($pathinfo, '/esp/produtividade/rels/criticas')) {
                     // esp_produtividade_esp-criticas
                     if ('/esp/produtividade/rels/criticas' === $pathinfo) {

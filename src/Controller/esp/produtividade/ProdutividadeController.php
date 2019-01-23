@@ -707,7 +707,6 @@ class ProdutividadeController extends Controller
 
     /**
      * @Route("/esp/produtividade/rels/visualizar-ato/{id}", name="esp_produtividade_visualizar-ato")
-     * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
     public function visualizarAto($id){
@@ -723,6 +722,23 @@ class ProdutividadeController extends Controller
         return new JsonResponse($template);
 
     }
+
+
+    /**
+     * @Route("/esp/produtividade/rels/detalhar-ato/{id}", name="esp_produtividade_detalhar-ato")
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function detalharAto($id){
+
+        $ato = $this->getDoctrine()
+            ->getRepository(Ato::class)
+            ->findBy(array('id' => $id));
+
+        return $this->render("esp/produtividade/ato/detalhe.html.twig", array(
+            'act' => $ato,
+        ));
+    }
+
 
 
     /**
@@ -857,7 +873,7 @@ class ProdutividadeController extends Controller
         $repository = $em->getRepository(Ato::class);
 
         $query = $repository->createQueryBuilder('a')
-            ->select("b.nome, a.emissao, a.assunto, c.descricao as tipodeato, d.descricao as tipodeprocesso, a.numerodoprocesso, a.descricao")
+            ->select("a.id, b.nome, a.emissao, a.assunto, c.descricao as tipodeato, d.descricao as tipodeprocesso, a.numerodoprocesso, a.descricao")
             ->innerJoin('a.user', 'b', 'WITH', 'b.id = a.user')
             ->innerJoin('a.tipodeato', 'c', 'WITH', 'c.id = a.tipodeato')
             ->innerJoin('a.tipodeprocesso', 'd', 'WITH', 'd.id = a.tipodeprocesso')

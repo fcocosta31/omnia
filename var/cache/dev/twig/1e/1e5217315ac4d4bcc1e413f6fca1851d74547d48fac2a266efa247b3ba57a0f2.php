@@ -94,55 +94,61 @@ class __TwigTemplate_db867170b67ca673d33c0ebb0be1300e3870794dec73c1d31593c53b8bd
                             <th>Tipo de Processo</th>
                             <th>Nº do Processo</th>
                             <th>Descrição</th>
+                            <th>#</th>
                         </tr>
                         </thead>
                         <tbody>
                         ";
-        // line 30
+        // line 31
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["detalhe"]) || array_key_exists("detalhe", $context) ? $context["detalhe"] : (function () { throw new Twig_Error_Runtime('Variable "detalhe" does not exist.', 30, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["detalhe"]) || array_key_exists("detalhe", $context) ? $context["detalhe"] : (function () { throw new Twig_Error_Runtime('Variable "detalhe" does not exist.', 31, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
-            // line 31
+            // line 32
             echo "                            <tr>
                                 <td>";
-            // line 32
+            // line 33
             echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "emissao", array()), "d/m/Y"), "html", null, true);
             echo "</td>
                                 <td>";
-            // line 33
+            // line 34
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "nome", array()), "html", null, true);
             echo "</td>
                                 <td>";
-            // line 34
+            // line 35
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "assunto", array()), "html", null, true);
             echo "</td>
                                 <td>";
-            // line 35
+            // line 36
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "tipodeato", array()), "html", null, true);
             echo "</td>
                                 <td>";
-            // line 36
+            // line 37
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "tipodeprocesso", array()), "html", null, true);
             echo "</td>
                                 <td>";
-            // line 37
+            // line 38
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "numerodoprocesso", array()), "html", null, true);
             echo "</td>
                                 <td>";
-            // line 38
+            // line 39
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "descricao", array()), "html", null, true);
             echo "</td>
+                                <td><a href=\"";
+            // line 40
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_detalhar-ato", array("id" => twig_get_attribute($this->env, $this->source, $context["i"], "id", array()))), "html", null, true);
+            echo "\"
+                                       class=\"btn btn-default btn-sm\">View</a></td>
                             </tr>
                         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['i'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 41
+        // line 44
         echo "                        </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan=\"7\"></td>
+                            <td colspan=\"8\"></td>
                         </tr>
                         </tfoot>
                     </table>
@@ -172,7 +178,7 @@ class __TwigTemplate_db867170b67ca673d33c0ebb0be1300e3870794dec73c1d31593c53b8bd
 
     public function getDebugInfo()
     {
-        return array (  142 => 41,  133 => 38,  129 => 37,  125 => 36,  121 => 35,  117 => 34,  113 => 33,  109 => 32,  106 => 31,  102 => 30,  82 => 15,  71 => 6,  62 => 5,  45 => 2,  15 => 1,);
+        return array (  148 => 44,  138 => 40,  134 => 39,  130 => 38,  126 => 37,  122 => 36,  118 => 35,  114 => 34,  110 => 33,  107 => 32,  103 => 31,  82 => 15,  71 => 6,  62 => 5,  45 => 2,  15 => 1,);
     }
 
     public function getSourceContext()
@@ -203,6 +209,7 @@ class __TwigTemplate_db867170b67ca673d33c0ebb0be1300e3870794dec73c1d31593c53b8bd
                             <th>Tipo de Processo</th>
                             <th>Nº do Processo</th>
                             <th>Descrição</th>
+                            <th>#</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -215,12 +222,14 @@ class __TwigTemplate_db867170b67ca673d33c0ebb0be1300e3870794dec73c1d31593c53b8bd
                                 <td>{{ i.tipodeprocesso }}</td>
                                 <td>{{ i.numerodoprocesso }}</td>
                                 <td>{{ i.descricao }}</td>
+                                <td><a href=\"{{ path('esp_produtividade_detalhar-ato', {'id':i.id}) }}\"
+                                       class=\"btn btn-default btn-sm\">View</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan=\"7\"></td>
+                            <td colspan=\"8\"></td>
                         </tr>
                         </tfoot>
                     </table>
@@ -229,6 +238,6 @@ class __TwigTemplate_db867170b67ca673d33c0ebb0be1300e3870794dec73c1d31593c53b8bd
             </div>
         </div>
     </div>
-{% endblock %}", "esp/produtividade/reports/esp_criticas_detalhe.html.twig", "/home/francisco/Projetos/omnia/templates/esp/produtividade/reports/esp_criticas_detalhe.html.twig");
+{% endblock %}", "esp/produtividade/reports/esp_criticas_detalhe.html.twig", "/home/dti/Projetos/omnia/templates/esp/produtividade/reports/esp_criticas_detalhe.html.twig");
     }
 }
