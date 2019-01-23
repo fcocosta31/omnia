@@ -107,10 +107,10 @@ class __TwigTemplate_57e025ea3f3e4030ddb06f157fcada8f18a235890e27fd99f357e4f861e
         echo "</label>
                         </div>
                         <div class=\"form-group\">
-                            <a href=\"";
+                           <!-- <a href=\"";
         // line 56
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fos_user_registration_register");
-        echo "\">Cadastre-se</a><span> | </span>
+        echo "\">Cadastre-se</a><span> | </span> -->
                             <a href=\"";
         // line 57
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fos_user_resetting_request");
@@ -203,7 +203,7 @@ class __TwigTemplate_57e025ea3f3e4030ddb06f157fcada8f18a235890e27fd99f357e4f861e
                             <label for=\"remember_me\">{{ 'security.login.remember_me'|trans }}</label>
                         </div>
                         <div class=\"form-group\">
-                            <a href=\"{{ path('fos_user_registration_register') }}\">Cadastre-se</a><span> | </span>
+                           <!-- <a href=\"{{ path('fos_user_registration_register') }}\">Cadastre-se</a><span> | </span> -->
                             <a href=\"{{ path('fos_user_resetting_request') }}\">Esqueceu a senha ?</a>
                         </div>
                     </div>
@@ -212,6 +212,6 @@ class __TwigTemplate_57e025ea3f3e4030ddb06f157fcada8f18a235890e27fd99f357e4f861e
         </div>
     </div>
 </form>
-", "@FOSUser/Security/login_content.html.twig", "/home/francisco/omnia/src/Resources/FOSUserBundle/views/Security/login_content.html.twig");
+", "@FOSUser/Security/login_content.html.twig", "/home/francisco/Projetos/omnia/src/Resources/FOSUserBundle/views/Security/login_content.html.twig");
     }
 }

@@ -43,7 +43,10 @@ class Documento{
 
     /**
      * @ORM\ManyToOne(targetEntity="Employee", inversedBy="files")
-     * @ORM\JoinColumn(name="employee_id", referencedColumnName="matricula")
+     * @ORM\JoinColumns(
+     *      @ORM\JoinColumn(name="employee_matricula", referencedColumnName="matricula"),
+     *      @ORM\JoinColumn(name="employee_cpf", referencedColumnName="cpf")
+     * )
      */
     protected $employee;
 

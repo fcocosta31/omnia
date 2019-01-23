@@ -846,7 +846,7 @@ class ProdutividadeController extends Controller
     }
 
     /**
-     * @Route("/esp/produtividade/rels/criticas-detalhe/{dini}/{dfim}/{idesp}/{idproc}/{nproc}", name="esp_produtividade_esp-criticas-detalhe")
+     * @Route("/esp/produtividade/rels/criticas-detalhe/{dini}/{dfim}/{idesp}/{idproc}/{nproc}", name="esp_produtividade_esp-criticas-detalhe", requirements={"nproc"=".+"})
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */

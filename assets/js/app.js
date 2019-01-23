@@ -1,17 +1,43 @@
 require('../js/app.css');
 require('../js/jquery.mask.js');
 
-
 $(document).ready(function () {
 
     $('.js-datepicker').datepicker({
         format: 'dd/mm/yyyy'
     });
 
+    $('.datatables').DataTable({
+        lengthMenu: [[5, 10, 15, -1], [5, 10, 15, "Tudo"]],
+        stateSave: true,
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+        }
+    });
+
     $('[data-toggle="tooltip"]').tooltip();
 
+    $("#employee_form_duracao").change(function () {
+        var x = $(this).val();
+        var dateString = $("#employee_form_dataposse").val();
+        var dateParts = dateString.split("/");
+        var datebegin = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+
+        x = parseInt(x) + parseInt(datebegin.getMonth());
+
+        datebegin.setMonth(x);
+
+        var dateEnd = datebegin.getDate().toString()+"/"+pad(datebegin.getMonth()+1)+"/"+datebegin.getFullYear().toString();
+        if(isNaN(x)){
+            $("#employee_form_datatermino").val(null);
+        }else{
+            $("#employee_form_datatermino").val(dateEnd);
+        }
+
+    });
 });
 
+function pad(s) { return (s < 10) ? '0' + s : s; }
 
 $("#esp_form_filter").on("submit", function (e) {
 

@@ -64,10 +64,10 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'id', 'matricula', 'nome', 'lotacao', 'atos', 'username', 'usernameCanonical', 'email', 'emailCanonical', 'enabled', 'salt', 'password', 'plainPassword', 'lastLogin', 'confirmationToken', 'passwordRequestedAt', 'groups', 'roles'];
+            return ['__isInitialized__', 'id', 'matricula', 'nome', 'lotacao', 'cargo', 'atos', 'votos', 'username', 'usernameCanonical', 'email', 'emailCanonical', 'enabled', 'salt', 'password', 'plainPassword', 'lastLogin', 'confirmationToken', 'passwordRequestedAt', 'groups', 'roles'];
         }
 
-        return ['__isInitialized__', 'id', 'matricula', 'nome', 'lotacao', 'atos', 'username', 'usernameCanonical', 'email', 'emailCanonical', 'enabled', 'salt', 'password', 'plainPassword', 'lastLogin', 'confirmationToken', 'passwordRequestedAt', 'groups', 'roles'];
+        return ['__isInitialized__', 'id', 'matricula', 'nome', 'lotacao', 'cargo', 'atos', 'votos', 'username', 'usernameCanonical', 'email', 'emailCanonical', 'enabled', 'salt', 'password', 'plainPassword', 'lastLogin', 'confirmationToken', 'passwordRequestedAt', 'groups', 'roles'];
     }
 
     /**
@@ -246,6 +246,28 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getCargo()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCargo', []);
+
+        return parent::getCargo();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCargo($cargo)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCargo', [$cargo]);
+
+        return parent::setCargo($cargo);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getAtos()
     {
 
@@ -285,6 +307,28 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setMatricula', [$matricula]);
 
         return parent::setMatricula($matricula);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getVotos()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVotos', []);
+
+        return parent::getVotos();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setVotos($votos)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVotos', [$votos]);
+
+        return parent::setVotos($votos);
     }
 
     /**

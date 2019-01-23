@@ -109,7 +109,7 @@ class __TwigTemplate_adfd0bd8684a72452dad62bbd587a05bf2820a457de0cfd778076ea3e7e
                     <div class=\"col-md-6 col-xs-12\">
                         ";
         // line 30
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 30, $this->source); })()), "interessado", array()), 'row', array("label" => "Interessado"));
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 30, $this->source); })()), "interessado", array()), 'row', array("label" => "Interessado/Requerente"));
         echo "
                     </div>
                     <div class=\"row\"></div>
@@ -207,7 +207,7 @@ class __TwigTemplate_adfd0bd8684a72452dad62bbd587a05bf2820a457de0cfd778076ea3e7e
                         {{ form_row(form.assunto, {'label':'Assunto'}) }}
                     </div>
                     <div class=\"col-md-6 col-xs-12\">
-                        {{ form_row(form.interessado, {'label':'Interessado'}) }}
+                        {{ form_row(form.interessado, {'label':'Interessado/Requerente'}) }}
                     </div>
                     <div class=\"row\"></div>
                     <br>
@@ -234,6 +234,6 @@ class __TwigTemplate_adfd0bd8684a72452dad62bbd587a05bf2820a457de0cfd778076ea3e7e
                 </div>
         </div>
     </div>
-{% endblock %}", "esp/produtividade/ato/editar.html.twig", "/var/www/omnia/templates/esp/produtividade/ato/editar.html.twig");
+{% endblock %}", "esp/produtividade/ato/editar.html.twig", "/home/francisco/Projetos/omnia/templates/esp/produtividade/ato/editar.html.twig");
     }
 }

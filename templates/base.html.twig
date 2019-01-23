@@ -26,6 +26,7 @@
                   crossorigin="anonymous">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
             <link rel="stylesheet" href="{{ asset('build/js/app.css') }}">
 
             <style>
@@ -103,20 +104,41 @@
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ path('dai_rh_ausencia_index') }}">Cadastro de Ausência</a></li>
+                                        <li><a href="{{ path("dai_rh_cadastro_index") }}">Cadastros</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="{{ path("dai_rh_cadastro_index") }}">Cadastro de Pessoal</a></li>
+                                        <li><a href="{{ path('dai_rh_ausencia_index') }}">Afastamentos</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown" role="presentation">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        Impressoras
+                                        Informática
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ path('dti_printers_status') }}">Status</a></li>
+                                        <li><a href="{{ path('dti_printers_status') }}">Impressoras</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{{ path('dti_equipamento_index') }}">Equipamentos</a></li>
                                     </ul>
                                 </li>
+                                <li class="dropdown" role="presentation">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Eleições
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path('esp_eleicao_pleito_index') }}">Pleito</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown" role="presentation">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Miscelânea
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path("params_index") }}">Parâmetros</a></li>
+                                    </ul>
+                                </li>
+
                             {% elseif 'ROLE_CGR' in app.user.roles %}
                                 <li class="dropdown" role="presentation">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -168,25 +190,28 @@
                                     </ul>
                                 </li>
 
+                            {% elseif 'ROLE_ESP' in app.user.roles %}
+
+                                <li class="dropdown" role="presentation">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Cadastros
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path('esp_produtividade_ato_index') }}">Atos</a></li>
+                                    </ul>
+                                </li>
+
                             {% elseif 'ROLE_DAI' in app.user.roles %}
                                 <li class="dropdown" role="presentation">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        Cadastro
+                                        Pessoal
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ path('dai_rh_ausencia_index') }}">Ausência</a></li>
+                                        <li><a href="{{ path("dai_rh_cadastro_index") }}">Cadastros</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="{{ path("dai_rh_cadastro_index") }}">Pessoal</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown" role="presentation">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        Impressoras
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="{{ path('dti_printers_status') }}">Status</a></li>
+                                        <li><a href="{{ path('dai_rh_ausencia_index') }}">Afastamentos</a></li>
                                     </ul>
                                 </li>
                             {% endif %}
@@ -210,13 +235,13 @@
                         </li>
                         <li role="presentation">
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <a href="{{ path('fos_user_security_logout') }}" class="navbar-brand"
+                                <a href="{{ path('fos_user_security_logout') }}" class="navbar-toggler-icon"
                                    title="{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}">
                                     <i class="glyphicon glyphicon-log-out"></i>
                                 </a>
                             {% else %}
                                 <a href="{{ path('fos_user_security_login') }}"
-                                   class="navbar-brand"  title="{{ 'layout.login'|trans({}, 'FOSUserBundle') }}">
+                                   class="navbar-toggler-icon"  title="{{ 'layout.login'|trans({}, 'FOSUserBundle') }}">
                                     <i class="glyphicon glyphicon-user"></i>
                                 </a>
                             {% endif %}
@@ -237,13 +262,13 @@
          </div>
         </main>
 
-        <footer class="navbar-default">
+        <footer class="navbar-custom">
         {% block footer %}
             <div class="container-fluid">
                 <div class="container-fluid" id="footer-container-img" style="color: white">
                 <img alt="" id="topo-img" src="{{ asset('uploads/images/logopgm.jpg')}}"
                      class="img-responsive" float="left">
-                    <span class="pull-right footer-text-gray">
+                    <span class="pull-right footer-text-white">
                         © 2018 - PGM, Todos os direitos reservados<br>
                         Desenvolvido por Francisco Costa.
                     </span>
@@ -264,6 +289,8 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
             <script src="https://github.com/makeusabrew/bootbox/releases/download/v4.4.0/bootbox.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
             <script type="text/javascript">
                 var routeCidadesPorEstado = "{{ path("dai_rh_get-cidades-por-estado") }}";
             </script>

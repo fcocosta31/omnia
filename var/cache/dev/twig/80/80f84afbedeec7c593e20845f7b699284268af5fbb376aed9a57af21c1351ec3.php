@@ -122,20 +122,21 @@ class __TwigTemplate_a5767846b564384efe425692350b4f239aaff62241bb1f701059dfd7cce
                                     </th>
                                 </tr>
                                 <tr>
+                                    <th>Nº do Ato</th>
                                     <th>";
-        // line 47
-        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->sortable($this->env, (isset($context["atos"]) || array_key_exists("atos", $context) ? $context["atos"] : (function () { throw new Twig_Error_Runtime('Variable "atos" does not exist.', 47, $this->source); })()), "Data", "u.emissao");
+        // line 48
+        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->sortable($this->env, (isset($context["atos"]) || array_key_exists("atos", $context) ? $context["atos"] : (function () { throw new Twig_Error_Runtime('Variable "atos" does not exist.', 48, $this->source); })()), "Data", "u.emissao");
         echo "</th>
                                     <th>Especializada</th>
                                     <th>Tipo de Ato</th>
                                     <th>";
-        // line 50
-        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->sortable($this->env, (isset($context["atos"]) || array_key_exists("atos", $context) ? $context["atos"] : (function () { throw new Twig_Error_Runtime('Variable "atos" does not exist.', 50, $this->source); })()), "Assunto", "u.assunto");
+        // line 51
+        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->sortable($this->env, (isset($context["atos"]) || array_key_exists("atos", $context) ? $context["atos"] : (function () { throw new Twig_Error_Runtime('Variable "atos" does not exist.', 51, $this->source); })()), "Assunto", "u.assunto");
         echo "</th>
                                     <th>Tipo de Processo</th>
                                     <th>";
-        // line 52
-        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->sortable($this->env, (isset($context["atos"]) || array_key_exists("atos", $context) ? $context["atos"] : (function () { throw new Twig_Error_Runtime('Variable "atos" does not exist.', 52, $this->source); })()), "Nº Processo", "u.numerodoprocesso");
+        // line 53
+        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->sortable($this->env, (isset($context["atos"]) || array_key_exists("atos", $context) ? $context["atos"] : (function () { throw new Twig_Error_Runtime('Variable "atos" does not exist.', 53, $this->source); })()), "Nº Processo", "u.numerodoprocesso");
         echo "</th>
                                     <th>#</th>
                                     <th>#</th>
@@ -143,55 +144,59 @@ class __TwigTemplate_a5767846b564384efe425692350b4f239aaff62241bb1f701059dfd7cce
                             </thead>
                             <tbody>
                                 ";
-        // line 58
+        // line 59
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["atos"]) || array_key_exists("atos", $context) ? $context["atos"] : (function () { throw new Twig_Error_Runtime('Variable "atos" does not exist.', 58, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["atos"]) || array_key_exists("atos", $context) ? $context["atos"] : (function () { throw new Twig_Error_Runtime('Variable "atos" does not exist.', 59, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
-            // line 59
+            // line 60
             echo "                                <tr>
                                     <td>";
-            // line 60
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "emissao", array()), "d/m/Y"), "html", null, true);
-            echo "</td>
-                                    <td>";
             // line 61
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["i"], "lotacao", array()), "descricao", array()), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "numero", array()), "html", null, true);
             echo "</td>
                                     <td>";
             // line 62
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["i"], "tipodeato", array()), "descricao", array()), "html", null, true);
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "emissao", array()), "d/m/Y"), "html", null, true);
             echo "</td>
                                     <td>";
             // line 63
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["i"], "lotacao", array()), "descricao", array()), "html", null, true);
+            echo "</td>
+                                    <td>";
+            // line 64
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["i"], "tipodeato", array()), "descricao", array()), "html", null, true);
+            echo "</td>
+                                    <td>";
+            // line 65
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "assunto", array()), "html", null, true);
             echo "</td>
                                     ";
-            // line 64
+            // line 66
             $context["processo"] = "";
-            // line 65
+            // line 67
             echo "                                    ";
             if ( !(null === twig_get_attribute($this->env, $this->source, $context["i"], "tipodeprocesso", array()))) {
-                // line 66
+                // line 68
                 echo "                                        ";
                 $context["processo"] = twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["i"], "tipodeprocesso", array()), "descricao", array());
-                // line 67
+                // line 69
                 echo "                                    ";
             }
-            // line 68
+            // line 70
             echo "                                    <td>";
-            echo twig_escape_filter($this->env, (isset($context["processo"]) || array_key_exists("processo", $context) ? $context["processo"] : (function () { throw new Twig_Error_Runtime('Variable "processo" does not exist.', 68, $this->source); })()), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["processo"]) || array_key_exists("processo", $context) ? $context["processo"] : (function () { throw new Twig_Error_Runtime('Variable "processo" does not exist.', 70, $this->source); })()), "html", null, true);
             echo "</td>
                                     <td>";
-            // line 69
+            // line 71
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "numerodoprocesso", array()), "html", null, true);
             echo "</td>
                                     <td><a href=\"";
-            // line 70
+            // line 72
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_ato_editar", array("id" => twig_get_attribute($this->env, $this->source, $context["i"], "id", array()))), "html", null, true);
             echo "\"
                                            class=\"btn btn-default btn-sm\">Editar</a></td>
                                     <td><a href=\"";
-            // line 72
+            // line 74
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_ato_deletar", array("id" => twig_get_attribute($this->env, $this->source, $context["i"], "id", array()))), "html", null, true);
             echo "\"
                                            onclick=\"return confirm('Tem certeza?')\" class=\"btn btn-danger btn-sm\">Deletar</a></td>
@@ -201,18 +206,18 @@ class __TwigTemplate_a5767846b564384efe425692350b4f239aaff62241bb1f701059dfd7cce
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['i'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 76
+        // line 78
         echo "                            </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan=\"8\"></td>
+                                    <td colspan=\"9\"></td>
                                 </tr>
                             </tfoot>
                         </table>
                         <div class=\"navigation\">
                             ";
-        // line 84
-        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["atos"]) || array_key_exists("atos", $context) ? $context["atos"] : (function () { throw new Twig_Error_Runtime('Variable "atos" does not exist.', 84, $this->source); })()));
+        // line 86
+        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["atos"]) || array_key_exists("atos", $context) ? $context["atos"] : (function () { throw new Twig_Error_Runtime('Variable "atos" does not exist.', 86, $this->source); })()));
         echo "
                         </div>
 
@@ -241,7 +246,7 @@ class __TwigTemplate_a5767846b564384efe425692350b4f239aaff62241bb1f701059dfd7cce
 
     public function getDebugInfo()
     {
-        return array (  215 => 84,  205 => 76,  195 => 72,  190 => 70,  186 => 69,  181 => 68,  178 => 67,  175 => 66,  172 => 65,  170 => 64,  166 => 63,  162 => 62,  158 => 61,  154 => 60,  151 => 59,  147 => 58,  138 => 52,  133 => 50,  127 => 47,  121 => 43,  119 => 37,  107 => 28,  94 => 18,  89 => 16,  84 => 14,  80 => 13,  71 => 6,  62 => 5,  45 => 2,  15 => 1,);
+        return array (  220 => 86,  210 => 78,  200 => 74,  195 => 72,  191 => 71,  186 => 70,  183 => 69,  180 => 68,  177 => 67,  175 => 66,  171 => 65,  167 => 64,  163 => 63,  159 => 62,  155 => 61,  152 => 60,  148 => 59,  139 => 53,  134 => 51,  128 => 48,  121 => 43,  119 => 37,  107 => 28,  94 => 18,  89 => 16,  84 => 14,  80 => 13,  71 => 6,  62 => 5,  45 => 2,  15 => 1,);
     }
 
     public function getSourceContext()
@@ -292,6 +297,7 @@ class __TwigTemplate_a5767846b564384efe425692350b4f239aaff62241bb1f701059dfd7cce
                                     </th>
                                 </tr>
                                 <tr>
+                                    <th>Nº do Ato</th>
                                     <th>{{ knp_pagination_sortable(atos, 'Data', 'u.emissao') }}</th>
                                     <th>Especializada</th>
                                     <th>Tipo de Ato</th>
@@ -305,6 +311,7 @@ class __TwigTemplate_a5767846b564384efe425692350b4f239aaff62241bb1f701059dfd7cce
                             <tbody>
                                 {% for i in atos %}
                                 <tr>
+                                    <td>{{ i.numero }}</td>
                                     <td>{{ i.emissao|date('d/m/Y') }}</td>
                                     <td>{{ i.lotacao.descricao }}</td>
                                     <td>{{ i.tipodeato.descricao }}</td>
@@ -324,7 +331,7 @@ class __TwigTemplate_a5767846b564384efe425692350b4f239aaff62241bb1f701059dfd7cce
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan=\"8\"></td>
+                                    <td colspan=\"9\"></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -336,6 +343,6 @@ class __TwigTemplate_a5767846b564384efe425692350b4f239aaff62241bb1f701059dfd7cce
             </div>
         </div>
     </div>
-{% endblock %}", "esp/produtividade/ato/index.html.twig", "/var/www/omnia/templates/esp/produtividade/ato/index.html.twig");
+{% endblock %}", "esp/produtividade/ato/index.html.twig", "/home/francisco/Projetos/omnia/templates/esp/produtividade/ato/index.html.twig");
     }
 }

@@ -49,7 +49,10 @@ class Ausencia
 
     /**
      * @ORM\ManyToOne(targetEntity="Employee", inversedBy="ausencias")
-     * @ORM\JoinColumn(name="employeeausencia_id", referencedColumnName="matricula")
+     * @ORM\JoinColumns(
+     *      @ORM\JoinColumn(name="employee_matricula", referencedColumnName="matricula"),
+     *      @ORM\JoinColumn(name="employee_cpf", referencedColumnName="cpf")
+     * )
      */
     protected $employee;
 

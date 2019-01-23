@@ -8,6 +8,7 @@
 
 namespace App\Entity\dai\rh;
 
+use App\Entity\Lotacao;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\QueryBuilder;
@@ -59,12 +60,12 @@ class EmployeeFormType extends AbstractType
             )
             ->add('departamento', EntityType::class, array(
                     'placeholder' => 'Selecione...',
-                    'class' => Departamento::class,
+                    'class' => Lotacao::class,
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('u')
-                            ->orderBy('u.nome', 'ASC');
+                            ->orderBy('u.descricao', 'ASC');
                     },
-                    'choice_label' => 'nome',
+                    'choice_label' => 'descricao',
                     'required' => true,
                     'empty_data' => null
                 )
@@ -161,8 +162,9 @@ class EmployeeFormType extends AbstractType
             ->add('sexo', ChoiceType::class, array(
                 'placeholder' => 'Selecione...',
                 'choices' => array(
-                    'MASCULINO' => 1,
-                    'FEMININO' => 2,
+                    'Masculino' => 1,
+                    'Feminino' => 2,
+                    'Outros' => 3,
                 )
             ))
             ->add('cnh', TextType::class, array(
@@ -252,6 +254,27 @@ class EmployeeFormType extends AbstractType
                 'attr' => ['class' => 'js-datepicker',
                     'data-mask' => '00/00/0000',
                     'placeholder' => '00/00/0000']
+            ))
+            ->add('duracao', ChoiceType::class, array(
+                'placeholder' => 'Prazo indeterminado',
+                'choices' => array(
+                    '03 meses' => 3,
+                    '06 meses' => 6,
+                    '09 meses' => 9,
+                    '12 meses' => 12,
+                    '18 meses' => 18,
+                    '24 meses' => 24,
+                ),
+                'required' => false,
+            ))
+            ->add('datatermino', DateType::class, array(
+                'widget' => 'single_text',
+                'html5' => false,
+                'required' => false,
+                'format' => 'dd/MM/yyyy',
+                'attr' => ['class' => 'js-datepicker',
+                'data-mask' => '00/00/0000',
+                'placeholder' => '00/00/0000']
             ))
             ->add('banco', TextType::class, array(
                 'required' => false,

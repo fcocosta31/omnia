@@ -206,8 +206,8 @@ class AusenciaController extends Controller
         $query = $em->createQueryBuilder()
             ->select('u')
             ->from(Ausencia::class, 'u')
-            ->innerJoin('u.tipoausencia', 'b', 'WITH', 'b.id = u.tipoausencia')
-            ->innerJoin('u.employee', 'c', 'WITH', 'c.matricula = u.employee')
+            ->innerJoin('u.tipoausencia', 'b')
+            ->innerJoin('u.employee', 'c')
             ->orderBy('u.dataini', 'DESC')
             ->orderBy('c.nome', 'ASC');
 

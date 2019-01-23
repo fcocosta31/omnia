@@ -5,19 +5,42 @@
 <div class="fundo-topo-menu">
     Cadastro de Pessoal
 </div>
-
 <br>
-<div class="container">
+
+<div class="container-fluid">
      <div class="row">
+
+         <div class="col-md-2 col-xs-12">
+             <h4>Cadastrar Novo(a)</h4>
+
+             <a href="{{ path('dai_rh_classificacao_index') }}"
+                class="btn btn-success btn-block">Situação</a>
+             <br>
+             <a href="{{ path('dai_rh_listar_cargos') }}"
+                class="btn btn-info btn-block">Cargo</a>
+             <br>
+             <a href="{{ path('dai_rh_listar_orgaos') }}"
+                class="btn btn-warning btn-block">Órgão</a>
+             <br>
+             <a href="{{ path('dai_rh_listar_estadocivis') }}"
+                class="btn btn-primary btn-block">Estado Civil</a>
+             <br>
+             <a href="{{ path('dai_rh_listar_escolaridades') }}"
+                class="btn btn-danger btn-block">Escolaridade</a>
+
+         </div>
+
+         <div class="col-md-10 col-xs-12">
+
          {{ form_start(form) }}
 
-         <div class="col-md-12 col-xs-12">
              <div class="row">
                  <div class="container-topo">
+                     <div class="row">
                      <div class="col-md-2 col-xs-12">
-                         {{ form_row(form.classificacao, {'label':'Classificação'}) }}
+                         {{ form_row(form.classificacao, {'label':'Situação'}) }}
                      </div>
-                     <div class="col-md-2 col-xs-12">
+                     <div class="col-md-3 col-xs-12">
                          {{ form_row(form.cargo, {'label':'Cargo'}) }}
                      </div>
                      <div class="col-md-3 col-xs-12">
@@ -26,11 +49,12 @@
                      <div class="col-md-2 col-xs-12">
                          {{ form_row(form.cedido, {'label':'Cedido?'}) }}
                      </div>
-                     <div class="col-md-3 col-xs-12">
+                     <div class="col-md-2 col-xs-12">
                          {{ form_row(form.orgao, {'label':'Órgão de Origem'}) }}
                      </div>
+                     </div>
                  </div>
-             </div>
+
              <div>
                  <!-- Nav tabs -->
                  <ul class="nav nav-tabs" role="tablist">
@@ -49,11 +73,11 @@
                          <div class="col-md-4 col-xs-12">
                              {{ form_row(form.nome, {'label':'Nome'}) }}
                          </div>
-                         <div class="col-md-5 col-xs-12">
+                         <div class="col-md-4 col-xs-12">
                              {{ form_row(form.endereco, {'label':'Endereço'}) }}
                          </div>
-                         <div class="col-md-1 col-xs-12">
-                             {{ form_row(form.numero, {'label':'Número'}) }}
+                         <div class="col-md-2 col-xs-12">
+                             {{ form_row(form.numero, {'label':'Nº'}) }}
                          </div>
                          <div class="col-md-4 col-xs-12">
                              {{ form_row(form.bairro, {'label':'Bairro'}) }}
@@ -155,11 +179,17 @@
                          <div class="col-md-3 col-xs-12">
                              {{ form_row(form.grauinstrucao, {'label':'Grau de Instrução'}) }}
                          </div>
-                         <div class="col-md-7 col-xs-12">
+                         <div class="col-md-9 col-xs-12">
                              {{ form_row(form.especializacoes, {'label':'Especializações'}) }}
                          </div>
-                         <div class="col-md-2 col-xs-12">
-                             {{ form_row(form.dataposse, {'label':'Data da Posse'}) }}
+                         <div class="col-md-4 col-xs-12">
+                             {{ form_row(form.dataposse, {'label':'Data entrada em exercício'}) }}
+                         </div>
+                         <div class="col-md-4 col-xs-12">
+                             {{ form_row(form.duracao, {'label':'Tempo de duração (estágio, contrato)'}) }}
+                         </div>
+                         <div class="col-md-4 col-xs-12">
+                             {{ form_row(form.datatermino, {'label':'Data do Término (estágio, contrato)'}) }}
                          </div>
                          <div class="col-md-12 col-xs-12">
                              <h4>Dados Bancários</h4>
@@ -182,15 +212,20 @@
                          <div class="col-md-12 col-xs-12">
                              {{ form_row(form.files, {'label':'Arquivos'}) }}
                          </div>
-                         <div class="col-md-12 col-xs-12">
-                             <br><br>
-                             <input class="btn btn-primary" type="submit" value="Enviar" />
-                         </div>
                      </div>
                  </div>
-             </div>
+
              {{ form_end(form) }}
+
+             </div>
          </div>
      </div>
 </div>
-{% endblock %}
+    <div class="row">
+        <div class="col-md-2 col-xs-4 col-md-offset-2">
+            <input class="btn btn-primary btn-block" type="button" onclick="$('form').submit()" value="Salvar Cadastro" />
+        </div>
+    </div>
+    <br><br>
+</div>
+    {% endblock %}

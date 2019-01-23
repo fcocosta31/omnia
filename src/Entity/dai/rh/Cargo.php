@@ -79,33 +79,33 @@ class Cargo
     }
 
     /**
-     * @return Collection
+     * @return mixed
      */
-    public function getEmployees(): Collection
+    public function getEmployees()
     {
         return $this->employees;
     }
 
     /**
-     * @param Collection $employees
+     * @param mixed $employees
      */
-    public function setEmployees(Collection $employees)
+    public function setEmployees($employees)
     {
         $this->employees = $employees;
     }
 
     /**
-     * @return Collection
+     * @return mixed
      */
-    public function getUsers(): Collection
+    public function getUsers()
     {
         return $this->users;
     }
 
     /**
-     * @param Collection $users
+     * @param mixed $users
      */
-    public function setUsers(Collection $users)
+    public function setUsers($users)
     {
         $this->users = $users;
     }

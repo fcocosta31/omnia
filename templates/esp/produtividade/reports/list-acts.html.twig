@@ -9,7 +9,7 @@
     <div class="container-fluid">
         <div class="col-md-12 col-xs-12">
             <div class="col-md-12 col-xs-12 table-responsive">
-                <table class="table table-hover">
+                <table class="table table-hover datatables">
                     <thead class="rows">
                     <tr>
                         <th>Date</th>
@@ -52,3 +52,15 @@
     </div>
 </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('.datatables').DataTable({
+            lengthMenu: [[5, 10, 15, -1], [5, 10, 15, "Tudo"]],
+            stateSave: true,
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+            }
+        });
+    });
+</script>

@@ -11,7 +11,7 @@
             <div class="col-md-1 col-xs-12">
                 <h4>Ações</h4>
                 <a href="{{ path('dai_rh_cadastro_novo') }}"
-                   class="btn btn-success">Novo</a>
+                   class="btn btn-success btn-block">Novo</a>
             </div>
             <div class="col-md-10 col-xs-12 table-responsive">
                 <table class="table table-hover">
@@ -26,6 +26,7 @@
                         <th>Fone</th>
                         <th>E-mail</th>
                         <th>CPF nº</th>
+                        <th>Dias</th>
                         <th>#</th>
                         <th>#</th>
                     </tr>
@@ -33,10 +34,10 @@
                     <tbody>
                     {% for i in empls %}
                         <tr>
-                            <td>{{ i.matricula }}</td>
+                            <td>{{ "%06d"|format(i.matricula) }}</td>
                             <td>{{ i.nome }}</td>
                             <td>{{ i.classificacao.nome }}</td>
-                            <td>{{ i.departamento.nome }}</td>
+                            <td>{{ i.departamento.descricao }}</td>
                             <td>
                                 {% if i.cedido == 0 %}
                                    SIM
@@ -54,7 +55,8 @@
                             <td>{{ i.fone }}</td>
                             <td>{{ i.email }}</td>
                             <td>{{ i.cpf }}</td>
-                            <td><a href="{{ path('dai_rh_cadastro_editar', {'id':i.id}) }}"
+                            <td>{{ i.getEventTermino() }}</td>
+                            <td><a href="{{ path('dai_rh_cadastro_editar', {'id':i.matricula}) }}"
                                    class="btn btn-default btn-sm">Editar</a></td>
                             <td><a href="{{ path('dai_rh_cadastro_deletar', {'id':i.matricula}) }}"
                                    onclick="return confirm('Tem certeza?')" class="btn btn-danger btn-sm">Deletar</a></td>

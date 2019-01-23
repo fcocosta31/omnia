@@ -8,6 +8,8 @@
 
 namespace App\Controller;
 
+use App\Entity\esp\eleicao\Eleicao;
+use App\Services\NotifyCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,16 +22,27 @@ class IndexController extends Controller
 {
     /**
      * @Route("/home", name="index_geral")
-     * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
     public function index(){
 
         $rolesTab = $this->getUser()->getRoles();
 
-        if (in_array('ROLE_ESP', $rolesTab, true))
-            return $this->redirectToRoute('esp_produtividade_ato_index');
-        else
+        $em = $this->getDoctrine()->getManager();
+
+        $pleitos = $em->getRepository(Eleicao::class)->findAll();
+
+        foreach ($pleitos as $i){
+            if($i->verificaPleito()){
+                if($i->verificaVoto($this->getUser())){
+                    return $this->redirectToRoute('esp_eleicao_voto_novo', array("pleitoid" => $i->getId()));
+                }
+            }
+        }
+
+        //if (in_array('ROLE_ESP', $rolesTab, true))
+          //  return $this->redirectToRoute('esp_produtividade_ato_index');
+        //else
             return $this->render("/index.html.twig", array(
             'index' => null,
         ));

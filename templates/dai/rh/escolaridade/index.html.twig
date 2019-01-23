@@ -1,23 +1,17 @@
 {% extends "base.html.twig" %}
 {% block header %}
-
-    <a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
-        <i class="glyphicon glyphicon-home"></i>
-    </a>
-
+{% endblock %}
+{% block content %}
     <div class="fundo-topo-menu">
         Listagem de Escolaridades
     </div>
-
-{% endblock %}
-{% block content %}
-
+    <br>
     <div class="container">
         <div class="row">
             <div class="col-md-1 col-xs-12">
                 <h4>Ações</h4>
                 <a href="{{ path('dai_rh_escolaridade_novo') }}"
-                   class="btn btn-default">Novo</a>
+                   class="btn btn-success btn-block">Novo</a>
             </div>
             <div class="col-md-10 col-xs-12">
                 <table class="table table-hover">
@@ -37,7 +31,7 @@
                         <td><a href="{{ path('dai_rh_escolaridade_editar', {'id':i.id}) }}"
                                class="btn btn-default btn-sm">Editar</a></td>
                         <td><a href="{{ path('dai_rh_escolaridade_deletar', {'id':i.id}) }}"
-                               class="btn btn-default btn-sm">Deletar</a></td>
+                               onclick="return confirm('Tem certeza?')" class="btn btn-danger btn-sm">Deletar</a></td>
                     </tr>
                 {% endfor %}
                     </tbody>

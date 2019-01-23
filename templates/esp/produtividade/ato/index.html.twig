@@ -44,6 +44,7 @@
                                     </th>
                                 </tr>
                                 <tr>
+                                    <th>Nº do Ato</th>
                                     <th>{{ knp_pagination_sortable(atos, 'Data', 'u.emissao') }}</th>
                                     <th>Especializada</th>
                                     <th>Tipo de Ato</th>
@@ -57,6 +58,7 @@
                             <tbody>
                                 {% for i in atos %}
                                 <tr>
+                                    <td>{{ i.numero }}</td>
                                     <td>{{ i.emissao|date('d/m/Y') }}</td>
                                     <td>{{ i.lotacao.descricao }}</td>
                                     <td>{{ i.tipodeato.descricao }}</td>
@@ -76,7 +78,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="8"></td>
+                                    <td colspan="9"></td>
                                 </tr>
                             </tfoot>
                         </table>

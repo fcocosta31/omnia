@@ -64,10 +64,10 @@ class Lotacao extends \App\Entity\Lotacao implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'id', 'descricao', 'atos', 'users', 'tiposdeato', 'tiposdeprocesso'];
+            return ['__isInitialized__', 'id', 'descricao', 'email', 'atos', 'users', 'tiposdeato', 'tiposdeprocesso', 'employees', 'equipamentos'];
         }
 
-        return ['__isInitialized__', 'id', 'descricao', 'atos', 'users', 'tiposdeato', 'tiposdeprocesso'];
+        return ['__isInitialized__', 'id', 'descricao', 'email', 'atos', 'users', 'tiposdeato', 'tiposdeprocesso', 'employees', 'equipamentos'];
     }
 
     /**
@@ -176,6 +176,50 @@ class Lotacao extends \App\Entity\Lotacao implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getEmployees(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEmployees', []);
+
+        return parent::getEmployees();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setEmployees(\Doctrine\Common\Collections\Collection $employees)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEmployees', [$employees]);
+
+        return parent::setEmployees($employees);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEquipamentos()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEquipamentos', []);
+
+        return parent::getEquipamentos();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setEquipamentos($equipamentos)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEquipamentos', [$equipamentos]);
+
+        return parent::setEquipamentos($equipamentos);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getId()
     {
         if ($this->__isInitialized__ === false) {
@@ -219,6 +263,28 @@ class Lotacao extends \App\Entity\Lotacao implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDescricao', [$descricao]);
 
         return parent::setDescricao($descricao);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEmail()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEmail', []);
+
+        return parent::getEmail();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setEmail($email)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEmail', [$email]);
+
+        return parent::setEmail($email);
     }
 
     /**

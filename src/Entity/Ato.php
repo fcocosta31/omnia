@@ -9,6 +9,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -327,5 +329,61 @@ class Ato
     {
         $this->files = $files;
     }
+
+    /**
+     * Permite verificar se o registro/alteração de um ato do mês está ocorrendo até o 5 dia do mês posterior
+     * @param $dia integer
+     * @return boolean
+     */
+    public function verificaAto($dia){
+
+        $data_do_ato = $this->emissao;
+        $mes_do_registro = date('m');
+        $ano_do_registro = date('Y');
+        $dia_do_registro = date('d');
+        $quinto_dia_util = $this->getDiaUtil($dia);
+        $mes_anterior = date('m', strtotime('-1 months', strtotime(date('m'))));
+
+        $mes_do_ato = $data_do_ato->format('m');
+        $ano_do_ato = $data_do_ato->format('Y');
+
+        if($mes_do_ato == $mes_do_registro && $ano_do_ato == $ano_do_registro){
+            return true;
+        } else if($mes_do_ato == $mes_anterior && $dia_do_registro <= $quinto_dia_util){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    function getDiaUtil($iDia, $iMes = null, $iAno = null, $aDiasIgnorar = array()) {
+        $iMes = empty($iMes) ? date('m') : $iMes;
+        $iAno = empty($iAno) ? date('Y') : $iAno;
+        $iUltimoDiaMes = date("t", mktime(0, 0, 0, $iMes, '01', $iAno));
+
+        for ($i = 1; $i <= $iUltimoDiaMes; $i++) {
+            $iDiaSemana = date('N', mktime(0, 0, 0, $iMes, $i, $iAno));
+            //inclui apenas os dias úteis
+            if ($iDiaSemana < 6) {
+                $aDias[] = date('j', mktime(0, 0, 0, $iMes, $i, $iAno));
+            }
+        }
+        //ignorando os feriados
+        if (sizeof($aDiasIgnorar) > 0) {
+            foreach ($aDiasIgnorar as $iDia) {
+                $iKey = array_search($iDia, $aDias);
+                unset($aDias[$iKey]);
+            }
+        }
+
+        if (isset($aDias[$iDia - 1])) {
+            return $aDias[$iDia - 1];
+        } else {
+            //retorna o último dia útil
+            return $aDias[count($aDias) - 1];
+        }
+    }
+
 
 }

@@ -11,6 +11,7 @@ class Status{
     
     
     public function impressoras($imps){
+        
 
         foreach ($imps as $p){
 
@@ -23,11 +24,17 @@ class Status{
             /*************************************************************************/
             $wc = new WebCrawler();
 
-            $rows = $wc->dadosstatus($p->getEndereco(), $uristatus, $urlinfo);
+            $context = stream_context_create(array(
+                    'http' => array(
+                        'timeout' => 60
+                    )
+            ));
+
+            $rows = $wc->dadosstatus($p->getEndereco(), $uristatus, $urlinfo, $context);
             $p->setOnOff($rows[0]);
             if($p->getOnOff() == 'LIGADA') {
 
-                $statusbar = $wc->getStatusBar($uristatusbar);
+                $statusbar = $wc->getStatusBar($uristatusbar, $context);
 
                 $p->setModelo($rows[1]);
                 $p->setSerial($rows[2]);

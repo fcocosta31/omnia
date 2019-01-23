@@ -21,6 +21,7 @@ class TipoDeAtoController extends Controller
     /**
      * @Route("/esp/produtividade/tipo-de-ato", name="esp_produtividade_tipo-de-ato_index")
      * @return Response|\Symfony\Component\HttpFoundation\Response
+     * @param Request $request
      */
     public function index(Request $request){
 

@@ -162,11 +162,17 @@ class AtoController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $ato = $form->getData();
-            $ato->setUser($user);
-            $ato->setLotacao($user->getLotacao());
-            $entityManager->persist($ato);
-            $entityManager->flush();
-            return $this->redirectToRoute('esp_produtividade_ato_index');
+            if($ato->verificaAto(5)){
+                $ato->setUser($user);
+                $ato->setLotacao($user->getLotacao());
+                $entityManager->persist($ato);
+                $entityManager->flush();
+                return $this->redirectToRoute('esp_produtividade_ato_index');
+            }else{
+                return $this->render("error.html.twig", array(
+                    'errormessage' => "Data de emissão do Ato não permitida. Prazo de registro encerrado!",
+                ));
+            }
         }
 
         return $this->render("esp/produtividade/ato/novo.html.twig", array(
@@ -243,9 +249,15 @@ class AtoController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $ato = $form->getData();
-            $entityManager->persist($ato);
-            $entityManager->flush();
-            return $this->redirectToRoute('esp_produtividade_ato_index');
+            if($ato->verificaAto(5)) {
+                $entityManager->persist($ato);
+                $entityManager->flush();
+                return $this->redirectToRoute('esp_produtividade_ato_index');
+            }else{
+                return $this->render("error.html.twig", array(
+                    'errormessage' => "Data de emissão do Ato não permitida. Prazo de registro encerrado!",
+                ));
+            }
         }
 
         return $this->render("esp/produtividade/ato/editar.html.twig", array(

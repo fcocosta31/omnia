@@ -72,10 +72,11 @@ class __TwigTemplate_941c8875e95557d7f8235f1145a4c8bacd93aff04796c428642d833bcc7
     <div class=\"container-fluid\">
 
         <div class=\"row\">
+            
             <div class=\"col-md-2 col-xs-12 noPrint\">
 
                 <form action=\"";
-        // line 12
+        // line 13
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_esp-filter-reports");
         echo "\" method=\"post\"
                     id=\"esp_form_filter\">
@@ -83,20 +84,20 @@ class __TwigTemplate_941c8875e95557d7f8235f1145a4c8bacd93aff04796c428642d833bcc7
                     <br>
                     <label>Início: </label>
                     <input type=\"date\" class=\"form-control\" id=\"_dateini\" name=\"_dateini\" value=\"";
-        // line 17
-        echo twig_escape_filter($this->env, (isset($context["dateini"]) || array_key_exists("dateini", $context) ? $context["dateini"] : (function () { throw new Twig_Error_Runtime('Variable "dateini" does not exist.', 17, $this->source); })()), "html", null, true);
+        // line 18
+        echo twig_escape_filter($this->env, (isset($context["dateini"]) || array_key_exists("dateini", $context) ? $context["dateini"] : (function () { throw new Twig_Error_Runtime('Variable "dateini" does not exist.', 18, $this->source); })()), "html", null, true);
         echo "\">
                     <br>
                     <label>Fim: </label>
                     <input type=\"date\" class=\"form-control\" id=\"_datefim\" name=\"_datefim\" value=\"";
-        // line 20
-        echo twig_escape_filter($this->env, (isset($context["datefim"]) || array_key_exists("datefim", $context) ? $context["datefim"] : (function () { throw new Twig_Error_Runtime('Variable "datefim" does not exist.', 20, $this->source); })()), "html", null, true);
+        // line 21
+        echo twig_escape_filter($this->env, (isset($context["datefim"]) || array_key_exists("datefim", $context) ? $context["datefim"] : (function () { throw new Twig_Error_Runtime('Variable "datefim" does not exist.', 21, $this->source); })()), "html", null, true);
         echo "\">
                     <br/>
                     <label>Tipo de Filtro: </label>
                     <select name=\"_filterType\" id=\"esp_type_filter\"
                             base-url=\"";
-        // line 24
+        // line 25
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_esp-filters");
         echo "\"
                     class=\"form-control\">
@@ -120,7 +121,7 @@ class __TwigTemplate_941c8875e95557d7f8235f1145a4c8bacd93aff04796c428642d833bcc7
 
             <div class=\"col-md-10 col-xs-12\" id=\"div_partial\">
                 ";
-        // line 45
+        // line 46
         echo twig_include($this->env, $context, "esp/produtividade/reports/esp_partial.html.twig");
         echo "
             </div>
@@ -211,7 +212,7 @@ class __TwigTemplate_941c8875e95557d7f8235f1145a4c8bacd93aff04796c428642d833bcc7
 
     public function getDebugInfo()
     {
-        return array (  124 => 45,  100 => 24,  93 => 20,  87 => 17,  79 => 12,  71 => 6,  62 => 5,  45 => 2,  15 => 1,);
+        return array (  125 => 46,  101 => 25,  94 => 21,  88 => 18,  80 => 13,  71 => 6,  62 => 5,  45 => 2,  15 => 1,);
     }
 
     public function getSourceContext()
@@ -225,6 +226,7 @@ class __TwigTemplate_941c8875e95557d7f8235f1145a4c8bacd93aff04796c428642d833bcc7
     <div class=\"container-fluid\">
 
         <div class=\"row\">
+            
             <div class=\"col-md-2 col-xs-12 noPrint\">
 
                 <form action=\"{{ path('esp_produtividade_esp-filter-reports') }}\" method=\"post\"
@@ -328,6 +330,6 @@ class __TwigTemplate_941c8875e95557d7f8235f1145a4c8bacd93aff04796c428642d833bcc7
 
     </script>
 
-{% endblock %}", "esp/produtividade/reports/index.html.twig", "/home/francisco/omnia/templates/esp/produtividade/reports/index.html.twig");
+{% endblock %}", "esp/produtividade/reports/index.html.twig", "/var/www/omnia/templates/esp/produtividade/reports/index.html.twig");
     }
 }

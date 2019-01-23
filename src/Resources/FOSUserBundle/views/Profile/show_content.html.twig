@@ -4,6 +4,11 @@
     <p>Nome: {{ user.nome }}</p>
     <p>Login: {{ user.username }}</p>
     <p>E-mail: {{ user.email }}</p>
+    {% if app.user.cargo is not null %}
+        <p>Cargo: {{ user.cargo.descricao }}</p>
+    {% else %}
+        <p>Cargo: Não definido</p>
+    {% endif %}
     {% if app.user.lotacao is not null %}
         <p>Lotação: {{ user.lotacao.descricao }}</p>
     {% endif %}

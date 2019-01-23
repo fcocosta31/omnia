@@ -166,7 +166,7 @@ class Employee{
 
     /**
      * @ORM\Id
-     * @ORM\Column(name="cpf", type="string", nullable=true, length=20)
+     * @ORM\Column(name="cpf", type="string", nullable=false, length=20)
      */
     protected $cpf;
 
@@ -237,7 +237,7 @@ class Employee{
     protected $conta;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Departamento", inversedBy="employees")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lotacao", inversedBy="employees")
      * @ORM\JoinColumn(name="departamento_id", referencedColumnName="id")
      */
     protected $departamento;
@@ -259,6 +259,11 @@ class Employee{
     protected $dataposse;
 
     /**
+     * @ORM\Column(name="datatermino", type="date", nullable=true)
+     */
+    protected $datatermino;
+
+    /**
      *
      * @ORM\OneToMany(targetEntity="Documento", mappedBy="employee", cascade={"persist","remove"})
      *
@@ -270,6 +275,39 @@ class Employee{
      * @ORM\OneToMany(targetEntity="Ausencia", mappedBy="employees")
      */
     protected $ausencias;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="App\Entity\dti\EquipamentoLotacao", mappedBy="employee")
+     */
+    protected $equipamentos;
+
+    /**
+     * @ORM\Column(name="duracao", type="integer", nullable=true)
+     */
+    protected $duracao;
+
+    public function getEventTermino(){
+        $now = new \DateTime();
+        if($this->datatermino == null) return null;
+        return date_diff($now, $this->datatermino)->format('%a');
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getEquipamentos(): Collection
+    {
+        return $this->equipamentos;
+    }
+
+    /**
+     * @param Collection $equipamentos
+     */
+    public function setEquipamentos(Collection $equipamentos)
+    {
+        $this->equipamentos = $equipamentos;
+    }
 
     /**
      * @return mixed
@@ -338,9 +376,26 @@ class Employee{
     /**
      * @return mixed
      */
+    public function getDatatermino()
+    {
+        return $this->datatermino;
+    }
+
+    /**
+     * @param mixed $datatermino
+     */
+    public function setDatatermino($datatermino)
+    {
+        $this->datatermino = $datatermino;
+    }
+
+
+    /**
+     * @return mixed
+     */
     public function getNome()
     {
-        return strtoupper($this->nome);
+        return $this->nome;
     }
 
     /**
@@ -356,7 +411,7 @@ class Employee{
      */
     public function getEndereco()
     {
-        return strtoupper($this->endereco);
+        return $this->endereco;
     }
 
     /**
@@ -388,7 +443,7 @@ class Employee{
      */
     public function getBairro()
     {
-        return strtoupper($this->bairro);
+        return $this->bairro;
     }
 
     /**
@@ -484,7 +539,7 @@ class Employee{
      */
     public function getMae()
     {
-        return strtoupper($this->mae);
+        return $this->mae;
     }
 
     /**
@@ -500,7 +555,7 @@ class Employee{
      */
     public function getPai()
     {
-        return strtoupper($this->pai);
+        return $this->pai;
     }
 
     /**
@@ -613,7 +668,7 @@ class Employee{
      */
     public function getSexo()
     {
-        return strtoupper($this->sexo);
+        return $this->sexo;
     }
 
     /**
@@ -645,7 +700,7 @@ class Employee{
      */
     public function getCategoria()
     {
-        return strtoupper($this->categoria);
+        return $this->categoria;
     }
 
     /**
@@ -677,7 +732,7 @@ class Employee{
      */
     public function getOrgaoemissor()
     {
-        return strtoupper($this->orgaoemissor);
+        return $this->orgaoemissor;
     }
 
     /**
@@ -933,7 +988,7 @@ class Employee{
      */
     public function getEspecializacoes()
     {
-        return strtoupper($this->especializacoes);
+        return $this->especializacoes;
     }
 
     /**
@@ -1041,4 +1096,21 @@ class Employee{
     {
         $this->ausencias = $ausencias;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDuracao()
+    {
+        return $this->duracao;
+    }
+
+    /**
+     * @param mixed $duracao
+     */
+    public function setDuracao($duracao)
+    {
+        $this->duracao = $duracao;
+    }
+
 }

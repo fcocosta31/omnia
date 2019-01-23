@@ -7,16 +7,24 @@
         Cadastro de Férias, Licenças, Atestados...
     </div>
     <br>
+
     <div class="container-fluid">
         <div class="row">
-            <div class="container">
-            <div class="col-md-11 col-xs-12">
+            <div class="col-md-2 col-xs-12">
+                <h4>Cadastrar Novo(a)</h4>
+
+                <a href="{{ path('dai_rh_listar_tipoausencias') }}"
+                   class="btn btn-success btn-block">Tipo de Ausência</a>
+
+            </div>
+
+            <div class="col-md-10 col-xs-12">
                 {{ form_start(form) }}
                 <div class="col-md-6 col-xs-12">
                     {{ form_row(form.employee, {'label':'Servidor'}) }}
                 </div>
                 <div class="col-md-6 col-xs-12">
-                    {{ form_row(form.tipoausencia, {'label':'Tipo'}) }}
+                    {{ form_row(form.tipoausencia, {'label':'Tipo de Ausência'}) }}
                 </div>
                 <div class="col-md-6 col-xs-12">
                     {{ form_row(form.dataini, {'label':'Data de início'}) }}
@@ -32,7 +40,7 @@
                 </div>
                 {{ form_end(form) }}
             </div>
-            </div>
+
         </div>
     </div>
 {% endblock %}

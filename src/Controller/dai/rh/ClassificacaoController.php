@@ -44,7 +44,7 @@ class ClassificacaoController extends Controller
             $classificacao = $form->getData();
             $entityManager->persist($classificacao);
             $entityManager->flush();
-            return $this->redirectToRoute('dai_rh_listar_classificacoes');
+            return $this->redirectToRoute('dai_rh_classificacao_index');
         }
 
         return $this->render("dai/rh/classificacao/novo.html.twig", array(
@@ -82,7 +82,7 @@ class ClassificacaoController extends Controller
             $classificacao = $form->getData();
             $entityManager->persist($classificacao);
             $entityManager->flush();
-            return $this->redirectToRoute('dai_rh_listar_classificacoes');
+            return $this->redirectToRoute('dai_rh_classificacao_index');
         }
 
         return $this->render("dai/rh/classificacao/editar.html.twig", array(
@@ -106,7 +106,7 @@ class ClassificacaoController extends Controller
 
         $entityManager->remove($classificacao);
         $entityManager->flush();
-        return $this->redirectToRoute('dai_rh_listar_classificacoes');
+        return $this->redirectToRoute('dai_rh_classificacao_index');
 
     }
 

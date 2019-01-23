@@ -46,7 +46,7 @@ class __TwigTemplate_8b946874bf7aa123da0d91f87c9f12e78cd151ece0feb03808ce18543d8
     <div class=\"container-fluid\">
         <div class=\"col-md-12 col-xs-12\">
             <div class=\"col-md-12 col-xs-12 table-responsive\">
-                <table class=\"table table-hover\">
+                <table class=\"table table-hover datatables\">
                     <thead class=\"rows\">
                     <tr>
                         <th>Date</th>
@@ -130,7 +130,19 @@ class __TwigTemplate_8b946874bf7aa123da0d91f87c9f12e78cd151ece0feb03808ce18543d8
         echo "')\">
     </div>
 </div>
-</div>";
+</div>
+
+<script>
+    \$(document).ready(function () {
+        \$('.datatables').DataTable({
+            lengthMenu: [[5, 10, 15, -1], [5, 10, 15, \"Tudo\"]],
+            stateSave: true,
+            language: {
+                \"url\": \"//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json\"
+            }
+        });
+    });
+</script>";
         
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
@@ -167,7 +179,7 @@ class __TwigTemplate_8b946874bf7aa123da0d91f87c9f12e78cd151ece0feb03808ce18543d8
     <div class=\"container-fluid\">
         <div class=\"col-md-12 col-xs-12\">
             <div class=\"col-md-12 col-xs-12 table-responsive\">
-                <table class=\"table table-hover\">
+                <table class=\"table table-hover datatables\">
                     <thead class=\"rows\">
                     <tr>
                         <th>Date</th>
@@ -209,6 +221,18 @@ class __TwigTemplate_8b946874bf7aa123da0d91f87c9f12e78cd151ece0feb03808ce18543d8
         <input type=\"button\" class=\"btn btn-success btn-sm\" value=\"Voltar\" onclick=\"turnBackToListActs('{{ path('esp_produtividade_esp-filter-reports') }}')\">
     </div>
 </div>
-</div>", "esp/produtividade/reports/list-acts.html.twig", "/var/www/omnia/templates/esp/produtividade/reports/list-acts.html.twig");
+</div>
+
+<script>
+    \$(document).ready(function () {
+        \$('.datatables').DataTable({
+            lengthMenu: [[5, 10, 15, -1], [5, 10, 15, \"Tudo\"]],
+            stateSave: true,
+            language: {
+                \"url\": \"//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json\"
+            }
+        });
+    });
+</script>", "esp/produtividade/reports/list-acts.html.twig", "/home/francisco/Projetos/omnia/templates/esp/produtividade/reports/list-acts.html.twig");
     }
 }

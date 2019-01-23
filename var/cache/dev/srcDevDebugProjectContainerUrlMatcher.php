@@ -113,6 +113,76 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        elseif (0 === strpos($pathinfo, '/params')) {
+            // params_index
+            if ('/params' === $pathinfo) {
+                return array (  '_controller' => 'App\\Controller\\NotifyParamsController::index',  '_route' => 'params_index',);
+            }
+
+            // params_novo
+            if ('/params/novo' === $pathinfo) {
+                return array (  '_controller' => 'App\\Controller\\NotifyParamsController::novo',  '_route' => 'params_novo',);
+            }
+
+            // params_editar
+            if (0 === strpos($pathinfo, '/params/editar') && preg_match('#^/params/editar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'params_editar')), array (  '_controller' => 'App\\Controller\\NotifyParamsController::editar',));
+            }
+
+            // params_deletar
+            if (0 === strpos($pathinfo, '/params/deletar') && preg_match('#^/params/deletar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'params_deletar')), array (  '_controller' => 'App\\Controller\\NotifyParamsController::deletar',));
+            }
+
+        }
+
+        elseif (0 === strpos($pathinfo, '/profile')) {
+            // fos_user_profile_show
+            if ('/profile' === $trimmedPathinfo) {
+                $ret = array (  '_controller' => 'fos_user.profile.controller:showAction',  '_route' => 'fos_user_profile_show',);
+                if ('/' === substr($pathinfo, -1)) {
+                    // no-op
+                } elseif ('GET' !== $canonicalMethod) {
+                    goto not_fos_user_profile_show;
+                } else {
+                    return array_replace($ret, $this->redirect($rawPathinfo.'/', 'fos_user_profile_show'));
+                }
+
+                if (!in_array($canonicalMethod, array('GET'))) {
+                    $allow = array_merge($allow, array('GET'));
+                    goto not_fos_user_profile_show;
+                }
+
+                return $ret;
+            }
+            not_fos_user_profile_show:
+
+            // fos_user_profile_edit
+            if ('/profile/edit' === $pathinfo) {
+                $ret = array (  '_controller' => 'fos_user.profile.controller:editAction',  '_route' => 'fos_user_profile_edit',);
+                if (!in_array($canonicalMethod, array('GET', 'POST'))) {
+                    $allow = array_merge($allow, array('GET', 'POST'));
+                    goto not_fos_user_profile_edit;
+                }
+
+                return $ret;
+            }
+            not_fos_user_profile_edit:
+
+            // fos_user_change_password
+            if ('/profile/change-password' === $pathinfo) {
+                $ret = array (  '_controller' => 'fos_user.change_password.controller:changePasswordAction',  '_route' => 'fos_user_change_password',);
+                if (!in_array($canonicalMethod, array('GET', 'POST'))) {
+                    $allow = array_merge($allow, array('GET', 'POST'));
+                    goto not_fos_user_change_password;
+                }
+
+                return $ret;
+            }
+            not_fos_user_change_password:
+
+        }
+
         // users_index
         if ('/users' === $pathinfo) {
             return array (  '_controller' => 'App\\Controller\\UserController::index',  '_route' => 'users_index',);
@@ -165,48 +235,74 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
             }
 
-            elseif (0 === strpos($pathinfo, '/dai/rh/classificacao')) {
-                // dai_rh_classificacao_novo
-                if ('/dai/rh/classificacao/novo' === $pathinfo) {
-                    return array (  '_controller' => 'App\\Controller\\dai\\rh\\ClassificacaoController::novo',  '_route' => 'dai_rh_classificacao_novo',);
+            elseif (0 === strpos($pathinfo, '/dai/rh/c')) {
+                if (0 === strpos($pathinfo, '/dai/rh/cargo')) {
+                    // dai_rh_cargo_novo
+                    if ('/dai/rh/cargo/novo' === $pathinfo) {
+                        return array (  '_controller' => 'App\\Controller\\dai\\rh\\CargoController::novo',  '_route' => 'dai_rh_cargo_novo',);
+                    }
+
+                    // dai_rh_cargo_editar
+                    if (0 === strpos($pathinfo, '/dai/rh/cargo/editar') && preg_match('#^/dai/rh/cargo/editar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'dai_rh_cargo_editar')), array (  '_controller' => 'App\\Controller\\dai\\rh\\CargoController::editar',));
+                    }
+
+                    // dai_rh_cargo_deletar
+                    if (0 === strpos($pathinfo, '/dai/rh/cargo/deletar') && preg_match('#^/dai/rh/cargo/deletar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'dai_rh_cargo_deletar')), array (  '_controller' => 'App\\Controller\\dai\\rh\\CargoController::deletar',));
+                    }
+
+                    // dai_rh_listar_cargos
+                    if ('/dai/rh/cargo' === $pathinfo) {
+                        return array (  '_controller' => 'App\\Controller\\dai\\rh\\CargoController::index',  '_route' => 'dai_rh_listar_cargos',);
+                    }
+
                 }
 
-                // dai_rh_classificacao_editar
-                if (0 === strpos($pathinfo, '/dai/rh/classificacao/editar') && preg_match('#^/dai/rh/classificacao/editar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'dai_rh_classificacao_editar')), array (  '_controller' => 'App\\Controller\\dai\\rh\\ClassificacaoController::editar',));
+                elseif (0 === strpos($pathinfo, '/dai/rh/cadastro')) {
+                    // dai_rh_cadastro_novo
+                    if ('/dai/rh/cadastro/novo' === $pathinfo) {
+                        return array (  '_controller' => 'App\\Controller\\dai\\rh\\EmployeeController::novo',  '_route' => 'dai_rh_cadastro_novo',);
+                    }
+
+                    // dai_rh_cadastro_editar
+                    if (0 === strpos($pathinfo, '/dai/rh/cadastro/editar') && preg_match('#^/dai/rh/cadastro/editar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'dai_rh_cadastro_editar')), array (  '_controller' => 'App\\Controller\\dai\\rh\\EmployeeController::editar',));
+                    }
+
+                    // dai_rh_cadastro_deletar
+                    if (0 === strpos($pathinfo, '/dai/rh/cadastro/deletar') && preg_match('#^/dai/rh/cadastro/deletar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'dai_rh_cadastro_deletar')), array (  '_controller' => 'App\\Controller\\dai\\rh\\EmployeeController::deletar',));
+                    }
+
+                    // dai_rh_cadastro_index
+                    if ('/dai/rh/cadastro' === $pathinfo) {
+                        return array (  '_controller' => 'App\\Controller\\dai\\rh\\EmployeeController::index',  '_route' => 'dai_rh_cadastro_index',);
+                    }
+
                 }
 
-                // dai_rh_classificacao_deletar
-                if (0 === strpos($pathinfo, '/dai/rh/classificacao/deletar') && preg_match('#^/dai/rh/classificacao/deletar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'dai_rh_classificacao_deletar')), array (  '_controller' => 'App\\Controller\\dai\\rh\\ClassificacaoController::deletar',));
-                }
+                elseif (0 === strpos($pathinfo, '/dai/rh/classificacao')) {
+                    // dai_rh_classificacao_novo
+                    if ('/dai/rh/classificacao/novo' === $pathinfo) {
+                        return array (  '_controller' => 'App\\Controller\\dai\\rh\\ClassificacaoController::novo',  '_route' => 'dai_rh_classificacao_novo',);
+                    }
 
-                // dai_rh_classificacao_index
-                if ('/dai/rh/classificacao' === $pathinfo) {
-                    return array (  '_controller' => 'App\\Controller\\dai\\rh\\ClassificacaoController::index',  '_route' => 'dai_rh_classificacao_index',);
-                }
+                    // dai_rh_classificacao_editar
+                    if (0 === strpos($pathinfo, '/dai/rh/classificacao/editar') && preg_match('#^/dai/rh/classificacao/editar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'dai_rh_classificacao_editar')), array (  '_controller' => 'App\\Controller\\dai\\rh\\ClassificacaoController::editar',));
+                    }
 
-            }
+                    // dai_rh_classificacao_deletar
+                    if (0 === strpos($pathinfo, '/dai/rh/classificacao/deletar') && preg_match('#^/dai/rh/classificacao/deletar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'dai_rh_classificacao_deletar')), array (  '_controller' => 'App\\Controller\\dai\\rh\\ClassificacaoController::deletar',));
+                    }
 
-            elseif (0 === strpos($pathinfo, '/dai/rh/cadastro')) {
-                // dai_rh_cadastro_novo
-                if ('/dai/rh/cadastro/novo' === $pathinfo) {
-                    return array (  '_controller' => 'App\\Controller\\dai\\rh\\EmployeeController::novo',  '_route' => 'dai_rh_cadastro_novo',);
-                }
+                    // dai_rh_classificacao_index
+                    if ('/dai/rh/classificacao' === $pathinfo) {
+                        return array (  '_controller' => 'App\\Controller\\dai\\rh\\ClassificacaoController::index',  '_route' => 'dai_rh_classificacao_index',);
+                    }
 
-                // dai_rh_cadastro_editar
-                if (0 === strpos($pathinfo, '/dai/rh/cadastro/editar') && preg_match('#^/dai/rh/cadastro/editar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'dai_rh_cadastro_editar')), array (  '_controller' => 'App\\Controller\\dai\\rh\\EmployeeController::editar',));
-                }
-
-                // dai_rh_cadastro_deletar
-                if (0 === strpos($pathinfo, '/dai/rh/cadastro/deletar') && preg_match('#^/dai/rh/cadastro/deletar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'dai_rh_cadastro_deletar')), array (  '_controller' => 'App\\Controller\\dai\\rh\\EmployeeController::deletar',));
-                }
-
-                // dai_rh_cadastro_index
-                if ('/dai/rh/cadastro' === $pathinfo) {
-                    return array (  '_controller' => 'App\\Controller\\dai\\rh\\EmployeeController::index',  '_route' => 'dai_rh_cadastro_index',);
                 }
 
             }
@@ -351,25 +447,125 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
-        elseif (0 === strpos($pathinfo, '/dti/printers')) {
-            // dti_printers_status
-            if ('/dti/printers/status' === $pathinfo) {
-                return array (  '_controller' => 'App\\Controller\\dti\\printers\\PrinterController::printers',  '_route' => 'dti_printers_status',);
+        elseif (0 === strpos($pathinfo, '/dti')) {
+            if (0 === strpos($pathinfo, '/dti/equipamento')) {
+                // dti_equipamento_index
+                if ('/dti/equipamento' === $pathinfo) {
+                    return array (  '_controller' => 'App\\Controller\\dti\\equipamento\\EquipamentoController::index',  '_route' => 'dti_equipamento_index',);
+                }
+
+                // dti_equipamento_novo
+                if ('/dti/equipamento/novo' === $pathinfo) {
+                    return array (  '_controller' => 'App\\Controller\\dti\\equipamento\\EquipamentoController::novo',  '_route' => 'dti_equipamento_novo',);
+                }
+
+                // dti_equipamento_editar
+                if (0 === strpos($pathinfo, '/dti/equipamento/editar') && preg_match('#^/dti/equipamento/editar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'dti_equipamento_editar')), array (  '_controller' => 'App\\Controller\\dti\\equipamento\\EquipamentoController::editar',));
+                }
+
+                // dti_equipamento_deletar
+                if (0 === strpos($pathinfo, '/dti/equipamento/deletar') && preg_match('#^/dti/equipamento/deletar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'dti_equipamento_deletar')), array (  '_controller' => 'App\\Controller\\dti\\equipamento\\EquipamentoController::deletar',));
+                }
+
             }
 
-            // dti_printers_novo
-            if ('/dti/printers/novo' === $pathinfo) {
-                return array (  '_controller' => 'App\\Controller\\dti\\printers\\PrinterController::novo',  '_route' => 'dti_printers_novo',);
+            // dti_marca_novo
+            if ('/dti/marca/novo' === $pathinfo) {
+                return array (  '_controller' => 'App\\Controller\\dti\\equipamento\\MarcaController::novo',  '_route' => 'dti_marca_novo',);
             }
 
-            // dti_printers_editar
-            if (0 === strpos($pathinfo, '/dti/printers/editar') && preg_match('#^/dti/printers/editar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'dti_printers_editar')), array (  '_controller' => 'App\\Controller\\dti\\printers\\PrinterController::editar',));
+            // dti_status_novo
+            if ('/dti/status/novo' === $pathinfo) {
+                return array (  '_controller' => 'App\\Controller\\dti\\equipamento\\StatusController::novo',  '_route' => 'dti_status_novo',);
             }
 
-            // dti_printers_deletar
-            if (0 === strpos($pathinfo, '/dti/printers/deletar') && preg_match('#^/dti/printers/deletar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'dti_printers_deletar')), array (  '_controller' => 'App\\Controller\\dti\\printers\\PrinterController::deletar',));
+            // dti_tipoequipamento_novo
+            if ('/dti/tipoequipamento/novo' === $pathinfo) {
+                return array (  '_controller' => 'App\\Controller\\dti\\equipamento\\TipoEquipamentoController::novo',  '_route' => 'dti_tipoequipamento_novo',);
+            }
+
+            if (0 === strpos($pathinfo, '/dti/printers')) {
+                // dti_printers_status
+                if ('/dti/printers/status' === $pathinfo) {
+                    return array (  '_controller' => 'App\\Controller\\dti\\printers\\PrinterController::printers',  '_route' => 'dti_printers_status',);
+                }
+
+                // dti_printers_novo
+                if ('/dti/printers/novo' === $pathinfo) {
+                    return array (  '_controller' => 'App\\Controller\\dti\\printers\\PrinterController::novo',  '_route' => 'dti_printers_novo',);
+                }
+
+                // dti_printers_editar
+                if (0 === strpos($pathinfo, '/dti/printers/editar') && preg_match('#^/dti/printers/editar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'dti_printers_editar')), array (  '_controller' => 'App\\Controller\\dti\\printers\\PrinterController::editar',));
+                }
+
+                // dti_printers_deletar
+                if (0 === strpos($pathinfo, '/dti/printers/deletar') && preg_match('#^/dti/printers/deletar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'dti_printers_deletar')), array (  '_controller' => 'App\\Controller\\dti\\printers\\PrinterController::deletar',));
+                }
+
+            }
+
+        }
+
+        elseif (0 === strpos($pathinfo, '/esp/eleicao')) {
+            if (0 === strpos($pathinfo, '/esp/eleicao/candidato')) {
+                // esp_eleicao_candidato_index
+                if (preg_match('#^/esp/eleicao/candidato/(?P<pleitoid>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'esp_eleicao_candidato_index')), array (  '_controller' => 'App\\Controller\\esp\\eleicao\\CandidatoController::index',));
+                }
+
+                // esp_eleicao_candidato_novo
+                if (0 === strpos($pathinfo, '/esp/eleicao/candidato/novo') && preg_match('#^/esp/eleicao/candidato/novo/(?P<eleicaoid>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'esp_eleicao_candidato_novo')), array (  '_controller' => 'App\\Controller\\esp\\eleicao\\CandidatoController::novo',));
+                }
+
+                // esp_eleicao_candidato_editar
+                if (0 === strpos($pathinfo, '/esp/eleicao/candidato/editar') && preg_match('#^/esp/eleicao/candidato/editar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'esp_eleicao_candidato_editar')), array (  '_controller' => 'App\\Controller\\esp\\eleicao\\CandidatoController::editar',));
+                }
+
+                // esp_eleicao_candidato_deletar
+                if (0 === strpos($pathinfo, '/esp/eleicao/candidato/deletar') && preg_match('#^/esp/eleicao/candidato/deletar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'esp_eleicao_candidato_deletar')), array (  '_controller' => 'App\\Controller\\esp\\eleicao\\CandidatoController::deletar',));
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/esp/eleicao/pleito')) {
+                // esp_eleicao_pleito_index
+                if ('/esp/eleicao/pleito' === $pathinfo) {
+                    return array (  '_controller' => 'App\\Controller\\esp\\eleicao\\EleicaoController::index',  '_route' => 'esp_eleicao_pleito_index',);
+                }
+
+                // esp_eleicao_pleito_novo
+                if ('/esp/eleicao/pleito/novo' === $pathinfo) {
+                    return array (  '_controller' => 'App\\Controller\\esp\\eleicao\\EleicaoController::novo',  '_route' => 'esp_eleicao_pleito_novo',);
+                }
+
+                // esp_eleicao_pleito_editar
+                if (0 === strpos($pathinfo, '/esp/eleicao/pleito/editar') && preg_match('#^/esp/eleicao/pleito/editar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'esp_eleicao_pleito_editar')), array (  '_controller' => 'App\\Controller\\esp\\eleicao\\EleicaoController::editar',));
+                }
+
+                // esp_eleicao_pleito_deletar
+                if (0 === strpos($pathinfo, '/esp/eleicao/pleito/deletar') && preg_match('#^/esp/eleicao/pleito/deletar/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'esp_eleicao_pleito_deletar')), array (  '_controller' => 'App\\Controller\\esp\\eleicao\\EleicaoController::deletar',));
+                }
+
+                // esp_eleicao_pleito_votantes
+                if (0 === strpos($pathinfo, '/esp/eleicao/pleito/votantes') && preg_match('#^/esp/eleicao/pleito/votantes/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'esp_eleicao_pleito_votantes')), array (  '_controller' => 'App\\Controller\\esp\\eleicao\\EleicaoController::votantes',));
+                }
+
+            }
+
+            // esp_eleicao_voto_novo
+            if (0 === strpos($pathinfo, '/esp/eleicao/voto') && preg_match('#^/esp/eleicao/voto/(?P<pleitoid>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'esp_eleicao_voto_novo')), array (  '_controller' => 'App\\Controller\\esp\\eleicao\\VotoController::novo',));
             }
 
         }
@@ -439,7 +635,7 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                     }
 
                     // esp_produtividade_esp-criticas-detalhe
-                    if (0 === strpos($pathinfo, '/esp/produtividade/rels/criticas-detalhe') && preg_match('#^/esp/produtividade/rels/criticas\\-detalhe/(?P<dini>[^/]++)/(?P<dfim>[^/]++)/(?P<idesp>[^/]++)/(?P<idproc>[^/]++)/(?P<nproc>[^/]++)$#sD', $pathinfo, $matches)) {
+                    if (0 === strpos($pathinfo, '/esp/produtividade/rels/criticas-detalhe') && preg_match('#^/esp/produtividade/rels/criticas\\-detalhe/(?P<dini>[^/]++)/(?P<dfim>[^/]++)/(?P<idesp>[^/]++)/(?P<idproc>[^/]++)/(?P<nproc>.+)$#sD', $pathinfo, $matches)) {
                         return $this->mergeDefaults(array_replace($matches, array('_route' => 'esp_produtividade_esp-criticas-detalhe')), array (  '_controller' => 'App\\Controller\\esp\\produtividade\\ProdutividadeController::getDetalhesDeCriticas',));
                     }
 
@@ -576,53 +772,6 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 }
 
             }
-
-        }
-
-        elseif (0 === strpos($pathinfo, '/profile')) {
-            // fos_user_profile_show
-            if ('/profile' === $trimmedPathinfo) {
-                $ret = array (  '_controller' => 'fos_user.profile.controller:showAction',  '_route' => 'fos_user_profile_show',);
-                if ('/' === substr($pathinfo, -1)) {
-                    // no-op
-                } elseif ('GET' !== $canonicalMethod) {
-                    goto not_fos_user_profile_show;
-                } else {
-                    return array_replace($ret, $this->redirect($rawPathinfo.'/', 'fos_user_profile_show'));
-                }
-
-                if (!in_array($canonicalMethod, array('GET'))) {
-                    $allow = array_merge($allow, array('GET'));
-                    goto not_fos_user_profile_show;
-                }
-
-                return $ret;
-            }
-            not_fos_user_profile_show:
-
-            // fos_user_profile_edit
-            if ('/profile/edit' === $pathinfo) {
-                $ret = array (  '_controller' => 'fos_user.profile.controller:editAction',  '_route' => 'fos_user_profile_edit',);
-                if (!in_array($canonicalMethod, array('GET', 'POST'))) {
-                    $allow = array_merge($allow, array('GET', 'POST'));
-                    goto not_fos_user_profile_edit;
-                }
-
-                return $ret;
-            }
-            not_fos_user_profile_edit:
-
-            // fos_user_change_password
-            if ('/profile/change-password' === $pathinfo) {
-                $ret = array (  '_controller' => 'fos_user.change_password.controller:changePasswordAction',  '_route' => 'fos_user_change_password',);
-                if (!in_array($canonicalMethod, array('GET', 'POST'))) {
-                    $allow = array_merge($allow, array('GET', 'POST'));
-                    goto not_fos_user_change_password;
-                }
-
-                return $ret;
-            }
-            not_fos_user_change_password:
 
         }
 

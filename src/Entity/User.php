@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class User
  * @package App\Entity
  * @ORM\Entity
- * @ORM\Table(name="app_users")
+ * @ORM\Table(name="app_users", uniqueConstraints={@ORM\UniqueConstraint(name="search_idx", columns={"matricula"})})
  */
 class User extends BaseUser
 {
@@ -46,16 +46,28 @@ class User extends BaseUser
     protected $lotacao;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\dai\rh\Cargo", inversedBy="users")
+     * @ORM\JoinColumn(name="cargo_id", referencedColumnName="id")
+     * @ORM\OrderBy({"descricao" = "ASC"})
+     */
+    protected $cargo;
+
+    /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="Ato", mappedBy="user_id")
      * @ORM\OrderBy({"emissao" = "DESC"})
      */
     protected $atos;
 
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="App\Entity\esp\eleicao\Voto", mappedBy="eleitor")
+     */
+    protected $votos;
 
     public function __construct()
     {
-        $this->roles = array('ROLE_ESP');
+        $this->roles = array('ROLE_USER');
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -109,6 +121,22 @@ class User extends BaseUser
         $this->lotacao = $lotacao;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCargo()
+    {
+        return $this->cargo;
+    }
+
+    /**
+     * @param mixed $cargo
+     */
+    public function setCargo($cargo)
+    {
+        $this->cargo = $cargo;
+    }
+
 
     /**
      * @return mixed
@@ -141,4 +169,21 @@ class User extends BaseUser
     {
         $this->matricula = $matricula;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getVotos()
+    {
+        return $this->votos;
+    }
+
+    /**
+     * @param mixed $votos
+     */
+    public function setVotos($votos)
+    {
+        $this->votos = $votos;
+    }
+
 }

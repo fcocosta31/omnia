@@ -35,6 +35,11 @@ class Lotacao
     protected $descricao;
 
     /**
+     * @ORM\Column(name="email", type="string", nullable=true)
+     */
+    protected $email;
+
+    /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="Ato", mappedBy="lotacao")
      * @ORM\OrderBy({"emissao" = "DESC"})
@@ -63,6 +68,53 @@ class Lotacao
      * @ORM\OrderBy({"descricao" = "ASC"})
      */
     protected $tiposdeprocesso;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="App\Entity\dai\rh\Employee", mappedBy="departamento")
+     */
+    protected $employees;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="App\Entity\dti\Equipamento", mappedBy="lotacao")
+     */
+    protected $equipamentos;
+
+
+    /**
+     * @return Collection
+     */
+    public function getEmployees(): Collection
+    {
+        return $this->employees;
+    }
+
+    /**
+     * @param Collection $employees
+     */
+    public function setEmployees(Collection $employees)
+    {
+        $this->employees = $employees;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getEquipamentos()
+    {
+        return $this->equipamentos;
+    }
+
+    /**
+     * @param mixed $equipamentos
+     */
+    public function setEquipamentos($equipamentos)
+    {
+        $this->equipamentos = $equipamentos;
+    }
+
 
     /**
      * @return mixed
@@ -95,6 +147,23 @@ class Lotacao
     {
         $this->descricao = $descricao;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
 
     /**
      * @return mixed

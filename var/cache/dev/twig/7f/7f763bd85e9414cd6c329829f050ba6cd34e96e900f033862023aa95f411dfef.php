@@ -48,7 +48,7 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
         ";
         // line 22
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 54
+        // line 55
         echo "    </head>
     <body>
         <nav class=\"navbar navbar-default navbar-static-top\" role=\"navigation\">
@@ -62,7 +62,7 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
                         <span class=\"icon-bar\"></span>
                     </button>
                     <a href=\"";
-        // line 66
+        // line 67
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("index_geral");
         echo "\" class=\"navbar-brand\" title=\"Home\">
                         <i class=\"glyphicon glyphicon-home\"></i>
@@ -71,12 +71,12 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
                 <div class=\"collapse navbar-collapse\" id=\"bs-navbar-collapse-1\">
                     <ul class=\"nav navbar navbar-nav\">
                         ";
-        // line 72
-        if ( !(null === twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 72, $this->source); })()), "user", array()))) {
-            // line 73
+        // line 73
+        if ( !(null === twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 73, $this->source); })()), "user", array()))) {
+            // line 74
             echo "                            ";
-            if (twig_in_filter("ROLE_ADMIN", twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 73, $this->source); })()), "user", array()), "roles", array()))) {
-                // line 74
+            if (twig_in_filter("ROLE_ADMIN", twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 74, $this->source); })()), "user", array()), "roles", array()))) {
+                // line 75
                 echo "                                <li class=\"dropdown\" role=\"presentation\">
                                     <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
                                         Relatórios
@@ -84,12 +84,12 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
                                     </a>
                                     <ul class=\"dropdown-menu\">
                                         <li><a href=\"";
-                // line 80
+                // line 81
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_esp-reports");
                 echo "\">Gráficos</a></li>
                                         <li role=\"separator\" class=\"divider\"></li>
                                         <li><a href=\"";
-                // line 82
+                // line 83
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_esp-criticas");
                 echo "\">Críticas</a></li>
                                     </ul>
@@ -101,22 +101,22 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
                                     </a>
                                     <ul class=\"dropdown-menu\">
                                         <li><a href=\"";
-                // line 91
+                // line 92
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("users_index");
                 echo "\">Usuários</a></li>
                                         <li role=\"separator\" class=\"divider\"></li>
                                         <li><a href=\"";
-                // line 93
+                // line 94
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_tipo-de-ato_index");
                 echo "\">Tipos de Atos</a></li>
                                         <li role=\"separator\" class=\"divider\"></li>
                                         <li><a href=\"";
-                // line 95
+                // line 96
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_tipo-de-processo_index");
                 echo "\">Tipos de Processos</a></li>
                                         <li role=\"separator\" class=\"divider\"></li>
                                         <li><a href=\"";
-                // line 97
+                // line 98
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("lotacao_index");
                 echo "\">Especializadas (Lotações)</a></li>
                                     </ul>
@@ -128,32 +128,62 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
                                     </a>
                                     <ul class=\"dropdown-menu\">
                                         <li><a href=\"";
-                // line 106
-                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dai_rh_ausencia_index");
-                echo "\">Cadastro de Ausência</a></li>
+                // line 107
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dai_rh_cadastro_index");
+                echo "\">Cadastros</a></li>
                                         <li role=\"separator\" class=\"divider\"></li>
                                         <li><a href=\"";
-                // line 108
-                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dai_rh_cadastro_index");
-                echo "\">Cadastro de Pessoal</a></li>
+                // line 109
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dai_rh_ausencia_index");
+                echo "\">Afastamentos</a></li>
                                     </ul>
                                 </li>
                                 <li class=\"dropdown\" role=\"presentation\">
                                     <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                        Impressoras
+                                        Informática
                                         <span class=\"caret\"></span>
                                     </a>
                                     <ul class=\"dropdown-menu\">
                                         <li><a href=\"";
-                // line 117
+                // line 118
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dti_printers_status");
-                echo "\">Status</a></li>
+                echo "\">Impressoras</a></li>
+                                        <li role=\"separator\" class=\"divider\"></li>
+                                        <li><a href=\"";
+                // line 120
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dti_equipamento_index");
+                echo "\">Equipamentos</a></li>
                                     </ul>
                                 </li>
+                                <li class=\"dropdown\" role=\"presentation\">
+                                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                        Eleições
+                                        <span class=\"caret\"></span>
+                                    </a>
+                                    <ul class=\"dropdown-menu\">
+                                        <li><a href=\"";
+                // line 129
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_eleicao_pleito_index");
+                echo "\">Pleito</a></li>
+                                    </ul>
+                                </li>
+                                <li class=\"dropdown\" role=\"presentation\">
+                                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                        Miscelânea
+                                        <span class=\"caret\"></span>
+                                    </a>
+                                    <ul class=\"dropdown-menu\">
+                                        <li><a href=\"";
+                // line 138
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("params_index");
+                echo "\">Parâmetros</a></li>
+                                    </ul>
+                                </li>
+
                             ";
-            } elseif (twig_in_filter("ROLE_CGR", twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source,             // line 120
-(isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 120, $this->source); })()), "user", array()), "roles", array()))) {
-                // line 121
+            } elseif (twig_in_filter("ROLE_CGR", twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source,             // line 142
+(isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 142, $this->source); })()), "user", array()), "roles", array()))) {
+                // line 143
                 echo "                                <li class=\"dropdown\" role=\"presentation\">
                                     <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
                                         Relatórios
@@ -161,12 +191,12 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
                                     </a>
                                     <ul class=\"dropdown-menu\">
                                         <li><a href=\"";
-                // line 127
+                // line 149
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_esp-reports");
                 echo "\">Gráficos</a></li>
                                         <li role=\"separator\" class=\"divider\"></li>
                                         <li><a href=\"";
-                // line 129
+                // line 151
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_esp-criticas");
                 echo "\">Críticas</a></li>
                                     </ul>
@@ -178,31 +208,31 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
                                     </a>
                                     <ul class=\"dropdown-menu\">
                                         <li><a href=\"";
-                // line 138
+                // line 160
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_ato_index");
                 echo "\">Atos</a></li>
                                         <li role=\"separator\" class=\"divider\"></li>
                                         <li><a href=\"";
-                // line 140
+                // line 162
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_tipo-de-ato_index");
                 echo "\">Tipos de Atos</a></li>
                                         <li role=\"separator\" class=\"divider\"></li>
                                         <li><a href=\"";
-                // line 142
+                // line 164
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_tipo-de-processo_index");
                 echo "\">Tipos de Processos</a></li>
                                         <li role=\"separator\" class=\"divider\"></li>
                                         <li><a href=\"";
-                // line 144
+                // line 166
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("lotacao_index");
                 echo "\">Especializadas (Lotações)</a></li>
                                     </ul>
                                 </li>
 
                             ";
-            } elseif (twig_in_filter("ROLE_CHESP", twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source,             // line 148
-(isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 148, $this->source); })()), "user", array()), "roles", array()))) {
-                // line 149
+            } elseif (twig_in_filter("ROLE_CHESP", twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source,             // line 170
+(isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 170, $this->source); })()), "user", array()), "roles", array()))) {
+                // line 171
                 echo "
                                 <li class=\"dropdown\" role=\"presentation\">
                                     <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
@@ -211,12 +241,12 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
                                     </a>
                                     <ul class=\"dropdown-menu\">
                                         <li><a href=\"";
-                // line 156
+                // line 178
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_esp-reports");
                 echo "\">Gráficos</a></li>
                                         <li role=\"separator\" class=\"divider\"></li>
                                         <li><a href=\"";
-                // line 158
+                // line 180
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_esp-criticas");
                 echo "\">Críticas</a></li>
                                     </ul>
@@ -228,110 +258,116 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
                                     </a>
                                     <ul class=\"dropdown-menu\">
                                         <li><a href=\"";
-                // line 167
+                // line 189
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_ato_index");
                 echo "\">Atos</a></li>
                                     </ul>
                                 </li>
 
                             ";
-            } elseif (twig_in_filter("ROLE_DAI", twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source,             // line 171
-(isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 171, $this->source); })()), "user", array()), "roles", array()))) {
-                // line 172
-                echo "                                <li class=\"dropdown\" role=\"presentation\">
-                                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                        Cadastro
-                                        <span class=\"caret\"></span>
-                                    </a>
-                                    <ul class=\"dropdown-menu\">
-                                        <li><a href=\"";
-                // line 178
-                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dai_rh_ausencia_index");
-                echo "\">Ausência</a></li>
-                                        <li role=\"separator\" class=\"divider\"></li>
-                                        <li><a href=\"";
-                // line 180
-                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dai_rh_cadastro_index");
-                echo "\">Pessoal</a></li>
-                                    </ul>
-                                </li>
+            } elseif (twig_in_filter("ROLE_ESP", twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source,             // line 193
+(isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 193, $this->source); })()), "user", array()), "roles", array()))) {
+                // line 194
+                echo "
                                 <li class=\"dropdown\" role=\"presentation\">
                                     <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                        Impressoras
+                                        Cadastros
                                         <span class=\"caret\"></span>
                                     </a>
                                     <ul class=\"dropdown-menu\">
                                         <li><a href=\"";
-                // line 189
-                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dti_printers_status");
-                echo "\">Status</a></li>
+                // line 201
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("esp_produtividade_ato_index");
+                echo "\">Atos</a></li>
+                                    </ul>
+                                </li>
+
+                            ";
+            } elseif (twig_in_filter("ROLE_DAI", twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source,             // line 205
+(isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 205, $this->source); })()), "user", array()), "roles", array()))) {
+                // line 206
+                echo "                                <li class=\"dropdown\" role=\"presentation\">
+                                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                        Pessoal
+                                        <span class=\"caret\"></span>
+                                    </a>
+                                    <ul class=\"dropdown-menu\">
+                                        <li><a href=\"";
+                // line 212
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dai_rh_cadastro_index");
+                echo "\">Cadastros</a></li>
+                                        <li role=\"separator\" class=\"divider\"></li>
+                                        <li><a href=\"";
+                // line 214
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dai_rh_ausencia_index");
+                echo "\">Afastamentos</a></li>
                                     </ul>
                                 </li>
                             ";
             }
-            // line 193
+            // line 218
             echo "
                         ";
         }
-        // line 195
+        // line 220
         echo "                    </ul>
 
                         ";
-        // line 197
+        // line 222
         $this->displayBlock('header', $context, $blocks);
-        // line 199
+        // line 224
         echo "
 
                     <ul class=\"nav navbar-nav navbar-right\">
                         <li role=\"presentation\">
                             ";
-        // line 203
-        if ( !(null === twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 203, $this->source); })()), "user", array()))) {
-            // line 204
+        // line 228
+        if ( !(null === twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 228, $this->source); })()), "user", array()))) {
+            // line 229
             echo "                                <p class=\"navbar-text\" style=\"color: white\">
                                     <a href=\"";
-            // line 205
+            // line 230
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fos_user_profile_show");
             echo "\" class=\"navbar-link\">
                                         ";
-            // line 206
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 206, $this->source); })()), "user", array()), "nome", array()), "html", null, true);
+            // line 231
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 231, $this->source); })()), "user", array()), "nome", array()), "html", null, true);
             echo "
                                     </a>
                                 </p>
                             ";
         }
-        // line 210
+        // line 235
         echo "                        </li>
                         <li role=\"presentation\">
                             ";
-        // line 212
+        // line 237
         if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
-            // line 213
+            // line 238
             echo "                                <a href=\"";
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fos_user_security_logout");
-            echo "\" class=\"navbar-brand\"
+            echo "\" class=\"navbar-toggler-icon\"
                                    title=\"";
-            // line 214
+            // line 239
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("layout.logout", array(), "FOSUserBundle"), "html", null, true);
             echo "\">
                                     <i class=\"glyphicon glyphicon-log-out\"></i>
                                 </a>
                             ";
         } else {
-            // line 218
+            // line 243
             echo "                                <a href=\"";
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fos_user_security_login");
             echo "\"
-                                   class=\"navbar-brand\"  title=\"";
-            // line 219
+                                   class=\"navbar-toggler-icon\"  title=\"";
+            // line 244
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("layout.login", array(), "FOSUserBundle"), "html", null, true);
             echo "\">
                                     <i class=\"glyphicon glyphicon-user\"></i>
                                 </a>
                             ";
         }
-        // line 223
+        // line 248
         echo "                        </li>
                     </ul>
                 </div>
@@ -343,25 +379,25 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
             <div class=\"watermark-over\">
              <div class=\"container-fluid\">
             ";
-        // line 233
+        // line 258
         $this->displayBlock('content', $context, $blocks);
-        // line 235
+        // line 260
         echo "            </div>
             </div>
          </div>
         </main>
 
-        <footer class=\"navbar-default\">
+        <footer class=\"navbar-custom\">
         ";
-        // line 241
+        // line 266
         $this->displayBlock('footer', $context, $blocks);
-        // line 253
+        // line 278
         echo "        </footer>
 
         ";
-        // line 255
+        // line 280
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 273
+        // line 300
         echo "    </body>
 </html>
 ";
@@ -440,15 +476,16 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
                   crossorigin=\"anonymous\">
             <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css\">
             <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">
+            <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css\">
             <link rel=\"stylesheet\" href=\"";
-        // line 29
+        // line 30
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("build/js/app.css"), "html", null, true);
         echo "\">
 
             <style>
                 .watermark{
                     background-image: url(";
-        // line 33
+        // line 34
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("uploads/images/water-mark2.jpg"), "html", null, true);
         echo ");
                     background-repeat: no-repeat;
@@ -479,7 +516,7 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
 
     }
 
-    // line 197
+    // line 222
     public function block_header($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -488,7 +525,7 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "header"));
 
-        // line 198
+        // line 223
         echo "                        ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -498,7 +535,7 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
 
     }
 
-    // line 233
+    // line 258
     public function block_content($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -507,7 +544,7 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
 
-        // line 234
+        // line 259
         echo "            ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -517,7 +554,7 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
 
     }
 
-    // line 241
+    // line 266
     public function block_footer($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -526,15 +563,15 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "footer"));
 
-        // line 242
+        // line 267
         echo "            <div class=\"container-fluid\">
                 <div class=\"container-fluid\" id=\"footer-container-img\" style=\"color: white\">
                 <img alt=\"\" id=\"topo-img\" src=\"";
-        // line 244
+        // line 269
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("uploads/images/logopgm.jpg"), "html", null, true);
         echo "\"
                      class=\"img-responsive\" float=\"left\">
-                    <span class=\"pull-right footer-text-gray\">
+                    <span class=\"pull-right footer-text-white\">
                         © 2018 - PGM, Todos os direitos reservados<br>
                         Desenvolvido por Francisco Costa.
                     </span>
@@ -549,7 +586,7 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
 
     }
 
-    // line 255
+    // line 280
     public function block_javascripts($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -558,7 +595,7 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 256
+        // line 281
         echo "            <!-- Imports Scripts -->
             <script
                     src=\"https://code.jquery.com/jquery-3.3.1.min.js\"
@@ -570,14 +607,16 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
             <script src=\"https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js\" integrity=\"sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb\" crossorigin=\"anonymous\"></script>
             <script src=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js\"></script>
             <script src=\"https://github.com/makeusabrew/bootbox/releases/download/v4.4.0/bootbox.min.js\"></script>
+            <script src=\"https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js\"></script>
+            <script src=\"https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js\"></script>
             <script type=\"text/javascript\">
                 var routeCidadesPorEstado = \"";
-        // line 268
+        // line 295
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dai_rh_get-cidades-por-estado");
         echo "\";
             </script>
             <script src=\"";
-        // line 270
+        // line 297
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("build/js/app.js"), "html", null, true);
         echo "\"></script>
 
@@ -602,7 +641,7 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
 
     public function getDebugInfo()
     {
-        return array (  581 => 270,  576 => 268,  562 => 256,  553 => 255,  534 => 244,  530 => 242,  521 => 241,  511 => 234,  502 => 233,  492 => 198,  483 => 197,  452 => 33,  445 => 29,  437 => 23,  428 => 22,  410 => 21,  386 => 5,  377 => 4,  365 => 273,  363 => 255,  359 => 253,  357 => 241,  349 => 235,  347 => 233,  335 => 223,  328 => 219,  323 => 218,  316 => 214,  311 => 213,  309 => 212,  305 => 210,  298 => 206,  294 => 205,  291 => 204,  289 => 203,  283 => 199,  281 => 197,  277 => 195,  273 => 193,  266 => 189,  254 => 180,  249 => 178,  241 => 172,  239 => 171,  232 => 167,  220 => 158,  215 => 156,  206 => 149,  204 => 148,  197 => 144,  192 => 142,  187 => 140,  182 => 138,  170 => 129,  165 => 127,  157 => 121,  155 => 120,  149 => 117,  137 => 108,  132 => 106,  120 => 97,  115 => 95,  110 => 93,  105 => 91,  93 => 82,  88 => 80,  80 => 74,  77 => 73,  75 => 72,  66 => 66,  52 => 54,  50 => 22,  46 => 21,  43 => 20,  41 => 4,  36 => 1,);
+        return array (  620 => 297,  615 => 295,  599 => 281,  590 => 280,  571 => 269,  567 => 267,  558 => 266,  548 => 259,  539 => 258,  529 => 223,  520 => 222,  489 => 34,  482 => 30,  473 => 23,  464 => 22,  446 => 21,  422 => 5,  413 => 4,  401 => 300,  399 => 280,  395 => 278,  393 => 266,  385 => 260,  383 => 258,  371 => 248,  364 => 244,  359 => 243,  352 => 239,  347 => 238,  345 => 237,  341 => 235,  334 => 231,  330 => 230,  327 => 229,  325 => 228,  319 => 224,  317 => 222,  313 => 220,  309 => 218,  302 => 214,  297 => 212,  289 => 206,  287 => 205,  280 => 201,  271 => 194,  269 => 193,  262 => 189,  250 => 180,  245 => 178,  236 => 171,  234 => 170,  227 => 166,  222 => 164,  217 => 162,  212 => 160,  200 => 151,  195 => 149,  187 => 143,  185 => 142,  178 => 138,  166 => 129,  154 => 120,  149 => 118,  137 => 109,  132 => 107,  120 => 98,  115 => 96,  110 => 94,  105 => 92,  93 => 83,  88 => 81,  80 => 75,  77 => 74,  75 => 73,  66 => 67,  52 => 55,  50 => 22,  46 => 21,  43 => 20,  41 => 4,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -635,6 +674,7 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
                   crossorigin=\"anonymous\">
             <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css\">
             <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">
+            <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css\">
             <link rel=\"stylesheet\" href=\"{{ asset('build/js/app.css') }}\">
 
             <style>
@@ -712,20 +752,41 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
                                         <span class=\"caret\"></span>
                                     </a>
                                     <ul class=\"dropdown-menu\">
-                                        <li><a href=\"{{ path('dai_rh_ausencia_index') }}\">Cadastro de Ausência</a></li>
+                                        <li><a href=\"{{ path(\"dai_rh_cadastro_index\") }}\">Cadastros</a></li>
                                         <li role=\"separator\" class=\"divider\"></li>
-                                        <li><a href=\"{{ path(\"dai_rh_cadastro_index\") }}\">Cadastro de Pessoal</a></li>
+                                        <li><a href=\"{{ path('dai_rh_ausencia_index') }}\">Afastamentos</a></li>
                                     </ul>
                                 </li>
                                 <li class=\"dropdown\" role=\"presentation\">
                                     <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                        Impressoras
+                                        Informática
                                         <span class=\"caret\"></span>
                                     </a>
                                     <ul class=\"dropdown-menu\">
-                                        <li><a href=\"{{ path('dti_printers_status') }}\">Status</a></li>
+                                        <li><a href=\"{{ path('dti_printers_status') }}\">Impressoras</a></li>
+                                        <li role=\"separator\" class=\"divider\"></li>
+                                        <li><a href=\"{{ path('dti_equipamento_index') }}\">Equipamentos</a></li>
                                     </ul>
                                 </li>
+                                <li class=\"dropdown\" role=\"presentation\">
+                                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                        Eleições
+                                        <span class=\"caret\"></span>
+                                    </a>
+                                    <ul class=\"dropdown-menu\">
+                                        <li><a href=\"{{ path('esp_eleicao_pleito_index') }}\">Pleito</a></li>
+                                    </ul>
+                                </li>
+                                <li class=\"dropdown\" role=\"presentation\">
+                                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                        Miscelânea
+                                        <span class=\"caret\"></span>
+                                    </a>
+                                    <ul class=\"dropdown-menu\">
+                                        <li><a href=\"{{ path(\"params_index\") }}\">Parâmetros</a></li>
+                                    </ul>
+                                </li>
+
                             {% elseif 'ROLE_CGR' in app.user.roles %}
                                 <li class=\"dropdown\" role=\"presentation\">
                                     <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
@@ -777,25 +838,28 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
                                     </ul>
                                 </li>
 
+                            {% elseif 'ROLE_ESP' in app.user.roles %}
+
+                                <li class=\"dropdown\" role=\"presentation\">
+                                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                        Cadastros
+                                        <span class=\"caret\"></span>
+                                    </a>
+                                    <ul class=\"dropdown-menu\">
+                                        <li><a href=\"{{ path('esp_produtividade_ato_index') }}\">Atos</a></li>
+                                    </ul>
+                                </li>
+
                             {% elseif 'ROLE_DAI' in app.user.roles %}
                                 <li class=\"dropdown\" role=\"presentation\">
                                     <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                        Cadastro
+                                        Pessoal
                                         <span class=\"caret\"></span>
                                     </a>
                                     <ul class=\"dropdown-menu\">
-                                        <li><a href=\"{{ path('dai_rh_ausencia_index') }}\">Ausência</a></li>
+                                        <li><a href=\"{{ path(\"dai_rh_cadastro_index\") }}\">Cadastros</a></li>
                                         <li role=\"separator\" class=\"divider\"></li>
-                                        <li><a href=\"{{ path(\"dai_rh_cadastro_index\") }}\">Pessoal</a></li>
-                                    </ul>
-                                </li>
-                                <li class=\"dropdown\" role=\"presentation\">
-                                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                        Impressoras
-                                        <span class=\"caret\"></span>
-                                    </a>
-                                    <ul class=\"dropdown-menu\">
-                                        <li><a href=\"{{ path('dti_printers_status') }}\">Status</a></li>
+                                        <li><a href=\"{{ path('dai_rh_ausencia_index') }}\">Afastamentos</a></li>
                                     </ul>
                                 </li>
                             {% endif %}
@@ -819,13 +883,13 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
                         </li>
                         <li role=\"presentation\">
                             {% if is_granted(\"IS_AUTHENTICATED_REMEMBERED\") %}
-                                <a href=\"{{ path('fos_user_security_logout') }}\" class=\"navbar-brand\"
+                                <a href=\"{{ path('fos_user_security_logout') }}\" class=\"navbar-toggler-icon\"
                                    title=\"{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}\">
                                     <i class=\"glyphicon glyphicon-log-out\"></i>
                                 </a>
                             {% else %}
                                 <a href=\"{{ path('fos_user_security_login') }}\"
-                                   class=\"navbar-brand\"  title=\"{{ 'layout.login'|trans({}, 'FOSUserBundle') }}\">
+                                   class=\"navbar-toggler-icon\"  title=\"{{ 'layout.login'|trans({}, 'FOSUserBundle') }}\">
                                     <i class=\"glyphicon glyphicon-user\"></i>
                                 </a>
                             {% endif %}
@@ -846,13 +910,13 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
          </div>
         </main>
 
-        <footer class=\"navbar-default\">
+        <footer class=\"navbar-custom\">
         {% block footer %}
             <div class=\"container-fluid\">
                 <div class=\"container-fluid\" id=\"footer-container-img\" style=\"color: white\">
                 <img alt=\"\" id=\"topo-img\" src=\"{{ asset('uploads/images/logopgm.jpg')}}\"
                      class=\"img-responsive\" float=\"left\">
-                    <span class=\"pull-right footer-text-gray\">
+                    <span class=\"pull-right footer-text-white\">
                         © 2018 - PGM, Todos os direitos reservados<br>
                         Desenvolvido por Francisco Costa.
                     </span>
@@ -873,6 +937,8 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
             <script src=\"https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js\" integrity=\"sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb\" crossorigin=\"anonymous\"></script>
             <script src=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js\"></script>
             <script src=\"https://github.com/makeusabrew/bootbox/releases/download/v4.4.0/bootbox.min.js\"></script>
+            <script src=\"https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js\"></script>
+            <script src=\"https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js\"></script>
             <script type=\"text/javascript\">
                 var routeCidadesPorEstado = \"{{ path(\"dai_rh_get-cidades-por-estado\") }}\";
             </script>
@@ -881,6 +947,6 @@ class __TwigTemplate_b53ea85173d80b7d575f1a44196b1d24673711f173e336e4c289ae0d919
         {% endblock %}
     </body>
 </html>
-", "base.html.twig", "/home/francisco/omnia/templates/base.html.twig");
+", "base.html.twig", "/home/francisco/Projetos/omnia/templates/base.html.twig");
     }
 }

@@ -11,7 +11,7 @@ use Symfony\Component\DomCrawler\Crawler;
 class WebCrawler{    
     
     
-    public function dadosstatus($endereco, $uristatus, $urlinfo){
+    public function dadosstatus($endereco, $uristatus, $urlinfo, $context){
         
         $stat = $this->GetServerStatus($endereco,'80');
 
@@ -20,7 +20,7 @@ class WebCrawler{
         
         if($stat == 'ONLINE'){
             
-            $html = file_get_contents($urlinfo);
+            $html = file_get_contents($urlinfo, 0, $context);
             $crawler = new Crawler($html);
             $crawler = $crawler->filter('body > table');
             
@@ -64,7 +64,7 @@ class WebCrawler{
             $items_rows[] = $rows[$index_modelo];
             $items_rows[] = $rows[$index_num_serie];
             $items_rows[] = trim($rows[$index_troca_toner]);
-            $items_rows = $this->dadosinfo($items_rows, $uristatus);
+            $items_rows = $this->dadosinfo($items_rows, $uristatus, $context);
 
         }else{
             $items_rows[] = 'DESLIGADA';
@@ -75,11 +75,11 @@ class WebCrawler{
     }
 
 
-    public function dadosinfo($items, $uri){
+    public function dadosinfo($items, $uri, $context){
         
         $rows = array();
             
-        $html = file_get_contents($uri);
+        $html = file_get_contents($uri, 0, $context);
         $crawler = new Crawler($html);
         $crawler = $crawler->filter('body > table');
 
@@ -135,11 +135,11 @@ class WebCrawler{
         return $items;
     }
 
-    public function getStatusBar($uri){
+    public function getStatusBar($uri, $context){
 
         $rows = array();
 
-        $html = file_get_contents($uri);
+        $html = file_get_contents($uri,0, $context);
         $crawler = new Crawler($html);
         $crawler = $crawler->filter('body > table');
 

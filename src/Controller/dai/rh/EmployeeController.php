@@ -94,7 +94,7 @@ class EmployeeController extends Controller
 
         $employee = $this->getDoctrine()
                             ->getRepository(Employee::class)
-                            ->find($id);
+                            ->findOneBy(array('matricula' => $id));
 
         $documents = $this->getDoctrine()
                           ->getRepository(Documento::class)
@@ -162,7 +162,7 @@ class EmployeeController extends Controller
 
         $employee = $this->getDoctrine()
             ->getRepository(Employee::class)
-            ->find($id);
+            ->findOneBy(array('matricula' => $id));
 
         $entityManager->remove($employee);
         $entityManager->flush();

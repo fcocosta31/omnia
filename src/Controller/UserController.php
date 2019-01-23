@@ -38,6 +38,7 @@ class UserController extends Controller
             ->from(User::class, 'u')
             ->select("u")
             ->innerJoin("u.lotacao", "t")
+            ->leftJoin("u.cargo", "s")
             ->orderBy('u.nome', 'ASC');
         /**
          * @var $paginator Knp\Component\Pager\Paginator
@@ -86,8 +87,8 @@ class UserController extends Controller
                 'choices' => array(
                     'Procurador' => 'ROLE_ESP',
                     'Adm.Interna' => 'ROLE_DAI',
-                    'Administrador' => 'ROLE_CGR',
-                    'Chefe de Especializada' => 'ROLE_CHESP',
+                    'Gestor' => 'ROLE_CGR',
+                    'Chefe Especializada' => 'ROLE_CHESP',
                     'Tec.Informação' => 'ROLE_ADMIN',
                 ),
                 'multiple' => true,
@@ -96,6 +97,19 @@ class UserController extends Controller
             ->add('lotacao', EntityType::class, array(
                 'placeholder' => 'Selecione...',
                 'class' => Lotacao::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.descricao', 'ASC');
+                },
+                'choice_label' => 'descricao',
+                'required' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'empty_data' => null
+            ))
+            ->add('cargo', EntityType::class, array(
+                'placeholder' => 'Selecione...',
+                'class' => Cargo::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->orderBy('u.descricao', 'ASC');
