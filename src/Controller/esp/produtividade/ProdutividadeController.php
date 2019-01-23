@@ -56,7 +56,7 @@ class ProdutividadeController extends Controller
         $value_filter = "Todos";
 
         $datefim = date("Y-m-d");
-        $dateini = date("Y-m-d", strtotime("-6 months"));
+        $dateini = date("Y-m-d", strtotime("-1 months"));
 
 
         if (in_array('ROLE_CHESP', $rolesTab, true)){

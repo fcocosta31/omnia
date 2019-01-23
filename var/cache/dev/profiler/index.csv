@@ -6724,3 +6724,10 @@ c7b3aa,127.0.0.1,POST,http://localhost:8000/login_check,1548205764,,302
 b77b89,127.0.0.1,GET,http://localhost:8000/esp/produtividade/ato,1548205764,,200
 138f2b,127.0.0.1,GET,http://localhost:8000/logout,1548205777,,302
 a03ab1,127.0.0.1,GET,http://localhost:8000/login,1548205777,,200
+6977c1,127.0.0.1,GET,http://localhost:8000/,1548206479,,302
+78cfea,127.0.0.1,GET,http://localhost:8000/login,1548206479,,200
+750807,127.0.0.1,POST,http://localhost:8000/login_check,1548206481,,302
+55067f,127.0.0.1,GET,http://localhost:8000/home,1548206482,,200
+bc07f1,127.0.0.1,GET,http://localhost:8000/users,1548206486,,200
+6c67a1,127.0.0.1,GET,http://localhost:8000/users?page=4,1548206488,,200
+fefc92,127.0.0.1,GET,http://localhost:8000/esp/produtividade/rels/esp-reports,1548206491,,200
