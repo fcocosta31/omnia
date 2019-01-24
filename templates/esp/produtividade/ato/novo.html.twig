@@ -11,7 +11,7 @@
         <div class="row">
             <div class="container">
                 <div class="col-md-11 col-xs-12">
-                    {{ form_start(form) }}
+                    {{ form_start(form, {'attr': {'id': 'form_act_new'}}) }}
                     <div class="col-md-3 col-xs-12">
                         {{ form_row(form.emissao, {'label':'Data'}) }}
                     </div>
@@ -50,9 +50,11 @@
                     <div class="col-md-12 col-xs-12">
                         <input class="btn btn-primary" type="submit" value="Enviar" />
                     </div>
+                    <input type="hidden" id="url-action-form" value="{{ path("esp_produtividade_ato_novo") }}">
                     {{ form_end(form) }}
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}

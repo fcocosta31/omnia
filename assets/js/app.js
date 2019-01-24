@@ -119,6 +119,24 @@ $("#employee_form_ufnatu").change(function () {
 });
 
 
+
+$("#form_act_new").on("submit", function (e) {
+
+    e.preventDefault();
+
+    $.ajax({
+        type: "POST",
+        url: $("#url-action-form").val(),
+        dataType: "json",
+        data: $(this).serialize(),
+        success: function (response) {
+            alert(response.data);
+            $("#form_act_new").trigger("reset");
+        }
+    });
+
+});
+
 /*
 
 var $estado = $('#employee_form_uf');

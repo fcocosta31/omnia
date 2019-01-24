@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -167,7 +168,10 @@ class AtoController extends Controller
                 $ato->setLotacao($user->getLotacao());
                 $entityManager->persist($ato);
                 $entityManager->flush();
-                return $this->redirectToRoute('esp_produtividade_ato_novo');
+                $mensagem = "Ato cadastrado com sucesso!";
+                $response = new JsonResponse();
+                $response->setData(['data' => $mensagem]);
+                return $response;
             }else{
                 return $this->render("error.html.twig", array(
                     'errormessage' => "Data de emissão do Ato não permitida. Prazo de registro encerrado!",
