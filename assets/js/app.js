@@ -130,8 +130,24 @@ $("#form_act_new").on("submit", function (e) {
         dataType: "json",
         data: $(this).serialize(),
         success: function (response) {
-            bootbox.alert(response.data);
-            $("#form_act_new").trigger("reset");
+            var codigomsg = response.data;
+            console.log("resposta = "+codigomsg);
+            if(codigomsg == '0'){
+                bootbox.alert("Ato salvo com sucesso!");
+                $("#form_act_new").trigger("reset");
+            }else{
+
+                bootbox.confirm("Já existe ato cadastrado para este processo! Deseja salvar?", function(result)
+                {
+                    if(result){
+                        $("#save-action-form").val(1);
+                        $("#form_act_new").submit();
+                    }
+                });
+
+            }
+
+
         }
     });
 

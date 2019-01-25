@@ -58,7 +58,7 @@ class AtoController extends Controller
         }
 
         $query = $em->createQueryBuilder()
-            ->select('u')
+            ->select('u.id, u.numero, u.emissao, u.assunto, u.numerodoprocesso, b.descricao as lotacao, c.descricao as tipodeato, d.descricao as tipodeprocesso')
             ->from(Ato::class, 'u')
             ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
             ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
@@ -160,28 +160,43 @@ class AtoController extends Controller
 
         $form->handleRequest($request);
 
+        $save_action = $request->get('_save-action-form');
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $ato = $form->getData();
             if($ato->verificaAto(5)){
-
+                $mensagem = 0;
                 if($ato->getNumerodoprocesso() != null)
                 {
-                    $atothat = $entityManager->getRepository(Ato::class)->findOneBy(array("numerodoprocesso" => $ato->getNumerodoprocesso()));
-                    if($atothat != null)
-                    {
-                        $mensagem = "Ato salvo com sucesso! [Obs.: já existe ato cadastrado com este nº de processo]";
+                    if($save_action == '0'){
+
+                        $atothat = $entityManager->getRepository(Ato::class)->findOneBy(array("numerodoprocesso" => $ato->getNumerodoprocesso()));
+                        if($atothat != null)
+                        {
+                            $mensagem = 1;
+                        }else{
+
+                            $ato->setUser($user);
+                            $ato->setLotacao($user->getLotacao());
+                            $entityManager->persist($ato);
+                            $entityManager->flush();
+                        }
                     }else{
-                        $mensagem = "Ato salvo com sucesso!";
+
+                        $ato->setUser($user);
+                        $ato->setLotacao($user->getLotacao());
+                        $entityManager->persist($ato);
+                        $entityManager->flush();
                     }
 
                 }else{
-                    $mensagem = "Ato salvo com sucesso!";
+
+                    $ato->setUser($user);
+                    $ato->setLotacao($user->getLotacao());
+                    $entityManager->persist($ato);
+                    $entityManager->flush();
                 }
-                $ato->setUser($user);
-                $ato->setLotacao($user->getLotacao());
-                $entityManager->persist($ato);
-                $entityManager->flush();
                 $response = new JsonResponse();
                 $response->setData(['data' => $mensagem]);
                 return $response;
