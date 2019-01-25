@@ -118,7 +118,7 @@ final class Versions
   'symfony/dotenv' => 'v3.4.8@66265f80c0f585cd6aec3fbdfc4ffdf7a0d75992',
   'symfony/phpunit-bridge' => 'v3.4.8@48c669ec1a2b0425d4a82c7ad4bce2f5b947b95e',
   'symfony/web-server-bundle' => 'v3.4.8@44a6b2deb1c58b2dfd3592139db9091d7cfce8ed',
-  '__root__' => 'dev-master@7df28d8c2c756bc1ec1d61e58197300573d3f096',
+  '__root__' => 'dev-master@3b7b8b7b0c29c717c851f34355aadeee3b6c3c9e',
 );
 
     private function __construct()

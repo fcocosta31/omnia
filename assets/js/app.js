@@ -130,7 +130,7 @@ $("#form_act_new").on("submit", function (e) {
         dataType: "json",
         data: $(this).serialize(),
         success: function (response) {
-            alert(response.data);
+            bootbox.alert(response.data);
             $("#form_act_new").trigger("reset");
         }
     });

@@ -164,19 +164,34 @@ class AtoController extends Controller
 
             $ato = $form->getData();
             if($ato->verificaAto(5)){
+
+                if($ato->getNumerodoprocesso() != null)
+                {
+                    $atothat = $entityManager->getRepository(Ato::class)->findOneBy(array("numerodoprocesso" => $ato->getNumerodoprocesso()));
+                    if($atothat != null)
+                    {
+                        $mensagem = "Ato salvo com sucesso! [Obs.: já existe ato cadastrado com este nº de processo]";
+                    }else{
+                        $mensagem = "Ato salvo com sucesso!";
+                    }
+
+                }else{
+                    $mensagem = "Ato salvo com sucesso!";
+                }
                 $ato->setUser($user);
                 $ato->setLotacao($user->getLotacao());
                 $entityManager->persist($ato);
                 $entityManager->flush();
-                $mensagem = "Ato cadastrado com sucesso!";
                 $response = new JsonResponse();
                 $response->setData(['data' => $mensagem]);
                 return $response;
+
             }else{
                 return $this->render("error.html.twig", array(
                     'errormessage' => "Data de emissão do Ato não permitida. Prazo de registro encerrado!",
                 ));
             }
+
         }
 
         return $this->render("esp/produtividade/ato/novo.html.twig", array(
