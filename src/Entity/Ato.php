@@ -54,7 +54,7 @@ class Ato
     protected $assunto;
 
     /**
-     * @ORM\Column(name="descricao", type="string", nullable=true)
+     * @ORM\Column(name="descricao", type="text", length=65535,nullable=true)
      */
     protected $descricao;
 
@@ -341,7 +341,7 @@ class Ato
         $mes_do_registro = date('m');
         $ano_do_registro = date('Y');
         $dia_do_registro = date('d');
-        $quinto_dia_util = $this->getDiaUtil($dia);
+        $quinto_dia_util = $this->getDiaUtil($dia, $mes_do_registro, $ano_do_registro);
         $mes_anterior = date('m', strtotime('-1 months', strtotime(date('m'))));
 
         $mes_do_ato = $data_do_ato->format('m');
@@ -357,7 +357,16 @@ class Ato
 
     }
 
+    /**
+     * Informa qual é o dia útil do mês
+     * Ex.: Caso deseja saber qual é o 15º útil do mês
+     * @param int $iDia = dia
+     * @param int $iMes = Mês, se não informado pega o mês atual
+     * @param int $iAno = Ano, se não informado pega o ano atual
+     * @return int
+     */
     function getDiaUtil($iDia, $iMes = null, $iAno = null, $aDiasIgnorar = array()) {
+
         $iMes = empty($iMes) ? date('m') : $iMes;
         $iAno = empty($iAno) ? date('Y') : $iAno;
         $iUltimoDiaMes = date("t", mktime(0, 0, 0, $iMes, '01', $iAno));

@@ -126,7 +126,8 @@ class AtoController extends Controller
                     'required' => true,
                     'empty_data' => null
                 ))
-            ->add('favoravel', ChoiceType::class, array(
+           /* RETIRADO DO FORMULÁRIO EM 12/02/2019 A PEDIDO DO DR. MARCELO FANCO
+            *  ->add('favoravel', ChoiceType::class, array(
                 'placeholder' => 'Selecione...',
                 'choices' => array(
                     'Sim' => true,
@@ -136,7 +137,7 @@ class AtoController extends Controller
                 'expanded' => false,
                 'required' => false,
                 'empty_data' => null
-            ))
+            )) */
             ->add('interessado', TextType::class, array(
                     'required' => false
                 ))
@@ -165,8 +166,11 @@ class AtoController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $ato = $form->getData();
-            if($ato->verificaAto(5)){
-                $mensagem = 0;
+
+            $mensagem = 0;
+
+            if($ato->verificaAto(10)){
+
                 if($ato->getNumerodoprocesso() != null)
                 {
                     if($save_action == '0'){
@@ -197,16 +201,16 @@ class AtoController extends Controller
                     $entityManager->persist($ato);
                     $entityManager->flush();
                 }
-                $response = new JsonResponse();
-                $response->setData(['data' => $mensagem]);
-                return $response;
 
             }else{
-                return $this->render("error.html.twig", array(
-                    'errormessage' => "Data de emissão do Ato não permitida. Prazo de registro encerrado!",
-                ));
+                $mensagem = 2;
+                //return $this->render("error.html.twig", array(
+                  //  'errormessage' => "Data de emissão do Ato não permitida. Prazo de registro encerrado!",
+                //));
             }
-
+            $response = new JsonResponse();
+            $response->setData(['data' => $mensagem]);
+            return $response;
         }
 
         return $this->render("esp/produtividade/ato/novo.html.twig", array(
@@ -246,17 +250,18 @@ class AtoController extends Controller
                 'required' => true,
                 'empty_data' => null
             ))
-            ->add('favoravel', ChoiceType::class, array(
-                'placeholder' => 'Selecione...',
-                'choices' => array(
-                    'Sim' => true,
-                    'Nâo' => false,
-                ),
-                'multiple' => false,
-                'expanded' => false,
-                'required' => false,
-                'empty_data' => null
-            ))
+            /* RETIRADO DO FORMULÁRIO EM 12/02/2019 A PEDIDO DO DR. MARCELO FANCO
+             *  ->add('favoravel', ChoiceType::class, array(
+                 'placeholder' => 'Selecione...',
+                 'choices' => array(
+                     'Sim' => true,
+                     'Nâo' => false,
+                 ),
+                 'multiple' => false,
+                 'expanded' => false,
+                 'required' => false,
+                 'empty_data' => null
+             )) */
             ->add('interessado', TextType::class, array(
                 'required' => false
             ))

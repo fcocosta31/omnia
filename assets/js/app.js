@@ -135,7 +135,7 @@ $("#form_act_new").on("submit", function (e) {
             if(codigomsg == '0'){
                 bootbox.alert("Ato salvo com sucesso!");
                 $("#form_act_new").trigger("reset");
-            }else{
+            }else if (codigomsg == '1'){
 
                 bootbox.confirm("Já existe ato cadastrado para este processo! Deseja salvar?", function(result)
                 {
@@ -145,6 +145,8 @@ $("#form_act_new").on("submit", function (e) {
                     }
                 });
 
+            }else{
+                bootbox.alert("Data de emissão do Ato não permitida. Prazo de registro encerrado!");
             }
 
 
