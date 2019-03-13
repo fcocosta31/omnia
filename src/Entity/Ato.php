@@ -346,14 +346,15 @@ class Ato
 
         $mes_do_ato = $data_do_ato->format('m');
         $ano_do_ato = $data_do_ato->format('Y');
-
+        return true;
+        /*
         if($mes_do_ato == $mes_do_registro && $ano_do_ato == $ano_do_registro){
             return true;
         } else if($mes_do_ato == $mes_anterior && $dia_do_registro <= $quinto_dia_util){
             return true;
         }else{
             return false;
-        }
+        }*/
 
     }
 

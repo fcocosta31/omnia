@@ -135,6 +135,7 @@ $("#form_act_new").on("submit", function (e) {
             if(codigomsg == '0'){
                 bootbox.alert("Ato salvo com sucesso!");
                 $("#form_act_new").trigger("reset");
+                $("#form_numero").focus();
             }else if (codigomsg == '1'){
 
                 bootbox.confirm("Já existe ato cadastrado para este processo! Deseja salvar?", function(result)

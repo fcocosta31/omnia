@@ -169,7 +169,7 @@ class AtoController extends Controller
 
             $mensagem = 0;
 
-            if($ato->verificaAto(10)){
+            if($ato->verificaAto(8)){
 
                 if($ato->getNumerodoprocesso() != null)
                 {
@@ -179,6 +179,7 @@ class AtoController extends Controller
                         if($atothat != null)
                         {
                             $mensagem = 1;
+
                         }else{
 
                             $ato->setUser($user);

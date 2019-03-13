@@ -103,7 +103,7 @@ final class Versions
   'symfony/var-dumper' => 'v3.4.8@951643091b39a6fd40fce56cd16e21e12bef3feb',
   'symfony/web-link' => 'v3.4.8@c7da19175bea0eff7d9ffee7ec7e30c93dadb61f',
   'symfony/web-profiler-bundle' => 'v3.4.8@a6a1390c444d11bdb9dcabe42237dc584c2ef20e',
-  'symfony/webpack-encore-bundle' => 'v1.1.0@9c89795a4577c522101206a1a88272660735257c',
+  'symfony/webpack-encore-bundle' => 'v1.2.2@e23e9d32abd7fb62b84ad0ff62b235b517c61bc4',
   'symfony/webpack-encore-pack' => 'v1.0.2@f9f4e91659e5f55de370d6aebe77e64bce35e4d3',
   'symfony/yaml' => 'v3.4.8@a42f9da85c7c38d59f5e53f076fe81a091f894d0',
   'twbs/bootstrap' => 'v4.1.0@8f7bd419935adfcd53c471a0202083464800619e',
@@ -118,7 +118,7 @@ final class Versions
   'symfony/dotenv' => 'v3.4.8@66265f80c0f585cd6aec3fbdfc4ffdf7a0d75992',
   'symfony/phpunit-bridge' => 'v3.4.8@48c669ec1a2b0425d4a82c7ad4bce2f5b947b95e',
   'symfony/web-server-bundle' => 'v3.4.8@44a6b2deb1c58b2dfd3592139db9091d7cfce8ed',
-  '__root__' => 'dev-master@86cee36f951f0f720ba6d9ecdffb5968ef0dc2c7',
+  '__root__' => 'dev-master@4713d3908991a1c9ffc54964c9db1be6d751ebbf',
 );
 
     private function __construct()
