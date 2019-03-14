@@ -42,7 +42,8 @@ class EquipamentoController extends Controller
             ->innerJoin('u.tipo', 'b', 'WITH', 'b.id = u.tipo')
             ->innerJoin('u.marca', 'c', 'WITH', 'c.id = u.marca')
             ->leftJoin('u.status', 'd', 'WITH', 'd.id = u.status')
-            ->leftJoin('u.lotacao', 'e', 'WITH', 'e.id = u.lotacao');
+            ->leftJoin('u.lotacao', 'e', 'WITH', 'e.id = u.lotacao')
+            ->orderBy('u.id');
 
         /**
          * @var $paginator Knp\Component\Pager\Paginator

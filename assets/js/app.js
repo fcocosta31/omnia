@@ -124,6 +124,8 @@ $("#form_act_new").on("submit", function (e) {
 
     e.preventDefault();
 
+    var form = $(this);
+
     $.ajax({
         type: "POST",
         url: $("#url-action-form").val(),
@@ -134,8 +136,9 @@ $("#form_act_new").on("submit", function (e) {
             console.log("resposta = "+codigomsg);
             if(codigomsg == '0'){
                 bootbox.alert("Ato salvo com sucesso!");
-                $("#form_act_new").trigger("reset");
-                $("#form_numero").focus();
+                form.trigger("reset");
+                setFocus($("input[id=form_numero]"));
+
             }else if (codigomsg == '1'){
 
                 bootbox.confirm("Já existe ato cadastrado para este processo! Deseja salvar?", function(result)
@@ -154,7 +157,15 @@ $("#form_act_new").on("submit", function (e) {
         }
     });
 
+
 });
+
+function setFocus(element) {
+    setTimeout(function () {
+        element.focus()
+    }, 2000);
+
+};
 
 /*
 

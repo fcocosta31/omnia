@@ -117,7 +117,10 @@ class AtoController extends Controller
                         'placeholder' => '00/00/0000']
                 ))
                 ->add('numero', TextType::class, array(
-                    'required' => true
+                    'required' => true,
+                    'attr' => array(
+                        'autofocus' => true
+                    )
                 ))
                 ->add('tipodeato', ChoiceType::class, array(
                     'placeholder' => 'Selecione...',
@@ -219,6 +222,21 @@ class AtoController extends Controller
         ));
     }
 
+
+    /**
+     * @Route("/esp/produtividade/ato/detalhe/{id}", name="esp_produtividade_ato_detalhe")
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function detalharAto($id){
+
+        $ato = $this->getDoctrine()
+            ->getRepository(Ato::class)
+            ->findBy(array('id' => $id));
+
+        return $this->render("esp/produtividade/ato/detalhe.html.twig", array(
+            'act' => $ato,
+        ));
+    }
 
     /**
      * @Route("/esp/produtividade/ato/editar/{id}", name="esp_produtividade_ato_editar")

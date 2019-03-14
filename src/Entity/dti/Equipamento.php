@@ -31,7 +31,7 @@ class Equipamento
     protected $titulo;
 
     /**
-     * @ORM\Column(name="descricao", type="string", nullable=true)
+     * @ORM\Column(name="descricao", type="text", length=65535, nullable=true)
      */
     protected $descricao;
 

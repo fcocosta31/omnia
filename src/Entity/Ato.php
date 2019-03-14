@@ -54,7 +54,7 @@ class Ato
     protected $assunto;
 
     /**
-     * @ORM\Column(name="descricao", type="text", length=65535,nullable=true)
+     * @ORM\Column(name="descricao", type="text", length=65535, nullable=true)
      */
     protected $descricao;
 

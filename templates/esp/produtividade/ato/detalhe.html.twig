@@ -45,17 +45,6 @@
                     <td>{{ i.interessado }}</td>
                 </tr>
 
-                {% if i.favoravel is not null %}
-                    <tr>
-                        {% set parecer = 'Não' %}
-                        {% if i.favoravel %}
-                            {% set parecer = 'Sim' %}
-                        {% endif %}
-                        <th>Parecer Favorável?</th>
-                        <td>{{ parecer }}</td>
-                    </tr>
-                {% endif %}
-
                 <tr>
                     <th>Tipo de Processo: </th>
                     {% set processo = 'Não informado' %}
