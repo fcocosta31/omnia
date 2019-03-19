@@ -404,6 +404,7 @@ class ProdutividadeController extends Controller
 
                 }else{
 
+
                     $query = $repository->createQueryBuilder('u')
                         ->select('c.nome as descricao, SUM(d.peso) as pontos, COUNT(d.peso) as atos')
                         ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
@@ -481,9 +482,9 @@ class ProdutividadeController extends Controller
             }
 
 
-
-            /* GRÁFICO EM FORMA DE LINHAS */
+            /** GRÁFICO EM FORMA DE LINHAS **/
             $chart = $this->getLineChart($query, $lotacoes, $dateini, $datefim, $type_filter, $value_filter);
+
 
             /* GRÁFICO EM FORMA DE TABELA VAZIO */
             $table = new TableChart();
@@ -1046,7 +1047,7 @@ class ProdutividadeController extends Controller
             );
             $chart->getOptions()->setTitle($type . ": " . $value . " - período: " . date("d/m/Y", strtotime($dateini)) . " a " . date("d/m/Y", strtotime($datefim)));
             $chart->getOptions()->getHAxis()->setTitle('Produtividade');
-            $chart->getOptions()->getBar()->setGroupWidth('35%');
+            $chart->getOptions()->getBar()->setGroupWidth('60%');
             $chart->getOptions()->getHAxis()->setMinValue(0);
             $chart->getOptions()->getLegend()->setPosition('none');
             $chart->getOptions()->setFontSize(12)
@@ -1077,7 +1078,7 @@ class ProdutividadeController extends Controller
                 ->setHeight(500)
                 ->setWidth(900);
             $chart->getOptions()->getVAxis()->setTitle("Produtividade");
-            $chart->getOptions()->getBar()->setGroupWidth('35%');
+            $chart->getOptions()->getBar()->setGroupWidth('60%');
             $chart->getOptions()->getLegend()->setPosition('none');
             $chart->getOptions()->setSeriesType('bars');
         }else{

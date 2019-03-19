@@ -1,6 +1,7 @@
 require('../js/app.css');
 require('../js/jquery.mask.js');
 
+
 $(document).ready(function () {
 
     $('.js-datepicker').datepicker({
@@ -39,6 +40,7 @@ $(document).ready(function () {
 
 function pad(s) { return (s < 10) ? '0' + s : s; }
 
+
 $("#esp_form_filter").on("submit", function (e) {
 
     e.preventDefault();
@@ -59,7 +61,7 @@ $("#esp_form_filter").on("submit", function (e) {
 $("#esp_type_filter").change(function () {
     var filtertype = $(this).val();
     var urlpath = $(this).attr('base-url');
-    if(filtertype != 0){
+    if(filtertype != 9){
         $.ajax({
             url: urlpath,
             type: "GET",

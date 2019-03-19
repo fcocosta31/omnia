@@ -11,7 +11,7 @@
 <div class="row"><br><br><p>...</p></div>
 </div>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script type="text/javascript">
 
     var imgData;
@@ -25,6 +25,7 @@
     };
 
     {{ gc_event(chart, 'select', 'getSelectionChart') }}
+    {{ gc_event(chart, 'error', 'errorHandler') }}
 
     function getSelectionChart() {
 
@@ -53,5 +54,22 @@
            }
         });
     };
+    
+    function errorHandler(errorMessage) {
+        var typefilter = $("#esp_type_filter").val();
+        var valuefilter = $("#esp_value_filter").val();
+
+        var mensagem = "<h4>Não há dados a serem apresentados para o período selecionado!</h4>";
+
+        if(typefilter == '2'){
+            if(valuefilter != '0'){
+                var textfilter = $("#esp_value_filter option:selected").text();
+                mensagem += "<h4>Procurador: "+textfilter+"</h4>";
+            }
+        }
+
+        $("#div_chart").html(mensagem);
+        $("#div_table").html(" ");
+    }
 
 </script>
