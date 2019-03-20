@@ -36,6 +36,18 @@ $(document).ready(function () {
         }
 
     });
+
+
+    $('.mySpinner').click(function(e){
+        bootbox.dialog({
+            message: '<div class="text-center" style="width: 30%; float: center;"><i class="fa fa-spin fa-spinner"></i> Carregando...</div>',
+            backdrop:false,
+            centerVertical:true,
+            closeButton:false
+        });
+    });
+
+
 });
 
 function pad(s) { return (s < 10) ? '0' + s : s; }
@@ -51,6 +63,7 @@ $("#esp_form_filter").on("submit", function (e) {
         dataType: "json",
         data: $(this).serialize(),
         success: function (response) {
+            bootbox.hideAll();
             $("#div_partial").html(response);
         }
     });
@@ -134,6 +147,7 @@ $("#form_act_new").on("submit", function (e) {
         dataType: "json",
         data: $(this).serialize(),
         success: function (response) {
+            bootbox.hideAll();
             var codigomsg = response.data;
             console.log("resposta = "+codigomsg);
             if(codigomsg == '0'){
