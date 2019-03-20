@@ -64,7 +64,7 @@ class ProdutividadeController extends Controller
             $lotacao_id = $this->getUser()->getLotacao()->getId();
 
             $query = $repository->createQueryBuilder('u')
-                ->select('MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                ->select('YEAR(u.emissao) as ano, MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
                 ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
                 ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
                 ->where('b = :idlotacao and u.emissao between :dateini and :datefim')
@@ -73,8 +73,8 @@ class ProdutividadeController extends Controller
                     'dateini' => $dateini,
                     'datefim' => $datefim,
                 ))
-                ->groupBy('mes, b')
-                ->orderBy('mes, b.descricao');
+                ->groupBy('ano, mes, b');
+                //->orderBy('mes, b.descricao');
 
             $lotacoes = $repository->createQueryBuilder('u')
                 ->select('distinct b.descricao')
@@ -437,7 +437,7 @@ class ProdutividadeController extends Controller
             if($ischesp){
 
                 $query = $repository->createQueryBuilder('u')
-                    ->select('MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                    ->select('YEAR(u.emissao) as ano, MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
                     ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
                     ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
                     ->where('b = :lotacaoid and u.emissao between :dateini and :datefim')
@@ -446,8 +446,8 @@ class ProdutividadeController extends Controller
                         'dateini' => $dateini,
                         'datefim' => $datefim,
                     ))
-                    ->groupBy('mes, b')
-                    ->orderBy('mes, b.descricao');
+                    ->groupBy('ano, mes, b');
+                    //->orderBy('mes, b.descricao');
 
                 $lotacoes = $repository->createQueryBuilder('u')
                     ->select('distinct b.descricao')
