@@ -89,7 +89,7 @@ class ProdutividadeController extends Controller
         }else{
 
             $query = $repository->createQueryBuilder('u')
-                ->select('MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                ->select('YEAR(u.emissao) as ano, MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
                 ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
                 ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
                 ->where('u.emissao between :dateini and :datefim')
@@ -97,8 +97,8 @@ class ProdutividadeController extends Controller
                     'dateini' => $dateini,
                     'datefim' => $datefim,
                 ))
-                ->groupBy('mes, b')
-                ->orderBy('mes, b.descricao');
+                ->groupBy('ano, mes, b');
+                //->orderBy('b.descricao');
 
             $lotacoes = $repository->createQueryBuilder('u')
                 ->select('distinct b.descricao')
@@ -462,7 +462,7 @@ class ProdutividadeController extends Controller
             }else{
 
                 $query = $repository->createQueryBuilder('u')
-                    ->select('MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                    ->select('YEAR(u.emissao) as ano, MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
                     ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
                     ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
                     ->where('u.emissao between :dateini and :datefim')
@@ -470,8 +470,8 @@ class ProdutividadeController extends Controller
                         'dateini' => $dateini,
                         'datefim' => $datefim,
                     ))
-                    ->groupBy('mes, b')
-                    ->orderBy('mes, b.descricao');
+                    ->groupBy('ano, mes, b');
+                    //->orderBy('mes, b.descricao');
 
                 $lotacoes = $repository->createQueryBuilder('u')
                     ->select('distinct b.descricao')
@@ -1111,6 +1111,8 @@ class ProdutividadeController extends Controller
 
                 $key = array_search($v['descricao'], $esps);
 
+                $year = $v['ano'];
+
                 if($mesant != intval($v['mes'])){
                     if(isset($value_array)){
 
@@ -1118,7 +1120,7 @@ class ProdutividadeController extends Controller
 
                         $monthNum  = intval($v['mes']);
                         $dateObj   = \DateTime::createFromFormat('!m', $monthNum);
-                        $monthName = strftime( '%b', $dateObj -> getTimestamp() );#$dateObj->format('M'); // March
+                        $monthName = $year."/".strftime( '%b', $dateObj -> getTimestamp() );#$dateObj->format('M'); // March
 
                         $value_array = array($monthName);
 
@@ -1135,7 +1137,7 @@ class ProdutividadeController extends Controller
                     }else{
                         $monthNum  = intval($v['mes']);
                         $dateObj   = \DateTime::createFromFormat('!m', $monthNum);
-                        $monthName = strftime( '%b', $dateObj -> getTimestamp() );#$dateObj->format('M'); // March
+                        $monthName = $year."/".strftime( '%b', $dateObj -> getTimestamp() );#$dateObj->format('M'); // March
 
                         $value_array = array($monthName);
 
