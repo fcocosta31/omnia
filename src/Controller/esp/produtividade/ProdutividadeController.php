@@ -324,8 +324,9 @@ class ProdutividadeController extends Controller
                     ->groupBy('c')
                     ->orderBy('c.descricao');
 
-                /* GRÁFICO EM FORMA DE BARRAS HORIZONTAIS */
-                $chart = $this->getBarHorChart($query, $dateini, $datefim, $type_filter, $value_filter);
+                /* GRÁFICO EM FORMA DE PIZZA */
+                $chart = $this->getPierChart($query, $dateini, $datefim, $type_filter, $value_filter, 0);
+                //$chart = $this->getBarHorChart($query, $dateini, $datefim, $type_filter, $value_filter);
                 /* GRÁFICO EM FORMA DE TABELA */
                 $table = $this->getTabChart($query);
 
@@ -981,7 +982,7 @@ class ProdutividadeController extends Controller
                 $result
             );
             $chart->getOptions()->setPieHole($piehole);
-            $chart->getOptions()->setFontSize(11);
+            $chart->getOptions()->setFontSize(13);
             $chart->getOptions()->setTitle($type . ": " . $value . " - período: " . date("d/m/Y", strtotime($dateini)) . " a " . date("d/m/Y", strtotime($datefim)));
             $chart->getOptions()->setHeight(500);
             $chart->getOptions()->setWidth(900);
@@ -1074,7 +1075,7 @@ class ProdutividadeController extends Controller
             );
             $chart->getOptions()->setTitle($type . ": " . $value . " - período: " . date("d/m/Y", strtotime($dateini)) . " a " . date("d/m/Y", strtotime($datefim)));
             $chart->getOptions()
-                ->setFontSize(11)
+                ->setFontSize(12)
                 ->setHeight(500)
                 ->setWidth(900);
             $chart->getOptions()->getVAxis()->setTitle("Produtividade");
@@ -1167,7 +1168,7 @@ class ProdutividadeController extends Controller
             );
 
             $chart->getOptions()->setTitle($type.": ".$value." - período: ".date("d/m/Y", strtotime($dateini))." a ".date("d/m/Y", strtotime($datefim)))
-                ->setFontSize(11)
+                ->setFontSize(12)
                 ->setHeight(500)
                 ->setWidth(900)
                 ->setCurveType('function')

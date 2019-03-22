@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            <!-- Mobile viewport optimized -->
+            <meta name="viewport"
+                  content="width=device-width, initial-scale=1, maximum-scale=1">
+
+            <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+            <meta name="keywords" content="omnia">
+            <meta name="keywords" content="aplicativos pgm">
+            <meta name="keywords" content="pgm">
+            <meta name="keywords" content="procuradoria geral do municipio">
+            <meta name="keywords" content="municipio de teresina">
+
+            <link href="http://pgm.teresina.pi.gov.br/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+        {% endblock %}
+
+        <title>{% block title %}Procuradoria Geral do Município de Teresina | PGM{% endblock %}</title>
+        {% block stylesheets %}
+            <!-- Imports CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+                  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+                  crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+            <link rel="stylesheet" href="{{ asset('build/js/app.css') }}">
+
+            <style>
+                .watermark{
+                    background-image: url({{ asset('uploads/images/water-mark2.jpg') }});
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    position: absolute;
+                    top: 60px;
+                    bottom: 60px;
+                    width: 100%;
+                    opacity: 0.10;
+                    color: white;
+                }
+                .watermark-over{
+                    color: #000000;
+                    position: relative;
+                    left: 0px;
+                    right: 0px;
+                    top: 0px;
+                    bottom: 60px;
+                }
+            </style>
+
+        {% endblock %}
+    </head>
+    <body>
+        <main class="container-fluid">
+         <div class="row">
+            <div class="watermark"></div>
+            <div class="watermark-over">
+             <div class="container-fluid">
+            {% block content %}
+            {% endblock %}
+            </div>
+            </div>
+         </div>
+        </main>
+
+        <footer class="navbar-default">
+        {% block footer %}
+            <div class="container-fluid">
+                <div class="container-fluid" id="footer-container-img" style="color: white">
+                <img alt="" id="topo-img" src="{{ asset('uploads/images/logopgm.jpg')}}"
+                     class="img-responsive" float="left">
+                    <span class="pull-right footer-text-black">
+                        © 2018 - PGM, Todos os direitos reservados<br>
+                        Desenvolvido por Francisco Costa.
+                    </span>
+                </div>
+            </div>
+        {% endblock %}
+        </footer>
+
+        {% block javascripts %}
+            <!-- Imports Scripts -->
+            <script
+                    src="https://code.jquery.com/jquery-3.3.1.min.js"
+                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                    crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                    crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+            <script src="https://github.com/makeusabrew/bootbox/releases/download/v4.4.0/bootbox.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+            <script type="text/javascript">
+                var routeCidadesPorEstado = "{{ path("dai_rh_get-cidades-por-estado") }}";
+            </script>
+            <script src="{{ asset('build/js/app.js') }}"></script>
+
+        {% endblock %}
+    </body>
+</html>
