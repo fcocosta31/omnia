@@ -627,3 +627,7 @@ fb5488,127.0.0.1,GET,http://localhost:8000/login,1553292074,,200
 2aa55f,127.0.0.1,GET,http://localhost:8000/home,1553292097,,200
 fdfb48,127.0.0.1,GET,http://localhost:8000/logout,1553292099,,302
 12c594,127.0.0.1,GET,http://localhost:8000/login,1553292099,,200
+b3a29f,127.0.0.1,GET,http://localhost:8000/,1553476323,,302
+ef628a,127.0.0.1,GET,http://localhost:8000/login,1553476323,,200
+675470,127.0.0.1,GET,http://localhost:8000/login,1553476353,,200
+e3ae4c,127.0.0.1,GET,http://localhost:8000/login,1553476380,,200
