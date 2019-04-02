@@ -511,6 +511,112 @@ class ProdutividadeController extends Controller
 
 
     /**
+     * @Route("/esp/produtividade/rels/esp-reports-proc", name="esp_produtividade_esp-reports-proc")
+     * @param Request $request
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function espReportsProc(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository(Ato::class);
+
+        $datefim = date("Y-m-d");
+        $dateini = date("Y-m-d", strtotime("-1 months"));
+
+
+        $type_filter = 'Procurador: ';
+
+        $value = $this->getUser()->getId();
+
+        $value_filter = $this->getUser()->getNome();
+
+        $query = $repository->createQueryBuilder('u')
+            ->select('c.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+            ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+            ->where('u.user = :usuario and u.emissao between :dateini and :datefim')
+            ->setParameters(array(
+                'usuario' => $value,
+                'dateini' => $dateini,
+                'datefim' => $datefim,
+            ))
+            ->groupBy('c')
+            ->orderBy('c.descricao');
+
+        /* GRÁFICO EM FORMA DE PIZZA */
+        $chart = $this->getPierChart($query, $dateini, $datefim, $type_filter, $value_filter, 0);
+        //$chart = $this->getBarHorChart($query, $dateini, $datefim, $type_filter, $value_filter);
+        /* GRÁFICO EM FORMA DE TABELA */
+        $table = $this->getTabChart($query);
+
+
+
+        return $this->render('esp/produtividade/reports/index_procurador.html.twig', array(
+            'typefilter' => $type_filter,
+            'valuefilter' => $value_filter,
+            'chart' => $chart,
+            'table' => $table,
+            'dateini' => $dateini,
+            'datefim' => $datefim
+        ));
+
+    }    
+
+    /**
+     * @Route("/esp/produtividade/rels/esp-filter-reports-proc", name="esp_produtividade_esp-filter-reports-proc")
+     * @param Request $request
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function espFiltersReportsProc(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository(Ato::class);
+
+        $dateini = $request->get('_dateini');
+        $datefim = $request->get('_datefim');
+
+        $type_filter = 'Procurador: ';
+
+        $value = $this->getUser()->getId();
+
+        $value_filter = $this->getUser()->getNome();
+
+        $query = $repository->createQueryBuilder('u')
+            ->select('c.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+            ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+            ->where('u.user = :usuario and u.emissao between :dateini and :datefim')
+            ->setParameters(array(
+                'usuario' => $value,
+                'dateini' => $dateini,
+                'datefim' => $datefim,
+            ))
+            ->groupBy('c')
+            ->orderBy('c.descricao');
+
+        /* GRÁFICO EM FORMA DE PIZZA */
+        $chart = $this->getPierChart($query, $dateini, $datefim, $type_filter, $value_filter, 0);
+        //$chart = $this->getBarHorChart($query, $dateini, $datefim, $type_filter, $value_filter);
+        /* GRÁFICO EM FORMA DE TABELA */
+        $table = $this->getTabChart($query);
+
+
+        $template = $this->render('esp/produtividade/reports/esp_partial.html.twig',
+            array(
+                'typefilter' => $type_filter,
+                'valuefilter' => $value_filter,
+                'chart' => $chart,
+                'table' => $table,
+                'dateini' => $dateini,
+                'datefim' => $datefim
+
+            ))->getContent();
+
+        return new JsonResponse($template);
+
+    }
+
+    /**
      * @Route("/esp/produtividade/rels/export-image-chart", name="esp_produtividade_export-image-chart")
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
