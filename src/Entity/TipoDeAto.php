@@ -51,6 +51,13 @@ class TipoDeAto
     protected $atos;
 
     /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="AtoAnalista", mappedBy="tipodeato")
+     */
+    protected $atosanalistas;
+
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -129,5 +136,22 @@ class TipoDeAto
     {
         $this->atos = $atos;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAtosanalistas(): ArrayCollection
+    {
+        return $this->atosanalistas;
+    }
+
+    /**
+     * @param ArrayCollection $atosanalistas
+     */
+    public function setAtosanalistas(ArrayCollection $atosanalistas)
+    {
+        $this->atosanalistas = $atosanalistas;
+    }
+
 
 }

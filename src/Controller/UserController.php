@@ -85,11 +85,12 @@ class UserController extends Controller
             ->add('roles', ChoiceType::class, array(
                 'placeholder' => 'Selecione...',
                 'choices' => array(
+                    'Procurador Geral/Adjunto/Corregedor' => 'ROLE_CGR',
+                    'Procurador Chefe de Especializada' => 'ROLE_CHESP',
                     'Procurador' => 'ROLE_ESP',
-                    'Adm.Interna' => 'ROLE_DAI',
-                    'Gestor' => 'ROLE_CGR',
-                    'Chefe Especializada' => 'ROLE_CHESP',
-                    'Tec.Informação' => 'ROLE_ADMIN',
+                    'Analista Administrativo' => 'ROLE_AESP',
+                    'DAI (Div Adm Interna)' => 'ROLE_DAI',
+                    'DTI (Div Tec Informação)' => 'ROLE_ADMIN',
                 ),
                 'multiple' => true,
                 'expanded' => true,

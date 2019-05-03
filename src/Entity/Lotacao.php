@@ -48,6 +48,13 @@ class Lotacao
 
     /**
      * @var Collection
+     * @ORM\OneToMany(targetEntity="AtoAnalista", mappedBy="lotacao")
+     * @ORM\OrderBy({"emissao" = "DESC"})
+     */
+    protected $atosanalistas;
+
+    /**
+     * @var Collection
      * @ORM\OneToMany(targetEntity="User", mappedBy="lotacao")
      * @ORM\OrderBy({"nome" = "ASC"})
      */
@@ -179,6 +186,22 @@ class Lotacao
     public function setAtos($atos)
     {
         $this->atos = $atos;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getAtosanalistas(): Collection
+    {
+        return $this->atosanalistas;
+    }
+
+    /**
+     * @param Collection $atosanalistas
+     */
+    public function setAtosanalistas(Collection $atosanalistas)
+    {
+        $this->atosanalistas = $atosanalistas;
     }
 
     /**

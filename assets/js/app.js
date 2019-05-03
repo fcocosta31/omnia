@@ -183,6 +183,16 @@ function setFocus(element) {
 
 };
 
+
+function openPDFDocument(element){
+    var url = element.attr('href');
+    var left  = ($(window).width()/2)-(900/2),
+        top   = ($(window).height()/2)-(600/2),
+        popup = window.open ("pdfviewer.html.twig?url="+url, "Visualizar PDF", "width=900, height=600, top="+top+", left="+left);
+        popup.focus();
+};
+
+
 /*
 
 var $estado = $('#employee_form_uf');

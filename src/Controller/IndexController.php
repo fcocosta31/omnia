@@ -40,9 +40,6 @@ class IndexController extends Controller
             }
         }
 
-        //if (in_array('ROLE_ESP', $rolesTab, true))
-          //  return $this->redirectToRoute('esp_produtividade_ato_index');
-        //else
             return $this->render("/index.html.twig", array(
             'index' => null,
         ));

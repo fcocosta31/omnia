@@ -54,6 +54,8 @@ class AfterLoginRedirection implements AuthenticationSuccessHandlerInterface
 
         if (in_array('ROLE_ESP', $rolesTab, true))
             $redirection = 'esp_produtividade_ato_index';
+        else if(in_array('ROLE_AESP', $rolesTab, true))
+            $redirection = 'esp_produtividade_analista_ato_index';
 
         return $redirection;
     }
