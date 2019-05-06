@@ -18,16 +18,18 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th colspan="5">
+                        <th colspan="6">
                             {{ knp_pagination_filter(usr, {
                                 'u.nome':'Nome',
-                                't.descricao':'Lotação'
+                                't.descricao':'Lotação',
+                                's.descricao':'Cargo'
                             }) }}
                         </th>
                     </tr>
                     <tr>
                         <th>Nome</th>
                         <th>E-mail</th>
+                        <th>Cargo</th>
                         <th>Lotação</th>
                         <th>Últ.Acesso</th>
                         <th>#</th>
@@ -42,6 +44,7 @@
                         <tr class='{{cor_linha}}'>
                             <td>{{ i.nome }}</td>
                             <td>{{ i.email }}</td>
+                            <td>{{ i.cargo.descricao }}</td>
                             <td>{{ i.lotacao.descricao }}</td>
                             <td>{{ i.lastLogin|date('d/m/Y H:i:s', 'America/Fortaleza') }}</td>
                             <td><a href="{{ path('fos_user_profile_edit_id', {'id':i.id}) }}"
@@ -49,7 +52,7 @@
                         </tr>
                     {% endfor %}
                     </tbody>
-                    <tfoot><tr><td colspan="5"></td></tr></tfoot>
+                    <tfoot><tr><td colspan="6"></td></tr></tfoot>
                 </table>
                 <div class="navigation">
                     {{ knp_pagination_render(usr) }}
