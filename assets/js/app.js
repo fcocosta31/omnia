@@ -95,6 +95,27 @@ $("#esp_type_filter").change(function () {
     }
 });
 
+
+$("#esp_type_filter_analista").change(function () {
+    var filtertype = $(this).val();
+    var urlpath = $(this).attr('base-url');
+
+    $.ajax({
+        url: urlpath,
+        type: "GET",
+        data: {_filterType:filtertype},
+        success: function (result) {
+            var formValues = $("#esp_value_filter");
+            formValues.empty().html(' ');
+            formValues.append('<option value="0">Todos</option>');
+            $.each(result, function (i, item) {
+                formValues.append('<option value="'+item.id+'">'+item.descricao+'</option>');
+            });
+        }
+    });
+
+});
+
 $("#employee_form_uf").change(function () {
     var ufSelector = $(this).val();
     var urlpath = routeCidadesPorEstado;

@@ -24,33 +24,12 @@
                     <td>{{ i.emissao|date('d/m/Y') }}</td>
                 </tr>
                     <tr>
-                        <th>Nº do Ato: </th>
+                        <th>Nº do Processo: </th>
                         <td>{{ i.numero }}</td>
                     </tr>
                 <tr>
                     <th>Tipo de Ato: </th>
                     <td>{{ i.tipodeato.descricao }}</td>
-                </tr>
-                <tr>
-                    <th>Assunto: </th>
-                    <td>{{ i.assunto }}</td>
-                </tr>
-                <tr>
-                    <th>Interessado/Requerente: </th>
-                    <td>{{ i.interessado }}</td>
-                </tr>
-
-                <tr>
-                    <th>Tipo de Processo: </th>
-                    {% set processo = 'Não informado' %}
-                    {% if i.tipodeprocesso is not null %}
-                        {% set processo = i.tipodeprocesso.descricao %}
-                    {% endif %}
-                    <td>{{ processo }}</td>
-                </tr>
-                <tr>
-                    <th>Nº do Processo: </th>
-                    <td>{{ i.numerodoprocesso }}</td>
                 </tr>
                 <tr>
                     <th>Descrição: </th>

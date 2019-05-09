@@ -1280,6 +1280,7 @@ class ProdutividadeController extends Controller
                 ->setCurveType('function')
                 ->setLineWidth(4)
                 ->getLegend()->setPosition('right');
+                $chart->getOptions()->getAnimation()->setDuration(1000)->setEasing('out')->setStartup(true);
         }else{
             $chart->getData()->setArrayToDataTable(array(["..."]));
         }

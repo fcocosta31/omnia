@@ -78,9 +78,27 @@
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ path("esp_produtividade_esp-reports") }}">Gráficos</a></li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">
+                                                Procurador
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu-right">
+                                                <li><a href="{{ path("esp_produtividade_esp-reports") }}">Gráficos</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a href="{{ path('esp_produtividade_esp-criticas') }}">Críticas</a></li>
+                                            </ul>
+                                        </li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="{{ path('esp_produtividade_esp-criticas') }}">Críticas</a></li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">
+                                                Analista
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu-right">
+                                                <li><a href="{{ path("esp_produtividade_analista_esp-reports") }}">Gráficos</a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="dropdown" role="presentation">

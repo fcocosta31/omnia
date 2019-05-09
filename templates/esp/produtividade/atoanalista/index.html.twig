@@ -35,7 +35,7 @@
                                 <tr>
                                     <th colspan="8">
                                         {{ knp_pagination_filter(atos, {
-                                            'u.numero':'Nº do Ato',
+                                            'u.numero':'Nº do Processo',
                                             'b.descricao':'Especializada',
                                             'c.descricao':'Tipo de Ato',
                                             'd.nome':'Procurador'
@@ -43,7 +43,7 @@
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th>{{ knp_pagination_sortable(atos, 'Nº do Ato', 'u.numero') }}</th>
+                                    <th>{{ knp_pagination_sortable(atos, 'Nº do Processo', 'u.numero') }}</th>
                                     <th>{{ knp_pagination_sortable(atos, 'Data', 'u.emissao') }}</th>
                                     <th>{{ knp_pagination_sortable(atos, 'Especializada', 'b.descricao') }}</th>
                                     <th>{{ knp_pagination_sortable(atos, 'Tipo de Ato', 'c.descricao') }}</th>
