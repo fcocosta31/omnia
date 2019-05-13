@@ -19,10 +19,15 @@ use CMEN\GoogleChartsBundle\GoogleCharts\Charts\Histogram;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\LineChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\TableChart;
+use CMEN\GoogleChartsBundle\GoogleCharts\Options\Diff\DiffColumnChart\Diff;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Knp\Bundle\SnappyBundle\Snappy\Response\JpegResponse;
+use Symfony\Component\Debug\Debug;
+use Symfony\Component\Debug\DebugClassLoader;
+use Symfony\Component\Debug\ErrorHandler;
+use Symfony\Component\Debug\ExceptionHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -31,6 +36,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+
 
 /**
  * Class ProdutividadeAnalistaController
@@ -467,33 +473,8 @@ class ProdutividadeAnalistaController extends Controller
 
                 if($ischesp){
 
-                    $query = $repository->createQueryBuilder('u')
-                        ->select('YEAR(u.emissao) as ano, MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
-                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
-                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
-                        ->where('b = :lotacaoid and u.emissao between :dateini and :datefim')
-                        ->setParameters(array(
-                            'lotacaoid' => $lotacao_id,
-                            'dateini' => $dateini,
-                            'datefim' => $datefim,
-                        ))
-                        ->groupBy('ano, mes, b');
-                    //->orderBy('mes, b.descricao');
-
-                    $lotacoes = $repository->createQueryBuilder('u')
-                        ->select('distinct b.descricao')
-                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
-                        ->where('b = :lotacaoid')
-                        ->setParameters(array(
-                            'lotacaoid' => $lotacao_id,
-                        ))
-                        ->orderBy('b.descricao')
-                        ->getQuery()->getResult();
-
-                }else{
-
-                    $query = $repository->createQueryBuilder('u')
-                        ->select('YEAR(u.emissao) as ano, MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
+                    $query1 = $repository->createQueryBuilder('u')
+                        ->select('YEAR(u.emissao) as ano, b.descricao, MONTH(u.emissao) as mes, COUNT(c.peso) as atos')
                         ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
                         ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
                         ->innerJoin('u.user', 'd', 'WITH', 'd.id = u.user')
@@ -502,14 +483,72 @@ class ProdutividadeAnalistaController extends Controller
                             'dateini' => $dateini,
                             'datefim' => $datefim,
                         ))
-                        ->groupBy('ano, mes, b');
-                    //->orderBy('mes, b.descricao');
+                        ->groupBy('ano, mes, b')
+                        ->orderBy('ano, mes, b.descricao');
+
+                    $query = $repository->createQueryBuilder('u')
+                        ->select('b.descricao, COUNT(c.peso) as atos')
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->innerJoin('u.user', 'd', 'WITH', 'd.id = u.user')
+                        ->where('b = :lotacaoid and u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'dateini' => $dateini,
+                            'datefim' => $datefim,
+                            'lotacaoid' => $lotacao_id,
+                        ))
+                        ->groupBy('b')
+                        ->orderBy('b.descricao');
+
+                    $lotacoes = $repository->createQueryBuilder('u')
+                        ->select('distinct b.descricao')
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->orderBy('b.descricao')
+                        ->where('b = :lotacaoid')
+                        ->setParameters(array(
+                            'lotacaoid' => $lotacao_id,
+                        ))
+                        ->getQuery()->getResult();
+
+                    /** GRÁFICO EM FORMA DE BARRAS VERTICAIS MATERIAL **/
+                    $chart = $this->getColumnChart($query1, $lotacoes, $dateini, $datefim, $type_filter, $value_filter);
+
+                }else{
+
+                    $query1 = $repository->createQueryBuilder('u')
+                        ->select('YEAR(u.emissao) as ano, b.descricao, MONTH(u.emissao) as mes, COUNT(c.peso) as atos')
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->innerJoin('u.user', 'd', 'WITH', 'd.id = u.user')
+                        ->where('u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'dateini' => $dateini,
+                            'datefim' => $datefim,
+                        ))
+                        ->groupBy('ano, mes, b')
+                        ->orderBy('ano, mes, b.descricao');
+
+                    $query = $repository->createQueryBuilder('u')
+                        ->select('b.descricao, COUNT(c.peso) as atos')
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->innerJoin('u.user', 'd', 'WITH', 'd.id = u.user')
+                        ->where('u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'dateini' => $dateini,
+                            'datefim' => $datefim,
+                        ))
+                        ->groupBy('b')
+                        ->orderBy('b.descricao');
 
                     $lotacoes = $repository->createQueryBuilder('u')
                         ->select('distinct b.descricao')
                         ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
                         ->orderBy('b.descricao')
                         ->getQuery()->getResult();
+
+                    /** GRÁFICO EM FORMA DE BARRAS VERTICAIS MATERIAL **/
+                    $chart = $this->getColumnChart($query1, $lotacoes, $dateini, $datefim, $type_filter, $value_filter);
 
                 }
 
@@ -533,7 +572,7 @@ class ProdutividadeAnalistaController extends Controller
                     ->select('d.nome as descricao, COUNT(c.peso) as atos')
                     ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
                     ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
-                    ->innerJoin('u.procurador', 'd', 'WITH', 'd.id = u.procurador')
+                    ->innerJoin('u.user', 'd', 'WITH', 'd.id = u.user')
                     ->where('b = :lotacaoid and u.emissao between :dateini and :datefim')
                     ->setParameters(array(
                         'lotacaoid' => $value,
@@ -543,12 +582,13 @@ class ProdutividadeAnalistaController extends Controller
                     ->groupBy('d')
                     ->orderBy('d.nome');
 
+                /** GRÁFICO EM FORMA DE BARRAS VERTICAIS **/
+                $chart = $this->getComboChart($query, $dateini, $datefim, $type_filter, $value_filter);
+
+
             }
 
 
-
-            /** GRÁFICO EM FORMA DE BARRAS VERTICAIS **/
-            $chart = $this->getComboChart($query, $dateini, $datefim, $type_filter, $value_filter);
 
             $table = $this->getTabChart($query);
             /* GRÁFICO EM FORMA DE TABELA VAZIO */
@@ -576,7 +616,7 @@ class ProdutividadeAnalistaController extends Controller
 
 
     /**
-     * @Route("/esp/produtividade/analista/rels/esp-reports-proc", name="esp_produtividade_analista_esp-reports-proc")
+     * @Route("/esp/produtividade/analista/rels/esp-reports-analista", name="esp_produtividade_analista_esp-reports-analista")
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
@@ -590,7 +630,7 @@ class ProdutividadeAnalistaController extends Controller
         $dateini = date("Y-m-d", strtotime("-1 months"));
 
 
-        $type_filter = 'Procurador: ';
+        $type_filter = 'Analista: ';
 
         $value = $this->getUser()->getId();
 
@@ -608,11 +648,25 @@ class ProdutividadeAnalistaController extends Controller
             ->groupBy('c')
             ->orderBy('c.descricao');
 
+        $query1 = $repository->createQueryBuilder('u')
+            ->select('b.nome as descricao, COUNT(c.peso) as atos')
+            ->innerJoin('u.procurador', 'b', 'WITH', 'b.id = u.procurador')
+            ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+            ->where('u.user = :usuario and u.emissao between :dateini and :datefim')
+            ->setParameters(array(
+                'usuario' => $value,
+                'dateini' => $dateini,
+                'datefim' => $datefim,
+            ))
+            ->groupBy('b')
+            ->orderBy('b.nome');
+
+
         /* GRÁFICO EM FORMA DE PIZZA */
         $chart = $this->getPierChart($query, $dateini, $datefim, $type_filter, $value_filter, 0);
         //$chart = $this->getBarHorChart($query, $dateini, $datefim, $type_filter, $value_filter);
         /* GRÁFICO EM FORMA DE TABELA */
-        $table = $this->getTabChart($query);
+        $table = $this->getTabChart($query1);
 
 
 
@@ -641,7 +695,7 @@ class ProdutividadeAnalistaController extends Controller
         $dateini = $request->get('_dateini');
         $datefim = $request->get('_datefim');
 
-        $type_filter = 'Procurador: ';
+        $type_filter = 'Analista: ';
 
         $value = $this->getUser()->getId();
 
@@ -1277,6 +1331,92 @@ class ProdutividadeAnalistaController extends Controller
         return $chart;
     }
 
+
+    /*COMBO CHART MULTIPLE V-AXIS*/
+    function getColumnChart($query, $lotacoes, $dateini, $datefim, $type, $value){
+
+        $chart = new ComboChart();//new \CMEN\GoogleChartsBundle\GoogleCharts\Charts\Material\ColumnChart();
+
+        if($query->getQuery()->getResult()){
+
+            $data_header = array('Year');
+
+            /*Setting up the esps on header of graphic*/
+            foreach ($lotacoes as $k => $v){
+                array_push($data_header, $v['descricao']);
+            }
+
+            $result = array();
+
+            array_push($result, $data_header);
+
+            $qry = $query->getQuery()->getResult();
+
+            setlocale( LC_ALL, 'pt_BR', 'pt_BR.iso-8859-1', 'pt_BR.utf-8', 'portuguese' );
+            date_default_timezone_set( 'America/Sao_Paulo' );
+
+            $monthAnt = intval(20);
+
+            foreach ($qry as $k => $v) {
+
+                $keyesp = array_search($v['descricao'], $data_header);
+
+                $year = $v['ano'];
+
+                $monthNum  = intval($v['mes']);
+                $dateObj   = \DateTime::createFromFormat('!m', $monthNum);
+                $monthName = $year."/".strftime( '%b', $dateObj -> getTimestamp() );#$dateObj->format('M'); // March
+                $qtde = floatval($v['atos']);
+
+                if(empty($row_array)){
+                    $row_array = array($monthName);
+                    $monthAnt = intval($v['mes']);
+                }else{
+                    if($monthAnt != $monthNum){
+                        array_push($result, $row_array);
+                        $row_array = array($monthName);
+                        $monthAnt = intval($v['mes']);
+                    }
+                }
+
+                for($i = 1; $i < sizeof($data_header); $i++){
+
+                    if($keyesp == $i){
+                        $row_array[$i] = $qtde;
+                    }else if(!array_key_exists($i, $row_array)){
+                        $row_array[$i] = floatval(0);
+                    }
+
+                }
+
+            }
+
+            array_push($result, $row_array);
+
+            $chart->getData()->setArrayToDataTable(
+                $result
+            );
+
+            $chart->getOptions()->setTitle($type.": ".$value." - período: ".date("d/m/Y", strtotime($dateini))." a ".date("d/m/Y", strtotime($datefim)));
+            $chart->getOptions()
+                ->setFontSize(12)
+                ->setHeight(500)
+                ->setWidth(900);
+            $chart->getOptions()->getVAxis()->setTitle("Nº de Atos");
+            $chart->getOptions()->getHAxis()->setTitle("Ano/Mês");
+            $chart->getOptions()->getBar()->setGroupWidth('60%');
+            $chart->getOptions()->getLegend()->setPosition('right');
+            $chart->getOptions()->setSeriesType('bars');
+
+
+        }else{
+            $chart->getData()->setArrayToDataTable(array(["..."]));
+        }
+
+        return $chart;
+    }
+
+
     function getLineChart($query, $lotacoes, $dateini, $datefim, $type, $value){
 
         $chart = new LineChart();
@@ -1317,6 +1457,7 @@ class ProdutividadeAnalistaController extends Controller
                         $mesant = intval($v['mes']);
 
                         for($i = 1; $i < sizeof($esps); $i++){
+
                             if($key == $i){
                                 $value_array[$i] = floatval($v['atos']);
                             }else{

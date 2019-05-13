@@ -162,9 +162,27 @@
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ path("esp_produtividade_esp-reports") }}">Gráficos</a></li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">
+                                                Procurador
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu-right">
+                                                <li><a href="{{ path("esp_produtividade_esp-reports") }}">Gráficos</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a href="{{ path('esp_produtividade_esp-criticas') }}">Críticas</a></li>
+                                            </ul>
+                                        </li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="{{ path('esp_produtividade_esp-criticas') }}">Críticas</a></li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">
+                                                Analista
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu-right">
+                                                <li><a href="{{ path("esp_produtividade_analista_esp-reports") }}">Gráficos</a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="dropdown" role="presentation">
@@ -182,7 +200,17 @@
                                         <li><a href="{{ path('lotacao_index') }}">Especializadas (Lotações)</a></li>
                                     </ul>
                                 </li>
-
+                                <li class="dropdown" role="presentation">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Pessoal
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path("dai_rh_cadastro_index") }}">Cadastros</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{{ path('dai_rh_ausencia_index') }}">Afastamentos</a></li>
+                                    </ul>
+                                </li>
                             {% elseif 'ROLE_CHESP' in app.user.roles %}
 
                                 <li class="dropdown" role="presentation">
@@ -191,11 +219,30 @@
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ path("esp_produtividade_esp-reports") }}">Gráficos</a></li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">
+                                                Procurador
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu-right">
+                                                <li><a href="{{ path("esp_produtividade_esp-reports") }}">Gráficos</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a href="{{ path('esp_produtividade_esp-criticas') }}">Críticas</a></li>
+                                            </ul>
+                                        </li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="{{ path('esp_produtividade_esp-criticas') }}">Críticas</a></li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">
+                                                Analista
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu-right">
+                                                <li><a href="{{ path("esp_produtividade_analista_esp-reports") }}">Gráficos</a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
+
                                 <li class="dropdown" role="presentation">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                         Cadastros
@@ -236,6 +283,15 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path('esp_produtividade_analista_ato_index') }}">Atos</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown" role="presentation">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Relatório
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path("esp_produtividade_analista_esp-reports-analista") }}">Gráfico</a></li>
                                     </ul>
                                 </li>
 

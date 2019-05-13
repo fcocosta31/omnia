@@ -38,11 +38,11 @@ security:
         - { path: ^/dti/printers/status, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/home, roles: [ROLE_CGR, ROLE_DAI, ROLE_DTI, ROLE_ESP, ROLE_CHESP, ROLE_AESP, ROLE_ADMIN ] }
         - { path: ^/profile, roles: [ROLE_CGR, ROLE_DAI, ROLE_DTI, ROLE_ESP, ROLE_CHESP, ROLE_AESP, ROLE_ADMIN ] }
-        - { path: ^/dai, roles: ROLE_DAI }
+        - { path: ^/dai, roles: [ROLE_DAI, ROLE_CGR] }
         - { path: ^/dti, roles: ROLE_DTI }
         - { path: ^/esp/produtividade/analista, roles: [ROLE_CGR, ROLE_ESP, ROLE_CHESP, ROLE_AESP] }
         - { path: ^/esp/produtividade/ato, roles: [ROLE_CGR, ROLE_ESP, ROLE_CHESP] }
-        - { path: ^/esp/produtividade/rels, roles: [ROLE_CGR, ROLE_ESP, ROLE_CHESP] }
+        - { path: ^/esp/produtividade/rels, roles: [ROLE_CGR, ROLE_ESP, ROLE_CHESP, ROLE_AESP] }
         - { path: ^/esp/eleicao/voto, roles: [ROLE_CGR, ROLE_ESP, ROLE_CHESP] }
         - { path: ^/lotacao, roles: [ROLE_CGR, ROLE_ADMIN] }
         - { path: ^/esp, roles: [ROLE_CGR, ROLE_ADMIN] }
