@@ -23,6 +23,7 @@ use CMEN\GoogleChartsBundle\GoogleCharts\Options\Diff\DiffColumnChart\Diff;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Knp\Bundle\SnappyBundle\Snappy\Response\JpegResponse;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\Debug\DebugClassLoader;
@@ -158,6 +159,7 @@ class ProdutividadeAnalistaController extends Controller
 
     }
 
+
     /**
      * @Route("/esp/produtividade/analista/rels/esp-filter-reports", name="esp_produtividade_analista_esp-filter-reports")
      * @param Request $request
@@ -222,8 +224,9 @@ class ProdutividadeAnalistaController extends Controller
                             'dateini' => $dateini,
                             'datefim' => $datefim,
                         ))
-                        ->groupBy('b')
-                        ->orderBy('b.descricao');
+                        ->groupBy('d')
+                        ->orderBy('d.nome');
+
                 }else{
 
                     $query = $repository->createQueryBuilder('u')
@@ -309,16 +312,17 @@ class ProdutividadeAnalistaController extends Controller
                 }else{
 
                     $query = $repository->createQueryBuilder('u')
-                        ->select('b.nome as descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
-                        ->innerJoin('u.user', 'b', 'WITH', 'b.id = u.user')
-                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
-                        ->where('u.emissao between :dateini and :datefim')
+                        ->select('b.nome as descricao, COUNT(c.peso) as atos')
+                        ->innerJoin('u.user', 'b')
+                        ->andWhere('u.emissao between :dateini and :datefim')
+                        ->leftJoin('u.tipodeato', 'c')
                         ->setParameters(array(
                             'dateini' => $dateini,
                             'datefim' => $datefim,
                         ))
                         ->groupBy('b')
                         ->orderBy('b.nome');
+
                 }
 
 
@@ -823,8 +827,8 @@ class ProdutividadeAnalistaController extends Controller
                     break;
 
                 case '2':
-
-                    $qb = $em->getRepository(TipoDeAto::class)
+                    /*ENCONTRANDO O PROCURADOR CLICADO NO GRÁFICO DO ANALISTA*/
+                    $qb = $em->getRepository(User::class)
 
                         ->createQueryBuilder('u')
                         ->select('u.id')
@@ -835,17 +839,19 @@ class ProdutividadeAnalistaController extends Controller
                             )
                         )->getQuery()->getSingleResult();
 
-                    $tipodeato_id = $qb['id'];
+                    $procurador_id = $qb['id'];
 
                     $query = $em->createQueryBuilder()
                         ->select('u')
                         ->from(AtoAnalista::class, 'u')
                         ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
-                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
-                        ->where('c.id = :ato and u.user = :user and u.emissao between :dateini and :datefim')
+                        ->innerJoin('u.procurador', 'c', 'WITH', 'c.id = u.procurador')
+                        ->innerJoin('u.user', 'd', 'WITH', 'd.id = u.user')
+                        ->innerJoin('u.tipodeato', 'e', 'WITH', 'e.id = u.tipodeato')
+                        ->where('c.id = :procurador and d.id = :analista and u.emissao between :dateini and :datefim')
                         ->setParameters(array(
-                            'ato' => $tipodeato_id,
-                            'user' => intval($valuefilter),
+                            'procurador' => $procurador_id,
+                            'analista' => intval($valuefilter),
                             'dateini' => $dateinifilter,
                             'datefim' => $datefimfilter,
                         ))
@@ -886,7 +892,7 @@ class ProdutividadeAnalistaController extends Controller
 
         }else{
 
-            if($typefilter == '2'){
+            if($typefilter == '1'){
 
                 $qb = $em->getRepository(User::class)
 
@@ -899,16 +905,17 @@ class ProdutividadeAnalistaController extends Controller
                         )
                     )->getQuery()->getSingleResult();
 
-                $user_id = $qb['id'];
+                $procurador_id = $qb['id'];
 
                 $query = $em->createQueryBuilder()
                     ->select('u')
                     ->from(AtoAnalista::class, 'u')
                     ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
-                    ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
-                    ->where('u.user = :user and u.emissao between :dateini and :datefim')
+                    ->innerJoin('u.procurador', 'c', 'WITH', 'c.id = u.procurador')
+                    ->innerJoin('u.tipodeato', 'd', 'WITH', 'd.id = u.tipodeato')
+                    ->where('c.id = :procurador and u.emissao between :dateini and :datefim')
                     ->setParameters(array(
-                        'user' => $user_id,
+                        'procurador' => $procurador_id,
                         'dateini' => $dateinifilter,
                         'datefim' => $datefimfilter,
                     ))
@@ -1028,11 +1035,14 @@ class ProdutividadeAnalistaController extends Controller
                         ->orderBy('t.nome');
                     $result = $query->getQuery()->getResult();
                 }else{
-                    $repository = $em->getRepository(AtoAnalista::class);
+                    $repository = $em->getRepository(User::class);
                     $query = $repository->createQueryBuilder('u')
-                        ->select("DISTINCT t.id, t.nome as descricao")
-                        ->innerJoin('u.user', 't', 'WITH', 't.id = u.user')
-                        ->orderBy('t.nome');
+                        ->select("u.id, u.nome as descricao")
+                        ->where('u.cargo = :cargoid')
+                        ->setParameters(array(
+                            'cargoid' => 1,
+                        ))
+                        ->orderBy('u.nome');
                     $result = $query->getQuery()->getResult();
                 }
 
@@ -1250,11 +1260,16 @@ class ProdutividadeAnalistaController extends Controller
             $qry = $query->getQuery()->getResult();
             $totats = 0;
             foreach ($qry as $k => $v) {
+                $qtde = $v['atos'];
+                $floatvalue = floatval($qtde);
+                if($qtde == '0'){
+                    $floatvalue = 0;
+                }
                 array_push($result, [
                     $v['descricao'],
-                    floatval($v['atos']),
+                    $floatvalue,
                 ]);
-                $totats += floatval($v['atos']);
+                $totats += $floatvalue;
             }
 
             array_push($result, [

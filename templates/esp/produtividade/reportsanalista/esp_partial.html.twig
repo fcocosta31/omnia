@@ -31,11 +31,11 @@
 
         var selection = {{ chart.name }}.getSelection()[0].row;
         var valueselection = dataChartDiv_chart.getValue(selection, 0);
-        var typefilter = $("#esp_type_filter").val();
+        var typefilter = $("#esp_type_filter_analista").val();
         var valuefilter = $("#esp_value_filter").val();
         var dateinifilter = $("#_dateini").val();
         var datefimfilter = $("#_datefim").val();
-        var url = "{{ path('esp_produtividade_list-acts') }}";
+        var url = "{{ path('esp_produtividade_analista_list-acts') }}";
 
         onChartClickItem(url, typefilter, valuefilter, valueselection, dateinifilter, datefimfilter);
 
@@ -47,7 +47,7 @@
     function exportImageToClipBoard() {
         $.ajax({
            type: "POST",
-           url: "{{ path('esp_produtividade_export-image-chart') }}",
+           url: "{{ path('esp_produtividade_analista_export-image-chart') }}",
            data: {imageData:imgData},
            success: function (content) {
                $("#div_img").html(content);

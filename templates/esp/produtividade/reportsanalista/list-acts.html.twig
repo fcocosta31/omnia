@@ -12,11 +12,9 @@
                 <table class="table table-hover datatables">
                     <thead class="rows">
                     <tr>
-                        <th>Date</th>
-                        <th>Especializada</th>
+                        <th>Data</th>
+                        <th>Procurador</th>
                         <th>Tipo de Ato</th>
-                        <th>Assunto</th>
-                        <th>Tipo de Processo</th>
                         <th>Nº Processo</th>
                         <th>#</th>
                     </tr>
@@ -25,30 +23,24 @@
                     {% for i in acts %}
                         <tr>
                             <td>{{ i.emissao|date('d/m/Y') }}</td>
-                            <td>{{ i.lotacao.descricao }}</td>
+                            <td>{{ i.procurador.nome }}</td>
                             <td>{{ i.tipodeato.descricao }}</td>
-                            <td>{{ i.assunto }}</td>
-                            {% set processo = '' %}
-                            {% if i.tipodeprocesso is not null %}
-                                {% set processo = i.tipodeprocesso.descricao %}
-                            {% endif %}
-                            <td>{{ processo }}</td>
-                            <td>{{ i.numerodoprocesso }}</td>
-                            <td><a href="#!" onclick='viewDetailsAct("{{ path('esp_produtividade_visualizar-ato', {'id':i.id}) }}")'
+                            <td>{{ i.numero }}</td>
+                            <td><a href="#!" onclick='viewDetailsAct("{{ path('esp_produtividade_analista_visualizar-ato', {'id':i.id}) }}")'
                                    class="btn btn-default btn-sm">View</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="7"></td>
+                        <td colspan="5"></td>
                     </tr>
                     </tfoot>
                 </table>
             </div>
 
         </div>
-        <input type="button" class="btn btn-success btn-sm" value="Voltar" onclick="turnBackToListActs('{{ path('esp_produtividade_esp-filter-reports') }}')">
+        <input type="button" class="btn btn-success btn-sm" value="Voltar" onclick="turnBackToListActs('{{ path('esp_produtividade_analista_esp-filter-reports') }}')">
         <br><br>
     </div>
 </div>
