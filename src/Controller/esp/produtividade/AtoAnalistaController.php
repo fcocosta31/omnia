@@ -64,7 +64,7 @@ class AtoAnalistaController extends Controller
             ->from(AtoAnalista::class, 'u')
             ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
             ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
-            ->innerJoin('u.procurador', 'd', 'WITH', 'd.id = u.procurador')
+            ->leftJoin('u.procurador', 'd', 'WITH', 'd.id = u.procurador')
             ->where('u.user = :userid and u.emissao between :dateini and :datefim')
             ->setParameters(array(
                 'userid' => $user->getId(),
@@ -149,7 +149,7 @@ class AtoAnalistaController extends Controller
                             ->orderBy('u.nome', 'ASC');
                     },
                     'choice_label' => 'nome',
-                    'required' => true,
+                    'required' => false,
                     'empty_data' => null
                 )
             )

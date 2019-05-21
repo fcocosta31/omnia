@@ -38,7 +38,11 @@
                 </tr>
                 <tr>
                     <th>Procurador: </th>
+                    {% if i.procurador == null %}
+                    <td>Procurador não identificado</td>
+                    {% else %}
                     <td>{{ i.procurador.nome }}</td>
+                    {% endif %}
                 </tr>
                 <tr>
                     <th>Descrição: </th>

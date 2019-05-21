@@ -349,7 +349,7 @@ class ProdutividadeAnalistaController extends Controller
 
                 $query = $repository->createQueryBuilder('u')
                     ->select('b.nome as descricao, COUNT(c.peso) as atos')
-                    ->innerJoin('u.procurador', 'b', 'WITH', 'b.id = u.procurador')
+                    ->leftJoin('u.procurador', 'b', 'WITH', 'b.id = u.procurador')
                     ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
                     ->where('u.user = :usuario and u.emissao between :dateini and :datefim')
                     ->setParameters(array(
@@ -654,7 +654,7 @@ class ProdutividadeAnalistaController extends Controller
 
         $query1 = $repository->createQueryBuilder('u')
             ->select('b.nome as descricao, COUNT(c.peso) as atos')
-            ->innerJoin('u.procurador', 'b', 'WITH', 'b.id = u.procurador')
+            ->leftJoin('u.procurador', 'b', 'WITH', 'b.id = u.procurador')
             ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
             ->where('u.user = :usuario and u.emissao between :dateini and :datefim')
             ->setParameters(array(
