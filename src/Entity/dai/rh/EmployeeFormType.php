@@ -100,6 +100,7 @@ class EmployeeFormType extends AbstractType
             ))
             ->add('fone', TextType::class, array(
                 'attr' => ['data-mask' => '(00) 00000-0000', 'placeholder' => '(00) 00000-0000'],
+                'required' => false,
             ))
             ->add('email', EmailType::class, array(
                 'attr' => ['placeholder' => 'email@example.com'],
@@ -195,7 +196,8 @@ class EmployeeFormType extends AbstractType
                 'format' => 'dd/MM/yyyy',
                 'attr' => ['class' => 'js-datepicker',
                     'data-mask' => '00/00/0000',
-                    'placeholder' => '00/00/0000']
+                    'placeholder' => '00/00/0000'],
+                'required' => false
             ))
             ->add('cpf', TextType::class, array(
                 'attr' => ['data-mask' => '000.000.000-00', 'placeholder' => '000.000.000-00'],

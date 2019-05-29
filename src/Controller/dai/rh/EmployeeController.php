@@ -187,13 +187,15 @@ class EmployeeController extends Controller
     /**
      * @Route ("/dai/rh/cadastro", name="dai_rh_cadastro_index")
      * @return Response|\Symfony\Component\HttpFoundation\Response
+     * @param Request $request
      */
-    public function index(){
-        $employess = $this->getDoctrine()
-            ->getRepository(Employee::class)
+    public function index(Request $request){
+
+        $result = $this->getDoctrine()->getRepository(Employee::class)
             ->findAll();
+
         return $this->render("dai/rh/cadastro/index.html.twig", array(
-            'empls' => $employess
+            'empls' => $result
         ));
     }
 

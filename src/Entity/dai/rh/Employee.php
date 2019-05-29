@@ -19,57 +19,86 @@ class Employee{
 
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Id
      * @ORM\Column(type="integer", nullable=false)
      */
     protected $matricula;
 
     /**
+     * @Assert\NotNull(
+     *     message = "Selecione uma opção!"
+     * )
      * @ORM\ManyToOne(targetEntity="Classificacao", inversedBy="employees")
      * @ORM\JoinColumn(name="classificacao_id", referencedColumnName="id")
      */
     protected $classificacao;
 
     /**
+     * @Assert\NotNull(
+     *     message = "Selecione uma opção!"
+     * )
      * @ORM\ManyToOne(targetEntity="Cargo", inversedBy="employees")
      * @ORM\JoinColumn(name="cargo_id", referencedColumnName="id")
      */
     protected $cargo;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="nome", type="string", nullable=true)
-     * @Assert\NotBlank()
      */
     protected $nome;
     
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="endereco", type="string", nullable=true)
      */
     protected $endereco;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="numero", type="string", nullable=true, length=10)
      */
     protected $numero;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="bairro", type="string", nullable=true)
      */
     protected $bairro;
 
     /**
+     * @Assert\NotNull(
+     *     message = "Selecione uma opção!"
+     * )
      * @ORM\ManyToOne(targetEntity="Cidade", inversedBy="employees")
      * @ORM\JoinColumn(name="cidade_id", referencedColumnName="codigo")
      */
     protected $cidade;
 
     /**
+     * @Assert\NotNull(
+     *     message = "Selecione uma opção!"
+     * )
      * @ORM\ManyToOne(targetEntity="Estado", inversedBy="employees")
      * @ORM\JoinColumn(name="estado_id", referencedColumnName="id")
      */
     protected $uf;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="cep", type="string", nullable=true, length=9)
      */
     protected $cep;
@@ -85,6 +114,9 @@ class Employee{
     protected $email;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="mae", type="string", nullable=true)
      */
     protected $mae;
@@ -95,6 +127,9 @@ class Employee{
     protected $pai;
 
     /**
+     * @Assert\NotNull(
+     *     message = "Selecione uma opção!"
+     * )
      * @ORM\ManyToOne(targetEntity="Escolaridade", inversedBy="employees")
      * @ORM\JoinColumn(name="escolaridade_id", referencedColumnName="id")
      */
@@ -106,29 +141,44 @@ class Employee{
     protected $especializacoes;
 
     /**
+     * @Assert\NotNull(
+     *     message = "Selecione uma opção!"
+     * )
      * @ORM\ManyToOne(targetEntity="Estadocivil", inversedBy="employees")
      * @ORM\JoinColumn(name="estadocivil_id", referencedColumnName="id")
      */
     protected $estadocivil;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="datanascimento", type="date", nullable=true)
      */
     protected $datanascimento;
 
     /**
+     * @Assert\NotNull(
+     *     message = "Selecione uma opção!"
+     * )
      * @ORM\ManyToOne(targetEntity="Cidade", inversedBy="employeesnatu")
      * @ORM\JoinColumn(name="cidadenatu_id", referencedColumnName="codigo")
      */
     protected $naturalidade;
 
     /**
+     * @Assert\NotNull(
+     *     message = "Selecione uma opção!"
+     * )
      * @ORM\ManyToOne(targetEntity="Estado", inversedBy="employeesnatu")
      * @ORM\JoinColumn(name="estadonatu_id", referencedColumnName="id")
      */
     protected $ufnatu;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="sexo", type="string", nullable=true)
      */
     protected $sexo;
@@ -144,11 +194,17 @@ class Employee{
     protected $categoria;
     
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="rg", type="string", nullable=true, length=20)
      */
     protected $rg;
     
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="orgaoemissor", type="string", nullable=true, length=140)
      */
     protected $orgaoemissor;
@@ -159,12 +215,18 @@ class Employee{
     protected $dataemissao;
 
     /**
+     * @Assert\NotNull(
+     *     message = "Selecione uma opção!"
+     * )
      * @ORM\ManyToOne(targetEntity="Estado", inversedBy="employeesrg")
      * @ORM\JoinColumn(name="estadorg_id", referencedColumnName="id")
      */
     protected $ufrg;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Id
      * @ORM\Column(name="cpf", type="string", nullable=false, length=20)
      */
@@ -237,6 +299,9 @@ class Employee{
     protected $conta;
 
     /**
+     * @Assert\NotNull(
+     *     message = "Selecione uma opção!"
+     * )
      * @ORM\ManyToOne(targetEntity="App\Entity\Lotacao", inversedBy="employees")
      * @ORM\JoinColumn(name="departamento_id", referencedColumnName="id")
      */
@@ -254,6 +319,9 @@ class Employee{
     protected $cedido;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="dataposse", type="date", nullable=true)
      */
     protected $dataposse;

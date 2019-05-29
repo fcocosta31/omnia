@@ -1336,7 +1336,8 @@ class ProdutividadeAnalistaController extends Controller
                 ->setFontSize(12)
                 ->setHeight(500)
                 ->setWidth(900);
-            $chart->getOptions()->getVAxis()->setTitle("Produtividade");
+            $chart->getOptions()->getVAxis()->setTitle("Nº de Atos");
+            $chart->getOptions()->getVAxis()->setMinValue(0);
             $chart->getOptions()->getBar()->setGroupWidth('60%');
             $chart->getOptions()->getLegend()->setPosition('none');
             $chart->getOptions()->setSeriesType('bars');
