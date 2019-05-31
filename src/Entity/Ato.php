@@ -44,11 +44,17 @@ class Ato
     protected $favoravel;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="emissao", type="date", nullable=false)
      */
     protected $emissao;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="assunto", type="string", nullable=false)
      */
     protected $assunto;
@@ -59,6 +65,9 @@ class Ato
     protected $descricao;
 
     /**
+     * @Assert\NotNull(
+     *     message = "Selecione uma opção!"
+     * )
      * @ORM\ManyToOne(targetEntity="TipoDeAto", inversedBy="atos")
      * @ORM\JoinColumn(name="tipodeato_id", referencedColumnName="id")
      */

@@ -32,22 +32,34 @@ class Ausencia
     protected $descricao;
 
     /**
+     * @Assert\NotNull(
+     *     message = "Selecione uma opção!"
+     * )
      * @ORM\ManyToOne(targetEntity="Tipoausencia", inversedBy="ausencias")
      * @ORM\JoinColumn(name="tipoausencia_id", referencedColumnName="id")
      */
     protected $tipoausencia;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="dataini", type="date", nullable=true)
      */
     protected $dataini;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      * @ORM\Column(name="datafim", type="date", nullable=true)
      */
     protected $datafim;
 
     /**
+     * @Assert\NotNull(
+     *     message = "Selecione uma opção!"
+     * )
      * @ORM\ManyToOne(targetEntity="Employee", inversedBy="ausencias")
      * @ORM\JoinColumns(
      *      @ORM\JoinColumn(name="employee_matricula", referencedColumnName="matricula"),

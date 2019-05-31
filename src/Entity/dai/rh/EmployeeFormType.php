@@ -291,7 +291,8 @@ class EmployeeFormType extends AbstractType
                 'empty_data' => null
             ))->add('files', FileType::class, array(
                 'multiple' => true,
-                'required' => false
+                'required' => false,
+                'attr' => array( 'accept' => 'application/pdf',)
             ));
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetDataUf'));

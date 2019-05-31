@@ -1093,6 +1093,7 @@ class ProdutividadeController extends Controller
             $chart->getOptions()->setHeight(500);
             $chart->getOptions()->setWidth(900);
             $chart->getOptions()->getLegend()->setPosition('right');
+            $chart->getOptions()->setIs3D(true);
         }else{
             $chart->getData()->setArrayToDataTable(array(["..."]));
         }
@@ -1160,6 +1161,7 @@ class ProdutividadeController extends Controller
             $chart->getOptions()->setFontSize(12)
                 ->setHeight(500)
                 ->setWidth(900);
+            $chart->getOptions()->getAnimation()->setDuration(1000)->setEasing('out')->setStartup(true);
         }else{
             $chart->getData()->setArrayToDataTable(array(["..."]));
         }
@@ -1188,6 +1190,7 @@ class ProdutividadeController extends Controller
             $chart->getOptions()->getBar()->setGroupWidth('60%');
             $chart->getOptions()->getLegend()->setPosition('none');
             $chart->getOptions()->setSeriesType('bars');
+            $chart->getOptions()->getAnimation()->setDuration(1000)->setEasing('out')->setStartup(true);
         }else{
             $chart->getData()->setArrayToDataTable(array(["..."]));
         }

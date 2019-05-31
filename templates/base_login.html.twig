@@ -66,7 +66,11 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href="{{ path('index_geral') }}" class="navbar-brand" title="Home">
-                    <i class="glyphicon glyphicon-home"></i>
+                    <img alt="" id="topo-nav-img" src="{{ asset('uploads/images/logopgm.jpg')}}"
+                         class="img-responsive" float="left">
+
+                    <!-- <i class="glyphicon glyphicon-home small"></i> -->
+
                 </a>
             </div>
 
@@ -109,14 +113,14 @@
          </div>
         </main>
 
-        <footer class="navbar-custom">
+        <footer class="navbar-default">
         {% block footer %}
             <div class="container-fluid">
                 <div class="container-fluid" id="footer-container-img" style="color: white">
-                <img alt="" id="topo-img" src="{{ asset('uploads/images/logopgm.jpg')}}"
-                     class="img-responsive" float="left">
-                    <span class="pull-right footer-text-white">
-                        © 2018 - PGM, Todos os direitos reservados<br>
+                    <!-- <img alt="" id="topo-img" src="{{ asset('uploads/images/logopgm.jpg')}}"
+                     class="img-responsive" float="left"> -->
+                    <span class="pull-right footer-text-blue">
+                        © 2018 - PGM Teresina-PI, Todos os direitos reservados<br>
                         Desenvolvido por Francisco Costa.
                     </span>
                 </div>
