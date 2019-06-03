@@ -1426,7 +1426,7 @@ class ProdutividadeAnalistaController extends Controller
             $chart->getOptions()->getBar()->setGroupWidth('60%');
             $chart->getOptions()->getLegend()->setPosition('right');
             $chart->getOptions()->setSeriesType('bars');
-
+            $chart->getOptions()->getAnimation()->setDuration(1000)->setEasing('out')->setStartup(true);
 
         }else{
             $chart->getData()->setArrayToDataTable(array(["..."]));

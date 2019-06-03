@@ -74,24 +74,28 @@ $("#esp_form_filter").on("submit", function (e) {
 $("#esp_type_filter").change(function () {
     var filtertype = $(this).val();
     var urlpath = $(this).attr('base-url');
+    var formValues = $("#esp_value_filter");
+    formValues.addClass("loading");
+
     if(filtertype != 9){
         $.ajax({
             url: urlpath,
             type: "GET",
             data: {_filterType:filtertype},
             success: function (result) {
-                var formValues = $("#esp_value_filter");
+
                 formValues.empty().html(' ');
                 formValues.append('<option value="0">Todos</option>');
                 $.each(result, function (i, item) {
                     formValues.append('<option value="'+item.id+'">'+item.descricao+'</option>');
                 });
+                formValues.removeClass("loading");
             }
         });
     }else{
-        var formValues = $("#esp_value_filter");
         formValues.empty().html(' ');
         formValues.append('<option value="0">Todos</option>');
+        formValues.removeClass("loading");
     }
 });
 
@@ -99,18 +103,21 @@ $("#esp_type_filter").change(function () {
 $("#esp_type_filter_analista").change(function () {
     var filtertype = $(this).val();
     var urlpath = $(this).attr('base-url');
-
+    var formValues = $("#esp_value_filter");
+    formValues.addClass("loading");
     $.ajax({
         url: urlpath,
         type: "GET",
         data: {_filterType:filtertype},
         success: function (result) {
-            var formValues = $("#esp_value_filter");
+
             formValues.empty().html(' ');
+
             formValues.append('<option value="0">Todos</option>');
             $.each(result, function (i, item) {
                 formValues.append('<option value="'+item.id+'">'+item.descricao+'</option>');
             });
+            formValues.removeClass("loading");
         }
     });
 
@@ -119,18 +126,22 @@ $("#esp_type_filter_analista").change(function () {
 $("#employee_form_uf").change(function () {
     var ufSelector = $(this).val();
     var urlpath = routeCidadesPorEstado;
+    var cidadeSelector = $("#employee_form_cidade");
+    cidadeSelector.addClass("loading");
+
     $.ajax({
         url: urlpath,
         type: "GET",
         dataType: "JSON",
         data: {uf:ufSelector},
         success: function (cidades) {
-            var cidadeSelector = $("#employee_form_cidade");
+
             cidadeSelector.html('');
             cidadeSelector.append('<option value>Selecione uma cidade...</option>');
             $.each(cidades, function (i, item) {
                 cidadeSelector.append('<option value="'+item.codigo+'">'+item.nome+'</option>');
             });
+            cidadeSelector.removeClass("loading");
         }
     });
 });
@@ -138,18 +149,22 @@ $("#employee_form_uf").change(function () {
 $("#employee_form_ufnatu").change(function () {
     var ufSelector = $(this).val();
     var urlpath = routeCidadesPorEstado;
+    var cidadeSelector = $("#employee_form_naturalidade");
+    cidadeSelector.addClass("loading");
+
     $.ajax({
         url: urlpath,
         type: "GET",
         dataType: "JSON",
         data: {uf:ufSelector},
         success: function (cidades) {
-            var cidadeSelector = $("#employee_form_naturalidade");
+
             cidadeSelector.html('');
             cidadeSelector.append('<option value>Selecione uma cidade...</option>');
             $.each(cidades, function (i, item) {
                 cidadeSelector.append('<option value="'+item.codigo+'">'+item.nome+'</option>');
             });
+            cidadeSelector.removeClass("loading");
         }
     });
 });
