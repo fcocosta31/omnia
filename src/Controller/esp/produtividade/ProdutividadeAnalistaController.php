@@ -813,12 +813,12 @@ class ProdutividadeAnalistaController extends Controller
                     $query = $em->createQueryBuilder()
                         ->select('u')
                         ->from(AtoAnalista::class, 'u')
-                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.procurador', 'b', 'WITH', 'b.id = u.procurador')
                         ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
-                        ->where('u.user = :user and u.lotacao = :espec and u.emissao between :dateini and :datefim')
+                        ->where('u.user = :analista and u.procurador = :procurador and u.emissao between :dateini and :datefim')
                         ->setParameters(array(
-                            'user' => intval($user_id),
-                            'espec' => intval($valuefilter),
+                            'analista' => intval($user_id),
+                            'procurador' => intval($valuefilter),
                             'dateini' => $dateinifilter,
                             'datefim' => $datefimfilter,
                         ))
@@ -832,10 +832,10 @@ class ProdutividadeAnalistaController extends Controller
 
                         ->createQueryBuilder('u')
                         ->select('u.id')
-                        ->where('u.descricao = :descricao')
+                        ->where('u.nome = :username')
                         ->setParameters(
                             array(
-                                'descricao' => $valueselection
+                                'username' => $valueselection
                             )
                         )->getQuery()->getSingleResult();
 
@@ -844,14 +844,12 @@ class ProdutividadeAnalistaController extends Controller
                     $query = $em->createQueryBuilder()
                         ->select('u')
                         ->from(AtoAnalista::class, 'u')
-                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
-                        ->innerJoin('u.procurador', 'c', 'WITH', 'c.id = u.procurador')
-                        ->innerJoin('u.user', 'd', 'WITH', 'd.id = u.user')
-                        ->innerJoin('u.tipodeato', 'e', 'WITH', 'e.id = u.tipodeato')
-                        ->where('c.id = :procurador and d.id = :analista and u.emissao between :dateini and :datefim')
+                        ->innerJoin('u.procurador', 'b', 'WITH', 'b.id = u.procurador')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->where('u.user = :analista and u.procurador = :procurador and u.emissao between :dateini and :datefim')
                         ->setParameters(array(
-                            'procurador' => $procurador_id,
                             'analista' => intval($valuefilter),
+                            'procurador' => intval($procurador_id),
                             'dateini' => $dateinifilter,
                             'datefim' => $datefimfilter,
                         ))
@@ -888,38 +886,126 @@ class ProdutividadeAnalistaController extends Controller
                         ->orderBy('u.emissao', 'DESC');
                     break;
 
+                default:
+                    $qb = $em->getRepository(User::class)
+
+                        ->createQueryBuilder('u')
+                        ->select('u.id')
+                        ->where('u.nome = :username')
+                        ->setParameters(
+                            array(
+                                'username' => $valueselection
+                            )
+                        )->getQuery()->getSingleResult();
+
+                    $user_id = $qb['id'];
+
+                    $query = $em->createQueryBuilder()
+                        ->select('u')
+                        ->from(AtoAnalista::class, 'u')
+                        ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->where('b.id = :lotacao and u.user = :user and u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'lotacao' => intval($valuefilter),
+                            'user' => $user_id,
+                            'dateini' => $dateinifilter,
+                            'datefim' => $datefimfilter,
+                        ))
+                        ->orderBy('u.emissao', 'DESC');
+                    break;
+
             }
 
         }else{
 
-            if($typefilter == '1'){
+            switch ($typefilter){
 
-                $qb = $em->getRepository(User::class)
+                case '1':
 
-                    ->createQueryBuilder('u')
-                    ->select('u.id')
-                    ->where('u.nome = :username')
-                    ->setParameters(
-                        array(
-                            'username' => $valueselection
-                        )
-                    )->getQuery()->getSingleResult();
+                    $qb = $em->getRepository(User::class)
 
-                $procurador_id = $qb['id'];
+                        ->createQueryBuilder('u')
+                        ->select('u.id')
+                        ->where('u.nome = :username')
+                        ->setParameters(
+                            array(
+                                'username' => $valueselection
+                            )
+                        )->getQuery()->getSingleResult();
 
-                $query = $em->createQueryBuilder()
-                    ->select('u')
-                    ->from(AtoAnalista::class, 'u')
-                    ->innerJoin('u.lotacao', 'b', 'WITH', 'b.id = u.lotacao')
-                    ->innerJoin('u.procurador', 'c', 'WITH', 'c.id = u.procurador')
-                    ->innerJoin('u.tipodeato', 'd', 'WITH', 'd.id = u.tipodeato')
-                    ->where('c.id = :procurador and u.emissao between :dateini and :datefim')
-                    ->setParameters(array(
-                        'procurador' => $procurador_id,
-                        'dateini' => $dateinifilter,
-                        'datefim' => $datefimfilter,
-                    ))
-                    ->orderBy('u.emissao', 'DESC');
+                    $user_id = $qb['id'];
+
+                    $query = $em->createQueryBuilder()
+                        ->select('u')
+                        ->from(AtoAnalista::class, 'u')
+                        ->innerJoin('u.procurador', 'b', 'WITH', 'b.id = u.procurador')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->where('u.procurador = :procurador and u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'procurador' => intval($user_id),
+                            'dateini' => $dateinifilter,
+                            'datefim' => $datefimfilter,
+                        ))
+                        ->orderBy('u.emissao', 'DESC');
+
+                    break;
+
+                case '2':
+                    /*ENCONTRANDO O ANALISTA CLICADO NO GRÁFICO*/
+                    $qb = $em->getRepository(User::class)
+
+                        ->createQueryBuilder('u')
+                        ->select('u.id')
+                        ->where('u.nome = :username')
+                        ->setParameters(
+                            array(
+                                'username' => $valueselection
+                            )
+                        )->getQuery()->getSingleResult();
+
+                    $analista_id = $qb['id'];
+
+                    $query = $em->createQueryBuilder()
+                        ->select('u')
+                        ->from(AtoAnalista::class, 'u')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->where('u.user = :analista and u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'analista' => intval($analista_id),
+                            'dateini' => $dateinifilter,
+                            'datefim' => $datefimfilter,
+                        ))
+                        ->orderBy('u.emissao', 'DESC');
+                    break;
+
+                case '3':
+
+                    $qb = $em->getRepository(TipoDeAto::class)
+
+                        ->createQueryBuilder('u')
+                        ->select('u.id')
+                        ->where('u.descricao like :descricao')
+                        ->setParameters(
+                            array(
+                                'descricao' => "%".$valueselection."%"
+                            )
+                        )->getQuery()->getSingleResult();
+
+                    $ato_id = $qb['id'];
+
+                    $query = $em->createQueryBuilder()
+                        ->select('u')
+                        ->from(AtoAnalista::class, 'u')
+                        ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
+                        ->where('u.tipodeato = :ato and u.emissao between :dateini and :datefim')
+                        ->setParameters(array(
+                            'ato' => intval($ato_id),
+                            'dateini' => $dateinifilter,
+                            'datefim' => $datefimfilter,
+                        ))
+                        ->orderBy('u.emissao', 'DESC');
+                    break;
             }
         }
 

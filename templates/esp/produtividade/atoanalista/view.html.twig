@@ -12,8 +12,12 @@
                     <td>{{ i.lotacao.descricao }}</td>
                 </tr>
                 <tr>
-                    <th>Procurador: </th>
+                    <th>Analista: </th>
                     <td>{{ i.user.nome }}</td>
+                </tr>
+                <tr>
+                    <th>Procurador: </th>
+                    <td>{{ i.procurador.nome }}</td>
                 </tr>
                 <tr>
                     <th>Data do Registro: </th>
@@ -42,7 +46,7 @@
 
             {% endfor %}
             </table>
-            <input type="button" class="btn btn-success btn-sm" value="Voltar" onclick="turnBackToListActs('{{ path('esp_produtividade_list-acts') }}')">
+            <input type="button" class="btn btn-success btn-sm" value="Voltar" onclick="turnBackToListActs('{{ path('esp_produtividade_analista_list-acts') }}')">
             <br><br>
         </div>
     </div>

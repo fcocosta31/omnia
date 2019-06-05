@@ -13,6 +13,7 @@
                     <thead class="rows">
                     <tr>
                         <th>Data</th>
+                        <th>Analista</th>
                         <th>Procurador</th>
                         <th>Tipo de Ato</th>
                         <th>Nº Processo</th>
@@ -23,6 +24,7 @@
                     {% for i in acts %}
                         <tr>
                             <td>{{ i.emissao|date('d/m/Y') }}</td>
+                            <td>{{ i.user.nome }}</td>
                             <td>{{ i.procurador.nome }}</td>
                             <td>{{ i.tipodeato.descricao }}</td>
                             <td>{{ i.numero }}</td>
@@ -33,7 +35,7 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="5"></td>
+                        <td colspan="6"></td>
                     </tr>
                     </tfoot>
                 </table>
