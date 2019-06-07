@@ -1,7 +1,6 @@
 require('../js/app.css');
 require('../js/jquery.mask.js');
 
-
 $(document).ready(function () {
 
     $('.js-datepicker').datepicker({
@@ -46,7 +45,6 @@ $(document).ready(function () {
             closeButton:false
         });
     });
-
 
 });
 

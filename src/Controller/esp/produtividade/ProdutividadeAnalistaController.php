@@ -969,6 +969,7 @@ class ProdutividadeAnalistaController extends Controller
                     $query = $em->createQueryBuilder()
                         ->select('u')
                         ->from(AtoAnalista::class, 'u')
+                        ->leftJoin('u.procurador', 'b', 'WITH', 'b.id = u.procurador')
                         ->innerJoin('u.tipodeato', 'c', 'WITH', 'c.id = u.tipodeato')
                         ->where('u.user = :analista and u.emissao between :dateini and :datefim')
                         ->setParameters(array(

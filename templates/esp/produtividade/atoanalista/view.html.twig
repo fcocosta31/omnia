@@ -17,7 +17,11 @@
                 </tr>
                 <tr>
                     <th>Procurador: </th>
-                    <td>{{ i.procurador.nome }}</td>
+                    {% if i.procurador != null %}
+                        <td>{{ i.procurador.nome }}</td>
+                    {% else %}
+                        <td>Não identificado</td>
+                    {% endif %}
                 </tr>
                 <tr>
                     <th>Data do Registro: </th>
