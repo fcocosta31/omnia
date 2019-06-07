@@ -3501,3 +3501,11 @@ cf12e9,127.0.0.1,GET,http://localhost:8000/dai/rh/cadastro,1559917518,,200
 28005d,127.0.0.1,GET,http://localhost:8000/dai/rh/cadastro,1559917642,,200
 1c3414,127.0.0.1,GET,http://localhost:8000/logout,1559917747,,302
 571857,127.0.0.1,GET,http://localhost:8000/login,1559917747,,200
+aa560e,127.0.0.1,GET,http://localhost:8000/,1559918026,,302
+0eac6f,127.0.0.1,GET,http://localhost:8000/login,1559918026,,200
+825fe9,127.0.0.1,POST,http://localhost:8000/login_check,1559918029,,302
+5bde91,127.0.0.1,GET,http://localhost:8000/home,1559918029,,200
+396c65,127.0.0.1,GET,http://localhost:8000/dai/rh/cadastro,1559918032,,200
+af1709,127.0.0.1,GET,http://localhost:8000/esp/produtividade/analista/rels/esp-reports,1559918079,,200
+a2a15f,127.0.0.1,POST,http://localhost:8000/esp/produtividade/analista/rels/esp-filter-reports,1559918084,,200
+abad87,127.0.0.1,POST,http://localhost:8000/esp/produtividade/analista/rels/list-acts,1559918087,,200
