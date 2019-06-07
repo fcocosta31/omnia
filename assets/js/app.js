@@ -1,13 +1,16 @@
 require('../js/app.css');
 require('../js/jquery.mask.js');
 
+var table;
+var arraysize;
+
 $(document).ready(function () {
 
     $('.js-datepicker').datepicker({
         format: 'dd/mm/yyyy'
     });
 
-    $('.datatables').DataTable({
+    table = $('.datatables').DataTable({
         lengthMenu: [[5, 10, 15, -1], [5, 10, 15, "Tudo"]],
         stateSave: true,
         language: {
@@ -46,7 +49,83 @@ $(document).ready(function () {
         });
     });
 
+    $("#_btn-gera-pdf-employees").on('click', function () {
+
+        var doc = new jsPDF('landscape');
+        doc.setFontSize(10);
+        doc.setFontStyle('arial');
+        var titletext = "LISTAGEM DE SERVIDORES, ESTAGIÁRIOS, CONTRATADOS...";
+
+        doc.text(15,15,titletext);
+        var pdfHead = headerRows($("#_table_employees thead tr th"));
+        var count = arraysize;
+        var pdfBody = [];
+
+        table.rows().iterator('row', function (context, index) {
+            var $data = $(this.row(index).node());
+            var $columns = $data.find('td');
+            var rowBody = {};
+            $.each($columns, function (i, item) {
+                if(i < count){
+                    rowBody[i] = item.innerHTML;
+                }
+            });
+            pdfBody.push(rowBody);
+        });
+
+        doc.autoTable({
+            head: pdfHead,
+            body: pdfBody,
+            startY: 20,
+            /* apply styling to table body */
+            bodyStyles: {
+                valign: 'top'
+            },
+            /* apply global styling */
+            styles: {
+                cellWidth: 'wrap',
+                rowPageBreak: 'auto',
+                halign: 'left'
+            },
+            /* apply styling specific to table columns */
+            columnStyles: {
+                2: {
+                    cellWidth: 'auto'
+                },
+                3: {
+                    cellWidth: 'auto'
+                },
+                4: {
+                    cellWidth: 'auto'
+                },
+                5: {
+                    cellWidth: 'auto'
+                }
+            }
+        });
+
+        doc.save('listagem-de-pessoal.pdf');
+    });
+
 });
+
+function headerRows(table) {
+
+    var header = [];
+    var row = {};
+    var index = 0;
+    $(table).each(function () {
+        if($(this).text() != '#'){
+            row[index] = $(this).text();
+            index++;
+        }
+    });
+    arraysize = index;
+    header.push(row);
+
+    return header;
+};
+
 
 function pad(s) { return (s < 10) ? '0' + s : s; }
 
