@@ -1091,7 +1091,7 @@ class ProdutividadeController extends Controller
             $chart->getOptions()->setFontSize(13);
             $chart->getOptions()->setTitle($type . ": " . $value . " - período: " . date("d/m/Y", strtotime($dateini)) . " a " . date("d/m/Y", strtotime($datefim)));
             $chart->getOptions()->setHeight(500);
-            $chart->getOptions()->setWidth(900);
+            $chart->getOptions()->setWidth('auto');
             $chart->getOptions()->getLegend()->setPosition('right');
             $chart->getOptions()->setIs3D(true);
         }else{
@@ -1160,7 +1160,7 @@ class ProdutividadeController extends Controller
             $chart->getOptions()->getLegend()->setPosition('none');
             $chart->getOptions()->setFontSize(12)
                 ->setHeight(500)
-                ->setWidth(900);
+                ->setWidth('auto');
             $chart->getOptions()->getAnimation()->setDuration(1000)->setEasing('out')->setStartup(true);
         }else{
             $chart->getData()->setArrayToDataTable(array(["..."]));
@@ -1185,7 +1185,7 @@ class ProdutividadeController extends Controller
             $chart->getOptions()
                 ->setFontSize(12)
                 ->setHeight(500)
-                ->setWidth(900);
+                ->setWidth('auto');
             $chart->getOptions()->getVAxis()->setTitle("Produtividade");
             $chart->getOptions()->getBar()->setGroupWidth('60%');
             $chart->getOptions()->getLegend()->setPosition('none');
@@ -1279,7 +1279,7 @@ class ProdutividadeController extends Controller
             $chart->getOptions()->setTitle($type.": ".$value." - período: ".date("d/m/Y", strtotime($dateini))." a ".date("d/m/Y", strtotime($datefim)))
                 ->setFontSize(12)
                 ->setHeight(500)
-                ->setWidth(900)
+                ->setWidth('auto')
                 ->setCurveType('function')
                 ->setLineWidth(4)
                 ->getLegend()->setPosition('right');

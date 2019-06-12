@@ -1,6 +1,7 @@
 <div class="row">
-<div class="row">
-    <div class="col-md-12 col-xs-12">
+    <br>
+<div class="container-fluid">
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <span id="_title_list_acts">Mostrando {{ acts|length }} registro(s). Período: {{ dateinifilter|date('d/m/Y') }} a {{ datefimfilter|date('d/m/Y') }}. {{ valueselection }}.</span>
         <a href="#!" title="Exportar para PDF" id="_btn-gera-pdf" class="pull-right">
             <img src="{{ asset('uploads/images/logo_pdf.png') }}" width="32" height="auto" float="right">
@@ -8,9 +9,8 @@
     </div>
 </div>
 <br>
-<div class="row">
-    <div class="container-fluid">
-        <div class="col-md-12 col-xs-12">
+<div class="container-fluid">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-12 col-xs-12 table-responsive">
                 <table class="table table-hover datatables" id="_acts-procurador">
                     <thead class="rows">
@@ -54,7 +54,6 @@
         <input type="button" class="btn btn-success btn-sm" value="Voltar" onclick="turnBackToListActs('{{ path('esp_produtividade_esp-filter-reports') }}')">
         <br><br>
     </div>
-</div>
 </div>
 
 <script>
@@ -126,7 +125,7 @@
                 }
             });
 
-            doc.save('analista.pdf');
+            doc.save('procurador.pdf');
         });
     });
 

@@ -4,39 +4,36 @@
 
 {% block content %}
 
-    <div class="container-fluid">
 
-        <div class="row">
-            
-            <div class="col-md-2 col-xs-12 noPrint">
+            <div class="noPrint">
 
                 <form action="{{ path('esp_produtividade_esp-filter-reports') }}" method="post"
-                    id="esp_form_filter">
-                    <div class="left-panel-title"><h4>Filtros:</h4></div>
-                    <br>
-                    <label>Início: </label>
-                    <input type="date" class="form-control" id="_dateini" name="_dateini" value="{{ dateini }}">
-                    <br>
-                    <label>Fim: </label>
-                    <input type="date" class="form-control" id="_datefim" name="_datefim" value="{{ datefim }}">
-                    <br/>
-                    <label>Tipo de Filtro: </label>
-                    <select name="_filterType" id="esp_type_filter"
-                            base-url="{{ path('esp_produtividade_esp-filters') }}"
-                    class="form-control">
-                        <option value="9">Todos</option>
-                        <option value="1">Especializada</option>
-                        <option value="2">Procurador</option>
-                        <option value="3">Tipo de Ato</option>
-                    </select>
-                    <br>
-                    <label>Filtrar por: </label>
-                    <select name="_filterValue" id="esp_value_filter" class="form-control">
-                        <option value="0">Todos</option>
-                    </select>
-                    <br/>
-                    <input type="submit" class="btn btn-sm btn-primary mySpinner" value="Enviar">
-                    <input type="hidden" name="_download-report" value="no" id="_download-report">
+                    id="esp_form_filter" class="form-inline">
+
+                        <label>Início: </label>
+                        <input type="date" class="form-control" id="_dateini" name="_dateini" value="{{ dateini }}">
+
+                        <label>Fim: </label>
+                        <input type="date" class="form-control" id="_datefim" name="_datefim" value="{{ datefim }}">
+
+                        <label>Tipo de Filtro: </label>
+                        <select name="_filterType" id="esp_type_filter"
+                                base-url="{{ path('esp_produtividade_esp-filters') }}"
+                        class="form-control">
+                            <option value="9">Todos</option>
+                            <option value="1">Especializada</option>
+                            <option value="2">Procurador</option>
+                            <option value="3">Tipo de Ato</option>
+                        </select>
+
+                        <label>Filtrar por: </label>
+                        <select name="_filterValue" id="esp_value_filter" class="form-control">
+                            <option value="0">Todos</option>
+                        </select>
+
+                        <input type="submit" class="btn btn-sm btn-primary mySpinner" value="Enviar">
+                        <input type="hidden" name="_download-report" value="no" id="_download-report">
+
                     <br/>
                 </form>
 
@@ -44,13 +41,9 @@
 
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-            <div class="col-md-10 col-xs-12" id="div_partial">
+            <div id="div_partial">
                 {{ include('esp/produtividade/reports/esp_partial.html.twig') }}
             </div>
-
-        </div>
-
-    </div>
 
     <script type="text/javascript">
 

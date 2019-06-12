@@ -3,6 +3,7 @@ require('../js/jquery.mask.js');
 
 var table;
 var arraysize;
+var responsechart;
 
 $(document).ready(function () {
 
@@ -141,12 +142,16 @@ $("#esp_form_filter").on("submit", function (e) {
         data: $(this).serialize(),
         success: function (response) {
             bootbox.hideAll();
+            responsechart = response;
             $("#div_partial").html(response);
         }
     });
 
 });
 
+$(window).resize(function () {
+    $("#div_partial").html(responsechart);
+});
 
 $("#esp_type_filter").change(function () {
     var filtertype = $(this).val();
