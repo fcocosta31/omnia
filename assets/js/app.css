@@ -207,6 +207,16 @@ p{
     /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#dbd8ff',GradientType=0 ); /* IE6-9 */
 }
 
+#modalajaxloader{
+    position: absolute;
+    top: 25%;
+    left: 45%;
+    width: 100px;
+    height: 100px;
+    opacity: 0.2;
+}
+
+.hidden{display: none !important;}
 
 /* navbar-blue OVERRIDE */
 

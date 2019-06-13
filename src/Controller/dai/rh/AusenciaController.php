@@ -30,7 +30,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AusenciaController extends Controller
 {
     /**
-     * @Route("/dai/rh/ausencia/novo", name="dai_rh_ausencia_novo")
+     * @Route("/dai/rh/afastamento/novo", name="dai_rh_afastamento_novo")
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
@@ -92,17 +92,17 @@ class AusenciaController extends Controller
             $ausencia = $form->getData();
             $entityManager->persist($ausencia);
             $entityManager->flush();
-            return $this->redirectToRoute('dai_rh_ausencia_index');
+            return $this->redirectToRoute('dai_rh_afastamento_index');
         }
 
-        return $this->render("dai/rh/ausencia/novo.html.twig", array(
+        return $this->render("dai/rh/afastamento/novo.html.twig", array(
             'form' => $form->createView(),
         ));
 
     }
 
     /**
-     * @Route("/dai/rh/ausencia/editar/{id}", name="dai_rh_ausencia_editar")
+     * @Route("/dai/rh/afastamento/editar/{id}", name="dai_rh_afastamento_editar")
      * @param Request $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
@@ -166,10 +166,10 @@ class AusenciaController extends Controller
             $ausencia = $form->getData();
             $entityManager->persist($ausencia);
             $entityManager->flush();
-            return $this->redirectToRoute('dai_rh_ausencia_index');
+            return $this->redirectToRoute('dai_rh_afastamento_index');
         }
 
-        return $this->render("dai/rh/ausencia/editar.html.twig", array(
+        return $this->render("dai/rh/afastamento/editar.html.twig", array(
             'form' => $form->createView(),
         ));
 
@@ -177,7 +177,7 @@ class AusenciaController extends Controller
 
 
     /**
-     * @Route("/dai/rh/ausencia/deletar/{id}", name="dai_rh_ausencia_deletar")
+     * @Route("/dai/rh/afastamento/deletar/{id}", name="dai_rh_afastamento_deletar")
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
     public function deletar($id){
@@ -190,13 +190,13 @@ class AusenciaController extends Controller
 
         $entityManager->remove($ausencia);
         $entityManager->flush();
-        return $this->redirectToRoute('dai_rh_ausencia_index');
+        return $this->redirectToRoute('dai_rh_afastamento_index');
 
     }
 
 
     /**
-     * @Route ("/dai/rh/ausencia", name="dai_rh_ausencia_index")
+     * @Route ("/dai/rh/afastamentos", name="dai_rh_afastamento_index")
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request){
@@ -223,7 +223,7 @@ class AusenciaController extends Controller
         );
 
 
-        return $this->render("dai/rh/ausencia/index.html.twig", array(
+        return $this->render("dai/rh/afastamento/index.html.twig", array(
             'tiposausencia' => $result
         ));
     }

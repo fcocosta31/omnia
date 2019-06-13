@@ -132,7 +132,7 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path("dai_rh_cadastro_index") }}">Cadastros</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="{{ path('dai_rh_ausencia_index') }}">Afastamentos</a></li>
+                                        <li><a href="{{ path('dai_rh_afastamento_index') }}">Afastamentos</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown" role="presentation">
@@ -214,7 +214,7 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path("dai_rh_cadastro_index") }}">Cadastros</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="{{ path('dai_rh_ausencia_index') }}">Afastamentos</a></li>
+                                        <li><a href="{{ path('dai_rh_afastamento_index') }}">Afastamentos</a></li>
                                     </ul>
                                 </li>
                             {% elseif 'ROLE_CHESP' in app.user.roles %}
@@ -310,7 +310,7 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path("dai_rh_cadastro_index") }}">Cadastros</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="{{ path('dai_rh_ausencia_index') }}">Afastamentos</a></li>
+                                        <li><a href="{{ path('dai_rh_afastamento_index') }}">Afastamentos</a></li>
                                     </ul>
                                 </li>
                             {% endif %}
@@ -360,6 +360,12 @@
             </div>
          </div>
         </main>
+
+        <div class="bg-transparent z-depth-0 noPrint hidden" id="modalajaxloader" tabindex="-1">
+            <div id="modalajaximg">
+                <img src="{{ asset('uploads/images/ajax-loader-lg.gif') }}">
+            </div>
+        </div>
 
         <footer class="navbar-default">
         {% block footer %}

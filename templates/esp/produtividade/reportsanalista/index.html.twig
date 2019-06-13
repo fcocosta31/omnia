@@ -4,11 +4,11 @@
 
 {% block content %}
 
-    <div class="noPrint">
+    <div>
 
 
                 <form action="{{ path('esp_produtividade_analista_esp-filter-reports') }}" method="post"
-                    id="esp_form_filter" class="form-inline">
+                    id="esp_form_filter" class="form-inline noPrint">
 
                     <label>Início: </label>
                     <input type="date" class="form-control" id="_dateini" name="_dateini" value="{{ dateini }}">

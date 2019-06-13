@@ -1370,7 +1370,7 @@ class ProdutividadeAnalistaController extends Controller
             );
             $table->getOptions()->setAllowHtml(true);
             $table->getOptions()->setShowRowNumber(true);
-            $table->getOptions()->setHeight(500);
+            $table->getOptions()->setHeight('auto');
             $table->getOptions()->setWidth('auto');
         }else{
             $table->getData()->setArrayToDataTable(array(["..."]));

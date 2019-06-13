@@ -1132,7 +1132,7 @@ class ProdutividadeController extends Controller
             $table->getOptions()->setAllowHtml(true);
             $table->getOptions()->setShowRowNumber(true);
             $table->getOptions()->setHeight('auto');
-            $table->getOptions()->setWidth('80%');
+            $table->getOptions()->setWidth('auto');
         }else{
             $table->getData()->setArrayToDataTable(array(["..."]));
         }

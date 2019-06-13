@@ -4,6 +4,7 @@ require('../js/jquery.mask.js');
 var table;
 var arraysize;
 var responsechart;
+var historyanterior, historyatual;
 
 $(document).ready(function () {
 
@@ -40,15 +41,6 @@ $(document).ready(function () {
 
     });
 
-
-    $('.mySpinner').click(function(e){
-        bootbox.dialog({
-            message: '<div class="text-center" style="width: 30%; float: center;"><i class="fa fa-spin fa-spinner"></i> Carregando...</div>',
-            backdrop:false,
-            centerVertical:true,
-            closeButton:false
-        });
-    });
 
     $("#_btn-gera-pdf-employees").on('click', function () {
 
@@ -108,7 +100,23 @@ $(document).ready(function () {
         doc.save('listagem-de-pessoal.pdf');
     });
 
+    $('.mySpinner').click(function(e){
+        preloadActive();
+        setInterval(function () {
+            preloadDeActive();
+        }, 4000);
+    });
+
 });
+
+
+function preloadActive(){
+    $("#modalajaxloader").removeClass('hidden');
+};
+
+function preloadDeActive(){
+    $("#modalajaxloader").addClass('hidden');
+};
 
 function headerRows(table) {
 
@@ -141,7 +149,7 @@ $("#esp_form_filter").on("submit", function (e) {
         dataType: "json",
         data: $(this).serialize(),
         success: function (response) {
-            bootbox.hideAll();
+            preloadDeActive();
             responsechart = response;
             $("#div_partial").html(response);
         }
@@ -265,7 +273,7 @@ $("#form_act_new").on("submit", function (e) {
         dataType: "json",
         data: $(this).serialize(),
         success: function (response) {
-            bootbox.hideAll();
+            preloadDeActive();
             var codigomsg = response.data;
             console.log("resposta = "+codigomsg);
             if(codigomsg == '0'){

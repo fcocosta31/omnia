@@ -29,7 +29,9 @@ class Tipoausencia
 
     /**
      * @ORM\Column(name="descricao", type="string", nullable=false)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(
+     *     message = "Campo vazio. Favor, preencher!"
+     * )
      */
     protected $descricao;
 
@@ -38,6 +40,12 @@ class Tipoausencia
      * @ORM\OneToMany(targetEntity="Ausencia", mappedBy="tipoausencia")
      */
     protected $ausencias;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="temperiodo", type="boolean", nullable=false)
+     */
+    protected $temperiodo;
 
     /**
      * @return mixed
@@ -86,4 +94,21 @@ class Tipoausencia
     {
         $this->ausencias = $ausencias;
     }
+
+    /**
+     * @return mixed $temperiodo
+     */
+    public function isTemperiodo()
+    {
+        return $this->temperiodo;
+    }
+
+    /**
+     * @param mixed $temperiodo
+     */
+    public function setTemperiodo(bool $temperiodo)
+    {
+        $this->temperiodo = $temperiodo;
+    }
+
 }

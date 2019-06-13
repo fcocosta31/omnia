@@ -3,7 +3,7 @@
 {% endblock %}
 {% block content %}
     <div class="fundo-topo-menu">
-        Listagem de Tipos de Ausência
+        Listagem de Tipos de Afastamento
     </div>
     <br>
     <div class="container">
@@ -17,7 +17,6 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Descrição</th>
                         <th>#</th>
                         <th>#</th>
@@ -26,16 +25,15 @@
                     <tbody>
                     {% for i in tiposausencia %}
                         <tr>
-                            <td>{{ i.id }}</td>
                             <td>{{ i.descricao }}</td>
                             <td><a href="{{ path('dai_rh_tipoausencia_editar', {'id':i.id}) }}"
                                    class="btn btn-default btn-sm">Editar</a></td>
                             <td><a href="{{ path('dai_rh_tipoausencia_deletar', {'id':i.id}) }}"
-                                   onclick="return confirm('Tem certeza?')" class="btn btn-default btn-sm">Deletar</a></td>
+                                   onclick="return confirm('Tem certeza?')" class="btn btn-danger btn-sm">Deletar</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
-                    <tfoot><tr><td colspan="4"></td></tr></tfoot>
+                    <tfoot><tr><td colspan="3"></td></tr></tfoot>
                 </table>
             </div>
         </div>

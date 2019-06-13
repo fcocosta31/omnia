@@ -9,6 +9,7 @@
 namespace App\Controller\dai\rh;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -34,6 +35,12 @@ class TipoausenciaController extends Controller
 
         $form = $this->createFormBuilder($tipoausencia)
             ->add('descricao', TextType::class)
+            ->add('temperiodo', ChoiceType::class, array(
+                'choices' => array(
+                    'Não' => true,
+                    'Sim' => false,
+                )
+            ))
             ->getForm();
 
         $form->handleRequest($request);
@@ -71,6 +78,12 @@ class TipoausenciaController extends Controller
                 'disabled' => true
             ))
             ->add('descricao', TextType::class)
+            ->add('temperiodo', ChoiceType::class, array(
+                'choices' => array(
+                    'Não' => true,
+                    'Sim' => false,
+                )
+            ))
             ->getForm();
 
         $form->handleRequest($request);
