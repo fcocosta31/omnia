@@ -4,7 +4,7 @@ require('../js/jquery.mask.js');
 var table;
 var arraysize;
 var responsechart;
-var historyanterior, historyatual;
+
 
 $(document).ready(function () {
 
@@ -100,11 +100,18 @@ $(document).ready(function () {
         doc.save('listagem-de-pessoal.pdf');
     });
 
-    $('.mySpinner').click(function(e){
+    $('.btn').click(function(e){
         preloadActive();
         setInterval(function () {
             preloadDeActive();
-        }, 4000);
+        }, 1000);
+    });
+
+    $('.dropdown-menu li a').click(function(e){
+        preloadActive();
+        setInterval(function () {
+            preloadDeActive();
+        }, 1000);
     });
 
 });

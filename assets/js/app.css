@@ -39,6 +39,10 @@ footer {
     color: blue;
 }
 
+ul {
+    list-style-type: none;
+}
+
 @media print{
     .noPrint, .noPrint * {
         display: none !important;
