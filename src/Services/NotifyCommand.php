@@ -74,17 +74,19 @@ class NotifyCommand extends Command
 
         $periodicidade = $params->getPeriodicidade();
 
-        $qtdedias = intval(0);
+        $qtdedias = "";
+
+        $mensagemdias = "Dias no array de estagiários: ";
 
         foreach ($employees as $e){
             $diff = $this->dateDifference($datenow, $e['datatermino']); //date_diff($datenow, $e['datatermino']);
             if( in_array($diff, $periodicidade, true) ){
-                $qtdedias = $diff;
+                $qtdedias = $qtdedias."[".$diff."] ";
                 array_push($itemsnotify, $e);
             }
         }
 
-        $mensagem = "Não há notificações de estágio a serem enviadas no prazo de ".$qtdedias." dias";
+        $mensagem = "Não há notificações de estágio a serem enviadas!";
 
         if(!empty($itemsnotify)){
 
@@ -92,7 +94,7 @@ class NotifyCommand extends Command
 
             $mailFrom = $this->container->getParameter("mailer_user");
 
-            $message = (new \Swift_Message("PGM-Estágios a vencer em ".$qtdedias." dias"));
+            $message = (new \Swift_Message("PGM-Estágios a vencer em ".$qtdedias."dias"));
 
             $imagem = $message->embed(\Swift_Image::fromPath($this->container->getParameter("images_directory")."water-mark2.jpg"));
 
@@ -127,7 +129,7 @@ class NotifyCommand extends Command
 
         $interval = date_diff($datetime1, $datetime2);
 
-        return $interval->format($differenceFormat);
+        return $interval->format($differenceFormat) + 1;
 
     }
 
