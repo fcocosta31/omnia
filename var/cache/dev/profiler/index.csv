@@ -4036,3 +4036,5 @@ b2ad9b,127.0.0.1,GET,http://localhost:8000/dti/tipoequipamento/novo,1560516722,,
 af2ecd,127.0.0.1,POST,http://localhost:8000/esp/produtividade/analista/rels/esp-filter-reports,1560516737,,200
 fc2d77,127.0.0.1,GET,http://localhost:8000/logout,1560516743,,302
 817ec6,127.0.0.1,GET,http://localhost:8000/login,1560516743,,200
+94e714,127.0.0.1,GET,http://localhost:8000/user-profile/edit/36,1562370453,,200
+77cad5,127.0.0.1,GET,http://localhost:8000/esp/produtividade/analista/rels/list-acts,1562371219,,200

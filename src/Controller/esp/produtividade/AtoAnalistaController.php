@@ -108,6 +108,9 @@ class AtoAnalistaController extends Controller
         $user = $entityManager->getRepository(User::class)
             ->find($user->getId());
 
+        $procgeral = $entityManager->getRepository(Lotacao::class)
+            ->findOneBy(array('descricao' => 'procuradoria geral'));
+
         $lotacaoid = $user->getLotacao()->getId();
 
         $form = $this->createFormBuilder($ato)
@@ -135,15 +138,17 @@ class AtoAnalistaController extends Controller
             ->add('procurador', EntityType::class, array(
                     'placeholder' => 'Selecione...',
                     'class' => User::class,
-                    'query_builder' => function (EntityRepository $er) use ($lotacaoid) {
+                    'query_builder' => function (EntityRepository $er) use ($lotacaoid, $procgeral) {
                         return $er->createQueryBuilder('u')
                             ->innerJoin('u.cargo','a', 'WITH', 'a.id = u.cargo')
                             ->innerJoin('u.lotacao','b', 'WITH', 'b.id = u.lotacao')
                             ->where('u.enabled = true')
                             ->andWhere('b.id = :lotacaoid')
+                            ->orWhere('b.id = :procgeral')
                             ->andWhere('a.descricao like :cargo')
                             ->setParameters(array(
                                 "lotacaoid" => $lotacaoid,
+                                "procgeral" => $procgeral->getId(),
                                 "cargo" => '%procurador%',
                             ))
                             ->orderBy('u.nome', 'ASC');
