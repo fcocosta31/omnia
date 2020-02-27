@@ -35,10 +35,9 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQueryBuilder()
-            ->from(User::class, 'u')
             ->select("u")
-            ->innerJoin("u.lotacao", "t")
-            ->leftJoin("u.cargo", "s")
+            ->from(User::class, 'u')
+            ->leftJoin("u.cargo", "s", "WITH", "s.id = u.cargo")
             ->orderBy('u.nome', 'ASC');
         /**
          * @var $paginator Knp\Component\Pager\Paginator
@@ -105,7 +104,7 @@ class UserController extends Controller
                 'choice_label' => 'descricao',
                 'required' => false,
                 'expanded' => false,
-                'multiple' => false,
+                'multiple' => true,
                 'empty_data' => null
             ))
             ->add('cargo', EntityType::class, array(

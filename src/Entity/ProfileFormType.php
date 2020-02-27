@@ -32,7 +32,7 @@ class ProfileFormType extends AbstractType
                     'choice_label' => 'descricao',
                     'required' => true,
                     'expanded' => false,
-                    'multiple' => false,
+                    'multiple' => true,
                     'empty_data' => null
                 )
             )

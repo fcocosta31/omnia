@@ -59,9 +59,13 @@ class ProdutividadeController extends Controller
         $dateini = date("Y-m-d", strtotime("-1 months"));
 
 
+        $session = $this->get('session');
+
+        $location = $session->get('current_location');
+
         if (in_array('ROLE_CHESP', $rolesTab, true)){
 
-            $lotacao_id = $this->getUser()->getLotacao()->getId();
+            $lotacao_id = $location->getId();
 
             $query = $repository->createQueryBuilder('u')
                 ->select('YEAR(u.emissao) as ano, MONTH(u.emissao) as mes, b.descricao, SUM(c.peso) as pontos, COUNT(c.peso) as atos')
@@ -142,6 +146,8 @@ class ProdutividadeController extends Controller
 
         $session = $this->get('session');
 
+        $location = $session->get('current_location');
+
         if(!empty($request->get('_filterType'))){
             $dateini = $request->get('_dateini');
             $datefim = $request->get('_datefim');
@@ -168,7 +174,7 @@ class ProdutividadeController extends Controller
         if (in_array('ROLE_CHESP', $rolesTab, true)) {
 
             $ischesp = true;
-            $lotacao_id = $this->getUser()->getLotacao()->getId();
+            $lotacao_id = $location->getId();
         }
 
         $value_filter = "Todos";
@@ -861,10 +867,14 @@ class ProdutividadeController extends Controller
         $ischesp = false;
         $lotacao_id = 0;
 
+        $session = $this->get('session');
+
+        $location = $session->get('current_location');
+
         if (in_array('ROLE_CHESP', $rolesTab, true)) {
 
             $ischesp = true;
-            $lotacao_id = $this->getUser()->getLotacao()->getId();
+            $lotacao_id = $location->getId();
         }
 
         $type = $request->get('_filterType');
@@ -1017,6 +1027,10 @@ class ProdutividadeController extends Controller
         $ischesp = false;
         $lotacao_id = 0;
 
+        $session = $this->get('session');
+
+        $location = $session->get('current_location');
+
         $dateini = $request->get('_dateini');
         $datefim = $request->get('_datefim');
 
@@ -1025,7 +1039,7 @@ class ProdutividadeController extends Controller
         if (in_array('ROLE_CHESP', $rolesTab, true)) {
 
             $ischesp = true;
-            $lotacao_id = $this->getUser()->getLotacao()->getId();
+            $lotacao_id = $location->getId();
         }
 
         $repository = $em->getRepository(Ato::class);

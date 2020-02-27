@@ -63,7 +63,14 @@ class ProdutividadeAnalistaController extends Controller
         $datefim = date("Y-m-d");
         $dateini = date("Y-m-d", strtotime("-1 months"));
 
-        $lotacao_id = $this->getUser()->getLotacao()->getId();
+        $session = $this->get('session');
+
+        $location = $session->get('current_location');
+
+        $lotacao = $em->getRepository(Lotacao::class)
+            ->find($location->getId());
+
+        $lotacao_id = $lotacao->getId();
 
         $repository = $em->getRepository(AtoAnalista::class);
 
@@ -173,6 +180,8 @@ class ProdutividadeAnalistaController extends Controller
 
         $session = $this->get('session');
 
+        $location = $session->get('current_location');
+
         if(!empty($request->get('_filterType'))){
             $dateini = $request->get('_dateini');
             $datefim = $request->get('_datefim');
@@ -199,7 +208,7 @@ class ProdutividadeAnalistaController extends Controller
         if (in_array('ROLE_CHESP', $rolesTab, true)) {
 
             $ischesp = true;
-            $lotacao_id = $this->getUser()->getLotacao()->getId();
+            $lotacao_id = $location->getId();
         }
 
         $value_filter = "Todos";
@@ -1070,10 +1079,14 @@ class ProdutividadeAnalistaController extends Controller
         $ischesp = false;
         $lotacao_id = 0;
 
+        $session = $this->get('session');
+
+        $location = $session->get('current_location');
+
         if (in_array('ROLE_CHESP', $rolesTab, true)) {
 
             $ischesp = true;
-            $lotacao_id = $this->getUser()->getLotacao()->getId();
+            $lotacao_id = $location->getId();
         }
 
         $type = $request->get('_filterType');

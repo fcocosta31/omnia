@@ -43,6 +43,12 @@ class AtoAnalistaController extends Controller
 
         $session = $this->get('session');
 
+        if($session->get('current_location') == null){
+            $session->set('current_location', $this->getUser()->getLotacao()[0]);
+            $session->save();
+        }
+
+
         if(!empty($request->get('_dateini'))){
             $dateini = $request->get('_dateini');
             $datefim = $request->get('_datefim');
@@ -101,6 +107,10 @@ class AtoAnalistaController extends Controller
 
         $ato = new AtoAnalista();
 
+        $session = $this->get('session');
+
+        $location = $session->get('current_location');
+
         $user = $this->getUser();
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -108,10 +118,13 @@ class AtoAnalistaController extends Controller
         $user = $entityManager->getRepository(User::class)
             ->find($user->getId());
 
+        $lotacao = $entityManager->getRepository(Lotacao::class)
+            ->find($location->getId());
+
         $procgeral = $entityManager->getRepository(Lotacao::class)
             ->findOneBy(array('descricao' => 'procuradoria geral'));
 
-        $lotacaoid = $user->getLotacao()->getId();
+        $lotacaoid = $lotacao->getId();
 
         $form = $this->createFormBuilder($ato)
             ->add('emissao', DateType::class, array(
@@ -130,7 +143,7 @@ class AtoAnalistaController extends Controller
             ))
             ->add('tipodeato', ChoiceType::class, array(
                 'placeholder' => 'Selecione...',
-                'choices' => $user->getLotacao()->getTiposdeato(),
+                'choices' => $lotacao->getTiposdeato(),
                 'choice_label' => 'descricao',
                 'required' => true,
                 'empty_data' => null
@@ -139,13 +152,17 @@ class AtoAnalistaController extends Controller
                     'placeholder' => 'Selecione...',
                     'class' => User::class,
                     'query_builder' => function (EntityRepository $er) use ($lotacaoid, $procgeral) {
-                        return $er->createQueryBuilder('u')
+                        $qb = $er->createQueryBuilder('u');
+                        return $qb
+                            ->select('u')
                             ->innerJoin('u.cargo','a', 'WITH', 'a.id = u.cargo')
-                            ->innerJoin('u.lotacao','b', 'WITH', 'b.id = u.lotacao')
+                            ->innerJoin('u.lotacao','b')
                             ->where('u.enabled = true')
-                            ->andWhere('b.id = :lotacaoid')
-                            ->orWhere('b.id = :procgeral')
                             ->andWhere('a.descricao like :cargo')
+                            ->andWhere($qb->expr()->orX(
+                                $qb->expr()->eq('b.id', ':lotacaoid'),
+                                $qb->expr()->eq('b.id', ':procgeral')
+                            ))
                             ->setParameters(array(
                                 "lotacaoid" => $lotacaoid,
                                 "procgeral" => $procgeral->getId(),
@@ -174,7 +191,7 @@ class AtoAnalistaController extends Controller
             $mensagem = 0;
 
             $ato->setUser($user);
-            $ato->setLotacao($user->getLotacao());
+            $ato->setLotacao($lotacao);
             $entityManager->persist($ato);
             $entityManager->flush();
 
@@ -217,6 +234,9 @@ class AtoAnalistaController extends Controller
 
         $lotacaoid = $ato->getLotacao()->getId();
 
+        $procgeral = $entityManager->getRepository(Lotacao::class)
+            ->findOneBy(array('descricao' => 'procuradoria geral'));
+
         $form = $this->createFormBuilder($ato)
             ->add('emissao', DateType::class, array(
                 'widget' => 'single_text',
@@ -239,21 +259,27 @@ class AtoAnalistaController extends Controller
             ->add('procurador', EntityType::class, array(
                     'placeholder' => 'Selecione...',
                     'class' => User::class,
-                    'query_builder' => function (EntityRepository $er) use ($lotacaoid) {
-                        return $er->createQueryBuilder('u')
+                    'query_builder' => function (EntityRepository $er) use ($lotacaoid, $procgeral) {
+                        $qb = $er->createQueryBuilder('u');
+                        return $qb
+                            ->select('u')
                             ->innerJoin('u.cargo','a', 'WITH', 'a.id = u.cargo')
-                            ->innerJoin('u.lotacao','b', 'WITH', 'b.id = u.lotacao')
+                            ->innerJoin('u.lotacao','b')
                             ->where('u.enabled = true')
-                            ->andWhere('b.id = :lotacaoid')
                             ->andWhere('a.descricao like :cargo')
+                            ->andWhere($qb->expr()->orX(
+                                $qb->expr()->eq('b.id', ':lotacaoid'),
+                                $qb->expr()->eq('b.id', ':procgeral')
+                            ))
                             ->setParameters(array(
                                 "lotacaoid" => $lotacaoid,
+                                "procgeral" => $procgeral->getId(),
                                 "cargo" => '%procurador%',
                             ))
                             ->orderBy('u.nome', 'ASC');
                     },
                     'choice_label' => 'nome',
-                    'required' => true,
+                    'required' => false,
                     'empty_data' => null
                 )
             )

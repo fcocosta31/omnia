@@ -40,7 +40,7 @@ class User extends BaseUser
     protected $nome;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Lotacao", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Lotacao", inversedBy="users")
      * @ORM\JoinColumn(name="lotacao_id", referencedColumnName="id")
      * @ORM\OrderBy({"descricao" = "ASC"})
      */

@@ -10,6 +10,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Mixed_;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -55,7 +56,8 @@ class Lotacao
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="User", mappedBy="lotacao")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="lotacao")
+     * @ORM\JoinTable(name="lotacao_users")
      * @ORM\OrderBy({"nome" = "ASC"})
      */
     protected $users;

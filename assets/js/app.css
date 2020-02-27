@@ -241,6 +241,11 @@ p{
 .navbar-blue .navbar-text {
     color: #feffff;
 }
+
+.navbar-blue .navbar-text-black {
+    color: black;
+}
+
 .navbar-blue .navbar-nav > li > a {
     color: #feffff;
     line-height: 50px;

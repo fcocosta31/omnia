@@ -124,6 +124,10 @@ class NotifyCommand extends Command
 
     function dateDifference($date_1 , $date_2 , $differenceFormat = '%a' )
     {
+        if(strtotime($date_1) > strtotime($date_2)){
+            return 0;
+        }
+
         $datetime1 = $date_1;
         $datetime2 = $date_2;
 

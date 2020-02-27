@@ -48,7 +48,7 @@ class UserFormType extends AbstractType
                     'choice_label' => 'descricao',
                     'required' => false,
                     'expanded' => false,
-                    'multiple' => false,
+                    'multiple' => true,
                     'empty_data' => null
                 )
             )

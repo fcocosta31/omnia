@@ -9,9 +9,14 @@
     {% else %}
         <p>Cargo: Não definido</p>
     {% endif %}
+    <p>Lotação:
     {% if app.user.lotacao is not null %}
-        <p>Lotação: {{ user.lotacao.descricao }}</p>
+        {% for r in user.lotacao %}
+             {{ r.descricao }}
+            {% endfor %}
+
     {% endif %}
+    </p>
     <a href="{{ path('fos_user_change_password') }}" class="btn btn-primary">Alterar Senha</a>
     <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary">Alterar Dados</a>
 </div>

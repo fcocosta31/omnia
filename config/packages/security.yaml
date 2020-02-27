@@ -44,6 +44,7 @@ security:
         - { path: ^/esp/produtividade/ato, roles: [ROLE_CGR, ROLE_ESP, ROLE_CHESP] }
         - { path: ^/esp/produtividade/rels, roles: [ROLE_CGR, ROLE_ESP, ROLE_CHESP, ROLE_AESP] }
         - { path: ^/esp/eleicao/voto, roles: [ROLE_CGR, ROLE_ESP, ROLE_CHESP] }
+        - { path: ^/location, roles: [ROLE_CGR, ROLE_ESP, ROLE_CHESP, ROLE_AESP] }
         - { path: ^/lotacao, roles: [ROLE_CGR, ROLE_ADMIN] }
         - { path: ^/esp, roles: [ROLE_CGR, ROLE_ADMIN] }
         - { path: ^/, roles: ROLE_ADMIN }

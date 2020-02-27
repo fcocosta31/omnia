@@ -41,6 +41,11 @@ class AtoController extends Controller
 
         $session = $this->get('session');
 
+        if($session->get('current_location') == null){
+            $session->set('current_location', $this->getUser()->getLotacao()[0]);
+            $session->save();
+        }
+
         if(!empty($request->get('_dateini'))){
             $dateini = $request->get('_dateini');
             $datefim = $request->get('_datefim');
@@ -101,11 +106,17 @@ class AtoController extends Controller
 
         $user = $this->getUser();
 
+        $session = $this->get('session');
+
+        $location = $session->get('current_location');
+
         $entityManager = $this->getDoctrine()->getManager();
 
         $user = $entityManager->getRepository(User::class)
             ->find($user->getId());
 
+        $lotacao = $entityManager->getRepository(Lotacao::class)
+            ->find($location->getId());
 
         $form = $this->createFormBuilder($ato)
                 ->add('emissao', DateType::class, array(
@@ -124,7 +135,7 @@ class AtoController extends Controller
                 ))
                 ->add('tipodeato', ChoiceType::class, array(
                     'placeholder' => 'Selecione...',
-                    'choices' => $user->getLotacao()->getTiposdeato(),
+                    'choices' => $lotacao->getTiposdeato(),
                     'choice_label' => 'descricao',
                     'required' => true,
                     'empty_data' => null
@@ -146,7 +157,7 @@ class AtoController extends Controller
                 ))
                 ->add('tipodeprocesso', ChoiceType::class, array(
                     'placeholder' => 'Selecione...',
-                    'choices' => $user->getLotacao()->getTiposdeprocesso(),
+                    'choices' => $lotacao->getTiposdeprocesso(),
                     'choice_label' => 'descricao',
                     'required' => false,
                     'empty_data' => null
@@ -186,14 +197,14 @@ class AtoController extends Controller
                         }else{
 
                             $ato->setUser($user);
-                            $ato->setLotacao($user->getLotacao());
+                            $ato->setLotacao($lotacao);
                             $entityManager->persist($ato);
                             $entityManager->flush();
                         }
                     }else{
 
                         $ato->setUser($user);
-                        $ato->setLotacao($user->getLotacao());
+                        $ato->setLotacao($lotacao);
                         $entityManager->persist($ato);
                         $entityManager->flush();
                     }
@@ -201,7 +212,7 @@ class AtoController extends Controller
                 }else{
 
                     $ato->setUser($user);
-                    $ato->setLotacao($user->getLotacao());
+                    $ato->setLotacao($lotacao);
                     $entityManager->persist($ato);
                     $entityManager->flush();
                 }

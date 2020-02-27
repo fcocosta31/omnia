@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class LotacaoController extends Controller
 {
+
     /**
      * @Route("/lotacao", name="lotacao_index")
      * @return Response|\Symfony\Component\HttpFoundation\Response
@@ -124,4 +125,20 @@ class LotacaoController extends Controller
         return $this->redirectToRoute('lotacao_index');
     }
 
+    /**
+     * @Route("/location/current/set", name="location_current_set")
+     * @param Request $request
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function setCurrent(Request $request){
+
+        $session = $this->get('session');
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $lotacao = $entityManager->getRepository(Lotacao::class)
+            ->find($request->get('location_id'));
+        $session->set('current_location', $lotacao);
+
+        return $this->redirectToRoute('index_geral');
+    }
 }
