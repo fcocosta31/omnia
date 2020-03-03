@@ -10,13 +10,20 @@ namespace App\Controller\esp\produtividade;
 
 use App\Entity\Ato;
 use App\Entity\Lotacao;
+use App\Entity\TipoDeAto;
+use App\Entity\TipoDeProcesso;
+use App\Entity\Upload;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use League\Csv\Reader;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -229,6 +236,178 @@ class AtoController extends Controller
         }
 
         return $this->render("esp/produtividade/ato/novo.html.twig", array(
+            'form' => $form->createView(),
+        ));
+    }
+
+
+
+    /**
+     * @Route("/esp/produtividade/ato/upload", name="esp_produtividade_ato_upload")
+     * @param Request $request
+     * @return Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function upload(Request $request){
+
+        $upload = new Upload();
+
+        $user = $this->getUser();
+
+        $session = $this->get('session');
+
+        $location = $session->get('current_location');
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $user = $entityManager->getRepository(User::class)
+            ->find($user->getId());
+
+        $lotacao = $entityManager->getRepository(Lotacao::class)
+            ->find($location->getId());
+
+
+        $form = $this->createFormBuilder($upload)
+            ->add('file', FileType::class, array(
+                'multiple' => false,
+                'required' => true,
+                'attr' => array( 'accept' => 'text/csv',)
+            ))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $upload = $form->getData();
+
+            /**
+             * @var UploadedFile $file
+             */
+            $file = $upload->getFile();
+
+            $fileName = md5(uniqid()).'.'.$file->getClientOriginalExtension();
+            $file->move(
+                $this->getParameter('documents_directory'),
+                $fileName
+            );
+
+            $reader = Reader::createFromPath($this->getParameter('documents_directory').'/'.$fileName);
+            $reader->setDelimiter(";");
+            $reader->setHeaderOffset(0);
+            $results = $reader->getRecords();
+
+            $errorarray = array();
+
+            $atoarray = array();
+
+            $key = 1;
+
+            $now = new \DateTime();
+
+            foreach ($results as $row){
+
+                $key++;
+
+                $ato = new Ato();
+                $ato->setUser($user);
+                $ato->setLotacao($lotacao);
+
+                if($row['emissao'] != null){
+
+                        $emissao = \DateTime::createFromFormat('d/m/Y', $row['emissao']);
+
+                        if(\DateTime::getLastErrors()['warning_count'] > 0){
+                            array_push($errorarray, 'Data inválida na linha '.$key);
+                            continue;
+                        }else if($emissao > $now){
+                            array_push($errorarray, 'Data futura inválida na linha '.$key);
+                            continue;
+                        }else{
+                            $ato->setEmissao($emissao);
+                        }
+
+                }else{
+                    array_push($errorarray, 'Formato de data inválido na linha '.$key);
+                    continue;
+                }
+
+                if($row['numeroato'] != null){
+                    $ato->setNumero($row['numeroato']);
+                }else{
+                    array_push($errorarray, 'Número do ato inválido na linha '.$key);
+                    continue;
+                }
+
+                if($row['tipodeato'] != null){
+
+                    $tipodeato = $entityManager->getRepository(TipoDeAto::class)
+                        ->findOneBy(array('descricao' => $row['tipodeato']));
+                    if($tipodeato != null){
+                        $ato->setTipodeato($tipodeato);
+                    }else{
+                        array_push($errorarray, 'Tipo de ato não encontrado na linha '.$key);
+                        continue;
+                    }
+
+                }else{
+                    array_push($errorarray, 'Tipo de ato inválido na linha '.$key);
+                    continue;
+                }
+
+                if($row['assunto'] != null){
+                    $ato->setAssunto($row['assunto']);
+                }else{
+                    array_push($errorarray, 'Assunto inválido na linha '.$key);
+                    continue;
+                }
+
+                if($row['interessado'] != null){
+                    $ato->setInteressado($row['interessado']);
+                }
+
+                if($row['tipodeprocesso'] != null){
+
+                    $tipodeprocesso = $entityManager->getRepository(TipoDeProcesso::class)
+                        ->findOneBy(array('descricao' => $row['tipodeprocesso']));
+                    if($tipodeprocesso != null){
+                        $ato->setTipodeprocesso($tipodeprocesso);
+                    }else{
+                        array_push($errorarray, 'Tipo de processo não encontrado na linha '.$key);
+                        continue;
+                    }
+                }
+
+                if($row['numeroprocesso'] != null){
+                    $ato->setNumerodoprocesso($row['numeroprocesso']);
+                }
+
+                if($row['descricao'] != null){
+                    $ato->setDescricao($row['descricao']);
+                }
+
+                array_push($atoarray, $ato);
+            }
+
+            if(empty($errorarray)){
+
+                foreach ($atoarray as $atoi){
+                    $entityManager->persist($atoi);
+                    $entityManager->flush();
+                }
+
+                $key = $key - 1;
+                array_push($errorarray, 'Foram cadastrados '.$key.' atos com sucesso!');
+
+            }else{
+                array_push($errorarray, 'Nenhum ato cadastrado. Corrija os erros e envie o arquivo novamente!');
+            }
+
+            return $this->render("esp/produtividade/ato/error.html.twig", array(
+                'errormessage' => $errorarray,
+            ));
+        }
+
+        return $this->render("esp/produtividade/ato/upload.html.twig", array(
             'form' => $form->createView(),
         ));
     }

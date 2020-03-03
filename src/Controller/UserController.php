@@ -76,6 +76,8 @@ class UserController extends Controller
 
         $user = $userManager->findUserBy(array('id'=> $id));
 
+        $session = $this->get('session');
+
         $form = $form = $this->createFormBuilder($user)
             ->add('matricula', NumberType::class)
             ->add('nome', TextType::class)

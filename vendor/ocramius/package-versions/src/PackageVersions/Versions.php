@@ -36,6 +36,7 @@ final class Versions
   'knplabs/knp-paginator-bundle' => 'v2.8.0@f4ece5b347121b9fe13166264f197f90252d4bd2',
   'knplabs/knp-snappy' => 'v1.0.4@144c4ecd1ccaeda936bf832b93079efc490e6850',
   'knplabs/knp-snappy-bundle' => 'v1.5.2@f7c2541008525bb621a0bd492e1d83a6d2b48adf',
+  'league/csv' => '9.5.0@b348d09d0d258a4f068efb50a2510dc63101c213',
   'monolog/monolog' => '1.23.0@fd8c787753b3a2ad11bc60c063cff1358a32a3b4',
   'ocramius/package-versions' => '1.2.0@ad8a245decad4897cc6b432743913dad0d69753c',
   'ocramius/proxy-manager' => '2.0.4@a55d08229f4f614bf335759ed0cf63378feeb2e6',
@@ -118,7 +119,7 @@ final class Versions
   'symfony/dotenv' => 'v3.4.8@66265f80c0f585cd6aec3fbdfc4ffdf7a0d75992',
   'symfony/phpunit-bridge' => 'v3.4.8@48c669ec1a2b0425d4a82c7ad4bce2f5b947b95e',
   'symfony/web-server-bundle' => 'v3.4.8@44a6b2deb1c58b2dfd3592139db9091d7cfce8ed',
-  '__root__' => 'dev-master@4713d3908991a1c9ffc54964c9db1be6d751ebbf',
+  '__root__' => 'dev-master@fb5a4b2dd19c9f881c10b1db071eb60355b8b940',
 );
 
     private function __construct()

@@ -137,6 +137,7 @@ class LotacaoController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $lotacao = $entityManager->getRepository(Lotacao::class)
             ->find($request->get('location_id'));
+        $session->remove('current_location');
         $session->set('current_location', $lotacao);
 
         return $this->redirectToRoute('index_geral');
