@@ -292,6 +292,8 @@ class AtoController extends Controller
             );
 
             $reader = Reader::createFromPath($this->getParameter('documents_directory').'/'.$fileName);
+            $reader->setOutputBOM(Reader::BOM_UTF8);
+            $reader->addStreamFilter('convert.iconv.ISO-8859-15/UTF-8');
             $reader->setDelimiter(";");
             $reader->setHeaderOffset(0);
             $results = $reader->getRecords();
